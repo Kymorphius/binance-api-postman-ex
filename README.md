@@ -87,8 +87,19 @@ lib/binance/api/
 Example raw API calls:
 
 ```elixir
-Binance.API.Spot.Market.current_average_price_v3(client, "BTCUSDT")
-Binance.API.DerivativesTrading.UsdsFutures.Trade.query_order_v1(client, "ETHUSDT", orderId: 123, recvWindow: 5000)
+Binance.Example.spot_average_price("BTCUSDT")
+Binance.Example.spot_ticker_price("BTCUSDT")
+Binance.Example.spot_order_book("BTCUSDT")
+
+Binance.Example.futures_mark_price("ETHUSDT")
+Binance.Example.futures_ticker_price("ETHUSDT")
+Binance.Example.futures_order_book("ETHUSDT")
+
+Binance.Example.futures_new_limit_order("ETHUSDT", "BUY", "0.01", "2400", positionSide: "LONG")
+Binance.Example.futures_close_long_market("ETHUSDT", "0.01", positionSide: "LONG")
+Binance.Example.futures_close_short_market("ETHUSDT", "0.01", positionSide: "SHORT")
+
+Binance.Example.fiat_deposit("BTC", "BANK", "100", "test")
 ```
 
 ## Local credentials

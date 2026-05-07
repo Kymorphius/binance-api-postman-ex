@@ -36,7 +36,7 @@ defmodule Binance.Example do
 
     Client.new(api_key, api_secret, env)
   end
-
+  
   def spot_average_price(symbol) do
     Market.current_average_price_v3(sample_client(), symbol)
   end
