@@ -11,8 +11,11 @@ defmodule Binance.REST.HTTPClient do
     |> maybe_send()
   end
 
-  defp validate_request(%Request{method: nil}), do: {:error, :missing_method}
-  defp validate_request(%Request{url: nil}), do: {:error, :missing_url}
+  defp validate_request(%Request{method: nil}), do: {:error, {:request_error, :missing_method}}
+  defp validate_request(%Request{url: nil}), do: {:error, {:request_error, :missing_url}}
+  defp validate_request(%Request{headers: headers}) when not is_list(headers) and not is_map(headers) do
+    {:error, {:request_error, :invalid_headers}}
+  end
   defp validate_request(request), do: {:ok, request}
 
   defp maybe_send({:ok, request}), do: dispatch(request)
@@ -33,15 +36,24 @@ defmodule Binance.REST.HTTPClient do
     Logger.debug(fn -> "http_json: #{inspect(json)}" end)
     Logger.debug(fn -> "http_raw_body: #{inspect(raw)}" end)
 
-    case method do
-      "get" -> Req.get(url, headers: headers, form: form, json: json, body: raw)
-      "post" -> Req.post(url, headers: headers, form: form, json: json, body: raw)
-      "put" -> Req.put(url, headers: headers, form: form, json: json, body: raw)
-      "delete" -> Req.delete(url, headers: headers, form: form, json: json, body: raw)
-      _ -> {:error, :unsupported_method}
-    end
-    |> normalize_response()
+    opts = [headers: headers] ++ maybe_put(:form, form) ++ maybe_put(:json, json) ++ maybe_put(:body, raw)
+
+    result =
+      case method do
+        "get" -> Req.get(url, opts)
+        "post" -> Req.post(url, opts)
+        "put" -> Req.put(url, opts)
+        "delete" -> Req.delete(url, opts)
+        _ -> {:error, :unsupported_method}
+      end
+
+    normalize_response(result)
+  rescue
+    exception -> {:error, {:transport_error, exception}}
   end
+
+  defp maybe_put(_key, nil), do: []
+  defp maybe_put(key, value), do: [{key, value}]
 
   defp form_body(body) when is_list(body) do
     case Keyword.get(body, :mode) do
@@ -91,13 +103,12 @@ defmodule Binance.REST.HTTPClient do
 
   defp normalize_response({:ok, %Req.Response{status: status, body: body}}) when status in 200..299 do
     case body do
-      %{"code" => code, "msg" => msg} when is_integer(code) -> {:error, {code, msg}}
-      %{"code" => code, "msg" => msg} -> {:error, {code, msg}}
+      %{"code" => code, "msg" => msg} -> {:error, {:binance_error, code, msg}}
       _ -> {:ok, body}
     end
   end
 
-  defp normalize_response({:ok, %Req.Response{status: status, body: body}}), do: {:error, {status, body}}
-  defp normalize_response({:error, reason}), do: {:error, reason}
+  defp normalize_response({:ok, %Req.Response{status: status, body: body}}), do: {:error, {:http_error, status, body}}
+  defp normalize_response({:error, reason}), do: {:error, {:transport_error, reason}}
 end
       

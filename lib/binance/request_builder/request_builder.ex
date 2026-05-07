@@ -10,18 +10,21 @@ defmodule Binance.RequestBuilder do
   end
 
   def build(attrs) when is_map(attrs) do
-    attrs
-    |> normalize_attrs()
-    |> auto_complete_request()
-    |> prune_request()
-    |> put_url()
-    |> to_request()
-    |> tap(fn request ->
-      Logger.debug(fn -> "builder_url: #{inspect(request.url)}" end)
-      Logger.debug(fn -> "builder_headers: #{inspect(request.headers)}" end)
-      Logger.debug(fn -> "builder_body: #{inspect(request.body)}" end)
-    end)
-    |> then(&{:ok, &1})
+    with {:ok, attrs} <- validate_required_attrs(attrs),
+         attrs <- normalize_attrs(attrs),
+         attrs <- auto_complete_request(attrs),
+         attrs <- prune_request(attrs),
+         attrs <- put_url(attrs),
+         request <- to_request(attrs) do
+      tap(request, fn request ->
+        Logger.debug(fn -> "builder_url: #{inspect(request.url)}" end)
+        Logger.debug(fn -> "builder_headers: #{inspect(request.headers)}" end)
+        Logger.debug(fn -> "builder_body: #{inspect(request.body)}" end)
+      end)
+      |> then(&{:ok, &1})
+    else
+      {:error, reason} -> {:error, {:request_error, reason}}
+    end
   end
 
   def normalize_attrs(attrs) when is_map(attrs) do
@@ -49,6 +52,9 @@ defmodule Binance.RequestBuilder do
   def to_request(attrs) when is_map(attrs) do
     struct(Request, Map.take(attrs, [:method, :url, :headers, :body]))
   end
+
+  defp validate_required_attrs(%{method: method, url: url} = attrs) when not is_nil(method) and not is_nil(url), do: {:ok, attrs}
+  defp validate_required_attrs(_), do: {:error, :missing_required_request_fields}
 
   defp normalize_headers(nil), do: []
   defp normalize_headers(headers) when is_list(headers), do: Enum.map(headers, &normalize_pair/1)

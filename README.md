@@ -142,6 +142,7 @@ Example wrapper calls through `Binance.Example`:
 Binance.Example.spot_average_price("BTCUSDT")
 Binance.Example.futures_close_long_market("ETHUSDT", "0.01", positionSide: "LONG")
 Binance.Example.fiat_deposit("BTC", "BANK", "100", "test")
+...
 ```
 
 ## Request behavior
@@ -154,6 +155,16 @@ The generated raw API functions call:
 For signed Binance endpoints, parameters are sent in the query string and `signature` is appended to the final URL.
 
 Debug logs use Elixir's `Logger`. In IEx, `.iex.exs` currently configures debug logging so generated request URLs and parameters are visible during manual testing.
+
+## Error model
+
+The generated raw API functions return a consistent tagged result shape:
+
+- `{:ok, result}` when the request succeeds and Binance returns a successful payload;
+- `{:error, {:request_error, reason}}` when the request cannot be built correctly;
+- `{:error, {:http_error, status, body}}` when the transport succeeds but the HTTP status is not in the 2xx range;
+- `{:error, {:binance_error, code, msg}}` when Binance returns a business-level error payload;
+- `{:error, {:transport_error, reason}}` when the underlying HTTP client raises or reports a transport failure.
 
 ## Tests
 
