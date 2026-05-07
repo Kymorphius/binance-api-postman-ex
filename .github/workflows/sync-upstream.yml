@@ -1,0 +1,102 @@
+name: Sync Binance API Postman
+
+on:
+  schedule:
+    - cron: '15 3 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Erlang/OTP
+        uses: erlef/setup-beam@v1
+        with:
+          otp-version: '28.0'
+          elixir-version: '1.19.5'
+
+      - name: Cache deps and build artifacts
+        uses: actions/cache@v4
+        with:
+          path: |
+            deps
+            _build
+          key: ${{ runner.os }}-mix-${{ hashFiles('mix.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-mix-
+
+      - name: Install dependencies
+        run: mix deps.get
+
+      - name: Pull Binance Postman repo
+        run: mix pull_repo
+
+      - name: Capture upstream commit metadata
+        id: upstream_commit
+        shell: bash
+        run: |
+          set -euo pipefail
+          UPSTREAM_REPO="lib/binance_api_postman_repo"
+          COMMIT_SHA="$(git -C "$UPSTREAM_REPO" rev-parse HEAD)"
+          COMMIT_SUBJECT="$(git -C "$UPSTREAM_REPO" log -1 --format=%s)"
+          COMMIT_BODY="$(git -C "$UPSTREAM_REPO" log -1 --format=%b)"
+          {
+            printf 'sha=%s\n' "$COMMIT_SHA"
+            printf 'subject=%s\n' "$COMMIT_SUBJECT"
+            printf 'body<<EOF\n%s\nEOF\n' "$COMMIT_BODY"
+          } >> "$GITHUB_OUTPUT"
+
+      - name: Generate raw API modules
+        run: mix generate_raw_api --all
+
+      - name: Drop changes outside lib/binance/api/
+        shell: bash
+        run: |
+          set -euo pipefail
+          git restore --worktree --staged -- .
+          git add lib/binance/api/
+          git restore --worktree --staged -- . ':(exclude)lib/binance/api/**'
+
+      - name: Check for generated changes
+        id: generated_diff
+        shell: bash
+        run: |
+          set -euo pipefail
+          if git diff --quiet --cached -- lib/binance/api/; then
+            echo "has_changes=false" >> "$GITHUB_OUTPUT"
+            echo "No generated changes detected under lib/binance/api/."
+          else
+            echo "has_changes=true" >> "$GITHUB_OUTPUT"
+            echo "Generated changes detected under lib/binance/api/."
+          fi
+
+      - name: Create pull request
+        if: steps.generated_diff.outputs.has_changes == 'true'
+        uses: peter-evans/create-pull-request@v6
+        with:
+          commit-message: Sync upstream commit ${{ steps.upstream_commit.outputs.sha }}: ${{ steps.upstream_commit.outputs.subject }}
+          title: Sync upstream commit ${{ steps.upstream_commit.outputs.sha }}
+          body: |
+            This PR syncs the generated Elixir API modules with the latest upstream Binance API Postman repository contents.
+
+            Upstream commit: ${{ steps.upstream_commit.outputs.sha }}
+            Subject: ${{ steps.upstream_commit.outputs.subject }}
+
+            Upstream body:
+            ${{ steps.upstream_commit.outputs.body }}
+          branch: sync/binance-api-postman
+          delete-branch: true
+          base: main
+          labels: |
+            automated
+            upstream-sync
