@@ -54,6 +54,8 @@ defmodule Binance.RequestBuilder do
   end
 
   defp validate_required_attrs(%{method: method, url: url} = attrs) when not is_nil(method) and not is_nil(url), do: {:ok, attrs}
+  defp validate_required_attrs(%{method: nil}), do: {:error, :missing_method}
+  defp validate_required_attrs(%{url: nil}), do: {:error, :missing_url}
   defp validate_required_attrs(_), do: {:error, :missing_required_request_fields}
 
   defp normalize_headers(nil), do: []

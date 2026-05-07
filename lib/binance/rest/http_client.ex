@@ -44,12 +44,12 @@ defmodule Binance.REST.HTTPClient do
         "post" -> Req.post(url, opts)
         "put" -> Req.put(url, opts)
         "delete" -> Req.delete(url, opts)
-        _ -> {:error, :unsupported_method}
+        _ -> {:error, {:request_error, :unsupported_method}}
       end
 
     normalize_response(result)
   rescue
-    exception -> {:error, {:transport_error, exception}}
+    exception -> {:error, {:transport_error, {:exception, exception}}}
   end
 
   defp maybe_put(_key, nil), do: []
@@ -109,6 +109,6 @@ defmodule Binance.REST.HTTPClient do
   end
 
   defp normalize_response({:ok, %Req.Response{status: status, body: body}}), do: {:error, {:http_error, status, body}}
-  defp normalize_response({:error, reason}), do: {:error, {:transport_error, reason}}
+  defp normalize_response({:error, reason}), do: {:error, {:transport_error, {:req_error, reason}}}
 end
       
