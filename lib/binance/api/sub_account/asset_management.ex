@@ -192,10 +192,10 @@ defmodule Binance.API.SubAccount.AssetManagement do
   Method: GET
   Path: /sapi/v1/sub-account/futures/move-position
   Requires signature: true
-  Required: symbol, page, row
+  Required: symbol, page, rows
   Optional: startTime, endTime, recvWindow
   """
-  def get_move_position_history_for_sub_account_v1(client, symbol, page, row, opts \\ []) do
+  def get_move_position_history_for_sub_account_v1(client, symbol, page, rows, opts \\ []) do
     with {:ok, base_url} <- base_url(client.env) do
       {:ok, request} =
         Binance.RequestBuilder.build(%{
@@ -204,7 +204,7 @@ defmodule Binance.API.SubAccount.AssetManagement do
           method: "GET",
           base_url: base_url,
           url: "/sapi/v1/sub-account/futures/move-position",
-          query: [symbol: symbol, startTime: Keyword.get(opts, :startTime), endTime: Keyword.get(opts, :endTime), page: page, row: row, recvWindow: Keyword.get(opts, :recvWindow), timestamp: nil],
+          query: [symbol: symbol, startTime: Keyword.get(opts, :startTime), endTime: Keyword.get(opts, :endTime), page: page, rows: rows, recvWindow: Keyword.get(opts, :recvWindow), timestamp: nil],
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
