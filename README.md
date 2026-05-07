@@ -10,6 +10,8 @@ This project focuses on a thin, generated raw API layer:
 - build signed and unsigned Binance REST requests;
 - provide small `Hack` examples for manual IEx usage.
 
+In addition to the main branch, the repository also maintains a continuous-integration branch, `ci/binance-api-postman`, which tracks the latest generated output from upstream and feeds changes back to `main` through a draft PR workflow.
+
 ## Requirements
 
 - Elixir `~> 1.19`
