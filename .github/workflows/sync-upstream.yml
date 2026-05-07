@@ -75,6 +75,10 @@ jobs:
           if git diff --quiet --cached -- lib/binance/api/; then
             echo "has_changes=false" >> "$GITHUB_OUTPUT"
             echo "No generated changes detected under lib/binance/api/."
+            echo "Upstream commit: ${{ steps.upstream_commit.outputs.sha }}"
+            echo "Upstream subject: ${{ steps.upstream_commit.outputs.subject }}"
+            echo "Generated diff stat:"
+            git diff --stat --cached -- lib/binance/api/ || true
           else
             echo "has_changes=true" >> "$GITHUB_OUTPUT"
             echo "Generated changes detected under lib/binance/api/."
