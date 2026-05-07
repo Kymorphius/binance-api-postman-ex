@@ -42,6 +42,13 @@ jobs:
       - name: Install dependencies
         run: mix deps.get
 
+      - name: Configure Git identity
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
       - name: Fetch main branch
         run: git fetch origin main:refs/remotes/origin/main
 
