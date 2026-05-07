@@ -58,6 +58,12 @@ jobs:
           set -euo pipefail
           git merge --no-edit origin/main
 
+      - name: Push merged main to CI branch
+        shell: bash
+        run: |
+          set -euo pipefail
+          git push origin HEAD:ci/binance-api-postman
+
       - name: Pull Binance Postman repo
         run: mix pull_repo
 
