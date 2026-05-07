@@ -134,10 +134,14 @@ iex -S mix
 
 `.iex.exs` prints common commands and aliases `BinanceApiPostmanEx` and `Binance.Example`.
 
-Example raw API calls through `Binance.Example`:
+`Binance.Example` is a small convenience layer for manual testing. It wraps a few common raw API calls and keeps the IEx examples shorter and easier to read.
+
+Example wrapper calls through `Binance.Example`:
 
 ```elixir
 Binance.Example.spot_average_price("BTCUSDT")
+Binance.Example.futures_close_long_market("ETHUSDT", "0.01", positionSide: "LONG")
+Binance.Example.fiat_deposit("BTC", "BANK", "100", "test")
 ```
 
 ## Request behavior
