@@ -10,13 +10,15 @@ defmodule Binance.API.Pay.Pay do
     end
   end
 
+  @spec get_pay_trade_history_v1(Binance.Client.t(), Keyword.t()) :: {:ok, term()} | {:error, term()}
   @doc """
   Get Pay Trade History
   Method: GET
   Path: /sapi/v1/pay/transactions
   Requires signature: true
+  Optional: startTime, endTime, limit, recvWindow
   """
-  def get_pay_trade_history_v1(client, startTime: startTime, endTime: endTime, limit: limit, recvWindow: recvWindow) do
+  def get_pay_trade_history_v1(client, opts \\ []) do
     with {:ok, base_url} <- base_url(client.env) do
       {:ok, request} =
         Binance.RequestBuilder.build(%{
@@ -25,7 +27,7 @@ defmodule Binance.API.Pay.Pay do
           method: "GET",
           base_url: base_url,
           url: "/sapi/v1/pay/transactions",
-          query: [startTime: startTime, endTime: endTime, limit: limit, recvWindow: recvWindow, timestamp: nil],
+          query: [startTime: Keyword.get(opts, :startTime), endTime: Keyword.get(opts, :endTime), limit: Keyword.get(opts, :limit), recvWindow: Keyword.get(opts, :recvWindow), timestamp: nil],
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })

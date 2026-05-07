@@ -10,13 +10,16 @@ defmodule Binance.API.Alpha.MarketData do
     end
   end
 
+  @spec aggregated_trades_v1(Binance.Client.t(), term(), Keyword.t()) :: {:ok, term()} | {:error, term()}
   @doc """
   Aggregated Trades
   Method: GET
   Path: /bapi/defi/v1/public/alpha-trade/agg-trades
   Requires signature: false
+  Required: symbol
+  Optional: fromId, startTime, endTime, limit
   """
-  def aggregated_trades_v1(client, symbol, fromId: fromId, startTime: startTime, endTime: endTime, limit: limit) do
+  def aggregated_trades_v1(client, symbol, opts \\ []) do
     with {:ok, base_url} <- base_url(client.env) do
       {:ok, request} =
         Binance.RequestBuilder.build(%{
@@ -25,7 +28,7 @@ defmodule Binance.API.Alpha.MarketData do
           method: "GET",
           base_url: base_url,
           url: "/bapi/defi/v1/public/alpha-trade/agg-trades",
-          query: [symbol: symbol, fromId: fromId, startTime: startTime, endTime: endTime, limit: limit],
+          query: [symbol: symbol, fromId: Keyword.get(opts, :fromId), startTime: Keyword.get(opts, :startTime), endTime: Keyword.get(opts, :endTime), limit: Keyword.get(opts, :limit)],
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
@@ -34,6 +37,7 @@ defmodule Binance.API.Alpha.MarketData do
     end
   end
   
+  @spec get_exchange_info_v1(Binance.Client.t()) :: {:ok, term()} | {:error, term()}
   @doc """
   Get Exchange Info
   Method: GET
@@ -58,6 +62,7 @@ defmodule Binance.API.Alpha.MarketData do
     end
   end
   
+  @spec klines_v1(Binance.Client.t(), term(), term(), Keyword.t()) :: {:ok, term()} | {:error, term()}
   @doc """
   Klines
   Variant: Candlestick Data
@@ -65,8 +70,10 @@ defmodule Binance.API.Alpha.MarketData do
   Method: GET
   Path: /bapi/defi/v1/public/alpha-trade/klines
   Requires signature: false
+  Required: symbol, interval
+  Optional: limit, startTime, endTime
   """
-  def klines_v1(client, symbol, interval, limit: limit, startTime: startTime, endTime: endTime) do
+  def klines_v1(client, symbol, interval, opts \\ []) do
     with {:ok, base_url} <- base_url(client.env) do
       {:ok, request} =
         Binance.RequestBuilder.build(%{
@@ -75,7 +82,7 @@ defmodule Binance.API.Alpha.MarketData do
           method: "GET",
           base_url: base_url,
           url: "/bapi/defi/v1/public/alpha-trade/klines",
-          query: [symbol: symbol, interval: interval, limit: limit, startTime: startTime, endTime: endTime],
+          query: [symbol: symbol, interval: interval, limit: Keyword.get(opts, :limit), startTime: Keyword.get(opts, :startTime), endTime: Keyword.get(opts, :endTime)],
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
@@ -84,6 +91,7 @@ defmodule Binance.API.Alpha.MarketData do
     end
   end
   
+  @spec ticker_v1(Binance.Client.t(), term()) :: {:ok, term()} | {:error, term()}
   @doc """
   Ticker
   Variant: 24hr Price Statistics
@@ -91,6 +99,7 @@ defmodule Binance.API.Alpha.MarketData do
   Method: GET
   Path: /bapi/defi/v1/public/alpha-trade/ticker
   Requires signature: false
+  Required: symbol
   """
   def ticker_v1(client, symbol) do
     with {:ok, base_url} <- base_url(client.env) do
@@ -110,6 +119,7 @@ defmodule Binance.API.Alpha.MarketData do
     end
   end
   
+  @spec token_list_v1(Binance.Client.t()) :: {:ok, term()} | {:error, term()}
   @doc """
   Token List
   Method: GET

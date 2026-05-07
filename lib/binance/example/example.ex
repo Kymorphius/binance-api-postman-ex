@@ -82,6 +82,26 @@ defmodule Binance.Example do
     )
   end
 
+  def futures_close_long_market(symbol, quantity, opts \\ []) do
+    FuturesTrade.new_order_v1(
+      sample_client(),
+      symbol,
+      "SELL",
+      "MARKET",
+      futures_market_close_order_opts(quantity, opts, "LONG")
+    )
+  end
+
+  def futures_close_short_market(symbol, quantity, opts \\ []) do
+    FuturesTrade.new_order_v1(
+      sample_client(),
+      symbol,
+      "BUY",
+      "MARKET",
+      futures_market_close_order_opts(quantity, opts, "SHORT")
+    )
+  end
+
   def futures_query_order(symbol, opts) do
     FuturesTrade.query_order_v1(
       sample_client(),
@@ -114,6 +134,18 @@ defmodule Binance.Example do
       priceMatch: Keyword.get(opts, :priceMatch),
       selfTradePreventionMode: Keyword.get(opts, :selfTradePreventionMode),
       goodTillDate: Keyword.get(opts, :goodTillDate),
+      recvWindow: Keyword.get(opts, :recvWindow, 5000)
+    ]
+  end
+
+  defp futures_market_close_order_opts(quantity, opts, position_side) do
+    [
+      positionSide: position_side,
+      quantity: quantity,
+      price: Keyword.get(opts, :price),
+      newClientOrderId: Keyword.get(opts, :newClientOrderId),
+      newOrderRespType: Keyword.get(opts, :newOrderRespType, "RESULT"),
+      selfTradePreventionMode: Keyword.get(opts, :selfTradePreventionMode),
       recvWindow: Keyword.get(opts, :recvWindow, 5000)
     ]
   end

@@ -10,6 +10,7 @@ defmodule Binance.API.DerivativesTrading.Options.Account do
     end
   end
 
+  @spec account_funding_flow_v1(Binance.Client.t(), term(), Keyword.t()) :: {:ok, term()} | {:error, term()}
   @doc """
   Account Funding Flow
   Variant: User Data
@@ -17,8 +18,10 @@ defmodule Binance.API.DerivativesTrading.Options.Account do
   Method: GET
   Path: /eapi/v1/bill
   Requires signature: true
+  Required: currency
+  Optional: recordId, startTime, endTime, limit, recvWindow
   """
-  def account_funding_flow_v1(client, currency, recordId: recordId, startTime: startTime, endTime: endTime, limit: limit, recvWindow: recvWindow) do
+  def account_funding_flow_v1(client, currency, opts \\ []) do
     with {:ok, base_url} <- base_url(client.env) do
       {:ok, request} =
         Binance.RequestBuilder.build(%{
@@ -27,7 +30,7 @@ defmodule Binance.API.DerivativesTrading.Options.Account do
           method: "GET",
           base_url: base_url,
           url: "/eapi/v1/bill",
-          query: [currency: currency, recordId: recordId, startTime: startTime, endTime: endTime, limit: limit, recvWindow: recvWindow, timestamp: nil],
+          query: [currency: currency, recordId: Keyword.get(opts, :recordId), startTime: Keyword.get(opts, :startTime), endTime: Keyword.get(opts, :endTime), limit: Keyword.get(opts, :limit), recvWindow: Keyword.get(opts, :recvWindow), timestamp: nil],
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
@@ -36,6 +39,7 @@ defmodule Binance.API.DerivativesTrading.Options.Account do
     end
   end
   
+  @spec option_margin_account_information_v1(Binance.Client.t(), Keyword.t()) :: {:ok, term()} | {:error, term()}
   @doc """
   Option Margin Account Information
   Variant: User Data
@@ -43,8 +47,9 @@ defmodule Binance.API.DerivativesTrading.Options.Account do
   Method: GET
   Path: /eapi/v1/marginAccount
   Requires signature: true
+  Optional: recvWindow
   """
-  def option_margin_account_information_v1(client, recvWindow: recvWindow) do
+  def option_margin_account_information_v1(client, opts \\ []) do
     with {:ok, base_url} <- base_url(client.env) do
       {:ok, request} =
         Binance.RequestBuilder.build(%{
@@ -53,7 +58,7 @@ defmodule Binance.API.DerivativesTrading.Options.Account do
           method: "GET",
           base_url: base_url,
           url: "/eapi/v1/marginAccount",
-          query: [recvWindow: recvWindow, timestamp: nil],
+          query: [recvWindow: Keyword.get(opts, :recvWindow), timestamp: nil],
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })

@@ -133,6 +133,8 @@ Binance.Example.futures_ticker_price("ETHUSDT")
 Binance.Example.futures_order_book("ETHUSDT")
 
 Binance.Example.futures_new_limit_order("ETHUSDT", "BUY", "0.01", "2400", positionSide: "LONG")
+Binance.Example.futures_close_long_market("ETHUSDT", "0.01", positionSide: "LONG")
+Binance.Example.futures_close_short_market("ETHUSDT", "0.01", positionSide: "SHORT")
 Binance.Example.futures_query_order("ETHUSDT", orderId: 123)
 Binance.Example.futures_cancel_order("ETHUSDT", orderId: 123)
 

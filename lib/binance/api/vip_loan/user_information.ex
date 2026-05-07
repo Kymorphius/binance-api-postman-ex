@@ -10,6 +10,7 @@ defmodule Binance.API.VipLoan.UserInformation do
     end
   end
 
+  @spec get_vip_loan_accrued_interest_v1(Binance.Client.t(), Keyword.t()) :: {:ok, term()} | {:error, term()}
   @doc """
   Get VIP Loan Accrued Interest
   Variant: User Data
@@ -17,8 +18,9 @@ defmodule Binance.API.VipLoan.UserInformation do
   Method: GET
   Path: /sapi/v1/loan/vip/accruedInterest
   Requires signature: true
+  Optional: orderId, loanCoin, startTime, endTime, current, limit, recvWindow
   """
-  def get_vip_loan_accrued_interest_v1(client, orderId: orderId, loanCoin: loanCoin, startTime: startTime, endTime: endTime, current: current, limit: limit, recvWindow: recvWindow) do
+  def get_vip_loan_accrued_interest_v1(client, opts \\ []) do
     with {:ok, base_url} <- base_url(client.env) do
       {:ok, request} =
         Binance.RequestBuilder.build(%{
@@ -27,7 +29,7 @@ defmodule Binance.API.VipLoan.UserInformation do
           method: "GET",
           base_url: base_url,
           url: "/sapi/v1/loan/vip/accruedInterest",
-          query: [orderId: orderId, loanCoin: loanCoin, startTime: startTime, endTime: endTime, current: current, limit: limit, recvWindow: recvWindow, timestamp: nil],
+          query: [orderId: Keyword.get(opts, :orderId), loanCoin: Keyword.get(opts, :loanCoin), startTime: Keyword.get(opts, :startTime), endTime: Keyword.get(opts, :endTime), current: Keyword.get(opts, :current), limit: Keyword.get(opts, :limit), recvWindow: Keyword.get(opts, :recvWindow), timestamp: nil],
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
@@ -36,6 +38,7 @@ defmodule Binance.API.VipLoan.UserInformation do
     end
   end
   
+  @spec check_vip_loan_collateral_account_v1(Binance.Client.t(), Keyword.t()) :: {:ok, term()} | {:error, term()}
   @doc """
   Check VIP Loan Collateral Account
   Variant: User Data
@@ -43,8 +46,9 @@ defmodule Binance.API.VipLoan.UserInformation do
   Method: GET
   Path: /sapi/v1/loan/vip/collateral/account
   Requires signature: true
+  Optional: orderId, collateralAccountId, recvWindow
   """
-  def check_vip_loan_collateral_account_v1(client, orderId: orderId, collateralAccountId: collateralAccountId, recvWindow: recvWindow) do
+  def check_vip_loan_collateral_account_v1(client, opts \\ []) do
     with {:ok, base_url} <- base_url(client.env) do
       {:ok, request} =
         Binance.RequestBuilder.build(%{
@@ -53,7 +57,7 @@ defmodule Binance.API.VipLoan.UserInformation do
           method: "GET",
           base_url: base_url,
           url: "/sapi/v1/loan/vip/collateral/account",
-          query: [orderId: orderId, collateralAccountId: collateralAccountId, recvWindow: recvWindow, timestamp: nil],
+          query: [orderId: Keyword.get(opts, :orderId), collateralAccountId: Keyword.get(opts, :collateralAccountId), recvWindow: Keyword.get(opts, :recvWindow), timestamp: nil],
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
@@ -62,6 +66,7 @@ defmodule Binance.API.VipLoan.UserInformation do
     end
   end
   
+  @spec get_vip_loan_ongoing_orders_v1(Binance.Client.t(), Keyword.t()) :: {:ok, term()} | {:error, term()}
   @doc """
   Get VIP Loan Ongoing Orders
   Variant: User Data
@@ -69,8 +74,9 @@ defmodule Binance.API.VipLoan.UserInformation do
   Method: GET
   Path: /sapi/v1/loan/vip/ongoing/orders
   Requires signature: true
+  Optional: orderId, collateralAccountId, loanCoin, collateralCoin, current, limit, recvWindow
   """
-  def get_vip_loan_ongoing_orders_v1(client, orderId: orderId, collateralAccountId: collateralAccountId, loanCoin: loanCoin, collateralCoin: collateralCoin, current: current, limit: limit, recvWindow: recvWindow) do
+  def get_vip_loan_ongoing_orders_v1(client, opts \\ []) do
     with {:ok, base_url} <- base_url(client.env) do
       {:ok, request} =
         Binance.RequestBuilder.build(%{
@@ -79,7 +85,7 @@ defmodule Binance.API.VipLoan.UserInformation do
           method: "GET",
           base_url: base_url,
           url: "/sapi/v1/loan/vip/ongoing/orders",
-          query: [orderId: orderId, collateralAccountId: collateralAccountId, loanCoin: loanCoin, collateralCoin: collateralCoin, current: current, limit: limit, recvWindow: recvWindow, timestamp: nil],
+          query: [orderId: Keyword.get(opts, :orderId), collateralAccountId: Keyword.get(opts, :collateralAccountId), loanCoin: Keyword.get(opts, :loanCoin), collateralCoin: Keyword.get(opts, :collateralCoin), current: Keyword.get(opts, :current), limit: Keyword.get(opts, :limit), recvWindow: Keyword.get(opts, :recvWindow), timestamp: nil],
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
@@ -88,6 +94,7 @@ defmodule Binance.API.VipLoan.UserInformation do
     end
   end
   
+  @spec query_application_status_v1(Binance.Client.t(), Keyword.t()) :: {:ok, term()} | {:error, term()}
   @doc """
   Query Application Status
   Variant: User Data
@@ -95,8 +102,9 @@ defmodule Binance.API.VipLoan.UserInformation do
   Method: GET
   Path: /sapi/v1/loan/vip/request/data
   Requires signature: true
+  Optional: current, limit, recvWindow
   """
-  def query_application_status_v1(client, current: current, limit: limit, recvWindow: recvWindow) do
+  def query_application_status_v1(client, opts \\ []) do
     with {:ok, base_url} <- base_url(client.env) do
       {:ok, request} =
         Binance.RequestBuilder.build(%{
@@ -105,7 +113,7 @@ defmodule Binance.API.VipLoan.UserInformation do
           method: "GET",
           base_url: base_url,
           url: "/sapi/v1/loan/vip/request/data",
-          query: [current: current, limit: limit, recvWindow: recvWindow, timestamp: nil],
+          query: [current: Keyword.get(opts, :current), limit: Keyword.get(opts, :limit), recvWindow: Keyword.get(opts, :recvWindow), timestamp: nil],
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })

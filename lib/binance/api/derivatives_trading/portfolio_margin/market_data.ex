@@ -10,6 +10,7 @@ defmodule Binance.API.DerivativesTrading.PortfolioMargin.MarketData do
     end
   end
 
+  @spec test_connectivity_v1(Binance.Client.t()) :: {:ok, term()} | {:error, term()}
   @doc """
   Test Connectivity
   Method: GET

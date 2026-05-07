@@ -10,6 +10,7 @@ defmodule Binance.API.C2c.C2c do
     end
   end
 
+  @spec get_c2c_trade_history_v1(Binance.Client.t(), Keyword.t()) :: {:ok, term()} | {:error, term()}
   @doc """
   Get C2C Trade History
   Variant: User Data
@@ -17,8 +18,9 @@ defmodule Binance.API.C2c.C2c do
   Method: GET
   Path: /sapi/v1/c2c/orderMatch/listUserOrderHistory
   Requires signature: true
+  Optional: tradeType, startTimestamp, endTimestamp, page, rows, recvWindow
   """
-  def get_c2c_trade_history_v1(client, tradeType: tradeType, startTimestamp: startTimestamp, endTimestamp: endTimestamp, page: page, rows: rows, recvWindow: recvWindow) do
+  def get_c2c_trade_history_v1(client, opts \\ []) do
     with {:ok, base_url} <- base_url(client.env) do
       {:ok, request} =
         Binance.RequestBuilder.build(%{
@@ -27,7 +29,7 @@ defmodule Binance.API.C2c.C2c do
           method: "GET",
           base_url: base_url,
           url: "/sapi/v1/c2c/orderMatch/listUserOrderHistory",
-          query: [tradeType: tradeType, startTimestamp: startTimestamp, endTimestamp: endTimestamp, page: page, rows: rows, recvWindow: recvWindow, timestamp: nil],
+          query: [tradeType: Keyword.get(opts, :tradeType), startTimestamp: Keyword.get(opts, :startTimestamp), endTimestamp: Keyword.get(opts, :endTimestamp), page: Keyword.get(opts, :page), rows: Keyword.get(opts, :rows), recvWindow: Keyword.get(opts, :recvWindow), timestamp: nil],
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })

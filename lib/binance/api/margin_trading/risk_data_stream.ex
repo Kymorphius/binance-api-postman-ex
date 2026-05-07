@@ -10,6 +10,7 @@ defmodule Binance.API.MarginTrading.RiskDataStream do
     end
   end
 
+  @spec close_user_data_stream_v1(Binance.Client.t()) :: {:ok, term()} | {:error, term()}
   @doc """
   Close User Data Stream
   Variant: User Stream
@@ -36,6 +37,7 @@ defmodule Binance.API.MarginTrading.RiskDataStream do
     end
   end
   
+  @spec keepalive_user_data_stream_v1(Binance.Client.t(), term()) :: {:ok, term()} | {:error, term()}
   @doc """
   Keepalive User Data Stream
   Variant: User Stream
@@ -43,6 +45,7 @@ defmodule Binance.API.MarginTrading.RiskDataStream do
   Method: PUT
   Path: /sapi/v1/margin/listen-key
   Requires signature: false
+  Required: listenKey
   """
   def keepalive_user_data_stream_v1(client, listenKey) do
     with {:ok, base_url} <- base_url(client.env) do
@@ -62,6 +65,7 @@ defmodule Binance.API.MarginTrading.RiskDataStream do
     end
   end
   
+  @spec start_user_data_stream_v1(Binance.Client.t()) :: {:ok, term()} | {:error, term()}
   @doc """
   Start User Data Stream
   Variant: User Stream

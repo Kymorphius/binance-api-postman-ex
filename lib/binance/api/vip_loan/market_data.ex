@@ -10,6 +10,7 @@ defmodule Binance.API.VipLoan.MarketData do
     end
   end
 
+  @spec get_collateral_asset_data_v1(Binance.Client.t(), Keyword.t()) :: {:ok, term()} | {:error, term()}
   @doc """
   Get Collateral Asset Data
   Variant: User Data
@@ -17,8 +18,9 @@ defmodule Binance.API.VipLoan.MarketData do
   Method: GET
   Path: /sapi/v1/loan/vip/collateral/data
   Requires signature: true
+  Optional: collateralCoin, recvWindow
   """
-  def get_collateral_asset_data_v1(client, collateralCoin: collateralCoin, recvWindow: recvWindow) do
+  def get_collateral_asset_data_v1(client, opts \\ []) do
     with {:ok, base_url} <- base_url(client.env) do
       {:ok, request} =
         Binance.RequestBuilder.build(%{
@@ -27,7 +29,7 @@ defmodule Binance.API.VipLoan.MarketData do
           method: "GET",
           base_url: base_url,
           url: "/sapi/v1/loan/vip/collateral/data",
-          query: [collateralCoin: collateralCoin, recvWindow: recvWindow, timestamp: nil],
+          query: [collateralCoin: Keyword.get(opts, :collateralCoin), recvWindow: Keyword.get(opts, :recvWindow), timestamp: nil],
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
@@ -36,6 +38,7 @@ defmodule Binance.API.VipLoan.MarketData do
     end
   end
   
+  @spec get_vip_loan_interest_rate_history_v1(Binance.Client.t(), term(), term(), Keyword.t()) :: {:ok, term()} | {:error, term()}
   @doc """
   Get VIP Loan Interest Rate History
   Variant: User Data
@@ -43,8 +46,10 @@ defmodule Binance.API.VipLoan.MarketData do
   Method: GET
   Path: /sapi/v1/loan/vip/interestRateHistory
   Requires signature: true
+  Required: coin, recvWindow
+  Optional: startTime, endTime, current, limit
   """
-  def get_vip_loan_interest_rate_history_v1(client, coin, recvWindow, startTime: startTime, endTime: endTime, current: current, limit: limit) do
+  def get_vip_loan_interest_rate_history_v1(client, coin, recvWindow, opts \\ []) do
     with {:ok, base_url} <- base_url(client.env) do
       {:ok, request} =
         Binance.RequestBuilder.build(%{
@@ -53,7 +58,7 @@ defmodule Binance.API.VipLoan.MarketData do
           method: "GET",
           base_url: base_url,
           url: "/sapi/v1/loan/vip/interestRateHistory",
-          query: [coin: coin, startTime: startTime, endTime: endTime, current: current, limit: limit, recvWindow: recvWindow, timestamp: nil],
+          query: [coin: coin, startTime: Keyword.get(opts, :startTime), endTime: Keyword.get(opts, :endTime), current: Keyword.get(opts, :current), limit: Keyword.get(opts, :limit), recvWindow: recvWindow, timestamp: nil],
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
@@ -62,6 +67,7 @@ defmodule Binance.API.VipLoan.MarketData do
     end
   end
   
+  @spec get_loanable_assets_data_v1(Binance.Client.t(), Keyword.t()) :: {:ok, term()} | {:error, term()}
   @doc """
   Get Loanable Assets Data
   Variant: User Data
@@ -69,8 +75,9 @@ defmodule Binance.API.VipLoan.MarketData do
   Method: GET
   Path: /sapi/v1/loan/vip/loanable/data
   Requires signature: true
+  Optional: loanCoin, vipLevel, recvWindow
   """
-  def get_loanable_assets_data_v1(client, loanCoin: loanCoin, vipLevel: vipLevel, recvWindow: recvWindow) do
+  def get_loanable_assets_data_v1(client, opts \\ []) do
     with {:ok, base_url} <- base_url(client.env) do
       {:ok, request} =
         Binance.RequestBuilder.build(%{
@@ -79,7 +86,7 @@ defmodule Binance.API.VipLoan.MarketData do
           method: "GET",
           base_url: base_url,
           url: "/sapi/v1/loan/vip/loanable/data",
-          query: [loanCoin: loanCoin, vipLevel: vipLevel, recvWindow: recvWindow, timestamp: nil],
+          query: [loanCoin: Keyword.get(opts, :loanCoin), vipLevel: Keyword.get(opts, :vipLevel), recvWindow: Keyword.get(opts, :recvWindow), timestamp: nil],
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
@@ -88,6 +95,7 @@ defmodule Binance.API.VipLoan.MarketData do
     end
   end
   
+  @spec get_borrow_interest_rate_v1(Binance.Client.t(), term(), Keyword.t()) :: {:ok, term()} | {:error, term()}
   @doc """
   Get Borrow Interest Rate
   Variant: User Data
@@ -95,8 +103,10 @@ defmodule Binance.API.VipLoan.MarketData do
   Method: GET
   Path: /sapi/v1/loan/vip/request/interestRate
   Requires signature: true
+  Required: loanCoin
+  Optional: recvWindow
   """
-  def get_borrow_interest_rate_v1(client, loanCoin, recvWindow: recvWindow) do
+  def get_borrow_interest_rate_v1(client, loanCoin, opts \\ []) do
     with {:ok, base_url} <- base_url(client.env) do
       {:ok, request} =
         Binance.RequestBuilder.build(%{
@@ -105,7 +115,7 @@ defmodule Binance.API.VipLoan.MarketData do
           method: "GET",
           base_url: base_url,
           url: "/sapi/v1/loan/vip/request/interestRate",
-          query: [loanCoin: loanCoin, recvWindow: recvWindow, timestamp: nil],
+          query: [loanCoin: loanCoin, recvWindow: Keyword.get(opts, :recvWindow), timestamp: nil],
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })

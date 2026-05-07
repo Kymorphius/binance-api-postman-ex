@@ -10,6 +10,7 @@ defmodule Binance.API.DerivativesTrading.Options.UserDataStreams do
     end
   end
 
+  @spec close_user_data_stream_v1(Binance.Client.t()) :: {:ok, term()} | {:error, term()}
   @doc """
   Close User Data Stream
   Variant: User Stream
@@ -36,6 +37,7 @@ defmodule Binance.API.DerivativesTrading.Options.UserDataStreams do
     end
   end
   
+  @spec keepalive_user_data_stream_v1(Binance.Client.t()) :: {:ok, term()} | {:error, term()}
   @doc """
   Keepalive User Data Stream
   Variant: User Stream
@@ -62,6 +64,7 @@ defmodule Binance.API.DerivativesTrading.Options.UserDataStreams do
     end
   end
   
+  @spec start_user_data_stream_v1(Binance.Client.t()) :: {:ok, term()} | {:error, term()}
   @doc """
   Start User Data Stream
   Variant: User Stream

@@ -10,6 +10,7 @@ defmodule Binance.API.SubAccount.AssetManagement do
     end
   end
 
+  @spec get_sub_account_deposit_address_v1(Binance.Client.t(), term(), term(), Keyword.t()) :: {:ok, term()} | {:error, term()}
   @doc """
   Get Sub-account Deposit Address
   Variant: User Data
@@ -17,8 +18,10 @@ defmodule Binance.API.SubAccount.AssetManagement do
   Method: GET
   Path: /sapi/v1/capital/deposit/subAddress
   Requires signature: true
+  Required: email, coin
+  Optional: network, amount, recvWindow
   """
-  def get_sub_account_deposit_address_v1(client, email, coin, network: network, amount: amount, recvWindow: recvWindow) do
+  def get_sub_account_deposit_address_v1(client, email, coin, opts \\ []) do
     with {:ok, base_url} <- base_url(client.env) do
       {:ok, request} =
         Binance.RequestBuilder.build(%{
@@ -27,7 +30,7 @@ defmodule Binance.API.SubAccount.AssetManagement do
           method: "GET",
           base_url: base_url,
           url: "/sapi/v1/capital/deposit/subAddress",
-          query: [email: email, coin: coin, network: network, amount: amount, recvWindow: recvWindow, timestamp: nil],
+          query: [email: email, coin: coin, network: Keyword.get(opts, :network), amount: Keyword.get(opts, :amount), recvWindow: Keyword.get(opts, :recvWindow), timestamp: nil],
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
@@ -36,6 +39,7 @@ defmodule Binance.API.SubAccount.AssetManagement do
     end
   end
   
+  @spec get_sub_account_deposit_history_v1(Binance.Client.t(), term(), Keyword.t()) :: {:ok, term()} | {:error, term()}
   @doc """
   Get Sub-account Deposit History
   Variant: User Data
@@ -43,8 +47,10 @@ defmodule Binance.API.SubAccount.AssetManagement do
   Method: GET
   Path: /sapi/v1/capital/deposit/subHisrec
   Requires signature: true
+  Required: email
+  Optional: coin, status, startTime, endTime, limit, offset, recvWindow, txId
   """
-  def get_sub_account_deposit_history_v1(client, email, coin: coin, status: status, startTime: startTime, endTime: endTime, limit: limit, offset: offset, recvWindow: recvWindow, txId: txId) do
+  def get_sub_account_deposit_history_v1(client, email, opts \\ []) do
     with {:ok, base_url} <- base_url(client.env) do
       {:ok, request} =
         Binance.RequestBuilder.build(%{
@@ -53,7 +59,7 @@ defmodule Binance.API.SubAccount.AssetManagement do
           method: "GET",
           base_url: base_url,
           url: "/sapi/v1/capital/deposit/subHisrec",
-          query: [email: email, coin: coin, status: status, startTime: startTime, endTime: endTime, limit: limit, offset: offset, recvWindow: recvWindow, txId: txId, timestamp: nil],
+          query: [email: email, coin: Keyword.get(opts, :coin), status: Keyword.get(opts, :status), startTime: Keyword.get(opts, :startTime), endTime: Keyword.get(opts, :endTime), limit: Keyword.get(opts, :limit), offset: Keyword.get(opts, :offset), recvWindow: Keyword.get(opts, :recvWindow), txId: Keyword.get(opts, :txId), timestamp: nil],
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
@@ -62,6 +68,7 @@ defmodule Binance.API.SubAccount.AssetManagement do
     end
   end
   
+  @spec get_detail_on_sub_account_s_futures_account_v1(Binance.Client.t(), term(), Keyword.t()) :: {:ok, term()} | {:error, term()}
   @doc """
   Get Detail on Sub-account's Futures Account
   Variant: User Data
@@ -69,8 +76,10 @@ defmodule Binance.API.SubAccount.AssetManagement do
   Method: GET
   Path: /sapi/v1/sub-account/futures/account
   Requires signature: true
+  Required: email
+  Optional: recvWindow
   """
-  def get_detail_on_sub_account_s_futures_account_v1(client, email, recvWindow: recvWindow) do
+  def get_detail_on_sub_account_s_futures_account_v1(client, email, opts \\ []) do
     with {:ok, base_url} <- base_url(client.env) do
       {:ok, request} =
         Binance.RequestBuilder.build(%{
@@ -79,7 +88,7 @@ defmodule Binance.API.SubAccount.AssetManagement do
           method: "GET",
           base_url: base_url,
           url: "/sapi/v1/sub-account/futures/account",
-          query: [email: email, recvWindow: recvWindow, timestamp: nil],
+          query: [email: email, recvWindow: Keyword.get(opts, :recvWindow), timestamp: nil],
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
@@ -88,6 +97,7 @@ defmodule Binance.API.SubAccount.AssetManagement do
     end
   end
   
+  @spec get_summary_of_sub_account_s_futures_account_v1(Binance.Client.t(), term(), term(), Keyword.t()) :: {:ok, term()} | {:error, term()}
   @doc """
   Get Summary of Sub-account's Futures Account
   Variant: User Data
@@ -95,8 +105,10 @@ defmodule Binance.API.SubAccount.AssetManagement do
   Method: GET
   Path: /sapi/v1/sub-account/futures/accountSummary
   Requires signature: true
+  Required: page, limit
+  Optional: recvWindow
   """
-  def get_summary_of_sub_account_s_futures_account_v1(client, page, limit, recvWindow: recvWindow) do
+  def get_summary_of_sub_account_s_futures_account_v1(client, page, limit, opts \\ []) do
     with {:ok, base_url} <- base_url(client.env) do
       {:ok, request} =
         Binance.RequestBuilder.build(%{
@@ -105,7 +117,7 @@ defmodule Binance.API.SubAccount.AssetManagement do
           method: "GET",
           base_url: base_url,
           url: "/sapi/v1/sub-account/futures/accountSummary",
-          query: [page: page, limit: limit, recvWindow: recvWindow, timestamp: nil],
+          query: [page: page, limit: limit, recvWindow: Keyword.get(opts, :recvWindow), timestamp: nil],
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
@@ -114,6 +126,7 @@ defmodule Binance.API.SubAccount.AssetManagement do
     end
   end
   
+  @spec query_sub_account_futures_asset_transfer_history_v1(Binance.Client.t(), term(), term(), Keyword.t()) :: {:ok, term()} | {:error, term()}
   @doc """
   Query Sub-account Futures Asset Transfer History
   Variant: User Data
@@ -121,8 +134,10 @@ defmodule Binance.API.SubAccount.AssetManagement do
   Method: GET
   Path: /sapi/v1/sub-account/futures/internalTransfer
   Requires signature: true
+  Required: email, futuresType
+  Optional: startTime, endTime, page, limit, recvWindow
   """
-  def query_sub_account_futures_asset_transfer_history_v1(client, email, futuresType, startTime: startTime, endTime: endTime, page: page, limit: limit, recvWindow: recvWindow) do
+  def query_sub_account_futures_asset_transfer_history_v1(client, email, futuresType, opts \\ []) do
     with {:ok, base_url} <- base_url(client.env) do
       {:ok, request} =
         Binance.RequestBuilder.build(%{
@@ -131,7 +146,7 @@ defmodule Binance.API.SubAccount.AssetManagement do
           method: "GET",
           base_url: base_url,
           url: "/sapi/v1/sub-account/futures/internalTransfer",
-          query: [email: email, futuresType: futuresType, startTime: startTime, endTime: endTime, page: page, limit: limit, recvWindow: recvWindow, timestamp: nil],
+          query: [email: email, futuresType: futuresType, startTime: Keyword.get(opts, :startTime), endTime: Keyword.get(opts, :endTime), page: Keyword.get(opts, :page), limit: Keyword.get(opts, :limit), recvWindow: Keyword.get(opts, :recvWindow), timestamp: nil],
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
@@ -140,6 +155,7 @@ defmodule Binance.API.SubAccount.AssetManagement do
     end
   end
   
+  @spec sub_account_futures_asset_transfer_v1(Binance.Client.t(), term(), term(), term(), term(), term(), Keyword.t()) :: {:ok, term()} | {:error, term()}
   @doc """
   Sub-account Futures Asset Transfer
   Variant: User Data
@@ -147,8 +163,10 @@ defmodule Binance.API.SubAccount.AssetManagement do
   Method: POST
   Path: /sapi/v1/sub-account/futures/internalTransfer
   Requires signature: true
+  Required: fromEmail, toEmail, futuresType, asset, amount
+  Optional: recvWindow
   """
-  def sub_account_futures_asset_transfer_v1(client, fromEmail, toEmail, futuresType, asset, amount, recvWindow: recvWindow) do
+  def sub_account_futures_asset_transfer_v1(client, fromEmail, toEmail, futuresType, asset, amount, opts \\ []) do
     with {:ok, base_url} <- base_url(client.env) do
       {:ok, request} =
         Binance.RequestBuilder.build(%{
@@ -157,7 +175,7 @@ defmodule Binance.API.SubAccount.AssetManagement do
           method: "POST",
           base_url: base_url,
           url: "/sapi/v1/sub-account/futures/internalTransfer",
-          query: [fromEmail: fromEmail, toEmail: toEmail, futuresType: futuresType, asset: asset, amount: amount, recvWindow: recvWindow, timestamp: nil],
+          query: [fromEmail: fromEmail, toEmail: toEmail, futuresType: futuresType, asset: asset, amount: amount, recvWindow: Keyword.get(opts, :recvWindow), timestamp: nil],
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
@@ -166,6 +184,7 @@ defmodule Binance.API.SubAccount.AssetManagement do
     end
   end
   
+  @spec get_move_position_history_for_sub_account_v1(Binance.Client.t(), term(), term(), term(), Keyword.t()) :: {:ok, term()} | {:error, term()}
   @doc """
   Get Move Position History for Sub-account
   Variant: User Data
@@ -173,8 +192,10 @@ defmodule Binance.API.SubAccount.AssetManagement do
   Method: GET
   Path: /sapi/v1/sub-account/futures/move-position
   Requires signature: true
+  Required: symbol, page, row
+  Optional: startTime, endTime, recvWindow
   """
-  def get_move_position_history_for_sub_account_v1(client, symbol, page, row, startTime: startTime, endTime: endTime, recvWindow: recvWindow) do
+  def get_move_position_history_for_sub_account_v1(client, symbol, page, row, opts \\ []) do
     with {:ok, base_url} <- base_url(client.env) do
       {:ok, request} =
         Binance.RequestBuilder.build(%{
@@ -183,7 +204,7 @@ defmodule Binance.API.SubAccount.AssetManagement do
           method: "GET",
           base_url: base_url,
           url: "/sapi/v1/sub-account/futures/move-position",
-          query: [symbol: symbol, startTime: startTime, endTime: endTime, page: page, row: row, recvWindow: recvWindow, timestamp: nil],
+          query: [symbol: symbol, startTime: Keyword.get(opts, :startTime), endTime: Keyword.get(opts, :endTime), page: page, row: row, recvWindow: Keyword.get(opts, :recvWindow), timestamp: nil],
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
@@ -192,6 +213,7 @@ defmodule Binance.API.SubAccount.AssetManagement do
     end
   end
   
+  @spec move_position_for_sub_account_v1(Binance.Client.t(), term(), term(), term(), term(), Keyword.t()) :: {:ok, term()} | {:error, term()}
   @doc """
   Move Position for Sub-account
   Variant: User Data
@@ -199,8 +221,10 @@ defmodule Binance.API.SubAccount.AssetManagement do
   Method: POST
   Path: /sapi/v1/sub-account/futures/move-position
   Requires signature: true
+  Required: fromUserEmail, toUserEmail, productType, orderArgs
+  Optional: recvWindow
   """
-  def move_position_for_sub_account_v1(client, fromUserEmail, toUserEmail, productType, orderArgs, recvWindow: recvWindow) do
+  def move_position_for_sub_account_v1(client, fromUserEmail, toUserEmail, productType, orderArgs, opts \\ []) do
     with {:ok, base_url} <- base_url(client.env) do
       {:ok, request} =
         Binance.RequestBuilder.build(%{
@@ -209,7 +233,7 @@ defmodule Binance.API.SubAccount.AssetManagement do
           method: "POST",
           base_url: base_url,
           url: "/sapi/v1/sub-account/futures/move-position",
-          query: [fromUserEmail: fromUserEmail, toUserEmail: toUserEmail, productType: productType, orderArgs: orderArgs, recvWindow: recvWindow, timestamp: nil],
+          query: [fromUserEmail: fromUserEmail, toUserEmail: toUserEmail, productType: productType, orderArgs: orderArgs, recvWindow: Keyword.get(opts, :recvWindow), timestamp: nil],
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
@@ -218,6 +242,7 @@ defmodule Binance.API.SubAccount.AssetManagement do
     end
   end
   
+  @spec futures_transfer_for_sub_account_v1(Binance.Client.t(), term(), term(), term(), term(), Keyword.t()) :: {:ok, term()} | {:error, term()}
   @doc """
   Futures Transfer for Sub-account
   Variant: User Data
@@ -225,8 +250,10 @@ defmodule Binance.API.SubAccount.AssetManagement do
   Method: POST
   Path: /sapi/v1/sub-account/futures/transfer
   Requires signature: true
+  Required: email, asset, amount, type
+  Optional: recvWindow
   """
-  def futures_transfer_for_sub_account_v1(client, email, asset, amount, type, recvWindow: recvWindow) do
+  def futures_transfer_for_sub_account_v1(client, email, asset, amount, type, opts \\ []) do
     with {:ok, base_url} <- base_url(client.env) do
       {:ok, request} =
         Binance.RequestBuilder.build(%{
@@ -235,7 +262,7 @@ defmodule Binance.API.SubAccount.AssetManagement do
           method: "POST",
           base_url: base_url,
           url: "/sapi/v1/sub-account/futures/transfer",
-          query: [email: email, asset: asset, amount: amount, type: type, recvWindow: recvWindow, timestamp: nil],
+          query: [email: email, asset: asset, amount: amount, type: type, recvWindow: Keyword.get(opts, :recvWindow), timestamp: nil],
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
@@ -244,6 +271,7 @@ defmodule Binance.API.SubAccount.AssetManagement do
     end
   end
   
+  @spec get_detail_on_sub_account_s_margin_account_v1(Binance.Client.t(), term(), Keyword.t()) :: {:ok, term()} | {:error, term()}
   @doc """
   Get Detail on Sub-account's Margin Account
   Variant: User Data
@@ -251,8 +279,10 @@ defmodule Binance.API.SubAccount.AssetManagement do
   Method: GET
   Path: /sapi/v1/sub-account/margin/account
   Requires signature: true
+  Required: email
+  Optional: recvWindow
   """
-  def get_detail_on_sub_account_s_margin_account_v1(client, email, recvWindow: recvWindow) do
+  def get_detail_on_sub_account_s_margin_account_v1(client, email, opts \\ []) do
     with {:ok, base_url} <- base_url(client.env) do
       {:ok, request} =
         Binance.RequestBuilder.build(%{
@@ -261,7 +291,7 @@ defmodule Binance.API.SubAccount.AssetManagement do
           method: "GET",
           base_url: base_url,
           url: "/sapi/v1/sub-account/margin/account",
-          query: [email: email, recvWindow: recvWindow, timestamp: nil],
+          query: [email: email, recvWindow: Keyword.get(opts, :recvWindow), timestamp: nil],
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
@@ -270,6 +300,7 @@ defmodule Binance.API.SubAccount.AssetManagement do
     end
   end
   
+  @spec get_summary_of_sub_account_s_margin_account_v1(Binance.Client.t(), Keyword.t()) :: {:ok, term()} | {:error, term()}
   @doc """
   Get Summary of Sub-account's Margin Account
   Variant: User Data
@@ -277,8 +308,9 @@ defmodule Binance.API.SubAccount.AssetManagement do
   Method: GET
   Path: /sapi/v1/sub-account/margin/accountSummary
   Requires signature: true
+  Optional: recvWindow
   """
-  def get_summary_of_sub_account_s_margin_account_v1(client, recvWindow: recvWindow) do
+  def get_summary_of_sub_account_s_margin_account_v1(client, opts \\ []) do
     with {:ok, base_url} <- base_url(client.env) do
       {:ok, request} =
         Binance.RequestBuilder.build(%{
@@ -287,7 +319,7 @@ defmodule Binance.API.SubAccount.AssetManagement do
           method: "GET",
           base_url: base_url,
           url: "/sapi/v1/sub-account/margin/accountSummary",
-          query: [recvWindow: recvWindow, timestamp: nil],
+          query: [recvWindow: Keyword.get(opts, :recvWindow), timestamp: nil],
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
@@ -296,6 +328,7 @@ defmodule Binance.API.SubAccount.AssetManagement do
     end
   end
   
+  @spec margin_transfer_for_sub_account_v1(Binance.Client.t(), term(), term(), term(), term(), Keyword.t()) :: {:ok, term()} | {:error, term()}
   @doc """
   Margin Transfer for Sub-account
   Variant: User Data
@@ -303,8 +336,10 @@ defmodule Binance.API.SubAccount.AssetManagement do
   Method: POST
   Path: /sapi/v1/sub-account/margin/transfer
   Requires signature: true
+  Required: email, asset, amount, type
+  Optional: recvWindow
   """
-  def margin_transfer_for_sub_account_v1(client, email, asset, amount, type, recvWindow: recvWindow) do
+  def margin_transfer_for_sub_account_v1(client, email, asset, amount, type, opts \\ []) do
     with {:ok, base_url} <- base_url(client.env) do
       {:ok, request} =
         Binance.RequestBuilder.build(%{
@@ -313,7 +348,7 @@ defmodule Binance.API.SubAccount.AssetManagement do
           method: "POST",
           base_url: base_url,
           url: "/sapi/v1/sub-account/margin/transfer",
-          query: [email: email, asset: asset, amount: amount, type: type, recvWindow: recvWindow, timestamp: nil],
+          query: [email: email, asset: asset, amount: amount, type: type, recvWindow: Keyword.get(opts, :recvWindow), timestamp: nil],
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
@@ -322,6 +357,7 @@ defmodule Binance.API.SubAccount.AssetManagement do
     end
   end
   
+  @spec query_sub_account_spot_assets_summary_v1(Binance.Client.t(), Keyword.t()) :: {:ok, term()} | {:error, term()}
   @doc """
   Query Sub-account Spot Assets Summary
   Variant: User Data
@@ -329,8 +365,9 @@ defmodule Binance.API.SubAccount.AssetManagement do
   Method: GET
   Path: /sapi/v1/sub-account/spotSummary
   Requires signature: true
+  Optional: email, page, size, recvWindow
   """
-  def query_sub_account_spot_assets_summary_v1(client, email: email, page: page, size: size, recvWindow: recvWindow) do
+  def query_sub_account_spot_assets_summary_v1(client, opts \\ []) do
     with {:ok, base_url} <- base_url(client.env) do
       {:ok, request} =
         Binance.RequestBuilder.build(%{
@@ -339,7 +376,7 @@ defmodule Binance.API.SubAccount.AssetManagement do
           method: "GET",
           base_url: base_url,
           url: "/sapi/v1/sub-account/spotSummary",
-          query: [email: email, page: page, size: size, recvWindow: recvWindow, timestamp: nil],
+          query: [email: Keyword.get(opts, :email), page: Keyword.get(opts, :page), size: Keyword.get(opts, :size), recvWindow: Keyword.get(opts, :recvWindow), timestamp: nil],
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
@@ -348,6 +385,7 @@ defmodule Binance.API.SubAccount.AssetManagement do
     end
   end
   
+  @spec query_sub_account_spot_asset_transfer_history_v1(Binance.Client.t(), Keyword.t()) :: {:ok, term()} | {:error, term()}
   @doc """
   Query Sub-account Spot Asset Transfer History
   Variant: User Data
@@ -355,8 +393,9 @@ defmodule Binance.API.SubAccount.AssetManagement do
   Method: GET
   Path: /sapi/v1/sub-account/sub/transfer/history
   Requires signature: true
+  Optional: fromEmail, toEmail, startTime, endTime, page, limit, recvWindow
   """
-  def query_sub_account_spot_asset_transfer_history_v1(client, fromEmail: fromEmail, toEmail: toEmail, startTime: startTime, endTime: endTime, page: page, limit: limit, recvWindow: recvWindow) do
+  def query_sub_account_spot_asset_transfer_history_v1(client, opts \\ []) do
     with {:ok, base_url} <- base_url(client.env) do
       {:ok, request} =
         Binance.RequestBuilder.build(%{
@@ -365,7 +404,7 @@ defmodule Binance.API.SubAccount.AssetManagement do
           method: "GET",
           base_url: base_url,
           url: "/sapi/v1/sub-account/sub/transfer/history",
-          query: [fromEmail: fromEmail, toEmail: toEmail, startTime: startTime, endTime: endTime, page: page, limit: limit, recvWindow: recvWindow, timestamp: nil],
+          query: [fromEmail: Keyword.get(opts, :fromEmail), toEmail: Keyword.get(opts, :toEmail), startTime: Keyword.get(opts, :startTime), endTime: Keyword.get(opts, :endTime), page: Keyword.get(opts, :page), limit: Keyword.get(opts, :limit), recvWindow: Keyword.get(opts, :recvWindow), timestamp: nil],
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
@@ -374,6 +413,7 @@ defmodule Binance.API.SubAccount.AssetManagement do
     end
   end
   
+  @spec transfer_to_master_v1(Binance.Client.t(), term(), term(), Keyword.t()) :: {:ok, term()} | {:error, term()}
   @doc """
   Transfer to Master
   Variant: User Data
@@ -381,8 +421,10 @@ defmodule Binance.API.SubAccount.AssetManagement do
   Method: POST
   Path: /sapi/v1/sub-account/transfer/subToMaster
   Requires signature: true
+  Required: asset, amount
+  Optional: recvWindow
   """
-  def transfer_to_master_v1(client, asset, amount, recvWindow: recvWindow) do
+  def transfer_to_master_v1(client, asset, amount, opts \\ []) do
     with {:ok, base_url} <- base_url(client.env) do
       {:ok, request} =
         Binance.RequestBuilder.build(%{
@@ -391,7 +433,7 @@ defmodule Binance.API.SubAccount.AssetManagement do
           method: "POST",
           base_url: base_url,
           url: "/sapi/v1/sub-account/transfer/subToMaster",
-          query: [asset: asset, amount: amount, recvWindow: recvWindow, timestamp: nil],
+          query: [asset: asset, amount: amount, recvWindow: Keyword.get(opts, :recvWindow), timestamp: nil],
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
@@ -400,6 +442,7 @@ defmodule Binance.API.SubAccount.AssetManagement do
     end
   end
   
+  @spec transfer_to_sub_account_of_same_master_v1(Binance.Client.t(), term(), term(), term(), Keyword.t()) :: {:ok, term()} | {:error, term()}
   @doc """
   Transfer to Sub-account of Same Master
   Variant: User Data
@@ -407,8 +450,10 @@ defmodule Binance.API.SubAccount.AssetManagement do
   Method: POST
   Path: /sapi/v1/sub-account/transfer/subToSub
   Requires signature: true
+  Required: toEmail, asset, amount
+  Optional: recvWindow
   """
-  def transfer_to_sub_account_of_same_master_v1(client, toEmail, asset, amount, recvWindow: recvWindow) do
+  def transfer_to_sub_account_of_same_master_v1(client, toEmail, asset, amount, opts \\ []) do
     with {:ok, base_url} <- base_url(client.env) do
       {:ok, request} =
         Binance.RequestBuilder.build(%{
@@ -417,7 +462,7 @@ defmodule Binance.API.SubAccount.AssetManagement do
           method: "POST",
           base_url: base_url,
           url: "/sapi/v1/sub-account/transfer/subToSub",
-          query: [toEmail: toEmail, asset: asset, amount: amount, recvWindow: recvWindow, timestamp: nil],
+          query: [toEmail: toEmail, asset: asset, amount: amount, recvWindow: Keyword.get(opts, :recvWindow), timestamp: nil],
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
@@ -426,6 +471,7 @@ defmodule Binance.API.SubAccount.AssetManagement do
     end
   end
   
+  @spec sub_account_transfer_history_v1(Binance.Client.t(), Keyword.t()) :: {:ok, term()} | {:error, term()}
   @doc """
   Sub-account Transfer History
   Variant: User Data
@@ -433,8 +479,9 @@ defmodule Binance.API.SubAccount.AssetManagement do
   Method: GET
   Path: /sapi/v1/sub-account/transfer/subUserHistory
   Requires signature: true
+  Optional: asset, type, startTime, endTime, limit, returnFailHistory, recvWindow
   """
-  def sub_account_transfer_history_v1(client, asset: asset, type: type, startTime: startTime, endTime: endTime, limit: limit, returnFailHistory: returnFailHistory, recvWindow: recvWindow) do
+  def sub_account_transfer_history_v1(client, opts \\ []) do
     with {:ok, base_url} <- base_url(client.env) do
       {:ok, request} =
         Binance.RequestBuilder.build(%{
@@ -443,7 +490,7 @@ defmodule Binance.API.SubAccount.AssetManagement do
           method: "GET",
           base_url: base_url,
           url: "/sapi/v1/sub-account/transfer/subUserHistory",
-          query: [asset: asset, type: type, startTime: startTime, endTime: endTime, limit: limit, returnFailHistory: returnFailHistory, recvWindow: recvWindow, timestamp: nil],
+          query: [asset: Keyword.get(opts, :asset), type: Keyword.get(opts, :type), startTime: Keyword.get(opts, :startTime), endTime: Keyword.get(opts, :endTime), limit: Keyword.get(opts, :limit), returnFailHistory: Keyword.get(opts, :returnFailHistory), recvWindow: Keyword.get(opts, :recvWindow), timestamp: nil],
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
@@ -452,6 +499,7 @@ defmodule Binance.API.SubAccount.AssetManagement do
     end
   end
   
+  @spec query_universal_transfer_history_v1(Binance.Client.t(), Keyword.t()) :: {:ok, term()} | {:error, term()}
   @doc """
   Query Universal Transfer History
   Variant: User Data
@@ -459,8 +507,9 @@ defmodule Binance.API.SubAccount.AssetManagement do
   Method: GET
   Path: /sapi/v1/sub-account/universalTransfer
   Requires signature: true
+  Optional: fromEmail, toEmail, clientTranId, startTime, endTime, page, limit, recvWindow
   """
-  def query_universal_transfer_history_v1(client, fromEmail: fromEmail, toEmail: toEmail, clientTranId: clientTranId, startTime: startTime, endTime: endTime, page: page, limit: limit, recvWindow: recvWindow) do
+  def query_universal_transfer_history_v1(client, opts \\ []) do
     with {:ok, base_url} <- base_url(client.env) do
       {:ok, request} =
         Binance.RequestBuilder.build(%{
@@ -469,7 +518,7 @@ defmodule Binance.API.SubAccount.AssetManagement do
           method: "GET",
           base_url: base_url,
           url: "/sapi/v1/sub-account/universalTransfer",
-          query: [fromEmail: fromEmail, toEmail: toEmail, clientTranId: clientTranId, startTime: startTime, endTime: endTime, page: page, limit: limit, recvWindow: recvWindow, timestamp: nil],
+          query: [fromEmail: Keyword.get(opts, :fromEmail), toEmail: Keyword.get(opts, :toEmail), clientTranId: Keyword.get(opts, :clientTranId), startTime: Keyword.get(opts, :startTime), endTime: Keyword.get(opts, :endTime), page: Keyword.get(opts, :page), limit: Keyword.get(opts, :limit), recvWindow: Keyword.get(opts, :recvWindow), timestamp: nil],
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
@@ -478,6 +527,7 @@ defmodule Binance.API.SubAccount.AssetManagement do
     end
   end
   
+  @spec universal_transfer_v1(Binance.Client.t(), term(), term(), term(), term(), Keyword.t()) :: {:ok, term()} | {:error, term()}
   @doc """
   Universal Transfer
   Variant: User Data
@@ -485,8 +535,10 @@ defmodule Binance.API.SubAccount.AssetManagement do
   Method: POST
   Path: /sapi/v1/sub-account/universalTransfer
   Requires signature: true
+  Required: fromAccountType, toAccountType, asset, amount
+  Optional: fromEmail, toEmail, clientTranId, symbol, recvWindow
   """
-  def universal_transfer_v1(client, fromAccountType, toAccountType, asset, amount, fromEmail: fromEmail, toEmail: toEmail, clientTranId: clientTranId, symbol: symbol, recvWindow: recvWindow) do
+  def universal_transfer_v1(client, fromAccountType, toAccountType, asset, amount, opts \\ []) do
     with {:ok, base_url} <- base_url(client.env) do
       {:ok, request} =
         Binance.RequestBuilder.build(%{
@@ -495,7 +547,7 @@ defmodule Binance.API.SubAccount.AssetManagement do
           method: "POST",
           base_url: base_url,
           url: "/sapi/v1/sub-account/universalTransfer",
-          query: [fromEmail: fromEmail, toEmail: toEmail, fromAccountType: fromAccountType, toAccountType: toAccountType, clientTranId: clientTranId, symbol: symbol, asset: asset, amount: amount, recvWindow: recvWindow, timestamp: nil],
+          query: [fromEmail: Keyword.get(opts, :fromEmail), toEmail: Keyword.get(opts, :toEmail), fromAccountType: fromAccountType, toAccountType: toAccountType, clientTranId: Keyword.get(opts, :clientTranId), symbol: Keyword.get(opts, :symbol), asset: asset, amount: amount, recvWindow: Keyword.get(opts, :recvWindow), timestamp: nil],
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
@@ -504,6 +556,7 @@ defmodule Binance.API.SubAccount.AssetManagement do
     end
   end
   
+  @spec get_detail_on_sub_account_s_futures_account_v2(Binance.Client.t(), term(), term(), Keyword.t()) :: {:ok, term()} | {:error, term()}
   @doc """
   Get Detail on Sub-account's Futures Account V2
   Variant: User Data
@@ -511,8 +564,10 @@ defmodule Binance.API.SubAccount.AssetManagement do
   Method: GET
   Path: /sapi/v2/sub-account/futures/account
   Requires signature: true
+  Required: email, futuresType
+  Optional: recvWindow
   """
-  def get_detail_on_sub_account_s_futures_account_v2(client, email, futuresType, recvWindow: recvWindow) do
+  def get_detail_on_sub_account_s_futures_account_v2(client, email, futuresType, opts \\ []) do
     with {:ok, base_url} <- base_url(client.env) do
       {:ok, request} =
         Binance.RequestBuilder.build(%{
@@ -521,7 +576,7 @@ defmodule Binance.API.SubAccount.AssetManagement do
           method: "GET",
           base_url: base_url,
           url: "/sapi/v2/sub-account/futures/account",
-          query: [email: email, futuresType: futuresType, recvWindow: recvWindow, timestamp: nil],
+          query: [email: email, futuresType: futuresType, recvWindow: Keyword.get(opts, :recvWindow), timestamp: nil],
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
@@ -530,6 +585,7 @@ defmodule Binance.API.SubAccount.AssetManagement do
     end
   end
   
+  @spec get_summary_of_sub_account_s_futures_account_v2(Binance.Client.t(), term(), Keyword.t()) :: {:ok, term()} | {:error, term()}
   @doc """
   Get Summary of Sub-account's Futures Account V2
   Variant: User Data
@@ -537,8 +593,10 @@ defmodule Binance.API.SubAccount.AssetManagement do
   Method: GET
   Path: /sapi/v2/sub-account/futures/accountSummary
   Requires signature: true
+  Required: futuresType
+  Optional: page, limit, recvWindow
   """
-  def get_summary_of_sub_account_s_futures_account_v2(client, futuresType, page: page, limit: limit, recvWindow: recvWindow) do
+  def get_summary_of_sub_account_s_futures_account_v2(client, futuresType, opts \\ []) do
     with {:ok, base_url} <- base_url(client.env) do
       {:ok, request} =
         Binance.RequestBuilder.build(%{
@@ -547,7 +605,7 @@ defmodule Binance.API.SubAccount.AssetManagement do
           method: "GET",
           base_url: base_url,
           url: "/sapi/v2/sub-account/futures/accountSummary",
-          query: [futuresType: futuresType, page: page, limit: limit, recvWindow: recvWindow, timestamp: nil],
+          query: [futuresType: futuresType, page: Keyword.get(opts, :page), limit: Keyword.get(opts, :limit), recvWindow: Keyword.get(opts, :recvWindow), timestamp: nil],
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
@@ -556,6 +614,7 @@ defmodule Binance.API.SubAccount.AssetManagement do
     end
   end
   
+  @spec query_sub_account_assets_v3(Binance.Client.t(), term(), Keyword.t()) :: {:ok, term()} | {:error, term()}
   @doc """
   Query Sub-account Assets
   Variant: User Data
@@ -563,8 +622,10 @@ defmodule Binance.API.SubAccount.AssetManagement do
   Method: GET
   Path: /sapi/v3/sub-account/assets
   Requires signature: true
+  Required: email
+  Optional: recvWindow
   """
-  def query_sub_account_assets_v3(client, email, recvWindow: recvWindow) do
+  def query_sub_account_assets_v3(client, email, opts \\ []) do
     with {:ok, base_url} <- base_url(client.env) do
       {:ok, request} =
         Binance.RequestBuilder.build(%{
@@ -573,7 +634,7 @@ defmodule Binance.API.SubAccount.AssetManagement do
           method: "GET",
           base_url: base_url,
           url: "/sapi/v3/sub-account/assets",
-          query: [email: email, recvWindow: recvWindow, timestamp: nil],
+          query: [email: email, recvWindow: Keyword.get(opts, :recvWindow), timestamp: nil],
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
@@ -582,6 +643,7 @@ defmodule Binance.API.SubAccount.AssetManagement do
     end
   end
   
+  @spec query_sub_account_assets_v4(Binance.Client.t(), term(), Keyword.t()) :: {:ok, term()} | {:error, term()}
   @doc """
   Query Sub-account Assets
   Variant: User Data
@@ -589,8 +651,10 @@ defmodule Binance.API.SubAccount.AssetManagement do
   Method: GET
   Path: /sapi/v4/sub-account/assets
   Requires signature: true
+  Required: email
+  Optional: recvWindow
   """
-  def query_sub_account_assets_v4(client, email, recvWindow: recvWindow) do
+  def query_sub_account_assets_v4(client, email, opts \\ []) do
     with {:ok, base_url} <- base_url(client.env) do
       {:ok, request} =
         Binance.RequestBuilder.build(%{
@@ -599,7 +663,7 @@ defmodule Binance.API.SubAccount.AssetManagement do
           method: "GET",
           base_url: base_url,
           url: "/sapi/v4/sub-account/assets",
-          query: [email: email, recvWindow: recvWindow, timestamp: nil],
+          query: [email: email, recvWindow: Keyword.get(opts, :recvWindow), timestamp: nil],
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })

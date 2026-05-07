@@ -10,6 +10,7 @@ defmodule Binance.API.DerivativesTrading.UsdsFutures.Convert do
     end
   end
 
+  @spec accept_the_offered_quote_v1(Binance.Client.t(), term(), Keyword.t()) :: {:ok, term()} | {:error, term()}
   @doc """
   Accept the offered quote
   Variant: User Data
@@ -17,8 +18,10 @@ defmodule Binance.API.DerivativesTrading.UsdsFutures.Convert do
   Method: POST
   Path: /fapi/v1/convert/acceptQuote
   Requires signature: true
+  Required: quoteId
+  Optional: recvWindow
   """
-  def accept_the_offered_quote_v1(client, quoteId, recvWindow: recvWindow) do
+  def accept_the_offered_quote_v1(client, quoteId, opts \\ []) do
     with {:ok, base_url} <- base_url(client.env) do
       {:ok, request} =
         Binance.RequestBuilder.build(%{
@@ -27,7 +30,7 @@ defmodule Binance.API.DerivativesTrading.UsdsFutures.Convert do
           method: "POST",
           base_url: base_url,
           url: "/fapi/v1/convert/acceptQuote",
-          query: [quoteId: quoteId, recvWindow: recvWindow, timestamp: nil],
+          query: [quoteId: quoteId, recvWindow: Keyword.get(opts, :recvWindow), timestamp: nil],
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
@@ -36,13 +39,15 @@ defmodule Binance.API.DerivativesTrading.UsdsFutures.Convert do
     end
   end
   
+  @spec list_all_convert_pairs_v1(Binance.Client.t(), Keyword.t()) :: {:ok, term()} | {:error, term()}
   @doc """
   List All Convert Pairs
   Method: GET
   Path: /fapi/v1/convert/exchangeInfo
   Requires signature: false
+  Optional: fromAsset, toAsset
   """
-  def list_all_convert_pairs_v1(client, fromAsset: fromAsset, toAsset: toAsset) do
+  def list_all_convert_pairs_v1(client, opts \\ []) do
     with {:ok, base_url} <- base_url(client.env) do
       {:ok, request} =
         Binance.RequestBuilder.build(%{
@@ -51,7 +56,7 @@ defmodule Binance.API.DerivativesTrading.UsdsFutures.Convert do
           method: "GET",
           base_url: base_url,
           url: "/fapi/v1/convert/exchangeInfo",
-          query: [fromAsset: fromAsset, toAsset: toAsset],
+          query: [fromAsset: Keyword.get(opts, :fromAsset), toAsset: Keyword.get(opts, :toAsset)],
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
@@ -60,6 +65,7 @@ defmodule Binance.API.DerivativesTrading.UsdsFutures.Convert do
     end
   end
   
+  @spec send_quote_request_v1(Binance.Client.t(), term(), term(), Keyword.t()) :: {:ok, term()} | {:error, term()}
   @doc """
   Send Quote Request
   Variant: User Data
@@ -67,8 +73,10 @@ defmodule Binance.API.DerivativesTrading.UsdsFutures.Convert do
   Method: POST
   Path: /fapi/v1/convert/getQuote
   Requires signature: true
+  Required: fromAsset, toAsset
+  Optional: fromAmount, toAmount, validTime, recvWindow
   """
-  def send_quote_request_v1(client, fromAsset, toAsset, fromAmount: fromAmount, toAmount: toAmount, validTime: validTime, recvWindow: recvWindow) do
+  def send_quote_request_v1(client, fromAsset, toAsset, opts \\ []) do
     with {:ok, base_url} <- base_url(client.env) do
       {:ok, request} =
         Binance.RequestBuilder.build(%{
@@ -77,7 +85,7 @@ defmodule Binance.API.DerivativesTrading.UsdsFutures.Convert do
           method: "POST",
           base_url: base_url,
           url: "/fapi/v1/convert/getQuote",
-          query: [fromAsset: fromAsset, toAsset: toAsset, fromAmount: fromAmount, toAmount: toAmount, validTime: validTime, recvWindow: recvWindow, timestamp: nil],
+          query: [fromAsset: fromAsset, toAsset: toAsset, fromAmount: Keyword.get(opts, :fromAmount), toAmount: Keyword.get(opts, :toAmount), validTime: Keyword.get(opts, :validTime), recvWindow: Keyword.get(opts, :recvWindow), timestamp: nil],
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
@@ -86,6 +94,7 @@ defmodule Binance.API.DerivativesTrading.UsdsFutures.Convert do
     end
   end
   
+  @spec order_status_v1(Binance.Client.t(), Keyword.t()) :: {:ok, term()} | {:error, term()}
   @doc """
   Order status
   Variant: User Data
@@ -93,8 +102,9 @@ defmodule Binance.API.DerivativesTrading.UsdsFutures.Convert do
   Method: GET
   Path: /fapi/v1/convert/orderStatus
   Requires signature: true
+  Optional: orderId, quoteId
   """
-  def order_status_v1(client, orderId: orderId, quoteId: quoteId) do
+  def order_status_v1(client, opts \\ []) do
     with {:ok, base_url} <- base_url(client.env) do
       {:ok, request} =
         Binance.RequestBuilder.build(%{
@@ -103,7 +113,7 @@ defmodule Binance.API.DerivativesTrading.UsdsFutures.Convert do
           method: "GET",
           base_url: base_url,
           url: "/fapi/v1/convert/orderStatus",
-          query: [orderId: orderId, quoteId: quoteId, timestamp: nil],
+          query: [orderId: Keyword.get(opts, :orderId), quoteId: Keyword.get(opts, :quoteId), timestamp: nil],
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })

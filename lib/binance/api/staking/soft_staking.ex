@@ -10,6 +10,7 @@ defmodule Binance.API.Staking.SoftStaking do
     end
   end
 
+  @spec get_soft_staking_rewards_history_v1(Binance.Client.t(), Keyword.t()) :: {:ok, term()} | {:error, term()}
   @doc """
   Get Soft Staking Rewards History
   Variant: User Data
@@ -17,8 +18,9 @@ defmodule Binance.API.Staking.SoftStaking do
   Method: GET
   Path: /sapi/v1/soft-staking/history/rewardsRecord
   Requires signature: true
+  Optional: asset, startTime, endTime, current, size, recvWindow
   """
-  def get_soft_staking_rewards_history_v1(client, asset: asset, startTime: startTime, endTime: endTime, current: current, size: size, recvWindow: recvWindow) do
+  def get_soft_staking_rewards_history_v1(client, opts \\ []) do
     with {:ok, base_url} <- base_url(client.env) do
       {:ok, request} =
         Binance.RequestBuilder.build(%{
@@ -27,7 +29,7 @@ defmodule Binance.API.Staking.SoftStaking do
           method: "GET",
           base_url: base_url,
           url: "/sapi/v1/soft-staking/history/rewardsRecord",
-          query: [asset: asset, startTime: startTime, endTime: endTime, current: current, size: size, recvWindow: recvWindow, timestamp: nil],
+          query: [asset: Keyword.get(opts, :asset), startTime: Keyword.get(opts, :startTime), endTime: Keyword.get(opts, :endTime), current: Keyword.get(opts, :current), size: Keyword.get(opts, :size), recvWindow: Keyword.get(opts, :recvWindow), timestamp: nil],
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
@@ -36,6 +38,7 @@ defmodule Binance.API.Staking.SoftStaking do
     end
   end
   
+  @spec get_soft_staking_product_list_v1(Binance.Client.t(), Keyword.t()) :: {:ok, term()} | {:error, term()}
   @doc """
   Get Soft Staking Product List
   Variant: User Data
@@ -43,8 +46,9 @@ defmodule Binance.API.Staking.SoftStaking do
   Method: GET
   Path: /sapi/v1/soft-staking/list
   Requires signature: true
+  Optional: asset, current, size, recvWindow
   """
-  def get_soft_staking_product_list_v1(client, asset: asset, current: current, size: size, recvWindow: recvWindow) do
+  def get_soft_staking_product_list_v1(client, opts \\ []) do
     with {:ok, base_url} <- base_url(client.env) do
       {:ok, request} =
         Binance.RequestBuilder.build(%{
@@ -53,7 +57,7 @@ defmodule Binance.API.Staking.SoftStaking do
           method: "GET",
           base_url: base_url,
           url: "/sapi/v1/soft-staking/list",
-          query: [asset: asset, current: current, size: size, recvWindow: recvWindow, timestamp: nil],
+          query: [asset: Keyword.get(opts, :asset), current: Keyword.get(opts, :current), size: Keyword.get(opts, :size), recvWindow: Keyword.get(opts, :recvWindow), timestamp: nil],
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
@@ -62,6 +66,7 @@ defmodule Binance.API.Staking.SoftStaking do
     end
   end
   
+  @spec set_soft_staking_v1(Binance.Client.t(), term(), Keyword.t()) :: {:ok, term()} | {:error, term()}
   @doc """
   Set Soft Staking
   Variant: User Data
@@ -69,8 +74,10 @@ defmodule Binance.API.Staking.SoftStaking do
   Method: GET
   Path: /sapi/v1/soft-staking/set
   Requires signature: true
+  Required: softStaking
+  Optional: recvWindow
   """
-  def set_soft_staking_v1(client, softStaking, recvWindow: recvWindow) do
+  def set_soft_staking_v1(client, softStaking, opts \\ []) do
     with {:ok, base_url} <- base_url(client.env) do
       {:ok, request} =
         Binance.RequestBuilder.build(%{
@@ -79,7 +86,7 @@ defmodule Binance.API.Staking.SoftStaking do
           method: "GET",
           base_url: base_url,
           url: "/sapi/v1/soft-staking/set",
-          query: [softStaking: softStaking, recvWindow: recvWindow, timestamp: nil],
+          query: [softStaking: softStaking, recvWindow: Keyword.get(opts, :recvWindow), timestamp: nil],
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })

@@ -10,13 +10,16 @@ defmodule Binance.API.DerivativesTrading.UsdsFutures.MarketData do
     end
   end
 
+  @spec compressed_aggregate_trades_list_v1(Binance.Client.t(), term(), Keyword.t()) :: {:ok, term()} | {:error, term()}
   @doc """
   Compressed/Aggregate Trades List
   Method: GET
   Path: /fapi/v1/aggTrades
   Requires signature: false
+  Required: symbol
+  Optional: fromId, startTime, endTime, limit
   """
-  def compressed_aggregate_trades_list_v1(client, symbol, fromId: fromId, startTime: startTime, endTime: endTime, limit: limit) do
+  def compressed_aggregate_trades_list_v1(client, symbol, opts \\ []) do
     with {:ok, base_url} <- base_url(client.env) do
       {:ok, request} =
         Binance.RequestBuilder.build(%{
@@ -25,7 +28,7 @@ defmodule Binance.API.DerivativesTrading.UsdsFutures.MarketData do
           method: "GET",
           base_url: base_url,
           url: "/fapi/v1/aggTrades",
-          query: [symbol: symbol, fromId: fromId, startTime: startTime, endTime: endTime, limit: limit],
+          query: [symbol: symbol, fromId: Keyword.get(opts, :fromId), startTime: Keyword.get(opts, :startTime), endTime: Keyword.get(opts, :endTime), limit: Keyword.get(opts, :limit)],
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
@@ -34,13 +37,15 @@ defmodule Binance.API.DerivativesTrading.UsdsFutures.MarketData do
     end
   end
   
+  @spec multi_assets_mode_asset_index_v1(Binance.Client.t(), Keyword.t()) :: {:ok, term()} | {:error, term()}
   @doc """
   Multi-Assets Mode Asset Index
   Method: GET
   Path: /fapi/v1/assetIndex
   Requires signature: false
+  Optional: symbol
   """
-  def multi_assets_mode_asset_index_v1(client, symbol: symbol) do
+  def multi_assets_mode_asset_index_v1(client, opts \\ []) do
     with {:ok, base_url} <- base_url(client.env) do
       {:ok, request} =
         Binance.RequestBuilder.build(%{
@@ -49,7 +54,7 @@ defmodule Binance.API.DerivativesTrading.UsdsFutures.MarketData do
           method: "GET",
           base_url: base_url,
           url: "/fapi/v1/assetIndex",
-          query: [symbol: symbol],
+          query: [symbol: Keyword.get(opts, :symbol)],
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
@@ -58,11 +63,13 @@ defmodule Binance.API.DerivativesTrading.UsdsFutures.MarketData do
     end
   end
   
+  @spec query_index_price_constituents_v1(Binance.Client.t(), term()) :: {:ok, term()} | {:error, term()}
   @doc """
   Query Index Price Constituents
   Method: GET
   Path: /fapi/v1/constituents
   Requires signature: false
+  Required: symbol
   """
   def query_index_price_constituents_v1(client, symbol) do
     with {:ok, base_url} <- base_url(client.env) do
@@ -82,13 +89,16 @@ defmodule Binance.API.DerivativesTrading.UsdsFutures.MarketData do
     end
   end
   
+  @spec continuous_contract_kline_candlestick_data_v1(Binance.Client.t(), term(), term(), term(), Keyword.t()) :: {:ok, term()} | {:error, term()}
   @doc """
   Continuous Contract Kline/Candlestick Data
   Method: GET
   Path: /fapi/v1/continuousKlines
   Requires signature: false
+  Required: pair, contractType, interval
+  Optional: startTime, endTime, limit
   """
-  def continuous_contract_kline_candlestick_data_v1(client, pair, contractType, interval, startTime: startTime, endTime: endTime, limit: limit) do
+  def continuous_contract_kline_candlestick_data_v1(client, pair, contractType, interval, opts \\ []) do
     with {:ok, base_url} <- base_url(client.env) do
       {:ok, request} =
         Binance.RequestBuilder.build(%{
@@ -97,7 +107,7 @@ defmodule Binance.API.DerivativesTrading.UsdsFutures.MarketData do
           method: "GET",
           base_url: base_url,
           url: "/fapi/v1/continuousKlines",
-          query: [pair: pair, contractType: contractType, interval: interval, startTime: startTime, endTime: endTime, limit: limit],
+          query: [pair: pair, contractType: contractType, interval: interval, startTime: Keyword.get(opts, :startTime), endTime: Keyword.get(opts, :endTime), limit: Keyword.get(opts, :limit)],
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
@@ -106,13 +116,16 @@ defmodule Binance.API.DerivativesTrading.UsdsFutures.MarketData do
     end
   end
   
+  @spec order_book_v1(Binance.Client.t(), term(), Keyword.t()) :: {:ok, term()} | {:error, term()}
   @doc """
   Order Book
   Method: GET
   Path: /fapi/v1/depth
   Requires signature: false
+  Required: symbol
+  Optional: limit
   """
-  def order_book_v1(client, symbol, limit: limit) do
+  def order_book_v1(client, symbol, opts \\ []) do
     with {:ok, base_url} <- base_url(client.env) do
       {:ok, request} =
         Binance.RequestBuilder.build(%{
@@ -121,7 +134,7 @@ defmodule Binance.API.DerivativesTrading.UsdsFutures.MarketData do
           method: "GET",
           base_url: base_url,
           url: "/fapi/v1/depth",
-          query: [symbol: symbol, limit: limit],
+          query: [symbol: symbol, limit: Keyword.get(opts, :limit)],
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
@@ -130,6 +143,7 @@ defmodule Binance.API.DerivativesTrading.UsdsFutures.MarketData do
     end
   end
   
+  @spec exchange_information_v1(Binance.Client.t()) :: {:ok, term()} | {:error, term()}
   @doc """
   Exchange Information
   Method: GET
@@ -154,6 +168,7 @@ defmodule Binance.API.DerivativesTrading.UsdsFutures.MarketData do
     end
   end
   
+  @spec get_funding_rate_info_v1(Binance.Client.t()) :: {:ok, term()} | {:error, term()}
   @doc """
   Get Funding Rate Info
   Method: GET
@@ -178,13 +193,15 @@ defmodule Binance.API.DerivativesTrading.UsdsFutures.MarketData do
     end
   end
   
+  @spec get_funding_rate_history_v1(Binance.Client.t(), Keyword.t()) :: {:ok, term()} | {:error, term()}
   @doc """
   Get Funding Rate History
   Method: GET
   Path: /fapi/v1/fundingRate
   Requires signature: false
+  Optional: symbol, startTime, endTime, limit
   """
-  def get_funding_rate_history_v1(client, symbol: symbol, startTime: startTime, endTime: endTime, limit: limit) do
+  def get_funding_rate_history_v1(client, opts \\ []) do
     with {:ok, base_url} <- base_url(client.env) do
       {:ok, request} =
         Binance.RequestBuilder.build(%{
@@ -193,7 +210,7 @@ defmodule Binance.API.DerivativesTrading.UsdsFutures.MarketData do
           method: "GET",
           base_url: base_url,
           url: "/fapi/v1/fundingRate",
-          query: [symbol: symbol, startTime: startTime, endTime: endTime, limit: limit],
+          query: [symbol: Keyword.get(opts, :symbol), startTime: Keyword.get(opts, :startTime), endTime: Keyword.get(opts, :endTime), limit: Keyword.get(opts, :limit)],
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
@@ -202,6 +219,7 @@ defmodule Binance.API.DerivativesTrading.UsdsFutures.MarketData do
     end
   end
   
+  @spec old_trades_lookup_v1(Binance.Client.t(), term(), Keyword.t()) :: {:ok, term()} | {:error, term()}
   @doc """
   Old Trades Lookup
   Variant: Market Data
@@ -209,8 +227,10 @@ defmodule Binance.API.DerivativesTrading.UsdsFutures.MarketData do
   Method: GET
   Path: /fapi/v1/historicalTrades
   Requires signature: false
+  Required: symbol
+  Optional: limit, fromId
   """
-  def old_trades_lookup_v1(client, symbol, limit: limit, fromId: fromId) do
+  def old_trades_lookup_v1(client, symbol, opts \\ []) do
     with {:ok, base_url} <- base_url(client.env) do
       {:ok, request} =
         Binance.RequestBuilder.build(%{
@@ -219,7 +239,7 @@ defmodule Binance.API.DerivativesTrading.UsdsFutures.MarketData do
           method: "GET",
           base_url: base_url,
           url: "/fapi/v1/historicalTrades",
-          query: [symbol: symbol, limit: limit, fromId: fromId],
+          query: [symbol: symbol, limit: Keyword.get(opts, :limit), fromId: Keyword.get(opts, :fromId)],
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
@@ -228,13 +248,15 @@ defmodule Binance.API.DerivativesTrading.UsdsFutures.MarketData do
     end
   end
   
+  @spec composite_index_symbol_information_v1(Binance.Client.t(), Keyword.t()) :: {:ok, term()} | {:error, term()}
   @doc """
   Composite Index Symbol Information
   Method: GET
   Path: /fapi/v1/indexInfo
   Requires signature: false
+  Optional: symbol
   """
-  def composite_index_symbol_information_v1(client, symbol: symbol) do
+  def composite_index_symbol_information_v1(client, opts \\ []) do
     with {:ok, base_url} <- base_url(client.env) do
       {:ok, request} =
         Binance.RequestBuilder.build(%{
@@ -243,7 +265,7 @@ defmodule Binance.API.DerivativesTrading.UsdsFutures.MarketData do
           method: "GET",
           base_url: base_url,
           url: "/fapi/v1/indexInfo",
-          query: [symbol: symbol],
+          query: [symbol: Keyword.get(opts, :symbol)],
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
@@ -252,13 +274,16 @@ defmodule Binance.API.DerivativesTrading.UsdsFutures.MarketData do
     end
   end
   
+  @spec index_price_kline_candlestick_data_v1(Binance.Client.t(), term(), term(), Keyword.t()) :: {:ok, term()} | {:error, term()}
   @doc """
   Index Price Kline/Candlestick Data
   Method: GET
   Path: /fapi/v1/indexPriceKlines
   Requires signature: false
+  Required: pair, interval
+  Optional: startTime, endTime, limit
   """
-  def index_price_kline_candlestick_data_v1(client, pair, interval, startTime: startTime, endTime: endTime, limit: limit) do
+  def index_price_kline_candlestick_data_v1(client, pair, interval, opts \\ []) do
     with {:ok, base_url} <- base_url(client.env) do
       {:ok, request} =
         Binance.RequestBuilder.build(%{
@@ -267,7 +292,7 @@ defmodule Binance.API.DerivativesTrading.UsdsFutures.MarketData do
           method: "GET",
           base_url: base_url,
           url: "/fapi/v1/indexPriceKlines",
-          query: [pair: pair, interval: interval, startTime: startTime, endTime: endTime, limit: limit],
+          query: [pair: pair, interval: interval, startTime: Keyword.get(opts, :startTime), endTime: Keyword.get(opts, :endTime), limit: Keyword.get(opts, :limit)],
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
@@ -276,13 +301,15 @@ defmodule Binance.API.DerivativesTrading.UsdsFutures.MarketData do
     end
   end
   
+  @spec query_insurance_fund_balance_snapshot_v1(Binance.Client.t(), Keyword.t()) :: {:ok, term()} | {:error, term()}
   @doc """
   Query Insurance Fund Balance Snapshot
   Method: GET
   Path: /fapi/v1/insuranceBalance
   Requires signature: false
+  Optional: symbol
   """
-  def query_insurance_fund_balance_snapshot_v1(client, symbol: symbol) do
+  def query_insurance_fund_balance_snapshot_v1(client, opts \\ []) do
     with {:ok, base_url} <- base_url(client.env) do
       {:ok, request} =
         Binance.RequestBuilder.build(%{
@@ -291,7 +318,7 @@ defmodule Binance.API.DerivativesTrading.UsdsFutures.MarketData do
           method: "GET",
           base_url: base_url,
           url: "/fapi/v1/insuranceBalance",
-          query: [symbol: symbol],
+          query: [symbol: Keyword.get(opts, :symbol)],
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
@@ -300,13 +327,16 @@ defmodule Binance.API.DerivativesTrading.UsdsFutures.MarketData do
     end
   end
   
+  @spec kline_candlestick_data_v1(Binance.Client.t(), term(), term(), Keyword.t()) :: {:ok, term()} | {:error, term()}
   @doc """
   Kline/Candlestick Data
   Method: GET
   Path: /fapi/v1/klines
   Requires signature: false
+  Required: symbol, interval
+  Optional: startTime, endTime, limit
   """
-  def kline_candlestick_data_v1(client, symbol, interval, startTime: startTime, endTime: endTime, limit: limit) do
+  def kline_candlestick_data_v1(client, symbol, interval, opts \\ []) do
     with {:ok, base_url} <- base_url(client.env) do
       {:ok, request} =
         Binance.RequestBuilder.build(%{
@@ -315,7 +345,7 @@ defmodule Binance.API.DerivativesTrading.UsdsFutures.MarketData do
           method: "GET",
           base_url: base_url,
           url: "/fapi/v1/klines",
-          query: [symbol: symbol, interval: interval, startTime: startTime, endTime: endTime, limit: limit],
+          query: [symbol: symbol, interval: interval, startTime: Keyword.get(opts, :startTime), endTime: Keyword.get(opts, :endTime), limit: Keyword.get(opts, :limit)],
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
@@ -324,13 +354,16 @@ defmodule Binance.API.DerivativesTrading.UsdsFutures.MarketData do
     end
   end
   
+  @spec mark_price_kline_candlestick_data_v1(Binance.Client.t(), term(), term(), Keyword.t()) :: {:ok, term()} | {:error, term()}
   @doc """
   Mark Price Kline/Candlestick Data
   Method: GET
   Path: /fapi/v1/markPriceKlines
   Requires signature: false
+  Required: symbol, interval
+  Optional: startTime, endTime, limit
   """
-  def mark_price_kline_candlestick_data_v1(client, symbol, interval, startTime: startTime, endTime: endTime, limit: limit) do
+  def mark_price_kline_candlestick_data_v1(client, symbol, interval, opts \\ []) do
     with {:ok, base_url} <- base_url(client.env) do
       {:ok, request} =
         Binance.RequestBuilder.build(%{
@@ -339,7 +372,7 @@ defmodule Binance.API.DerivativesTrading.UsdsFutures.MarketData do
           method: "GET",
           base_url: base_url,
           url: "/fapi/v1/markPriceKlines",
-          query: [symbol: symbol, interval: interval, startTime: startTime, endTime: endTime, limit: limit],
+          query: [symbol: symbol, interval: interval, startTime: Keyword.get(opts, :startTime), endTime: Keyword.get(opts, :endTime), limit: Keyword.get(opts, :limit)],
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
@@ -348,11 +381,13 @@ defmodule Binance.API.DerivativesTrading.UsdsFutures.MarketData do
     end
   end
   
+  @spec open_interest_v1(Binance.Client.t(), term()) :: {:ok, term()} | {:error, term()}
   @doc """
   Open Interest
   Method: GET
   Path: /fapi/v1/openInterest
   Requires signature: false
+  Required: symbol
   """
   def open_interest_v1(client, symbol) do
     with {:ok, base_url} <- base_url(client.env) do
@@ -372,6 +407,7 @@ defmodule Binance.API.DerivativesTrading.UsdsFutures.MarketData do
     end
   end
   
+  @spec test_connectivity_v1(Binance.Client.t()) :: {:ok, term()} | {:error, term()}
   @doc """
   Test Connectivity
   Method: GET
@@ -396,13 +432,15 @@ defmodule Binance.API.DerivativesTrading.UsdsFutures.MarketData do
     end
   end
   
+  @spec mark_price_v1(Binance.Client.t(), Keyword.t()) :: {:ok, term()} | {:error, term()}
   @doc """
   Mark Price
   Method: GET
   Path: /fapi/v1/premiumIndex
   Requires signature: false
+  Optional: symbol
   """
-  def mark_price_v1(client, symbol: symbol) do
+  def mark_price_v1(client, opts \\ []) do
     with {:ok, base_url} <- base_url(client.env) do
       {:ok, request} =
         Binance.RequestBuilder.build(%{
@@ -411,7 +449,7 @@ defmodule Binance.API.DerivativesTrading.UsdsFutures.MarketData do
           method: "GET",
           base_url: base_url,
           url: "/fapi/v1/premiumIndex",
-          query: [symbol: symbol],
+          query: [symbol: Keyword.get(opts, :symbol)],
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
@@ -420,13 +458,16 @@ defmodule Binance.API.DerivativesTrading.UsdsFutures.MarketData do
     end
   end
   
+  @spec premium_index_kline_data_v1(Binance.Client.t(), term(), term(), Keyword.t()) :: {:ok, term()} | {:error, term()}
   @doc """
   Premium index Kline Data
   Method: GET
   Path: /fapi/v1/premiumIndexKlines
   Requires signature: false
+  Required: symbol, interval
+  Optional: startTime, endTime, limit
   """
-  def premium_index_kline_data_v1(client, symbol, interval, startTime: startTime, endTime: endTime, limit: limit) do
+  def premium_index_kline_data_v1(client, symbol, interval, opts \\ []) do
     with {:ok, base_url} <- base_url(client.env) do
       {:ok, request} =
         Binance.RequestBuilder.build(%{
@@ -435,7 +476,7 @@ defmodule Binance.API.DerivativesTrading.UsdsFutures.MarketData do
           method: "GET",
           base_url: base_url,
           url: "/fapi/v1/premiumIndexKlines",
-          query: [symbol: symbol, interval: interval, startTime: startTime, endTime: endTime, limit: limit],
+          query: [symbol: symbol, interval: interval, startTime: Keyword.get(opts, :startTime), endTime: Keyword.get(opts, :endTime), limit: Keyword.get(opts, :limit)],
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
@@ -444,13 +485,16 @@ defmodule Binance.API.DerivativesTrading.UsdsFutures.MarketData do
     end
   end
   
+  @spec rpi_order_book_v1(Binance.Client.t(), term(), Keyword.t()) :: {:ok, term()} | {:error, term()}
   @doc """
   RPI Order Book
   Method: GET
   Path: /fapi/v1/rpiDepth
   Requires signature: false
+  Required: symbol
+  Optional: limit
   """
-  def rpi_order_book_v1(client, symbol, limit: limit) do
+  def rpi_order_book_v1(client, symbol, opts \\ []) do
     with {:ok, base_url} <- base_url(client.env) do
       {:ok, request} =
         Binance.RequestBuilder.build(%{
@@ -459,7 +503,7 @@ defmodule Binance.API.DerivativesTrading.UsdsFutures.MarketData do
           method: "GET",
           base_url: base_url,
           url: "/fapi/v1/rpiDepth",
-          query: [symbol: symbol, limit: limit],
+          query: [symbol: symbol, limit: Keyword.get(opts, :limit)],
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
@@ -468,13 +512,15 @@ defmodule Binance.API.DerivativesTrading.UsdsFutures.MarketData do
     end
   end
   
+  @spec adl_risk_v1(Binance.Client.t(), Keyword.t()) :: {:ok, term()} | {:error, term()}
   @doc """
   ADL Risk
   Method: GET
   Path: /fapi/v1/symbolAdlRisk
   Requires signature: false
+  Optional: symbol
   """
-  def adl_risk_v1(client, symbol: symbol) do
+  def adl_risk_v1(client, opts \\ []) do
     with {:ok, base_url} <- base_url(client.env) do
       {:ok, request} =
         Binance.RequestBuilder.build(%{
@@ -483,7 +529,7 @@ defmodule Binance.API.DerivativesTrading.UsdsFutures.MarketData do
           method: "GET",
           base_url: base_url,
           url: "/fapi/v1/symbolAdlRisk",
-          query: [symbol: symbol],
+          query: [symbol: Keyword.get(opts, :symbol)],
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
@@ -492,13 +538,15 @@ defmodule Binance.API.DerivativesTrading.UsdsFutures.MarketData do
     end
   end
   
+  @spec x_24hr_ticker_price_change_statistics_v1(Binance.Client.t(), Keyword.t()) :: {:ok, term()} | {:error, term()}
   @doc """
   24hr Ticker Price Change Statistics
   Method: GET
   Path: /fapi/v1/ticker/24hr
   Requires signature: false
+  Optional: symbol
   """
-  def x_24hr_ticker_price_change_statistics_v1(client, symbol: symbol) do
+  def x_24hr_ticker_price_change_statistics_v1(client, opts \\ []) do
     with {:ok, base_url} <- base_url(client.env) do
       {:ok, request} =
         Binance.RequestBuilder.build(%{
@@ -507,7 +555,7 @@ defmodule Binance.API.DerivativesTrading.UsdsFutures.MarketData do
           method: "GET",
           base_url: base_url,
           url: "/fapi/v1/ticker/24hr",
-          query: [symbol: symbol],
+          query: [symbol: Keyword.get(opts, :symbol)],
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
@@ -516,13 +564,15 @@ defmodule Binance.API.DerivativesTrading.UsdsFutures.MarketData do
     end
   end
   
+  @spec symbol_order_book_ticker_v1(Binance.Client.t(), Keyword.t()) :: {:ok, term()} | {:error, term()}
   @doc """
   Symbol Order Book Ticker
   Method: GET
   Path: /fapi/v1/ticker/bookTicker
   Requires signature: false
+  Optional: symbol
   """
-  def symbol_order_book_ticker_v1(client, symbol: symbol) do
+  def symbol_order_book_ticker_v1(client, opts \\ []) do
     with {:ok, base_url} <- base_url(client.env) do
       {:ok, request} =
         Binance.RequestBuilder.build(%{
@@ -531,7 +581,7 @@ defmodule Binance.API.DerivativesTrading.UsdsFutures.MarketData do
           method: "GET",
           base_url: base_url,
           url: "/fapi/v1/ticker/bookTicker",
-          query: [symbol: symbol],
+          query: [symbol: Keyword.get(opts, :symbol)],
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
@@ -540,13 +590,15 @@ defmodule Binance.API.DerivativesTrading.UsdsFutures.MarketData do
     end
   end
   
+  @spec symbol_price_ticker_v1(Binance.Client.t(), Keyword.t()) :: {:ok, term()} | {:error, term()}
   @doc """
   Symbol Price Ticker
   Method: GET
   Path: /fapi/v1/ticker/price
   Requires signature: false
+  Optional: symbol
   """
-  def symbol_price_ticker_v1(client, symbol: symbol) do
+  def symbol_price_ticker_v1(client, opts \\ []) do
     with {:ok, base_url} <- base_url(client.env) do
       {:ok, request} =
         Binance.RequestBuilder.build(%{
@@ -555,7 +607,7 @@ defmodule Binance.API.DerivativesTrading.UsdsFutures.MarketData do
           method: "GET",
           base_url: base_url,
           url: "/fapi/v1/ticker/price",
-          query: [symbol: symbol],
+          query: [symbol: Keyword.get(opts, :symbol)],
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
@@ -564,6 +616,7 @@ defmodule Binance.API.DerivativesTrading.UsdsFutures.MarketData do
     end
   end
   
+  @spec check_server_time_v1(Binance.Client.t()) :: {:ok, term()} | {:error, term()}
   @doc """
   Check Server Time
   Method: GET
@@ -588,13 +641,16 @@ defmodule Binance.API.DerivativesTrading.UsdsFutures.MarketData do
     end
   end
   
+  @spec recent_trades_list_v1(Binance.Client.t(), term(), Keyword.t()) :: {:ok, term()} | {:error, term()}
   @doc """
   Recent Trades List
   Method: GET
   Path: /fapi/v1/trades
   Requires signature: false
+  Required: symbol
+  Optional: limit
   """
-  def recent_trades_list_v1(client, symbol, limit: limit) do
+  def recent_trades_list_v1(client, symbol, opts \\ []) do
     with {:ok, base_url} <- base_url(client.env) do
       {:ok, request} =
         Binance.RequestBuilder.build(%{
@@ -603,7 +659,7 @@ defmodule Binance.API.DerivativesTrading.UsdsFutures.MarketData do
           method: "GET",
           base_url: base_url,
           url: "/fapi/v1/trades",
-          query: [symbol: symbol, limit: limit],
+          query: [symbol: symbol, limit: Keyword.get(opts, :limit)],
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
@@ -612,6 +668,7 @@ defmodule Binance.API.DerivativesTrading.UsdsFutures.MarketData do
     end
   end
   
+  @spec trading_schedule_v1(Binance.Client.t()) :: {:ok, term()} | {:error, term()}
   @doc """
   Trading Schedule
   Method: GET
@@ -636,13 +693,15 @@ defmodule Binance.API.DerivativesTrading.UsdsFutures.MarketData do
     end
   end
   
+  @spec symbol_price_ticker_v2(Binance.Client.t(), Keyword.t()) :: {:ok, term()} | {:error, term()}
   @doc """
   Symbol Price Ticker V2
   Method: GET
   Path: /fapi/v2/ticker/price
   Requires signature: false
+  Optional: symbol
   """
-  def symbol_price_ticker_v2(client, symbol: symbol) do
+  def symbol_price_ticker_v2(client, opts \\ []) do
     with {:ok, base_url} <- base_url(client.env) do
       {:ok, request} =
         Binance.RequestBuilder.build(%{
@@ -651,7 +710,7 @@ defmodule Binance.API.DerivativesTrading.UsdsFutures.MarketData do
           method: "GET",
           base_url: base_url,
           url: "/fapi/v2/ticker/price",
-          query: [symbol: symbol],
+          query: [symbol: Keyword.get(opts, :symbol)],
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
@@ -660,13 +719,16 @@ defmodule Binance.API.DerivativesTrading.UsdsFutures.MarketData do
     end
   end
   
+  @spec basis(Binance.Client.t(), term(), term(), term(), Keyword.t()) :: {:ok, term()} | {:error, term()}
   @doc """
   Basis
   Method: GET
   Path: /futures/data/basis
   Requires signature: false
+  Required: pair, contractType, period
+  Optional: limit, startTime, endTime
   """
-  def basis(client, pair, contractType, period, limit: limit, startTime: startTime, endTime: endTime) do
+  def basis(client, pair, contractType, period, opts \\ []) do
     with {:ok, base_url} <- base_url(client.env) do
       {:ok, request} =
         Binance.RequestBuilder.build(%{
@@ -675,7 +737,7 @@ defmodule Binance.API.DerivativesTrading.UsdsFutures.MarketData do
           method: "GET",
           base_url: base_url,
           url: "/futures/data/basis",
-          query: [pair: pair, contractType: contractType, period: period, limit: limit, startTime: startTime, endTime: endTime],
+          query: [pair: pair, contractType: contractType, period: period, limit: Keyword.get(opts, :limit), startTime: Keyword.get(opts, :startTime), endTime: Keyword.get(opts, :endTime)],
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
@@ -684,11 +746,13 @@ defmodule Binance.API.DerivativesTrading.UsdsFutures.MarketData do
     end
   end
   
+  @spec quarterly_contract_settlement_price(Binance.Client.t(), term()) :: {:ok, term()} | {:error, term()}
   @doc """
   Quarterly Contract Settlement Price
   Method: GET
   Path: /futures/data/delivery-price
   Requires signature: false
+  Required: pair
   """
   def quarterly_contract_settlement_price(client, pair) do
     with {:ok, base_url} <- base_url(client.env) do
@@ -708,13 +772,16 @@ defmodule Binance.API.DerivativesTrading.UsdsFutures.MarketData do
     end
   end
   
+  @spec long_short_ratio(Binance.Client.t(), term(), term(), Keyword.t()) :: {:ok, term()} | {:error, term()}
   @doc """
   Long/Short Ratio
   Method: GET
   Path: /futures/data/globalLongShortAccountRatio
   Requires signature: false
+  Required: symbol, period
+  Optional: limit, startTime, endTime
   """
-  def long_short_ratio(client, symbol, period, limit: limit, startTime: startTime, endTime: endTime) do
+  def long_short_ratio(client, symbol, period, opts \\ []) do
     with {:ok, base_url} <- base_url(client.env) do
       {:ok, request} =
         Binance.RequestBuilder.build(%{
@@ -723,7 +790,7 @@ defmodule Binance.API.DerivativesTrading.UsdsFutures.MarketData do
           method: "GET",
           base_url: base_url,
           url: "/futures/data/globalLongShortAccountRatio",
-          query: [symbol: symbol, period: period, limit: limit, startTime: startTime, endTime: endTime],
+          query: [symbol: symbol, period: period, limit: Keyword.get(opts, :limit), startTime: Keyword.get(opts, :startTime), endTime: Keyword.get(opts, :endTime)],
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
@@ -732,13 +799,16 @@ defmodule Binance.API.DerivativesTrading.UsdsFutures.MarketData do
     end
   end
   
+  @spec open_interest_statistics(Binance.Client.t(), term(), term(), Keyword.t()) :: {:ok, term()} | {:error, term()}
   @doc """
   Open Interest Statistics
   Method: GET
   Path: /futures/data/openInterestHist
   Requires signature: false
+  Required: symbol, period
+  Optional: limit, startTime, endTime
   """
-  def open_interest_statistics(client, symbol, period, limit: limit, startTime: startTime, endTime: endTime) do
+  def open_interest_statistics(client, symbol, period, opts \\ []) do
     with {:ok, base_url} <- base_url(client.env) do
       {:ok, request} =
         Binance.RequestBuilder.build(%{
@@ -747,7 +817,7 @@ defmodule Binance.API.DerivativesTrading.UsdsFutures.MarketData do
           method: "GET",
           base_url: base_url,
           url: "/futures/data/openInterestHist",
-          query: [symbol: symbol, period: period, limit: limit, startTime: startTime, endTime: endTime],
+          query: [symbol: symbol, period: period, limit: Keyword.get(opts, :limit), startTime: Keyword.get(opts, :startTime), endTime: Keyword.get(opts, :endTime)],
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
@@ -756,13 +826,16 @@ defmodule Binance.API.DerivativesTrading.UsdsFutures.MarketData do
     end
   end
   
+  @spec taker_buy_sell_volume(Binance.Client.t(), term(), term(), Keyword.t()) :: {:ok, term()} | {:error, term()}
   @doc """
   Taker Buy/Sell Volume
   Method: GET
   Path: /futures/data/takerlongshortRatio
   Requires signature: false
+  Required: symbol, period
+  Optional: limit, startTime, endTime
   """
-  def taker_buy_sell_volume(client, symbol, period, limit: limit, startTime: startTime, endTime: endTime) do
+  def taker_buy_sell_volume(client, symbol, period, opts \\ []) do
     with {:ok, base_url} <- base_url(client.env) do
       {:ok, request} =
         Binance.RequestBuilder.build(%{
@@ -771,7 +844,7 @@ defmodule Binance.API.DerivativesTrading.UsdsFutures.MarketData do
           method: "GET",
           base_url: base_url,
           url: "/futures/data/takerlongshortRatio",
-          query: [symbol: symbol, period: period, limit: limit, startTime: startTime, endTime: endTime],
+          query: [symbol: symbol, period: period, limit: Keyword.get(opts, :limit), startTime: Keyword.get(opts, :startTime), endTime: Keyword.get(opts, :endTime)],
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
@@ -780,6 +853,7 @@ defmodule Binance.API.DerivativesTrading.UsdsFutures.MarketData do
     end
   end
   
+  @spec top_trader_long_short_ratio_accounts(Binance.Client.t(), term(), term(), Keyword.t()) :: {:ok, term()} | {:error, term()}
   @doc """
   Top Trader Long/Short Ratio
   Variant: Accounts
@@ -787,8 +861,10 @@ defmodule Binance.API.DerivativesTrading.UsdsFutures.MarketData do
   Method: GET
   Path: /futures/data/topLongShortAccountRatio
   Requires signature: false
+  Required: symbol, period
+  Optional: limit, startTime, endTime
   """
-  def top_trader_long_short_ratio_accounts(client, symbol, period, limit: limit, startTime: startTime, endTime: endTime) do
+  def top_trader_long_short_ratio_accounts(client, symbol, period, opts \\ []) do
     with {:ok, base_url} <- base_url(client.env) do
       {:ok, request} =
         Binance.RequestBuilder.build(%{
@@ -797,7 +873,7 @@ defmodule Binance.API.DerivativesTrading.UsdsFutures.MarketData do
           method: "GET",
           base_url: base_url,
           url: "/futures/data/topLongShortAccountRatio",
-          query: [symbol: symbol, period: period, limit: limit, startTime: startTime, endTime: endTime],
+          query: [symbol: symbol, period: period, limit: Keyword.get(opts, :limit), startTime: Keyword.get(opts, :startTime), endTime: Keyword.get(opts, :endTime)],
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
@@ -806,6 +882,7 @@ defmodule Binance.API.DerivativesTrading.UsdsFutures.MarketData do
     end
   end
   
+  @spec top_trader_long_short_ratio_positions(Binance.Client.t(), term(), term(), Keyword.t()) :: {:ok, term()} | {:error, term()}
   @doc """
   Top Trader Long/Short Ratio
   Variant: Positions
@@ -813,8 +890,10 @@ defmodule Binance.API.DerivativesTrading.UsdsFutures.MarketData do
   Method: GET
   Path: /futures/data/topLongShortPositionRatio
   Requires signature: false
+  Required: symbol, period
+  Optional: limit, startTime, endTime
   """
-  def top_trader_long_short_ratio_positions(client, symbol, period, limit: limit, startTime: startTime, endTime: endTime) do
+  def top_trader_long_short_ratio_positions(client, symbol, period, opts \\ []) do
     with {:ok, base_url} <- base_url(client.env) do
       {:ok, request} =
         Binance.RequestBuilder.build(%{
@@ -823,7 +902,7 @@ defmodule Binance.API.DerivativesTrading.UsdsFutures.MarketData do
           method: "GET",
           base_url: base_url,
           url: "/futures/data/topLongShortPositionRatio",
-          query: [symbol: symbol, period: period, limit: limit, startTime: startTime, endTime: endTime],
+          query: [symbol: symbol, period: period, limit: Keyword.get(opts, :limit), startTime: Keyword.get(opts, :startTime), endTime: Keyword.get(opts, :endTime)],
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })

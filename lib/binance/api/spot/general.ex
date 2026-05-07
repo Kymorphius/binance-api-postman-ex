@@ -10,13 +10,15 @@ defmodule Binance.API.Spot.General do
     end
   end
 
+  @spec exchange_information_v3(Binance.Client.t(), Keyword.t()) :: {:ok, term()} | {:error, term()}
   @doc """
   Exchange information
   Method: GET
   Path: /api/v3/exchangeInfo
   Requires signature: false
+  Optional: symbol, symbols, permissions, showPermissionSets, symbolStatus
   """
-  def exchange_information_v3(client, symbol: symbol, symbols: symbols, permissions: permissions, showPermissionSets: showPermissionSets, symbolStatus: symbolStatus) do
+  def exchange_information_v3(client, opts \\ []) do
     with {:ok, base_url} <- base_url(client.env) do
       {:ok, request} =
         Binance.RequestBuilder.build(%{
@@ -25,7 +27,7 @@ defmodule Binance.API.Spot.General do
           method: "GET",
           base_url: base_url,
           url: "/api/v3/exchangeInfo",
-          query: [symbol: symbol, symbols: symbols, permissions: permissions, showPermissionSets: showPermissionSets, symbolStatus: symbolStatus],
+          query: [symbol: Keyword.get(opts, :symbol), symbols: Keyword.get(opts, :symbols), permissions: Keyword.get(opts, :permissions), showPermissionSets: Keyword.get(opts, :showPermissionSets), symbolStatus: Keyword.get(opts, :symbolStatus)],
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
@@ -34,13 +36,15 @@ defmodule Binance.API.Spot.General do
     end
   end
   
+  @spec query_execution_rules_v3(Binance.Client.t(), Keyword.t()) :: {:ok, term()} | {:error, term()}
   @doc """
   Query Execution Rules
   Method: GET
   Path: /api/v3/executionRules
   Requires signature: false
+  Optional: symbol, symbols, symbolStatus
   """
-  def query_execution_rules_v3(client, symbol: symbol, symbols: symbols, symbolStatus: symbolStatus) do
+  def query_execution_rules_v3(client, opts \\ []) do
     with {:ok, base_url} <- base_url(client.env) do
       {:ok, request} =
         Binance.RequestBuilder.build(%{
@@ -49,7 +53,7 @@ defmodule Binance.API.Spot.General do
           method: "GET",
           base_url: base_url,
           url: "/api/v3/executionRules",
-          query: [symbol: symbol, symbols: symbols, symbolStatus: symbolStatus],
+          query: [symbol: Keyword.get(opts, :symbol), symbols: Keyword.get(opts, :symbols), symbolStatus: Keyword.get(opts, :symbolStatus)],
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
@@ -58,6 +62,7 @@ defmodule Binance.API.Spot.General do
     end
   end
   
+  @spec test_connectivity_v3(Binance.Client.t()) :: {:ok, term()} | {:error, term()}
   @doc """
   Test connectivity
   Method: GET
@@ -82,6 +87,7 @@ defmodule Binance.API.Spot.General do
     end
   end
   
+  @spec check_server_time_v3(Binance.Client.t()) :: {:ok, term()} | {:error, term()}
   @doc """
   Check server time
   Method: GET

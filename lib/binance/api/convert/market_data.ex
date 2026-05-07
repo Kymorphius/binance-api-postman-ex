@@ -10,6 +10,7 @@ defmodule Binance.API.Convert.MarketData do
     end
   end
 
+  @spec query_order_quantity_precision_per_asset_v1(Binance.Client.t(), Keyword.t()) :: {:ok, term()} | {:error, term()}
   @doc """
   Query order quantity precision per asset
   Variant: User Data
@@ -17,8 +18,9 @@ defmodule Binance.API.Convert.MarketData do
   Method: GET
   Path: /sapi/v1/convert/assetInfo
   Requires signature: true
+  Optional: recvWindow
   """
-  def query_order_quantity_precision_per_asset_v1(client, recvWindow: recvWindow) do
+  def query_order_quantity_precision_per_asset_v1(client, opts \\ []) do
     with {:ok, base_url} <- base_url(client.env) do
       {:ok, request} =
         Binance.RequestBuilder.build(%{
@@ -27,7 +29,7 @@ defmodule Binance.API.Convert.MarketData do
           method: "GET",
           base_url: base_url,
           url: "/sapi/v1/convert/assetInfo",
-          query: [recvWindow: recvWindow, timestamp: nil],
+          query: [recvWindow: Keyword.get(opts, :recvWindow), timestamp: nil],
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
@@ -36,13 +38,15 @@ defmodule Binance.API.Convert.MarketData do
     end
   end
   
+  @spec list_all_convert_pairs_v1(Binance.Client.t(), Keyword.t()) :: {:ok, term()} | {:error, term()}
   @doc """
   List All Convert Pairs
   Method: GET
   Path: /sapi/v1/convert/exchangeInfo
   Requires signature: false
+  Optional: fromAsset, toAsset
   """
-  def list_all_convert_pairs_v1(client, fromAsset: fromAsset, toAsset: toAsset) do
+  def list_all_convert_pairs_v1(client, opts \\ []) do
     with {:ok, base_url} <- base_url(client.env) do
       {:ok, request} =
         Binance.RequestBuilder.build(%{
@@ -51,7 +55,7 @@ defmodule Binance.API.Convert.MarketData do
           method: "GET",
           base_url: base_url,
           url: "/sapi/v1/convert/exchangeInfo",
-          query: [fromAsset: fromAsset, toAsset: toAsset],
+          query: [fromAsset: Keyword.get(opts, :fromAsset), toAsset: Keyword.get(opts, :toAsset)],
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })

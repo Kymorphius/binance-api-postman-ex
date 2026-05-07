@@ -10,6 +10,7 @@ defmodule Binance.API.Wallet.TravelRule do
     end
   end
 
+  @spec fetch_address_verification_list_v1(Binance.Client.t(), Keyword.t()) :: {:ok, term()} | {:error, term()}
   @doc """
   Fetch address verification list
   Variant: User Data
@@ -17,8 +18,9 @@ defmodule Binance.API.Wallet.TravelRule do
   Method: GET
   Path: /sapi/v1/addressVerify/list
   Requires signature: true
+  Optional: recvWindow
   """
-  def fetch_address_verification_list_v1(client, recvWindow: recvWindow) do
+  def fetch_address_verification_list_v1(client, opts \\ []) do
     with {:ok, base_url} <- base_url(client.env) do
       {:ok, request} =
         Binance.RequestBuilder.build(%{
@@ -27,7 +29,7 @@ defmodule Binance.API.Wallet.TravelRule do
           method: "GET",
           base_url: base_url,
           url: "/sapi/v1/addressVerify/list",
-          query: [recvWindow: recvWindow, timestamp: nil],
+          query: [recvWindow: Keyword.get(opts, :recvWindow), timestamp: nil],
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
@@ -36,6 +38,7 @@ defmodule Binance.API.Wallet.TravelRule do
     end
   end
   
+  @spec submit_deposit_questionnaire_for_local_entities_that_require_travel_rule_supporting_network_v1(Binance.Client.t(), term(), term(), term(), term(), Keyword.t()) :: {:ok, term()} | {:error, term()}
   @doc """
   Submit Deposit Questionnaire
   Variant: User Data
@@ -43,8 +46,10 @@ defmodule Binance.API.Wallet.TravelRule do
   Method: PUT
   Path: /sapi/v1/localentity/broker/deposit/provide-info
   Requires signature: true
+  Required: subAccountId, depositId, questionnaire, beneficiaryPii
+  Optional: network, coin, amount, address, addressTag
   """
-  def submit_deposit_questionnaire_for_local_entities_that_require_travel_rule_supporting_network_v1(client, subAccountId, depositId, questionnaire, beneficiaryPii, network: network, coin: coin, amount: amount, address: address, addressTag: addressTag) do
+  def submit_deposit_questionnaire_for_local_entities_that_require_travel_rule_supporting_network_v1(client, subAccountId, depositId, questionnaire, beneficiaryPii, opts \\ []) do
     with {:ok, base_url} <- base_url(client.env) do
       {:ok, request} =
         Binance.RequestBuilder.build(%{
@@ -53,7 +58,7 @@ defmodule Binance.API.Wallet.TravelRule do
           method: "PUT",
           base_url: base_url,
           url: "/sapi/v1/localentity/broker/deposit/provide-info",
-          query: [subAccountId: subAccountId, depositId: depositId, questionnaire: questionnaire, beneficiaryPii: beneficiaryPii, network: network, coin: coin, amount: amount, address: address, addressTag: addressTag, timestamp: nil],
+          query: [subAccountId: subAccountId, depositId: depositId, questionnaire: questionnaire, beneficiaryPii: beneficiaryPii, network: Keyword.get(opts, :network), coin: Keyword.get(opts, :coin), amount: Keyword.get(opts, :amount), address: Keyword.get(opts, :address), addressTag: Keyword.get(opts, :addressTag), timestamp: nil],
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
@@ -62,6 +67,7 @@ defmodule Binance.API.Wallet.TravelRule do
     end
   end
   
+  @spec broker_withdraw_v1(Binance.Client.t(), term(), term(), term(), term(), term(), term(), Keyword.t()) :: {:ok, term()} | {:error, term()}
   @doc """
   Broker Withdraw
   Variant: User Data
@@ -69,8 +75,10 @@ defmodule Binance.API.Wallet.TravelRule do
   Method: POST
   Path: /sapi/v1/localentity/broker/withdraw/apply
   Requires signature: true
+  Required: address, coin, amount, withdrawOrderId, questionnaire, originatorPii
+  Optional: addressTag, network, addressName, transactionFeeFlag, walletType
   """
-  def broker_withdraw_v1(client, address, coin, amount, withdrawOrderId, questionnaire, originatorPii, addressTag: addressTag, network: network, addressName: addressName, transactionFeeFlag: transactionFeeFlag, walletType: walletType) do
+  def broker_withdraw_v1(client, address, coin, amount, withdrawOrderId, questionnaire, originatorPii, opts \\ []) do
     with {:ok, base_url} <- base_url(client.env) do
       {:ok, request} =
         Binance.RequestBuilder.build(%{
@@ -79,7 +87,7 @@ defmodule Binance.API.Wallet.TravelRule do
           method: "POST",
           base_url: base_url,
           url: "/sapi/v1/localentity/broker/withdraw/apply",
-          query: [address: address, addressTag: addressTag, network: network, coin: coin, addressName: addressName, amount: amount, withdrawOrderId: withdrawOrderId, transactionFeeFlag: transactionFeeFlag, walletType: walletType, questionnaire: questionnaire, originatorPii: originatorPii, timestamp: nil],
+          query: [address: address, addressTag: Keyword.get(opts, :addressTag), network: Keyword.get(opts, :network), coin: coin, addressName: Keyword.get(opts, :addressName), amount: amount, withdrawOrderId: withdrawOrderId, transactionFeeFlag: Keyword.get(opts, :transactionFeeFlag), walletType: Keyword.get(opts, :walletType), questionnaire: questionnaire, originatorPii: originatorPii, timestamp: nil],
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
@@ -88,6 +96,7 @@ defmodule Binance.API.Wallet.TravelRule do
     end
   end
   
+  @spec deposit_history_v1(Binance.Client.t(), Keyword.t()) :: {:ok, term()} | {:error, term()}
   @doc """
   Deposit History
   Variant: User Data
@@ -95,8 +104,9 @@ defmodule Binance.API.Wallet.TravelRule do
   Method: GET
   Path: /sapi/v1/localentity/deposit/history
   Requires signature: true
+  Optional: trId, txId, tranId, network, coin, travelRuleStatus, pendingQuestionnaire, startTime, endTime, offset, limit
   """
-  def deposit_history_v1(client, trId: trId, txId: txId, tranId: tranId, network: network, coin: coin, travelRuleStatus: travelRuleStatus, pendingQuestionnaire: pendingQuestionnaire, startTime: startTime, endTime: endTime, offset: offset, limit: limit) do
+  def deposit_history_v1(client, opts \\ []) do
     with {:ok, base_url} <- base_url(client.env) do
       {:ok, request} =
         Binance.RequestBuilder.build(%{
@@ -105,7 +115,7 @@ defmodule Binance.API.Wallet.TravelRule do
           method: "GET",
           base_url: base_url,
           url: "/sapi/v1/localentity/deposit/history",
-          query: [trId: trId, txId: txId, tranId: tranId, network: network, coin: coin, travelRuleStatus: travelRuleStatus, pendingQuestionnaire: pendingQuestionnaire, startTime: startTime, endTime: endTime, offset: offset, limit: limit, timestamp: nil],
+          query: [trId: Keyword.get(opts, :trId), txId: Keyword.get(opts, :txId), tranId: Keyword.get(opts, :tranId), network: Keyword.get(opts, :network), coin: Keyword.get(opts, :coin), travelRuleStatus: Keyword.get(opts, :travelRuleStatus), pendingQuestionnaire: Keyword.get(opts, :pendingQuestionnaire), startTime: Keyword.get(opts, :startTime), endTime: Keyword.get(opts, :endTime), offset: Keyword.get(opts, :offset), limit: Keyword.get(opts, :limit), timestamp: nil],
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
@@ -114,6 +124,7 @@ defmodule Binance.API.Wallet.TravelRule do
     end
   end
   
+  @spec submit_deposit_questionnaire_for_local_entities_that_require_travel_rule_supporting_network_v1(Binance.Client.t(), term(), term()) :: {:ok, term()} | {:error, term()}
   @doc """
   Submit Deposit Questionnaire
   Variant: User Data
@@ -121,6 +132,7 @@ defmodule Binance.API.Wallet.TravelRule do
   Method: PUT
   Path: /sapi/v1/localentity/deposit/provide-info
   Requires signature: true
+  Required: tranId, questionnaire
   """
   def submit_deposit_questionnaire_for_local_entities_that_require_travel_rule_supporting_network_v1(client, tranId, questionnaire) do
     with {:ok, base_url} <- base_url(client.env) do
@@ -140,6 +152,7 @@ defmodule Binance.API.Wallet.TravelRule do
     end
   end
   
+  @spec check_questionnaire_requirements_v1(Binance.Client.t(), Keyword.t()) :: {:ok, term()} | {:error, term()}
   @doc """
   Check Questionnaire Requirements
   Variant: User Data
@@ -147,8 +160,9 @@ defmodule Binance.API.Wallet.TravelRule do
   Method: GET
   Path: /sapi/v1/localentity/questionnaire-requirements
   Requires signature: true
+  Optional: recvWindow
   """
-  def check_questionnaire_requirements_v1(client, recvWindow: recvWindow) do
+  def check_questionnaire_requirements_v1(client, opts \\ []) do
     with {:ok, base_url} <- base_url(client.env) do
       {:ok, request} =
         Binance.RequestBuilder.build(%{
@@ -157,7 +171,7 @@ defmodule Binance.API.Wallet.TravelRule do
           method: "GET",
           base_url: base_url,
           url: "/sapi/v1/localentity/questionnaire-requirements",
-          query: [recvWindow: recvWindow, timestamp: nil],
+          query: [recvWindow: Keyword.get(opts, :recvWindow), timestamp: nil],
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
@@ -166,6 +180,7 @@ defmodule Binance.API.Wallet.TravelRule do
     end
   end
   
+  @spec vasp_list_v1(Binance.Client.t(), Keyword.t()) :: {:ok, term()} | {:error, term()}
   @doc """
   VASP list
   Variant: User Data
@@ -173,8 +188,9 @@ defmodule Binance.API.Wallet.TravelRule do
   Method: GET
   Path: /sapi/v1/localentity/vasp
   Requires signature: true
+  Optional: recvWindow
   """
-  def vasp_list_v1(client, recvWindow: recvWindow) do
+  def vasp_list_v1(client, opts \\ []) do
     with {:ok, base_url} <- base_url(client.env) do
       {:ok, request} =
         Binance.RequestBuilder.build(%{
@@ -183,7 +199,7 @@ defmodule Binance.API.Wallet.TravelRule do
           method: "GET",
           base_url: base_url,
           url: "/sapi/v1/localentity/vasp",
-          query: [recvWindow: recvWindow, timestamp: nil],
+          query: [recvWindow: Keyword.get(opts, :recvWindow), timestamp: nil],
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
@@ -192,6 +208,7 @@ defmodule Binance.API.Wallet.TravelRule do
     end
   end
   
+  @spec withdraw_v1(Binance.Client.t(), term(), term(), term(), term(), Keyword.t()) :: {:ok, term()} | {:error, term()}
   @doc """
   Withdraw
   Variant: User Data
@@ -199,8 +216,10 @@ defmodule Binance.API.Wallet.TravelRule do
   Method: POST
   Path: /sapi/v1/localentity/withdraw/apply
   Requires signature: true
+  Required: coin, address, amount, questionnaire
+  Optional: withdrawOrderId, network, addressTag, transactionFeeFlag, name, walletType, recvWindow
   """
-  def withdraw_v1(client, coin, address, amount, questionnaire, withdrawOrderId: withdrawOrderId, network: network, addressTag: addressTag, transactionFeeFlag: transactionFeeFlag, name: name, walletType: walletType, recvWindow: recvWindow) do
+  def withdraw_v1(client, coin, address, amount, questionnaire, opts \\ []) do
     with {:ok, base_url} <- base_url(client.env) do
       {:ok, request} =
         Binance.RequestBuilder.build(%{
@@ -209,7 +228,7 @@ defmodule Binance.API.Wallet.TravelRule do
           method: "POST",
           base_url: base_url,
           url: "/sapi/v1/localentity/withdraw/apply",
-          query: [coin: coin, withdrawOrderId: withdrawOrderId, network: network, address: address, addressTag: addressTag, amount: amount, transactionFeeFlag: transactionFeeFlag, name: name, walletType: walletType, recvWindow: recvWindow, questionnaire: questionnaire, timestamp: nil],
+          query: [coin: coin, withdrawOrderId: Keyword.get(opts, :withdrawOrderId), network: Keyword.get(opts, :network), address: address, addressTag: Keyword.get(opts, :addressTag), amount: amount, transactionFeeFlag: Keyword.get(opts, :transactionFeeFlag), name: Keyword.get(opts, :name), walletType: Keyword.get(opts, :walletType), recvWindow: Keyword.get(opts, :recvWindow), questionnaire: questionnaire, timestamp: nil],
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
@@ -218,6 +237,7 @@ defmodule Binance.API.Wallet.TravelRule do
     end
   end
   
+  @spec withdraw_history_v1(Binance.Client.t(), Keyword.t()) :: {:ok, term()} | {:error, term()}
   @doc """
   Withdraw History
   Variant: User Data
@@ -225,8 +245,9 @@ defmodule Binance.API.Wallet.TravelRule do
   Method: GET
   Path: /sapi/v1/localentity/withdraw/history
   Requires signature: true
+  Optional: trId, txId, withdrawOrderId, network, coin, travelRuleStatus, offset, limit, startTime, endTime, recvWindow
   """
-  def withdraw_history_v1(client, trId: trId, txId: txId, withdrawOrderId: withdrawOrderId, network: network, coin: coin, travelRuleStatus: travelRuleStatus, offset: offset, limit: limit, startTime: startTime, endTime: endTime, recvWindow: recvWindow) do
+  def withdraw_history_v1(client, opts \\ []) do
     with {:ok, base_url} <- base_url(client.env) do
       {:ok, request} =
         Binance.RequestBuilder.build(%{
@@ -235,7 +256,7 @@ defmodule Binance.API.Wallet.TravelRule do
           method: "GET",
           base_url: base_url,
           url: "/sapi/v1/localentity/withdraw/history",
-          query: [trId: trId, txId: txId, withdrawOrderId: withdrawOrderId, network: network, coin: coin, travelRuleStatus: travelRuleStatus, offset: offset, limit: limit, startTime: startTime, endTime: endTime, recvWindow: recvWindow, timestamp: nil],
+          query: [trId: Keyword.get(opts, :trId), txId: Keyword.get(opts, :txId), withdrawOrderId: Keyword.get(opts, :withdrawOrderId), network: Keyword.get(opts, :network), coin: Keyword.get(opts, :coin), travelRuleStatus: Keyword.get(opts, :travelRuleStatus), offset: Keyword.get(opts, :offset), limit: Keyword.get(opts, :limit), startTime: Keyword.get(opts, :startTime), endTime: Keyword.get(opts, :endTime), recvWindow: Keyword.get(opts, :recvWindow), timestamp: nil],
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
@@ -244,6 +265,7 @@ defmodule Binance.API.Wallet.TravelRule do
     end
   end
   
+  @spec deposit_history_v2(Binance.Client.t(), Keyword.t()) :: {:ok, term()} | {:error, term()}
   @doc """
   Deposit History V2
   Variant: User Data
@@ -251,8 +273,9 @@ defmodule Binance.API.Wallet.TravelRule do
   Method: GET
   Path: /sapi/v2/localentity/deposit/history
   Requires signature: true
+  Optional: depositId, txId, network, coin, retrieveQuestionnaire, startTime, endTime, offset, limit
   """
-  def deposit_history_v2(client, depositId: depositId, txId: txId, network: network, coin: coin, retrieveQuestionnaire: retrieveQuestionnaire, startTime: startTime, endTime: endTime, offset: offset, limit: limit) do
+  def deposit_history_v2(client, opts \\ []) do
     with {:ok, base_url} <- base_url(client.env) do
       {:ok, request} =
         Binance.RequestBuilder.build(%{
@@ -261,7 +284,7 @@ defmodule Binance.API.Wallet.TravelRule do
           method: "GET",
           base_url: base_url,
           url: "/sapi/v2/localentity/deposit/history",
-          query: [depositId: depositId, txId: txId, network: network, coin: coin, retrieveQuestionnaire: retrieveQuestionnaire, startTime: startTime, endTime: endTime, offset: offset, limit: limit, timestamp: nil],
+          query: [depositId: Keyword.get(opts, :depositId), txId: Keyword.get(opts, :txId), network: Keyword.get(opts, :network), coin: Keyword.get(opts, :coin), retrieveQuestionnaire: Keyword.get(opts, :retrieveQuestionnaire), startTime: Keyword.get(opts, :startTime), endTime: Keyword.get(opts, :endTime), offset: Keyword.get(opts, :offset), limit: Keyword.get(opts, :limit), timestamp: nil],
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
@@ -270,6 +293,7 @@ defmodule Binance.API.Wallet.TravelRule do
     end
   end
   
+  @spec submit_deposit_questionnaire_v2(Binance.Client.t(), term(), term()) :: {:ok, term()} | {:error, term()}
   @doc """
   Submit Deposit Questionnaire V2
   Variant: User Data
@@ -277,6 +301,7 @@ defmodule Binance.API.Wallet.TravelRule do
   Method: PUT
   Path: /sapi/v2/localentity/deposit/provide-info
   Requires signature: true
+  Required: depositId, questionnaire
   """
   def submit_deposit_questionnaire_v2(client, depositId, questionnaire) do
     with {:ok, base_url} <- base_url(client.env) do
@@ -296,6 +321,7 @@ defmodule Binance.API.Wallet.TravelRule do
     end
   end
   
+  @spec withdraw_history_v2(Binance.Client.t(), Keyword.t()) :: {:ok, term()} | {:error, term()}
   @doc """
   Withdraw History V2
   Variant: User Data
@@ -303,8 +329,9 @@ defmodule Binance.API.Wallet.TravelRule do
   Method: GET
   Path: /sapi/v2/localentity/withdraw/history
   Requires signature: true
+  Optional: trId, txId, withdrawOrderId, network, coin, travelRuleStatus, offset, limit, startTime, endTime, recvWindow
   """
-  def withdraw_history_v2(client, trId: trId, txId: txId, withdrawOrderId: withdrawOrderId, network: network, coin: coin, travelRuleStatus: travelRuleStatus, offset: offset, limit: limit, startTime: startTime, endTime: endTime, recvWindow: recvWindow) do
+  def withdraw_history_v2(client, opts \\ []) do
     with {:ok, base_url} <- base_url(client.env) do
       {:ok, request} =
         Binance.RequestBuilder.build(%{
@@ -313,7 +340,7 @@ defmodule Binance.API.Wallet.TravelRule do
           method: "GET",
           base_url: base_url,
           url: "/sapi/v2/localentity/withdraw/history",
-          query: [trId: trId, txId: txId, withdrawOrderId: withdrawOrderId, network: network, coin: coin, travelRuleStatus: travelRuleStatus, offset: offset, limit: limit, startTime: startTime, endTime: endTime, recvWindow: recvWindow, timestamp: nil],
+          query: [trId: Keyword.get(opts, :trId), txId: Keyword.get(opts, :txId), withdrawOrderId: Keyword.get(opts, :withdrawOrderId), network: Keyword.get(opts, :network), coin: Keyword.get(opts, :coin), travelRuleStatus: Keyword.get(opts, :travelRuleStatus), offset: Keyword.get(opts, :offset), limit: Keyword.get(opts, :limit), startTime: Keyword.get(opts, :startTime), endTime: Keyword.get(opts, :endTime), recvWindow: Keyword.get(opts, :recvWindow), timestamp: nil],
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })

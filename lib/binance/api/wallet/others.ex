@@ -10,6 +10,7 @@ defmodule Binance.API.Wallet.Others do
     end
   end
 
+  @spec get_symbols_delist_schedule_for_spot_v1(Binance.Client.t(), Keyword.t()) :: {:ok, term()} | {:error, term()}
   @doc """
   Get symbols delist schedule for spot
   Variant: Market Data
@@ -17,8 +18,9 @@ defmodule Binance.API.Wallet.Others do
   Method: GET
   Path: /sapi/v1/spot/delist-schedule
   Requires signature: false
+  Optional: recvWindow
   """
-  def get_symbols_delist_schedule_for_spot_v1(client, recvWindow: recvWindow) do
+  def get_symbols_delist_schedule_for_spot_v1(client, opts \\ []) do
     with {:ok, base_url} <- base_url(client.env) do
       {:ok, request} =
         Binance.RequestBuilder.build(%{
@@ -27,7 +29,7 @@ defmodule Binance.API.Wallet.Others do
           method: "GET",
           base_url: base_url,
           url: "/sapi/v1/spot/delist-schedule",
-          query: [recvWindow: recvWindow],
+          query: [recvWindow: Keyword.get(opts, :recvWindow)],
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
@@ -36,6 +38,7 @@ defmodule Binance.API.Wallet.Others do
     end
   end
   
+  @spec system_status_v1(Binance.Client.t()) :: {:ok, term()} | {:error, term()}
   @doc """
   System Status
   Variant: System

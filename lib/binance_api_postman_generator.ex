@@ -69,28 +69,30 @@ defmodule BinanceApiPostmanGenerator do
   end
 
   defp render_function(%{name: name, request: request, requires_signature?: requires_signature?}, collection_variables, fun_name) do
-    {required_params, optional_params, _} = split_params_with_env(request.query, collection_variables)
+    {required_query_params, optional_query_params, _} = split_params_with_env(request.query, collection_variables)
     {required_body_params, optional_body_params, _} = split_params_with_env(request.body && request.body.urlencoded || [], collection_variables)
 
-    required_args = Enum.map(required_params ++ required_body_params, &Macro.var(String.to_atom(&1.key), nil))
-    optional_kw =
-      Enum.map(optional_params ++ optional_body_params, fn param ->
-        {String.to_atom(param.key), Macro.var(String.to_atom(param.key), nil)}
-      end)
+    required_args = Enum.map(required_query_params ++ required_body_params, &Macro.var(String.to_atom(&1.key), nil))
 
     args_str =
-      Enum.join([
+      [
         Enum.map_join(required_args, ", ", &Macro.to_string/1),
-        Enum.map_join(optional_kw, ", ", fn {key, var} -> "#{key}: #{Macro.to_string(var)}" end)
-      ], ", ")
-      |> String.trim(", ")
-      |> then(&Enum.join(["client", &1], ", "))
-      |> String.trim(", ")
+        if(optional_query_params ++ optional_body_params == [], do: nil, else: "opts \\\\ []")
+      ]
+      |> Enum.reject(&is_nil/1)
+      |> Enum.reject(&(&1 == ""))
+      |> Enum.join(", ")
+      |> then(fn
+        "" -> "client"
+        other -> Enum.join(["client", other], ", ")
+      end)
 
-    body = build_function_body(required_params ++ optional_params, required_body_params ++ optional_body_params, request, requires_signature?)
-    doc = build_function_doc(name, request, requires_signature?)
+    body = build_function_body(required_query_params, optional_query_params, required_body_params, optional_body_params, request, requires_signature?)
+    doc = build_function_doc(name, request, requires_signature?, required_query_params, optional_query_params, required_body_params, optional_body_params)
+    spec = build_function_spec(fun_name, required_query_params, optional_query_params, required_body_params, optional_body_params)
 
     """
+    #{spec}
     @doc \"\"\"
     #{doc}
     \"\"\"
@@ -102,10 +104,13 @@ defmodule BinanceApiPostmanGenerator do
     |> then(&{&1, fun_name})
   end
 
-  defp build_function_doc(name, request, requires_signature?) do
+  defp build_function_doc(name, request, requires_signature?, required_query_params, optional_query_params, required_body_params, optional_body_params) do
     title = strip_paren_tags(name)
     tags = extract_paren_tags(name)
     variant = extract_variant_tag(name)
+
+    required = Enum.map_join(required_query_params ++ required_body_params, ", ", & &1.key)
+    optional = Enum.map_join(optional_query_params ++ optional_body_params, ", ", & &1.key)
 
     [
       title,
@@ -113,7 +118,9 @@ defmodule BinanceApiPostmanGenerator do
       doc_line("Tags", Enum.join(tags, ", "), tags != []),
       "Method: #{request.method}",
       "Path: #{request.url}",
-      "Requires signature: #{requires_signature?}"
+      "Requires signature: #{requires_signature?}",
+      doc_line("Required", required, required != ""),
+      doc_line("Optional", optional, optional != "")
     ]
     |> Enum.reject(&is_nil/1)
     |> Enum.join("\n")
@@ -168,13 +175,21 @@ defmodule BinanceApiPostmanGenerator do
   defp system_param?(key) when is_binary(key), do: key in ["timestamp", "signature"]
   defp system_param?(_), do: false
 
-  defp build_function_body(query_params, body_params, request, requires_signature?) do
-    build_request_payload(query_params, body_params, request, requires_signature?)
+  defp build_function_spec(fun_name, required_query_params, optional_query_params, required_body_params, optional_body_params) do
+    required_args = Enum.map(required_query_params ++ required_body_params, &param_spec_type/1)
+    optional_args = Enum.map(optional_query_params ++ optional_body_params, &param_spec_type/1)
+
+    params =
+      ["Binance.Client.t()"] ++ required_args ++ if(optional_args == [], do: [], else: ["Keyword.t()"])
+
+    "@spec #{fun_name}(#{Enum.join(params, ", ")}) :: {:ok, term()} | {:error, term()}"
   end
 
-  defp build_request_payload(query_params, body_params, request, requires_signature?) do
-    query = build_query(request.query, query_params)
-    body = build_body(request.body, body_params)
+  defp param_spec_type(_param), do: "term()"
+
+  defp build_function_body(required_query_params, optional_query_params, required_body_params, optional_body_params, request, requires_signature?) do
+    query = build_query(request.query, required_query_params ++ optional_query_params, optional_query_params)
+    body = build_body(request.body, required_body_params, optional_body_params)
     headers = build_headers(request.headers)
 
     """
@@ -197,12 +212,14 @@ defmodule BinanceApiPostmanGenerator do
     |> String.trim()
   end
 
-  defp build_body(nil, _params), do: "nil"
+  defp build_body(nil, _required_params, _optional_params), do: "nil"
 
-  defp build_body(%{mode: "urlencoded"}, params) do
-    case build_body_params(params) do
+  defp build_body(%{mode: "urlencoded"}, required_params, optional_params) do
+    body_params = build_body_params(required_params, optional_params)
+
+    case body_params do
       "" -> "nil"
-      body_params ->
+      _ ->
         """
         %{mode: "urlencoded", urlencoded: #{body_params}}
         """
@@ -210,7 +227,7 @@ defmodule BinanceApiPostmanGenerator do
     end
   end
 
-  defp build_body(_body, _params), do: "nil"
+  defp build_body(_body, _required_params, _optional_params), do: "nil"
 
   defp build_headers(headers) do
     headers
@@ -222,20 +239,27 @@ defmodule BinanceApiPostmanGenerator do
     |> then(&"[#{Enum.join(&1, ", ")}]")
   end
 
-  defp build_body_params(params) do
-    param_map = Map.new(params, fn param -> {param.key, Macro.var(String.to_atom(param.key), nil)} end)
+  defp build_body_params(required_params, optional_params) do
+    required_map = Map.new(required_params, fn param -> {param.key, Macro.var(String.to_atom(param.key), nil)} end)
+    optional_keys = MapSet.new(Enum.map(optional_params, & &1.key))
 
-    params
+    (required_params ++ optional_params)
     |> Enum.map(fn param ->
-      var = Map.get(param_map, param.key, Macro.var(String.to_atom(param.key), nil))
-      key = String.to_atom(param.key)
-      "#{key}: #{Macro.to_string(var)}"
+      key = param.key
+      var = Map.get(required_map, key, Macro.var(String.to_atom(key), nil))
+
+      if MapSet.member?(optional_keys, key) do
+        "#{key}: Keyword.get(opts, :#{key})"
+      else
+        "#{key}: #{Macro.to_string(var)}"
+      end
     end)
     |> then(&"[#{Enum.join(&1, ", ")}]")
   end
 
-  defp build_query(request_query, params) do
-    param_map = Map.new(params, fn param -> {param.key, Macro.var(String.to_atom(param.key), nil)} end)
+  defp build_query(request_query, required_params, optional_params) do
+    required_map = Map.new(required_params, fn param -> {param.key, Macro.var(String.to_atom(param.key), nil)} end)
+    optional_keys = MapSet.new(Enum.map(optional_params, & &1.key))
 
     request_query
     |> Enum.reject(fn param -> param.key == "signature" end)
@@ -245,8 +269,12 @@ defmodule BinanceApiPostmanGenerator do
       case key do
         "timestamp" -> "timestamp: nil"
         _ ->
-          var = Map.get(param_map, key, Macro.var(String.to_atom(key), nil))
-          "#{key}: #{Macro.to_string(var)}"
+          var = Map.get(required_map, key, Macro.var(String.to_atom(key), nil))
+          if MapSet.member?(optional_keys, key) do
+            "#{key}: Keyword.get(opts, :#{key})"
+          else
+            "#{key}: #{Macro.to_string(var)}"
+          end
       end
     end)
     |> Enum.join(", ")
