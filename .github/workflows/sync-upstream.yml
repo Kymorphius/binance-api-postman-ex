@@ -72,36 +72,21 @@ jobs:
       - name: Generate raw API modules
         run: mix generate_raw_api --all
 
-      - name: Drop changes outside lib/binance/api/
-        shell: bash
-        run: |
-          set -euo pipefail
-          git restore --worktree --staged -- .
-          git add lib/binance/api/
-          git restore --worktree --staged -- . ':(exclude)lib/binance/api/**'
-
-      - name: Re-stage merged main changes outside generated output
-        shell: bash
-        run: |
-          set -euo pipefail
-          git add -A
-          git restore --staged -- lib/binance/api/
-
       - name: Check for generated changes
         id: generated_diff
         shell: bash
         run: |
           set -euo pipefail
-          if git diff --quiet --cached -- lib/binance/api/; then
+          if git diff --quiet -- .; then
             echo "has_changes=false" >> "$GITHUB_OUTPUT"
-            echo "No generated changes detected under lib/binance/api/."
+            echo "No changes detected after syncing main and upstream."
             echo "Upstream commit: ${{ steps.upstream_commit.outputs.sha }}"
             echo "Upstream subject: ${{ steps.upstream_commit.outputs.subject }}"
             echo "Generated diff stat:"
-            git diff --stat --cached -- lib/binance/api/ || true
+            git diff --stat || true
           else
             echo "has_changes=true" >> "$GITHUB_OUTPUT"
-            echo "Generated changes detected under lib/binance/api/."
+            echo "Changes detected after syncing main and upstream."
           fi
 
       - name: Create pull request
