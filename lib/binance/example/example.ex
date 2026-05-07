@@ -107,13 +107,13 @@ defmodule Binance.Example do
       "BUY",
       "MARKET",
       [
-        positionSide: opts[:positionSide],
+        positionSide: Keyword.get(opts, :positionSide),
         quantity: quantity,
-        price: opts[:price],
-        newClientOrderId: opts[:newClientOrderId],
-        newOrderRespType: opts[:newOrderRespType],
-        selfTradePreventionMode: opts[:selfTradePreventionMode],
-        recvWindow: opts[:recvWindow]
+        price: Keyword.get(opts, :price),
+        newClientOrderId: Keyword.get(opts, :newClientOrderId),
+        newOrderRespType: Keyword.get(opts, :newOrderRespType, "RESULT"),
+        selfTradePreventionMode: Keyword.get(opts, :selfTradePreventionMode),
+        recvWindow: Keyword.get(opts, :recvWindow, 5000)
       ]
     )
   end
@@ -150,18 +150,6 @@ defmodule Binance.Example do
       priceMatch: Keyword.get(opts, :priceMatch),
       selfTradePreventionMode: Keyword.get(opts, :selfTradePreventionMode),
       goodTillDate: Keyword.get(opts, :goodTillDate),
-      recvWindow: Keyword.get(opts, :recvWindow, 5000)
-    ]
-  end
-
-  defp futures_market_close_order_opts(quantity, opts, position_side) do
-    [
-      positionSide: position_side,
-      quantity: quantity,
-      price: Keyword.get(opts, :price),
-      newClientOrderId: Keyword.get(opts, :newClientOrderId),
-      newOrderRespType: Keyword.get(opts, :newOrderRespType, "RESULT"),
-      selfTradePreventionMode: Keyword.get(opts, :selfTradePreventionMode),
       recvWindow: Keyword.get(opts, :recvWindow, 5000)
     ]
   end
