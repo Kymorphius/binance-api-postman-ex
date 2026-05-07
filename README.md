@@ -71,16 +71,18 @@ lib/binance/api/
 ├── spot/
 │   ├── market.ex
 │   ├── trade.ex
-│   └── account.ex
-├── derivatives_trading/
-│   ├── usds_futures/
-│   │   ├── market_data.ex
-│   │   ├── trade.ex
-│   │   └── account.ex
-│   └── coin_futures/
-│       ├── market_data.ex
-│       ├── trade.ex
-│       └── account.ex
+│   ├── account.ex
+│   └── ...
+├── usds_futures/
+│   ├── market_data.ex
+│   ├── trade.ex
+│   ├── account.ex
+│   └── ...
+├── coin_futures/
+│   ├── market_data.ex
+│   ├── trade.ex
+│   ├── account.ex
+│   └── ...
 └── ...
 ```
 
