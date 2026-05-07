@@ -1,4 +1,4 @@
-defmodule Hack do
+defmodule Binance.Example do
   @moduledoc """
   Small examples for calling generated raw Binance API modules manually.
   """

@@ -119,24 +119,24 @@ Start an interactive shell:
 iex -S mix
 ```
 
-`.iex.exs` prints common commands and aliases `BinanceApiPostmanEx` and `Hack`.
+`.iex.exs` prints common commands and aliases `BinanceApiPostmanEx` and `Binance.Example`.
 
-Example raw API calls through `Hack`:
+Example raw API calls through `Binance.Example`:
 
 ```elixir
-Hack.spot_average_price("BTCUSDT")
-Hack.spot_ticker_price("BTCUSDT")
-Hack.spot_order_book("BTCUSDT")
+Binance.Example.spot_average_price("BTCUSDT")
+Binance.Example.spot_ticker_price("BTCUSDT")
+Binance.Example.spot_order_book("BTCUSDT")
 
-Hack.futures_mark_price("ETHUSDT")
-Hack.futures_ticker_price("ETHUSDT")
-Hack.futures_order_book("ETHUSDT")
+Binance.Example.futures_mark_price("ETHUSDT")
+Binance.Example.futures_ticker_price("ETHUSDT")
+Binance.Example.futures_order_book("ETHUSDT")
 
-Hack.futures_new_limit_order("ETHUSDT", "BUY", "0.01", "2400", positionSide: "LONG")
-Hack.futures_query_order("ETHUSDT", orderId: 123)
-Hack.futures_cancel_order("ETHUSDT", orderId: 123)
+Binance.Example.futures_new_limit_order("ETHUSDT", "BUY", "0.01", "2400", positionSide: "LONG")
+Binance.Example.futures_query_order("ETHUSDT", orderId: 123)
+Binance.Example.futures_cancel_order("ETHUSDT", orderId: 123)
 
-Hack.fiat_deposit("BTC", "BANK", "100", "test")
+Binance.Example.fiat_deposit("BTC", "BANK", "100", "test")
 ```
 
 ## Request behavior
