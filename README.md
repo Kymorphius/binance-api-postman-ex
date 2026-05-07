@@ -99,7 +99,7 @@ Binance.API.DerivativesTrading.UsdsFutures.Trade.new_order_v1(client, "ETHUSDT",
 Binance.API.DerivativesTrading.UsdsFutures.Trade.new_order_v1(client, "ETHUSDT", "SELL", "MARKET", [positionSide: "LONG", quantity: "0.01", reduceOnly: true, newOrderRespType: "RESULT", recvWindow: 5000])
 Binance.API.DerivativesTrading.UsdsFutures.Trade.new_order_v1(client, "ETHUSDT", "BUY", "MARKET", [positionSide: "SHORT", quantity: "0.01", reduceOnly: true, newOrderRespType: "RESULT", recvWindow: 5000])
 
-Binance.API.Fiat.Fiat.deposit_v1(client, "BTC", "BANK", "100", recvWindow: 5000, ext: "test")
+Binance.API.Fiat.deposit_v1(client, "BTC", "BANK", "100", recvWindow: 5000, ext: "test")
 ```
 
 ## Local credentials
@@ -136,20 +136,6 @@ Example raw API calls through `Binance.Example`:
 
 ```elixir
 Binance.Example.spot_average_price("BTCUSDT")
-Binance.Example.spot_ticker_price("BTCUSDT")
-Binance.Example.spot_order_book("BTCUSDT")
-
-Binance.Example.futures_mark_price("ETHUSDT")
-Binance.Example.futures_ticker_price("ETHUSDT")
-Binance.Example.futures_order_book("ETHUSDT")
-
-Binance.Example.futures_new_limit_order("ETHUSDT", "BUY", "0.01", "2400", positionSide: "LONG")
-Binance.Example.futures_close_long_market("ETHUSDT", "0.01", positionSide: "LONG")
-Binance.Example.futures_close_short_market("ETHUSDT", "0.01", positionSide: "SHORT")
-Binance.Example.futures_query_order("ETHUSDT", orderId: 123)
-Binance.Example.futures_cancel_order("ETHUSDT", orderId: 123)
-
-Binance.Example.fiat_deposit("BTC", "BANK", "100", "test")
 ```
 
 ## Request behavior

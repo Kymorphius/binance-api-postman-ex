@@ -1,4 +1,4 @@
-defmodule Binance.API.Pay.Pay do
+defmodule Binance.API.Pay do
   @moduledoc false
 
   @base_urls %{prod_url: "https://api.binance.com"}

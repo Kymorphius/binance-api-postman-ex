@@ -1,4 +1,4 @@
-defmodule Binance.API.Nft.Nft do
+defmodule Binance.API.Nft do
   @moduledoc false
 
   @base_urls %{prod_url: "https://api.binance.com"}

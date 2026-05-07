@@ -4,7 +4,7 @@ defmodule Binance.Example do
   """
 
   alias Binance.Client
-  alias Binance.API.Fiat.Fiat
+  alias Binance.API.Fiat
   alias Binance.API.Spot.Market
   alias Binance.API.DerivativesTrading.UsdsFutures.MarketData, as: FuturesMarketData
   alias Binance.API.DerivativesTrading.UsdsFutures.Trade, as: FuturesTrade

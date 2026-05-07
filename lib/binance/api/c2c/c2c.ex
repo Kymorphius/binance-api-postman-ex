@@ -1,4 +1,4 @@
-defmodule Binance.API.C2c.C2c do
+defmodule Binance.API.C2c do
   @moduledoc false
 
   @base_urls %{prod_url: "https://api.binance.com"}

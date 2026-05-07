@@ -20,8 +20,19 @@ defmodule BinanceApiPostmanRepoMapper do
   def collection_base_url(_), do: nil
 
   def module_name(collection_name, folder_name) do
-    ["Binance", "API"] ++ collection_module_name_parts(collection_name) ++ [folder_name |> normalize_name() |> Macro.camelize()]
+    collection_module = collection_module_name_parts(collection_name)
+    folder_module = folder_name |> normalize_name() |> Macro.camelize()
+
+    ["Binance", "API"] ++ collection_module ++ maybe_append_folder_module(collection_module, folder_module)
     |> Enum.join(".")
+  end
+
+  defp maybe_append_folder_module(collection_module, folder_module) do
+    if List.last(collection_module) == folder_module do
+      []
+    else
+      [folder_module]
+    end
   end
 
   def folder_file_name(folder_name) do

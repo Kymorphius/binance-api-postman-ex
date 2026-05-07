@@ -1,4 +1,4 @@
-defmodule Binance.API.Mining.Mining do
+defmodule Binance.API.Mining do
   @moduledoc false
 
   @base_urls %{prod_url: "https://api.binance.com"}

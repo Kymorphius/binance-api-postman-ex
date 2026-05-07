@@ -1,4 +1,4 @@
-defmodule Binance.API.Fiat.Fiat do
+defmodule Binance.API.Fiat do
   @moduledoc false
 
   @base_urls %{prod_url: "https://api.binance.com"}

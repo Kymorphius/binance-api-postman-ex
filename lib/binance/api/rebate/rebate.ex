@@ -1,4 +1,4 @@
-defmodule Binance.API.Rebate.Rebate do
+defmodule Binance.API.Rebate do
   @moduledoc false
 
   @base_urls %{prod_url: "https://api.binance.com"}
