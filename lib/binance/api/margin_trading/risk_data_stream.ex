@@ -32,12 +32,13 @@ defmodule Binance.API.MarginTrading.RiskDataStream do
           headers: [{"X-MBX-APIKEY", ""}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
-    
+
       Binance.REST.HTTPClient.request(request)
     end
   end
-  
-  @spec keepalive_user_data_stream_v1(Binance.Client.t(), term()) :: {:ok, term()} | {:error, term()}
+
+  @spec keepalive_user_data_stream_v1(Binance.Client.t(), term()) ::
+          {:ok, term()} | {:error, term()}
   @doc """
   Keepalive User Data Stream
   Variant: User Stream
@@ -60,11 +61,11 @@ defmodule Binance.API.MarginTrading.RiskDataStream do
           headers: [{"X-MBX-APIKEY", ""}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
-    
+
       Binance.REST.HTTPClient.request(request)
     end
   end
-  
+
   @spec start_user_data_stream_v1(Binance.Client.t()) :: {:ok, term()} | {:error, term()}
   @doc """
   Start User Data Stream
@@ -87,7 +88,7 @@ defmodule Binance.API.MarginTrading.RiskDataStream do
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
-    
+
       Binance.REST.HTTPClient.request(request)
     end
   end

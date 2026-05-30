@@ -10,7 +10,8 @@ defmodule Binance.API.VipLoan.MarketData do
     end
   end
 
-  @spec get_collateral_asset_data_v1(Binance.Client.t(), Keyword.t()) :: {:ok, term()} | {:error, term()}
+  @spec get_collateral_asset_data_v1(Binance.Client.t(), Keyword.t()) ::
+          {:ok, term()} | {:error, term()}
   @doc """
   Get Collateral Asset Data
   Variant: User Data
@@ -29,16 +30,21 @@ defmodule Binance.API.VipLoan.MarketData do
           method: "GET",
           base_url: base_url,
           url: "/sapi/v1/loan/vip/collateral/data",
-          query: [collateralCoin: Keyword.get(opts, :collateralCoin), recvWindow: Keyword.get(opts, :recvWindow), timestamp: nil],
+          query: [
+            collateralCoin: Keyword.get(opts, :collateralCoin),
+            recvWindow: Keyword.get(opts, :recvWindow),
+            timestamp: nil
+          ],
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
-    
+
       Binance.REST.HTTPClient.request(request)
     end
   end
-  
-  @spec get_vip_loan_interest_rate_history_v1(Binance.Client.t(), term(), term(), Keyword.t()) :: {:ok, term()} | {:error, term()}
+
+  @spec get_vip_loan_interest_rate_history_v1(Binance.Client.t(), term(), term(), Keyword.t()) ::
+          {:ok, term()} | {:error, term()}
   @doc """
   Get VIP Loan Interest Rate History
   Variant: User Data
@@ -58,16 +64,25 @@ defmodule Binance.API.VipLoan.MarketData do
           method: "GET",
           base_url: base_url,
           url: "/sapi/v1/loan/vip/interestRateHistory",
-          query: [coin: coin, startTime: Keyword.get(opts, :startTime), endTime: Keyword.get(opts, :endTime), current: Keyword.get(opts, :current), limit: Keyword.get(opts, :limit), recvWindow: recvWindow, timestamp: nil],
+          query: [
+            coin: coin,
+            startTime: Keyword.get(opts, :startTime),
+            endTime: Keyword.get(opts, :endTime),
+            current: Keyword.get(opts, :current),
+            limit: Keyword.get(opts, :limit),
+            recvWindow: recvWindow,
+            timestamp: nil
+          ],
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
-    
+
       Binance.REST.HTTPClient.request(request)
     end
   end
-  
-  @spec get_loanable_assets_data_v1(Binance.Client.t(), Keyword.t()) :: {:ok, term()} | {:error, term()}
+
+  @spec get_loanable_assets_data_v1(Binance.Client.t(), Keyword.t()) ::
+          {:ok, term()} | {:error, term()}
   @doc """
   Get Loanable Assets Data
   Variant: User Data
@@ -86,16 +101,22 @@ defmodule Binance.API.VipLoan.MarketData do
           method: "GET",
           base_url: base_url,
           url: "/sapi/v1/loan/vip/loanable/data",
-          query: [loanCoin: Keyword.get(opts, :loanCoin), vipLevel: Keyword.get(opts, :vipLevel), recvWindow: Keyword.get(opts, :recvWindow), timestamp: nil],
+          query: [
+            loanCoin: Keyword.get(opts, :loanCoin),
+            vipLevel: Keyword.get(opts, :vipLevel),
+            recvWindow: Keyword.get(opts, :recvWindow),
+            timestamp: nil
+          ],
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
-    
+
       Binance.REST.HTTPClient.request(request)
     end
   end
-  
-  @spec get_borrow_interest_rate_v1(Binance.Client.t(), term(), Keyword.t()) :: {:ok, term()} | {:error, term()}
+
+  @spec get_borrow_interest_rate_v1(Binance.Client.t(), term(), Keyword.t()) ::
+          {:ok, term()} | {:error, term()}
   @doc """
   Get Borrow Interest Rate
   Variant: User Data
@@ -119,7 +140,7 @@ defmodule Binance.API.VipLoan.MarketData do
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
-    
+
       Binance.REST.HTTPClient.request(request)
     end
   end

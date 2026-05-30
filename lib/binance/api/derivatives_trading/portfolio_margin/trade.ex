@@ -1,7 +1,10 @@
 defmodule Binance.API.DerivativesTrading.PortfolioMargin.Trade do
   @moduledoc false
 
-  @base_urls %{prod_url: "https://papi.binance.com", testnet_url: "https://testnet.binancefuture.com"}
+  @base_urls %{
+    prod_url: "https://papi.binance.com",
+    testnet_url: "https://testnet.binancefuture.com"
+  }
 
   def base_url(key \\ :prod_url) do
     case Map.fetch(@base_urls, key) do
@@ -10,7 +13,8 @@ defmodule Binance.API.DerivativesTrading.PortfolioMargin.Trade do
     end
   end
 
-  @spec cm_position_adl_quantile_estimation_v1(Binance.Client.t(), Keyword.t()) :: {:ok, term()} | {:error, term()}
+  @spec cm_position_adl_quantile_estimation_v1(Binance.Client.t(), Keyword.t()) ::
+          {:ok, term()} | {:error, term()}
   @doc """
   CM Position ADL Quantile Estimation
   Variant: User Data
@@ -29,16 +33,21 @@ defmodule Binance.API.DerivativesTrading.PortfolioMargin.Trade do
           method: "GET",
           base_url: base_url,
           url: "/papi/v1/cm/adlQuantile",
-          query: [symbol: Keyword.get(opts, :symbol), recvWindow: Keyword.get(opts, :recvWindow), timestamp: nil],
+          query: [
+            symbol: Keyword.get(opts, :symbol),
+            recvWindow: Keyword.get(opts, :recvWindow),
+            timestamp: nil
+          ],
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
-    
+
       Binance.REST.HTTPClient.request(request)
     end
   end
-  
-  @spec cancel_all_cm_open_orders_v1(Binance.Client.t(), term(), Keyword.t()) :: {:ok, term()} | {:error, term()}
+
+  @spec cancel_all_cm_open_orders_v1(Binance.Client.t(), term(), Keyword.t()) ::
+          {:ok, term()} | {:error, term()}
   @doc """
   Cancel All CM Open Orders
   Variant: Trade
@@ -62,12 +71,13 @@ defmodule Binance.API.DerivativesTrading.PortfolioMargin.Trade do
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
-    
+
       Binance.REST.HTTPClient.request(request)
     end
   end
-  
-  @spec query_all_cm_orders_v1(Binance.Client.t(), term(), Keyword.t()) :: {:ok, term()} | {:error, term()}
+
+  @spec query_all_cm_orders_v1(Binance.Client.t(), term(), Keyword.t()) ::
+          {:ok, term()} | {:error, term()}
   @doc """
   Query All CM Orders
   Variant: User Data
@@ -87,16 +97,26 @@ defmodule Binance.API.DerivativesTrading.PortfolioMargin.Trade do
           method: "GET",
           base_url: base_url,
           url: "/papi/v1/cm/allOrders",
-          query: [symbol: symbol, pair: Keyword.get(opts, :pair), orderId: Keyword.get(opts, :orderId), startTime: Keyword.get(opts, :startTime), endTime: Keyword.get(opts, :endTime), limit: Keyword.get(opts, :limit), recvWindow: Keyword.get(opts, :recvWindow), timestamp: nil],
+          query: [
+            symbol: symbol,
+            pair: Keyword.get(opts, :pair),
+            orderId: Keyword.get(opts, :orderId),
+            startTime: Keyword.get(opts, :startTime),
+            endTime: Keyword.get(opts, :endTime),
+            limit: Keyword.get(opts, :limit),
+            recvWindow: Keyword.get(opts, :recvWindow),
+            timestamp: nil
+          ],
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
-    
+
       Binance.REST.HTTPClient.request(request)
     end
   end
-  
-  @spec cancel_all_cm_open_conditional_orders_v1(Binance.Client.t(), term(), Keyword.t()) :: {:ok, term()} | {:error, term()}
+
+  @spec cancel_all_cm_open_conditional_orders_v1(Binance.Client.t(), term(), Keyword.t()) ::
+          {:ok, term()} | {:error, term()}
   @doc """
   Cancel All CM Open Conditional Orders
   Variant: Trade
@@ -120,12 +140,13 @@ defmodule Binance.API.DerivativesTrading.PortfolioMargin.Trade do
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
-    
+
       Binance.REST.HTTPClient.request(request)
     end
   end
-  
-  @spec query_all_cm_conditional_orders_v1(Binance.Client.t(), Keyword.t()) :: {:ok, term()} | {:error, term()}
+
+  @spec query_all_cm_conditional_orders_v1(Binance.Client.t(), Keyword.t()) ::
+          {:ok, term()} | {:error, term()}
   @doc """
   Query All CM Conditional Orders
   Variant: User Data
@@ -144,16 +165,25 @@ defmodule Binance.API.DerivativesTrading.PortfolioMargin.Trade do
           method: "GET",
           base_url: base_url,
           url: "/papi/v1/cm/conditional/allOrders",
-          query: [symbol: Keyword.get(opts, :symbol), strategyId: Keyword.get(opts, :strategyId), startTime: Keyword.get(opts, :startTime), endTime: Keyword.get(opts, :endTime), limit: Keyword.get(opts, :limit), recvWindow: Keyword.get(opts, :recvWindow), timestamp: nil],
+          query: [
+            symbol: Keyword.get(opts, :symbol),
+            strategyId: Keyword.get(opts, :strategyId),
+            startTime: Keyword.get(opts, :startTime),
+            endTime: Keyword.get(opts, :endTime),
+            limit: Keyword.get(opts, :limit),
+            recvWindow: Keyword.get(opts, :recvWindow),
+            timestamp: nil
+          ],
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
-    
+
       Binance.REST.HTTPClient.request(request)
     end
   end
-  
-  @spec query_current_cm_open_conditional_order_v1(Binance.Client.t(), term(), Keyword.t()) :: {:ok, term()} | {:error, term()}
+
+  @spec query_current_cm_open_conditional_order_v1(Binance.Client.t(), term(), Keyword.t()) ::
+          {:ok, term()} | {:error, term()}
   @doc """
   Query Current CM Open Conditional Order
   Variant: User Data
@@ -173,16 +203,23 @@ defmodule Binance.API.DerivativesTrading.PortfolioMargin.Trade do
           method: "GET",
           base_url: base_url,
           url: "/papi/v1/cm/conditional/openOrder",
-          query: [symbol: symbol, strategyId: Keyword.get(opts, :strategyId), newClientStrategyId: Keyword.get(opts, :newClientStrategyId), recvWindow: Keyword.get(opts, :recvWindow), timestamp: nil],
+          query: [
+            symbol: symbol,
+            strategyId: Keyword.get(opts, :strategyId),
+            newClientStrategyId: Keyword.get(opts, :newClientStrategyId),
+            recvWindow: Keyword.get(opts, :recvWindow),
+            timestamp: nil
+          ],
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
-    
+
       Binance.REST.HTTPClient.request(request)
     end
   end
-  
-  @spec query_all_current_cm_open_conditional_orders_v1(Binance.Client.t(), Keyword.t()) :: {:ok, term()} | {:error, term()}
+
+  @spec query_all_current_cm_open_conditional_orders_v1(Binance.Client.t(), Keyword.t()) ::
+          {:ok, term()} | {:error, term()}
   @doc """
   Query All Current CM Open Conditional Orders
   Variant: User Data
@@ -201,16 +238,21 @@ defmodule Binance.API.DerivativesTrading.PortfolioMargin.Trade do
           method: "GET",
           base_url: base_url,
           url: "/papi/v1/cm/conditional/openOrders",
-          query: [symbol: Keyword.get(opts, :symbol), recvWindow: Keyword.get(opts, :recvWindow), timestamp: nil],
+          query: [
+            symbol: Keyword.get(opts, :symbol),
+            recvWindow: Keyword.get(opts, :recvWindow),
+            timestamp: nil
+          ],
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
-    
+
       Binance.REST.HTTPClient.request(request)
     end
   end
-  
-  @spec cancel_cm_conditional_order_v1(Binance.Client.t(), term(), Keyword.t()) :: {:ok, term()} | {:error, term()}
+
+  @spec cancel_cm_conditional_order_v1(Binance.Client.t(), term(), Keyword.t()) ::
+          {:ok, term()} | {:error, term()}
   @doc """
   Cancel CM Conditional Order
   Variant: Trade
@@ -230,16 +272,23 @@ defmodule Binance.API.DerivativesTrading.PortfolioMargin.Trade do
           method: "DELETE",
           base_url: base_url,
           url: "/papi/v1/cm/conditional/order",
-          query: [symbol: symbol, strategyId: Keyword.get(opts, :strategyId), newClientStrategyId: Keyword.get(opts, :newClientStrategyId), recvWindow: Keyword.get(opts, :recvWindow), timestamp: nil],
+          query: [
+            symbol: symbol,
+            strategyId: Keyword.get(opts, :strategyId),
+            newClientStrategyId: Keyword.get(opts, :newClientStrategyId),
+            recvWindow: Keyword.get(opts, :recvWindow),
+            timestamp: nil
+          ],
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
-    
+
       Binance.REST.HTTPClient.request(request)
     end
   end
-  
-  @spec new_cm_conditional_order_v1(Binance.Client.t(), term(), term(), term(), Keyword.t()) :: {:ok, term()} | {:error, term()}
+
+  @spec new_cm_conditional_order_v1(Binance.Client.t(), term(), term(), term(), Keyword.t()) ::
+          {:ok, term()} | {:error, term()}
   @doc """
   New CM Conditional Order
   Variant: Trade
@@ -259,16 +308,34 @@ defmodule Binance.API.DerivativesTrading.PortfolioMargin.Trade do
           method: "POST",
           base_url: base_url,
           url: "/papi/v1/cm/conditional/order",
-          query: [symbol: symbol, side: side, positionSide: Keyword.get(opts, :positionSide), strategyType: strategyType, timeInForce: Keyword.get(opts, :timeInForce), quantity: Keyword.get(opts, :quantity), reduceOnly: Keyword.get(opts, :reduceOnly), price: Keyword.get(opts, :price), workingType: Keyword.get(opts, :workingType), priceProtect: Keyword.get(opts, :priceProtect), newClientStrategyId: Keyword.get(opts, :newClientStrategyId), stopPrice: Keyword.get(opts, :stopPrice), activationPrice: Keyword.get(opts, :activationPrice), callbackRate: Keyword.get(opts, :callbackRate), recvWindow: Keyword.get(opts, :recvWindow), timestamp: nil],
+          query: [
+            symbol: symbol,
+            side: side,
+            positionSide: Keyword.get(opts, :positionSide),
+            strategyType: strategyType,
+            timeInForce: Keyword.get(opts, :timeInForce),
+            quantity: Keyword.get(opts, :quantity),
+            reduceOnly: Keyword.get(opts, :reduceOnly),
+            price: Keyword.get(opts, :price),
+            workingType: Keyword.get(opts, :workingType),
+            priceProtect: Keyword.get(opts, :priceProtect),
+            newClientStrategyId: Keyword.get(opts, :newClientStrategyId),
+            stopPrice: Keyword.get(opts, :stopPrice),
+            activationPrice: Keyword.get(opts, :activationPrice),
+            callbackRate: Keyword.get(opts, :callbackRate),
+            recvWindow: Keyword.get(opts, :recvWindow),
+            timestamp: nil
+          ],
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
-    
+
       Binance.REST.HTTPClient.request(request)
     end
   end
-  
-  @spec query_cm_conditional_order_history_v1(Binance.Client.t(), term(), Keyword.t()) :: {:ok, term()} | {:error, term()}
+
+  @spec query_cm_conditional_order_history_v1(Binance.Client.t(), term(), Keyword.t()) ::
+          {:ok, term()} | {:error, term()}
   @doc """
   Query CM Conditional Order History
   Variant: User Data
@@ -288,16 +355,23 @@ defmodule Binance.API.DerivativesTrading.PortfolioMargin.Trade do
           method: "GET",
           base_url: base_url,
           url: "/papi/v1/cm/conditional/orderHistory",
-          query: [symbol: symbol, strategyId: Keyword.get(opts, :strategyId), newClientStrategyId: Keyword.get(opts, :newClientStrategyId), recvWindow: Keyword.get(opts, :recvWindow), timestamp: nil],
+          query: [
+            symbol: symbol,
+            strategyId: Keyword.get(opts, :strategyId),
+            newClientStrategyId: Keyword.get(opts, :newClientStrategyId),
+            recvWindow: Keyword.get(opts, :recvWindow),
+            timestamp: nil
+          ],
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
-    
+
       Binance.REST.HTTPClient.request(request)
     end
   end
-  
-  @spec query_user_s_cm_force_orders_v1(Binance.Client.t(), Keyword.t()) :: {:ok, term()} | {:error, term()}
+
+  @spec query_user_s_cm_force_orders_v1(Binance.Client.t(), Keyword.t()) ::
+          {:ok, term()} | {:error, term()}
   @doc """
   Query User's CM Force Orders
   Variant: User Data
@@ -316,16 +390,25 @@ defmodule Binance.API.DerivativesTrading.PortfolioMargin.Trade do
           method: "GET",
           base_url: base_url,
           url: "/papi/v1/cm/forceOrders",
-          query: [symbol: Keyword.get(opts, :symbol), autoCloseType: Keyword.get(opts, :autoCloseType), startTime: Keyword.get(opts, :startTime), endTime: Keyword.get(opts, :endTime), limit: Keyword.get(opts, :limit), recvWindow: Keyword.get(opts, :recvWindow), timestamp: nil],
+          query: [
+            symbol: Keyword.get(opts, :symbol),
+            autoCloseType: Keyword.get(opts, :autoCloseType),
+            startTime: Keyword.get(opts, :startTime),
+            endTime: Keyword.get(opts, :endTime),
+            limit: Keyword.get(opts, :limit),
+            recvWindow: Keyword.get(opts, :recvWindow),
+            timestamp: nil
+          ],
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
-    
+
       Binance.REST.HTTPClient.request(request)
     end
   end
-  
-  @spec query_current_cm_open_order_v1(Binance.Client.t(), term(), Keyword.t()) :: {:ok, term()} | {:error, term()}
+
+  @spec query_current_cm_open_order_v1(Binance.Client.t(), term(), Keyword.t()) ::
+          {:ok, term()} | {:error, term()}
   @doc """
   Query Current CM Open Order
   Variant: User Data
@@ -345,16 +428,23 @@ defmodule Binance.API.DerivativesTrading.PortfolioMargin.Trade do
           method: "GET",
           base_url: base_url,
           url: "/papi/v1/cm/openOrder",
-          query: [symbol: symbol, orderId: Keyword.get(opts, :orderId), origClientOrderId: Keyword.get(opts, :origClientOrderId), recvWindow: Keyword.get(opts, :recvWindow), timestamp: nil],
+          query: [
+            symbol: symbol,
+            orderId: Keyword.get(opts, :orderId),
+            origClientOrderId: Keyword.get(opts, :origClientOrderId),
+            recvWindow: Keyword.get(opts, :recvWindow),
+            timestamp: nil
+          ],
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
-    
+
       Binance.REST.HTTPClient.request(request)
     end
   end
-  
-  @spec query_all_current_cm_open_orders_v1(Binance.Client.t(), Keyword.t()) :: {:ok, term()} | {:error, term()}
+
+  @spec query_all_current_cm_open_orders_v1(Binance.Client.t(), Keyword.t()) ::
+          {:ok, term()} | {:error, term()}
   @doc """
   Query All Current CM Open Orders
   Variant: User Data
@@ -373,16 +463,22 @@ defmodule Binance.API.DerivativesTrading.PortfolioMargin.Trade do
           method: "GET",
           base_url: base_url,
           url: "/papi/v1/cm/openOrders",
-          query: [symbol: Keyword.get(opts, :symbol), pair: Keyword.get(opts, :pair), recvWindow: Keyword.get(opts, :recvWindow), timestamp: nil],
+          query: [
+            symbol: Keyword.get(opts, :symbol),
+            pair: Keyword.get(opts, :pair),
+            recvWindow: Keyword.get(opts, :recvWindow),
+            timestamp: nil
+          ],
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
-    
+
       Binance.REST.HTTPClient.request(request)
     end
   end
-  
-  @spec cancel_cm_order_v1(Binance.Client.t(), term(), Keyword.t()) :: {:ok, term()} | {:error, term()}
+
+  @spec cancel_cm_order_v1(Binance.Client.t(), term(), Keyword.t()) ::
+          {:ok, term()} | {:error, term()}
   @doc """
   Cancel CM Order
   Variant: Trade
@@ -402,16 +498,23 @@ defmodule Binance.API.DerivativesTrading.PortfolioMargin.Trade do
           method: "DELETE",
           base_url: base_url,
           url: "/papi/v1/cm/order",
-          query: [symbol: symbol, orderId: Keyword.get(opts, :orderId), origClientOrderId: Keyword.get(opts, :origClientOrderId), recvWindow: Keyword.get(opts, :recvWindow), timestamp: nil],
+          query: [
+            symbol: symbol,
+            orderId: Keyword.get(opts, :orderId),
+            origClientOrderId: Keyword.get(opts, :origClientOrderId),
+            recvWindow: Keyword.get(opts, :recvWindow),
+            timestamp: nil
+          ],
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
-    
+
       Binance.REST.HTTPClient.request(request)
     end
   end
-  
-  @spec modify_cm_order_v1(Binance.Client.t(), term(), term(), term(), term(), Keyword.t()) :: {:ok, term()} | {:error, term()}
+
+  @spec modify_cm_order_v1(Binance.Client.t(), term(), term(), term(), term(), Keyword.t()) ::
+          {:ok, term()} | {:error, term()}
   @doc """
   Modify CM Order
   Variant: Trade
@@ -431,16 +534,27 @@ defmodule Binance.API.DerivativesTrading.PortfolioMargin.Trade do
           method: "PUT",
           base_url: base_url,
           url: "/papi/v1/cm/order",
-          query: [orderId: Keyword.get(opts, :orderId), origClientOrderId: Keyword.get(opts, :origClientOrderId), symbol: symbol, side: side, quantity: quantity, price: price, priceMatch: Keyword.get(opts, :priceMatch), recvWindow: Keyword.get(opts, :recvWindow), timestamp: nil],
+          query: [
+            orderId: Keyword.get(opts, :orderId),
+            origClientOrderId: Keyword.get(opts, :origClientOrderId),
+            symbol: symbol,
+            side: side,
+            quantity: quantity,
+            price: price,
+            priceMatch: Keyword.get(opts, :priceMatch),
+            recvWindow: Keyword.get(opts, :recvWindow),
+            timestamp: nil
+          ],
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
-    
+
       Binance.REST.HTTPClient.request(request)
     end
   end
-  
-  @spec new_cm_order_v1(Binance.Client.t(), term(), term(), term(), Keyword.t()) :: {:ok, term()} | {:error, term()}
+
+  @spec new_cm_order_v1(Binance.Client.t(), term(), term(), term(), Keyword.t()) ::
+          {:ok, term()} | {:error, term()}
   @doc """
   New CM Order
   Variant: Trade
@@ -460,16 +574,31 @@ defmodule Binance.API.DerivativesTrading.PortfolioMargin.Trade do
           method: "POST",
           base_url: base_url,
           url: "/papi/v1/cm/order",
-          query: [symbol: symbol, side: side, positionSide: Keyword.get(opts, :positionSide), type: type, timeInForce: Keyword.get(opts, :timeInForce), quantity: Keyword.get(opts, :quantity), reduceOnly: Keyword.get(opts, :reduceOnly), price: Keyword.get(opts, :price), priceMatch: Keyword.get(opts, :priceMatch), newClientOrderId: Keyword.get(opts, :newClientOrderId), newOrderRespType: Keyword.get(opts, :newOrderRespType), recvWindow: Keyword.get(opts, :recvWindow), timestamp: nil],
+          query: [
+            symbol: symbol,
+            side: side,
+            positionSide: Keyword.get(opts, :positionSide),
+            type: type,
+            timeInForce: Keyword.get(opts, :timeInForce),
+            quantity: Keyword.get(opts, :quantity),
+            reduceOnly: Keyword.get(opts, :reduceOnly),
+            price: Keyword.get(opts, :price),
+            priceMatch: Keyword.get(opts, :priceMatch),
+            newClientOrderId: Keyword.get(opts, :newClientOrderId),
+            newOrderRespType: Keyword.get(opts, :newOrderRespType),
+            recvWindow: Keyword.get(opts, :recvWindow),
+            timestamp: nil
+          ],
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
-    
+
       Binance.REST.HTTPClient.request(request)
     end
   end
-  
-  @spec query_cm_order_v1(Binance.Client.t(), term(), Keyword.t()) :: {:ok, term()} | {:error, term()}
+
+  @spec query_cm_order_v1(Binance.Client.t(), term(), Keyword.t()) ::
+          {:ok, term()} | {:error, term()}
   @doc """
   Query CM Order
   Variant: User Data
@@ -489,16 +618,23 @@ defmodule Binance.API.DerivativesTrading.PortfolioMargin.Trade do
           method: "GET",
           base_url: base_url,
           url: "/papi/v1/cm/order",
-          query: [symbol: symbol, orderId: Keyword.get(opts, :orderId), origClientOrderId: Keyword.get(opts, :origClientOrderId), recvWindow: Keyword.get(opts, :recvWindow), timestamp: nil],
+          query: [
+            symbol: symbol,
+            orderId: Keyword.get(opts, :orderId),
+            origClientOrderId: Keyword.get(opts, :origClientOrderId),
+            recvWindow: Keyword.get(opts, :recvWindow),
+            timestamp: nil
+          ],
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
-    
+
       Binance.REST.HTTPClient.request(request)
     end
   end
-  
-  @spec query_cm_modify_order_history_v1(Binance.Client.t(), term(), Keyword.t()) :: {:ok, term()} | {:error, term()}
+
+  @spec query_cm_modify_order_history_v1(Binance.Client.t(), term(), Keyword.t()) ::
+          {:ok, term()} | {:error, term()}
   @doc """
   Query CM Modify Order History
   Variant: Trade
@@ -518,16 +654,26 @@ defmodule Binance.API.DerivativesTrading.PortfolioMargin.Trade do
           method: "GET",
           base_url: base_url,
           url: "/papi/v1/cm/orderAmendment",
-          query: [symbol: symbol, orderId: Keyword.get(opts, :orderId), origClientOrderId: Keyword.get(opts, :origClientOrderId), startTime: Keyword.get(opts, :startTime), endTime: Keyword.get(opts, :endTime), limit: Keyword.get(opts, :limit), recvWindow: Keyword.get(opts, :recvWindow), timestamp: nil],
+          query: [
+            symbol: symbol,
+            orderId: Keyword.get(opts, :orderId),
+            origClientOrderId: Keyword.get(opts, :origClientOrderId),
+            startTime: Keyword.get(opts, :startTime),
+            endTime: Keyword.get(opts, :endTime),
+            limit: Keyword.get(opts, :limit),
+            recvWindow: Keyword.get(opts, :recvWindow),
+            timestamp: nil
+          ],
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
-    
+
       Binance.REST.HTTPClient.request(request)
     end
   end
-  
-  @spec cm_account_trade_list_v1(Binance.Client.t(), Keyword.t()) :: {:ok, term()} | {:error, term()}
+
+  @spec cm_account_trade_list_v1(Binance.Client.t(), Keyword.t()) ::
+          {:ok, term()} | {:error, term()}
   @doc """
   CM Account Trade List
   Variant: User Data
@@ -546,16 +692,29 @@ defmodule Binance.API.DerivativesTrading.PortfolioMargin.Trade do
           method: "GET",
           base_url: base_url,
           url: "/papi/v1/cm/userTrades",
-          query: [symbol: Keyword.get(opts, :symbol), pair: Keyword.get(opts, :pair), startTime: Keyword.get(opts, :startTime), endTime: Keyword.get(opts, :endTime), fromId: Keyword.get(opts, :fromId), limit: Keyword.get(opts, :limit), recvWindow: Keyword.get(opts, :recvWindow), timestamp: nil],
+          query: [
+            symbol: Keyword.get(opts, :symbol),
+            pair: Keyword.get(opts, :pair),
+            startTime: Keyword.get(opts, :startTime),
+            endTime: Keyword.get(opts, :endTime),
+            fromId: Keyword.get(opts, :fromId),
+            limit: Keyword.get(opts, :limit),
+            recvWindow: Keyword.get(opts, :recvWindow),
+            timestamp: nil
+          ],
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
-    
+
       Binance.REST.HTTPClient.request(request)
     end
   end
-  
-  @spec cancel_margin_account_all_open_orders_on_a_symbol_v1(Binance.Client.t(), term(), Keyword.t()) :: {:ok, term()} | {:error, term()}
+
+  @spec cancel_margin_account_all_open_orders_on_a_symbol_v1(
+          Binance.Client.t(),
+          term(),
+          Keyword.t()
+        ) :: {:ok, term()} | {:error, term()}
   @doc """
   Cancel Margin Account All Open Orders on a Symbol
   Variant: Trade
@@ -579,12 +738,13 @@ defmodule Binance.API.DerivativesTrading.PortfolioMargin.Trade do
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
-    
+
       Binance.REST.HTTPClient.request(request)
     end
   end
-  
-  @spec query_margin_account_s_all_oco_v1(Binance.Client.t(), Keyword.t()) :: {:ok, term()} | {:error, term()}
+
+  @spec query_margin_account_s_all_oco_v1(Binance.Client.t(), Keyword.t()) ::
+          {:ok, term()} | {:error, term()}
   @doc """
   Query Margin Account's all OCO
   Variant: User Data
@@ -603,16 +763,24 @@ defmodule Binance.API.DerivativesTrading.PortfolioMargin.Trade do
           method: "GET",
           base_url: base_url,
           url: "/papi/v1/margin/allOrderList",
-          query: [fromId: Keyword.get(opts, :fromId), startTime: Keyword.get(opts, :startTime), endTime: Keyword.get(opts, :endTime), limit: Keyword.get(opts, :limit), recvWindow: Keyword.get(opts, :recvWindow), timestamp: nil],
+          query: [
+            fromId: Keyword.get(opts, :fromId),
+            startTime: Keyword.get(opts, :startTime),
+            endTime: Keyword.get(opts, :endTime),
+            limit: Keyword.get(opts, :limit),
+            recvWindow: Keyword.get(opts, :recvWindow),
+            timestamp: nil
+          ],
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
-    
+
       Binance.REST.HTTPClient.request(request)
     end
   end
-  
-  @spec query_all_margin_account_orders_v1(Binance.Client.t(), term(), Keyword.t()) :: {:ok, term()} | {:error, term()}
+
+  @spec query_all_margin_account_orders_v1(Binance.Client.t(), term(), Keyword.t()) ::
+          {:ok, term()} | {:error, term()}
   @doc """
   Query All Margin Account Orders
   Variant: User Data
@@ -632,16 +800,25 @@ defmodule Binance.API.DerivativesTrading.PortfolioMargin.Trade do
           method: "GET",
           base_url: base_url,
           url: "/papi/v1/margin/allOrders",
-          query: [symbol: symbol, orderId: Keyword.get(opts, :orderId), startTime: Keyword.get(opts, :startTime), endTime: Keyword.get(opts, :endTime), limit: Keyword.get(opts, :limit), recvWindow: Keyword.get(opts, :recvWindow), timestamp: nil],
+          query: [
+            symbol: symbol,
+            orderId: Keyword.get(opts, :orderId),
+            startTime: Keyword.get(opts, :startTime),
+            endTime: Keyword.get(opts, :endTime),
+            limit: Keyword.get(opts, :limit),
+            recvWindow: Keyword.get(opts, :recvWindow),
+            timestamp: nil
+          ],
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
-    
+
       Binance.REST.HTTPClient.request(request)
     end
   end
-  
-  @spec query_user_s_margin_force_orders_v1(Binance.Client.t(), Keyword.t()) :: {:ok, term()} | {:error, term()}
+
+  @spec query_user_s_margin_force_orders_v1(Binance.Client.t(), Keyword.t()) ::
+          {:ok, term()} | {:error, term()}
   @doc """
   Query User's Margin Force Orders
   Variant: User Data
@@ -660,16 +837,24 @@ defmodule Binance.API.DerivativesTrading.PortfolioMargin.Trade do
           method: "GET",
           base_url: base_url,
           url: "/papi/v1/margin/forceOrders",
-          query: [startTime: Keyword.get(opts, :startTime), endTime: Keyword.get(opts, :endTime), current: Keyword.get(opts, :current), size: Keyword.get(opts, :size), recvWindow: Keyword.get(opts, :recvWindow), timestamp: nil],
+          query: [
+            startTime: Keyword.get(opts, :startTime),
+            endTime: Keyword.get(opts, :endTime),
+            current: Keyword.get(opts, :current),
+            size: Keyword.get(opts, :size),
+            recvWindow: Keyword.get(opts, :recvWindow),
+            timestamp: nil
+          ],
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
-    
+
       Binance.REST.HTTPClient.request(request)
     end
   end
-  
-  @spec margin_account_trade_list_v1(Binance.Client.t(), term(), Keyword.t()) :: {:ok, term()} | {:error, term()}
+
+  @spec margin_account_trade_list_v1(Binance.Client.t(), term(), Keyword.t()) ::
+          {:ok, term()} | {:error, term()}
   @doc """
   Margin Account Trade List
   Variant: User Data
@@ -689,16 +874,26 @@ defmodule Binance.API.DerivativesTrading.PortfolioMargin.Trade do
           method: "GET",
           base_url: base_url,
           url: "/papi/v1/margin/myTrades",
-          query: [symbol: symbol, orderId: Keyword.get(opts, :orderId), startTime: Keyword.get(opts, :startTime), endTime: Keyword.get(opts, :endTime), fromId: Keyword.get(opts, :fromId), limit: Keyword.get(opts, :limit), recvWindow: Keyword.get(opts, :recvWindow), timestamp: nil],
+          query: [
+            symbol: symbol,
+            orderId: Keyword.get(opts, :orderId),
+            startTime: Keyword.get(opts, :startTime),
+            endTime: Keyword.get(opts, :endTime),
+            fromId: Keyword.get(opts, :fromId),
+            limit: Keyword.get(opts, :limit),
+            recvWindow: Keyword.get(opts, :recvWindow),
+            timestamp: nil
+          ],
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
-    
+
       Binance.REST.HTTPClient.request(request)
     end
   end
-  
-  @spec query_margin_account_s_open_oco_v1(Binance.Client.t(), Keyword.t()) :: {:ok, term()} | {:error, term()}
+
+  @spec query_margin_account_s_open_oco_v1(Binance.Client.t(), Keyword.t()) ::
+          {:ok, term()} | {:error, term()}
   @doc """
   Query Margin Account's Open OCO
   Variant: User Data
@@ -721,12 +916,13 @@ defmodule Binance.API.DerivativesTrading.PortfolioMargin.Trade do
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
-    
+
       Binance.REST.HTTPClient.request(request)
     end
   end
-  
-  @spec query_current_margin_open_order_v1(Binance.Client.t(), term(), Keyword.t()) :: {:ok, term()} | {:error, term()}
+
+  @spec query_current_margin_open_order_v1(Binance.Client.t(), term(), Keyword.t()) ::
+          {:ok, term()} | {:error, term()}
   @doc """
   Query Current Margin Open Order
   Variant: User Data
@@ -750,12 +946,13 @@ defmodule Binance.API.DerivativesTrading.PortfolioMargin.Trade do
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
-    
+
       Binance.REST.HTTPClient.request(request)
     end
   end
-  
-  @spec cancel_margin_account_order_v1(Binance.Client.t(), term(), Keyword.t()) :: {:ok, term()} | {:error, term()}
+
+  @spec cancel_margin_account_order_v1(Binance.Client.t(), term(), Keyword.t()) ::
+          {:ok, term()} | {:error, term()}
   @doc """
   Cancel Margin Account Order
   Variant: Trade
@@ -775,16 +972,24 @@ defmodule Binance.API.DerivativesTrading.PortfolioMargin.Trade do
           method: "DELETE",
           base_url: base_url,
           url: "/papi/v1/margin/order",
-          query: [symbol: symbol, orderId: Keyword.get(opts, :orderId), origClientOrderId: Keyword.get(opts, :origClientOrderId), newClientOrderId: Keyword.get(opts, :newClientOrderId), recvWindow: Keyword.get(opts, :recvWindow), timestamp: nil],
+          query: [
+            symbol: symbol,
+            orderId: Keyword.get(opts, :orderId),
+            origClientOrderId: Keyword.get(opts, :origClientOrderId),
+            newClientOrderId: Keyword.get(opts, :newClientOrderId),
+            recvWindow: Keyword.get(opts, :recvWindow),
+            timestamp: nil
+          ],
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
-    
+
       Binance.REST.HTTPClient.request(request)
     end
   end
-  
-  @spec new_margin_order_v1(Binance.Client.t(), term(), term(), term(), Keyword.t()) :: {:ok, term()} | {:error, term()}
+
+  @spec new_margin_order_v1(Binance.Client.t(), term(), term(), term(), Keyword.t()) ::
+          {:ok, term()} | {:error, term()}
   @doc """
   New Margin Order
   Variant: Trade
@@ -804,16 +1009,34 @@ defmodule Binance.API.DerivativesTrading.PortfolioMargin.Trade do
           method: "POST",
           base_url: base_url,
           url: "/papi/v1/margin/order",
-          query: [symbol: symbol, side: side, type: type, quantity: Keyword.get(opts, :quantity), quoteOrderQty: Keyword.get(opts, :quoteOrderQty), price: Keyword.get(opts, :price), stopPrice: Keyword.get(opts, :stopPrice), newClientOrderId: Keyword.get(opts, :newClientOrderId), newOrderRespType: Keyword.get(opts, :newOrderRespType), icebergQty: Keyword.get(opts, :icebergQty), sideEffectType: Keyword.get(opts, :sideEffectType), timeInForce: Keyword.get(opts, :timeInForce), selfTradePreventionMode: Keyword.get(opts, :selfTradePreventionMode), autoRepayAtCancel: Keyword.get(opts, :autoRepayAtCancel), recvWindow: Keyword.get(opts, :recvWindow), timestamp: nil],
+          query: [
+            symbol: symbol,
+            side: side,
+            type: type,
+            quantity: Keyword.get(opts, :quantity),
+            quoteOrderQty: Keyword.get(opts, :quoteOrderQty),
+            price: Keyword.get(opts, :price),
+            stopPrice: Keyword.get(opts, :stopPrice),
+            newClientOrderId: Keyword.get(opts, :newClientOrderId),
+            newOrderRespType: Keyword.get(opts, :newOrderRespType),
+            icebergQty: Keyword.get(opts, :icebergQty),
+            sideEffectType: Keyword.get(opts, :sideEffectType),
+            timeInForce: Keyword.get(opts, :timeInForce),
+            selfTradePreventionMode: Keyword.get(opts, :selfTradePreventionMode),
+            autoRepayAtCancel: Keyword.get(opts, :autoRepayAtCancel),
+            recvWindow: Keyword.get(opts, :recvWindow),
+            timestamp: nil
+          ],
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
-    
+
       Binance.REST.HTTPClient.request(request)
     end
   end
-  
-  @spec query_margin_account_order_v1(Binance.Client.t(), term(), Keyword.t()) :: {:ok, term()} | {:error, term()}
+
+  @spec query_margin_account_order_v1(Binance.Client.t(), term(), Keyword.t()) ::
+          {:ok, term()} | {:error, term()}
   @doc """
   Query Margin Account Order
   Variant: User Data
@@ -833,16 +1056,30 @@ defmodule Binance.API.DerivativesTrading.PortfolioMargin.Trade do
           method: "GET",
           base_url: base_url,
           url: "/papi/v1/margin/order",
-          query: [symbol: symbol, orderId: Keyword.get(opts, :orderId), origClientOrderId: Keyword.get(opts, :origClientOrderId), recvWindow: Keyword.get(opts, :recvWindow), timestamp: nil],
+          query: [
+            symbol: symbol,
+            orderId: Keyword.get(opts, :orderId),
+            origClientOrderId: Keyword.get(opts, :origClientOrderId),
+            recvWindow: Keyword.get(opts, :recvWindow),
+            timestamp: nil
+          ],
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
-    
+
       Binance.REST.HTTPClient.request(request)
     end
   end
-  
-  @spec margin_account_new_oco_v1(Binance.Client.t(), term(), term(), term(), term(), term(), Keyword.t()) :: {:ok, term()} | {:error, term()}
+
+  @spec margin_account_new_oco_v1(
+          Binance.Client.t(),
+          term(),
+          term(),
+          term(),
+          term(),
+          term(),
+          Keyword.t()
+        ) :: {:ok, term()} | {:error, term()}
   @doc """
   Margin Account New OCO
   Variant: Trade
@@ -862,16 +1099,34 @@ defmodule Binance.API.DerivativesTrading.PortfolioMargin.Trade do
           method: "POST",
           base_url: base_url,
           url: "/papi/v1/margin/order/oco",
-          query: [symbol: symbol, listClientOrderId: Keyword.get(opts, :listClientOrderId), side: side, quantity: quantity, limitClientOrderId: Keyword.get(opts, :limitClientOrderId), price: price, limitIcebergQty: Keyword.get(opts, :limitIcebergQty), stopClientOrderId: Keyword.get(opts, :stopClientOrderId), stopPrice: stopPrice, stopLimitPrice: Keyword.get(opts, :stopLimitPrice), stopIcebergQty: Keyword.get(opts, :stopIcebergQty), stopLimitTimeInForce: Keyword.get(opts, :stopLimitTimeInForce), newOrderRespType: Keyword.get(opts, :newOrderRespType), sideEffectType: Keyword.get(opts, :sideEffectType), recvWindow: Keyword.get(opts, :recvWindow), timestamp: nil],
+          query: [
+            symbol: symbol,
+            listClientOrderId: Keyword.get(opts, :listClientOrderId),
+            side: side,
+            quantity: quantity,
+            limitClientOrderId: Keyword.get(opts, :limitClientOrderId),
+            price: price,
+            limitIcebergQty: Keyword.get(opts, :limitIcebergQty),
+            stopClientOrderId: Keyword.get(opts, :stopClientOrderId),
+            stopPrice: stopPrice,
+            stopLimitPrice: Keyword.get(opts, :stopLimitPrice),
+            stopIcebergQty: Keyword.get(opts, :stopIcebergQty),
+            stopLimitTimeInForce: Keyword.get(opts, :stopLimitTimeInForce),
+            newOrderRespType: Keyword.get(opts, :newOrderRespType),
+            sideEffectType: Keyword.get(opts, :sideEffectType),
+            recvWindow: Keyword.get(opts, :recvWindow),
+            timestamp: nil
+          ],
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
-    
+
       Binance.REST.HTTPClient.request(request)
     end
   end
-  
-  @spec cancel_margin_account_oco_orders_v1(Binance.Client.t(), term(), Keyword.t()) :: {:ok, term()} | {:error, term()}
+
+  @spec cancel_margin_account_oco_orders_v1(Binance.Client.t(), term(), Keyword.t()) ::
+          {:ok, term()} | {:error, term()}
   @doc """
   Cancel Margin Account OCO Orders
   Variant: Trade
@@ -891,16 +1146,24 @@ defmodule Binance.API.DerivativesTrading.PortfolioMargin.Trade do
           method: "DELETE",
           base_url: base_url,
           url: "/papi/v1/margin/orderList",
-          query: [symbol: symbol, orderListId: Keyword.get(opts, :orderListId), listClientOrderId: Keyword.get(opts, :listClientOrderId), newClientOrderId: Keyword.get(opts, :newClientOrderId), recvWindow: Keyword.get(opts, :recvWindow), timestamp: nil],
+          query: [
+            symbol: symbol,
+            orderListId: Keyword.get(opts, :orderListId),
+            listClientOrderId: Keyword.get(opts, :listClientOrderId),
+            newClientOrderId: Keyword.get(opts, :newClientOrderId),
+            recvWindow: Keyword.get(opts, :recvWindow),
+            timestamp: nil
+          ],
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
-    
+
       Binance.REST.HTTPClient.request(request)
     end
   end
-  
-  @spec query_margin_account_s_oco_v1(Binance.Client.t(), Keyword.t()) :: {:ok, term()} | {:error, term()}
+
+  @spec query_margin_account_s_oco_v1(Binance.Client.t(), Keyword.t()) ::
+          {:ok, term()} | {:error, term()}
   @doc """
   Query Margin Account's OCO
   Variant: User Data
@@ -919,16 +1182,22 @@ defmodule Binance.API.DerivativesTrading.PortfolioMargin.Trade do
           method: "GET",
           base_url: base_url,
           url: "/papi/v1/margin/orderList",
-          query: [orderListId: Keyword.get(opts, :orderListId), origClientOrderId: Keyword.get(opts, :origClientOrderId), recvWindow: Keyword.get(opts, :recvWindow), timestamp: nil],
+          query: [
+            orderListId: Keyword.get(opts, :orderListId),
+            origClientOrderId: Keyword.get(opts, :origClientOrderId),
+            recvWindow: Keyword.get(opts, :recvWindow),
+            timestamp: nil
+          ],
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
-    
+
       Binance.REST.HTTPClient.request(request)
     end
   end
-  
-  @spec margin_account_repay_debt_v1(Binance.Client.t(), term(), Keyword.t()) :: {:ok, term()} | {:error, term()}
+
+  @spec margin_account_repay_debt_v1(Binance.Client.t(), term(), Keyword.t()) ::
+          {:ok, term()} | {:error, term()}
   @doc """
   Margin Account Repay Debt
   Variant: Trade
@@ -948,16 +1217,23 @@ defmodule Binance.API.DerivativesTrading.PortfolioMargin.Trade do
           method: "POST",
           base_url: base_url,
           url: "/papi/v1/margin/repay-debt",
-          query: [asset: asset, amount: Keyword.get(opts, :amount), specifyRepayAssets: Keyword.get(opts, :specifyRepayAssets), recvWindow: Keyword.get(opts, :recvWindow), timestamp: nil],
+          query: [
+            asset: asset,
+            amount: Keyword.get(opts, :amount),
+            specifyRepayAssets: Keyword.get(opts, :specifyRepayAssets),
+            recvWindow: Keyword.get(opts, :recvWindow),
+            timestamp: nil
+          ],
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
-    
+
       Binance.REST.HTTPClient.request(request)
     end
   end
-  
-  @spec margin_account_borrow_v1(Binance.Client.t(), term(), term(), Keyword.t()) :: {:ok, term()} | {:error, term()}
+
+  @spec margin_account_borrow_v1(Binance.Client.t(), term(), term(), Keyword.t()) ::
+          {:ok, term()} | {:error, term()}
   @doc """
   Margin Account Borrow
   Variant: Margin
@@ -977,16 +1253,22 @@ defmodule Binance.API.DerivativesTrading.PortfolioMargin.Trade do
           method: "POST",
           base_url: base_url,
           url: "/papi/v1/marginLoan",
-          query: [asset: asset, amount: amount, recvWindow: Keyword.get(opts, :recvWindow), timestamp: nil],
+          query: [
+            asset: asset,
+            amount: amount,
+            recvWindow: Keyword.get(opts, :recvWindow),
+            timestamp: nil
+          ],
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
-    
+
       Binance.REST.HTTPClient.request(request)
     end
   end
-  
-  @spec margin_account_repay_v1(Binance.Client.t(), term(), term(), Keyword.t()) :: {:ok, term()} | {:error, term()}
+
+  @spec margin_account_repay_v1(Binance.Client.t(), term(), term(), Keyword.t()) ::
+          {:ok, term()} | {:error, term()}
   @doc """
   Margin Account Repay
   Variant: Margin
@@ -1006,16 +1288,22 @@ defmodule Binance.API.DerivativesTrading.PortfolioMargin.Trade do
           method: "POST",
           base_url: base_url,
           url: "/papi/v1/repayLoan",
-          query: [asset: asset, amount: amount, recvWindow: Keyword.get(opts, :recvWindow), timestamp: nil],
+          query: [
+            asset: asset,
+            amount: amount,
+            recvWindow: Keyword.get(opts, :recvWindow),
+            timestamp: nil
+          ],
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
-    
+
       Binance.REST.HTTPClient.request(request)
     end
   end
-  
-  @spec um_position_adl_quantile_estimation_v1(Binance.Client.t(), Keyword.t()) :: {:ok, term()} | {:error, term()}
+
+  @spec um_position_adl_quantile_estimation_v1(Binance.Client.t(), Keyword.t()) ::
+          {:ok, term()} | {:error, term()}
   @doc """
   UM Position ADL Quantile Estimation
   Variant: User Data
@@ -1034,16 +1322,21 @@ defmodule Binance.API.DerivativesTrading.PortfolioMargin.Trade do
           method: "GET",
           base_url: base_url,
           url: "/papi/v1/um/adlQuantile",
-          query: [symbol: Keyword.get(opts, :symbol), recvWindow: Keyword.get(opts, :recvWindow), timestamp: nil],
+          query: [
+            symbol: Keyword.get(opts, :symbol),
+            recvWindow: Keyword.get(opts, :recvWindow),
+            timestamp: nil
+          ],
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
-    
+
       Binance.REST.HTTPClient.request(request)
     end
   end
-  
-  @spec query_current_um_open_algo_order_v1(Binance.Client.t(), Keyword.t()) :: {:ok, term()} | {:error, term()}
+
+  @spec query_current_um_open_algo_order_v1(Binance.Client.t(), Keyword.t()) ::
+          {:ok, term()} | {:error, term()}
   @doc """
   Query Current UM Open Algo Order
   Variant: User Data
@@ -1062,16 +1355,22 @@ defmodule Binance.API.DerivativesTrading.PortfolioMargin.Trade do
           method: "GET",
           base_url: base_url,
           url: "/papi/v1/um/algo/algoOrder",
-          query: [algoId: Keyword.get(opts, :algoId), clientAlgoId: Keyword.get(opts, :clientAlgoId), recvWindow: Keyword.get(opts, :recvWindow), timestamp: nil],
+          query: [
+            algoId: Keyword.get(opts, :algoId),
+            clientAlgoId: Keyword.get(opts, :clientAlgoId),
+            recvWindow: Keyword.get(opts, :recvWindow),
+            timestamp: nil
+          ],
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
-    
+
       Binance.REST.HTTPClient.request(request)
     end
   end
-  
-  @spec query_um_algo_order_history_v1(Binance.Client.t(), term(), Keyword.t()) :: {:ok, term()} | {:error, term()}
+
+  @spec query_um_algo_order_history_v1(Binance.Client.t(), term(), Keyword.t()) ::
+          {:ok, term()} | {:error, term()}
   @doc """
   Query UM Algo Order History
   Variant: User Data
@@ -1091,16 +1390,25 @@ defmodule Binance.API.DerivativesTrading.PortfolioMargin.Trade do
           method: "GET",
           base_url: base_url,
           url: "/papi/v1/um/algo/allAlgoOrders",
-          query: [symbol: symbol, algoId: Keyword.get(opts, :algoId), startTime: Keyword.get(opts, :startTime), endTime: Keyword.get(opts, :endTime), limit: Keyword.get(opts, :limit), recvWindow: Keyword.get(opts, :recvWindow), timestamp: nil],
+          query: [
+            symbol: symbol,
+            algoId: Keyword.get(opts, :algoId),
+            startTime: Keyword.get(opts, :startTime),
+            endTime: Keyword.get(opts, :endTime),
+            limit: Keyword.get(opts, :limit),
+            recvWindow: Keyword.get(opts, :recvWindow),
+            timestamp: nil
+          ],
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
-    
+
       Binance.REST.HTTPClient.request(request)
     end
   end
-  
-  @spec cancel_all_um_algo_open_orders_v1(Binance.Client.t(), term(), Keyword.t()) :: {:ok, term()} | {:error, term()}
+
+  @spec cancel_all_um_algo_open_orders_v1(Binance.Client.t(), term(), Keyword.t()) ::
+          {:ok, term()} | {:error, term()}
   @doc """
   Cancel All UM Algo Open Orders
   Variant: Trade
@@ -1124,12 +1432,13 @@ defmodule Binance.API.DerivativesTrading.PortfolioMargin.Trade do
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
-    
+
       Binance.REST.HTTPClient.request(request)
     end
   end
-  
-  @spec query_all_current_um_open_algo_orders_v1(Binance.Client.t(), Keyword.t()) :: {:ok, term()} | {:error, term()}
+
+  @spec query_all_current_um_open_algo_orders_v1(Binance.Client.t(), Keyword.t()) ::
+          {:ok, term()} | {:error, term()}
   @doc """
   Query All Current UM Open Algo Orders
   Variant: User Data
@@ -1148,16 +1457,23 @@ defmodule Binance.API.DerivativesTrading.PortfolioMargin.Trade do
           method: "GET",
           base_url: base_url,
           url: "/papi/v1/um/algo/openAlgoOrders",
-          query: [algoType: Keyword.get(opts, :algoType), symbol: Keyword.get(opts, :symbol), algoId: Keyword.get(opts, :algoId), recvWindow: Keyword.get(opts, :recvWindow), timestamp: nil],
+          query: [
+            algoType: Keyword.get(opts, :algoType),
+            symbol: Keyword.get(opts, :symbol),
+            algoId: Keyword.get(opts, :algoId),
+            recvWindow: Keyword.get(opts, :recvWindow),
+            timestamp: nil
+          ],
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
-    
+
       Binance.REST.HTTPClient.request(request)
     end
   end
-  
-  @spec cancel_um_algo_order_v1(Binance.Client.t(), Keyword.t()) :: {:ok, term()} | {:error, term()}
+
+  @spec cancel_um_algo_order_v1(Binance.Client.t(), Keyword.t()) ::
+          {:ok, term()} | {:error, term()}
   @doc """
   Cancel UM Algo Order
   Variant: Trade
@@ -1176,16 +1492,29 @@ defmodule Binance.API.DerivativesTrading.PortfolioMargin.Trade do
           method: "DELETE",
           base_url: base_url,
           url: "/papi/v1/um/algo/order",
-          query: [algoId: Keyword.get(opts, :algoId), clientAlgoId: Keyword.get(opts, :clientAlgoId), recvWindow: Keyword.get(opts, :recvWindow), timestamp: nil],
+          query: [
+            algoId: Keyword.get(opts, :algoId),
+            clientAlgoId: Keyword.get(opts, :clientAlgoId),
+            recvWindow: Keyword.get(opts, :recvWindow),
+            timestamp: nil
+          ],
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
-    
+
       Binance.REST.HTTPClient.request(request)
     end
   end
-  
-  @spec new_um_algo_order_v1(Binance.Client.t(), term(), term(), term(), term(), term(), Keyword.t()) :: {:ok, term()} | {:error, term()}
+
+  @spec new_um_algo_order_v1(
+          Binance.Client.t(),
+          term(),
+          term(),
+          term(),
+          term(),
+          term(),
+          Keyword.t()
+        ) :: {:ok, term()} | {:error, term()}
   @doc """
   New UM Algo Order
   Variant: Trade
@@ -1205,16 +1534,39 @@ defmodule Binance.API.DerivativesTrading.PortfolioMargin.Trade do
           method: "POST",
           base_url: base_url,
           url: "/papi/v1/um/algo/order",
-          query: [algoType: algoType, symbol: symbol, side: side, positionSide: Keyword.get(opts, :positionSide), type: type, timeInForce: Keyword.get(opts, :timeInForce), quantity: quantity, price: Keyword.get(opts, :price), triggerPrice: Keyword.get(opts, :triggerPrice), workingType: Keyword.get(opts, :workingType), priceMatch: Keyword.get(opts, :priceMatch), priceProtect: Keyword.get(opts, :priceProtect), reduceOnly: Keyword.get(opts, :reduceOnly), activatePrice: Keyword.get(opts, :activatePrice), callbackRate: Keyword.get(opts, :callbackRate), clientAlgoId: Keyword.get(opts, :clientAlgoId), newOrderRespType: Keyword.get(opts, :newOrderRespType), selfTradePreventionMode: Keyword.get(opts, :selfTradePreventionMode), goodTillDate: Keyword.get(opts, :goodTillDate), recvWindow: Keyword.get(opts, :recvWindow), timestamp: nil],
+          query: [
+            algoType: algoType,
+            symbol: symbol,
+            side: side,
+            positionSide: Keyword.get(opts, :positionSide),
+            type: type,
+            timeInForce: Keyword.get(opts, :timeInForce),
+            quantity: quantity,
+            price: Keyword.get(opts, :price),
+            triggerPrice: Keyword.get(opts, :triggerPrice),
+            workingType: Keyword.get(opts, :workingType),
+            priceMatch: Keyword.get(opts, :priceMatch),
+            priceProtect: Keyword.get(opts, :priceProtect),
+            reduceOnly: Keyword.get(opts, :reduceOnly),
+            activatePrice: Keyword.get(opts, :activatePrice),
+            callbackRate: Keyword.get(opts, :callbackRate),
+            clientAlgoId: Keyword.get(opts, :clientAlgoId),
+            newOrderRespType: Keyword.get(opts, :newOrderRespType),
+            selfTradePreventionMode: Keyword.get(opts, :selfTradePreventionMode),
+            goodTillDate: Keyword.get(opts, :goodTillDate),
+            recvWindow: Keyword.get(opts, :recvWindow),
+            timestamp: nil
+          ],
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
-    
+
       Binance.REST.HTTPClient.request(request)
     end
   end
-  
-  @spec cancel_all_um_open_orders_v1(Binance.Client.t(), term(), Keyword.t()) :: {:ok, term()} | {:error, term()}
+
+  @spec cancel_all_um_open_orders_v1(Binance.Client.t(), term(), Keyword.t()) ::
+          {:ok, term()} | {:error, term()}
   @doc """
   Cancel All UM Open Orders
   Variant: Trade
@@ -1238,12 +1590,13 @@ defmodule Binance.API.DerivativesTrading.PortfolioMargin.Trade do
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
-    
+
       Binance.REST.HTTPClient.request(request)
     end
   end
-  
-  @spec query_all_um_orders_v1(Binance.Client.t(), term(), Keyword.t()) :: {:ok, term()} | {:error, term()}
+
+  @spec query_all_um_orders_v1(Binance.Client.t(), term(), Keyword.t()) ::
+          {:ok, term()} | {:error, term()}
   @doc """
   Query All UM Orders
   Variant: User Data
@@ -1263,16 +1616,25 @@ defmodule Binance.API.DerivativesTrading.PortfolioMargin.Trade do
           method: "GET",
           base_url: base_url,
           url: "/papi/v1/um/allOrders",
-          query: [symbol: symbol, orderId: Keyword.get(opts, :orderId), startTime: Keyword.get(opts, :startTime), endTime: Keyword.get(opts, :endTime), limit: Keyword.get(opts, :limit), recvWindow: Keyword.get(opts, :recvWindow), timestamp: nil],
+          query: [
+            symbol: symbol,
+            orderId: Keyword.get(opts, :orderId),
+            startTime: Keyword.get(opts, :startTime),
+            endTime: Keyword.get(opts, :endTime),
+            limit: Keyword.get(opts, :limit),
+            recvWindow: Keyword.get(opts, :recvWindow),
+            timestamp: nil
+          ],
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
-    
+
       Binance.REST.HTTPClient.request(request)
     end
   end
-  
-  @spec cancel_all_um_open_conditional_orders_v1(Binance.Client.t(), term(), Keyword.t()) :: {:ok, term()} | {:error, term()}
+
+  @spec cancel_all_um_open_conditional_orders_v1(Binance.Client.t(), term(), Keyword.t()) ::
+          {:ok, term()} | {:error, term()}
   @doc """
   Cancel All UM Open Conditional Orders
   Method: DELETE
@@ -1294,12 +1656,13 @@ defmodule Binance.API.DerivativesTrading.PortfolioMargin.Trade do
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
-    
+
       Binance.REST.HTTPClient.request(request)
     end
   end
-  
-  @spec query_all_um_conditional_orders_v1(Binance.Client.t(), Keyword.t()) :: {:ok, term()} | {:error, term()}
+
+  @spec query_all_um_conditional_orders_v1(Binance.Client.t(), Keyword.t()) ::
+          {:ok, term()} | {:error, term()}
   @doc """
   Query All UM Conditional Orders
   Method: GET
@@ -1316,16 +1679,25 @@ defmodule Binance.API.DerivativesTrading.PortfolioMargin.Trade do
           method: "GET",
           base_url: base_url,
           url: "/papi/v1/um/conditional/allOrders",
-          query: [symbol: Keyword.get(opts, :symbol), strategyId: Keyword.get(opts, :strategyId), startTime: Keyword.get(opts, :startTime), endTime: Keyword.get(opts, :endTime), limit: Keyword.get(opts, :limit), recvWindow: Keyword.get(opts, :recvWindow), timestamp: nil],
+          query: [
+            symbol: Keyword.get(opts, :symbol),
+            strategyId: Keyword.get(opts, :strategyId),
+            startTime: Keyword.get(opts, :startTime),
+            endTime: Keyword.get(opts, :endTime),
+            limit: Keyword.get(opts, :limit),
+            recvWindow: Keyword.get(opts, :recvWindow),
+            timestamp: nil
+          ],
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
-    
+
       Binance.REST.HTTPClient.request(request)
     end
   end
-  
-  @spec query_current_um_open_conditional_order_v1(Binance.Client.t(), term(), Keyword.t()) :: {:ok, term()} | {:error, term()}
+
+  @spec query_current_um_open_conditional_order_v1(Binance.Client.t(), term(), Keyword.t()) ::
+          {:ok, term()} | {:error, term()}
   @doc """
   Query Current UM Open Conditional Order
   Method: GET
@@ -1343,16 +1715,23 @@ defmodule Binance.API.DerivativesTrading.PortfolioMargin.Trade do
           method: "GET",
           base_url: base_url,
           url: "/papi/v1/um/conditional/openOrder",
-          query: [symbol: symbol, strategyId: Keyword.get(opts, :strategyId), newClientStrategyId: Keyword.get(opts, :newClientStrategyId), recvWindow: Keyword.get(opts, :recvWindow), timestamp: nil],
+          query: [
+            symbol: symbol,
+            strategyId: Keyword.get(opts, :strategyId),
+            newClientStrategyId: Keyword.get(opts, :newClientStrategyId),
+            recvWindow: Keyword.get(opts, :recvWindow),
+            timestamp: nil
+          ],
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
-    
+
       Binance.REST.HTTPClient.request(request)
     end
   end
-  
-  @spec query_all_current_um_open_conditional_orders_v1(Binance.Client.t(), Keyword.t()) :: {:ok, term()} | {:error, term()}
+
+  @spec query_all_current_um_open_conditional_orders_v1(Binance.Client.t(), Keyword.t()) ::
+          {:ok, term()} | {:error, term()}
   @doc """
   Query All Current UM Open Conditional Orders
   Method: GET
@@ -1369,16 +1748,21 @@ defmodule Binance.API.DerivativesTrading.PortfolioMargin.Trade do
           method: "GET",
           base_url: base_url,
           url: "/papi/v1/um/conditional/openOrders",
-          query: [symbol: Keyword.get(opts, :symbol), recvWindow: Keyword.get(opts, :recvWindow), timestamp: nil],
+          query: [
+            symbol: Keyword.get(opts, :symbol),
+            recvWindow: Keyword.get(opts, :recvWindow),
+            timestamp: nil
+          ],
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
-    
+
       Binance.REST.HTTPClient.request(request)
     end
   end
-  
-  @spec cancel_um_conditional_order_v1(Binance.Client.t(), term(), Keyword.t()) :: {:ok, term()} | {:error, term()}
+
+  @spec cancel_um_conditional_order_v1(Binance.Client.t(), term(), Keyword.t()) ::
+          {:ok, term()} | {:error, term()}
   @doc """
   Cancel UM Conditional Order
   Method: DELETE
@@ -1396,16 +1780,23 @@ defmodule Binance.API.DerivativesTrading.PortfolioMargin.Trade do
           method: "DELETE",
           base_url: base_url,
           url: "/papi/v1/um/conditional/order",
-          query: [symbol: symbol, strategyId: Keyword.get(opts, :strategyId), newClientStrategyId: Keyword.get(opts, :newClientStrategyId), recvWindow: Keyword.get(opts, :recvWindow), timestamp: nil],
+          query: [
+            symbol: symbol,
+            strategyId: Keyword.get(opts, :strategyId),
+            newClientStrategyId: Keyword.get(opts, :newClientStrategyId),
+            recvWindow: Keyword.get(opts, :recvWindow),
+            timestamp: nil
+          ],
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
-    
+
       Binance.REST.HTTPClient.request(request)
     end
   end
-  
-  @spec new_um_conditional_order_v1(Binance.Client.t(), term(), term(), term(), Keyword.t()) :: {:ok, term()} | {:error, term()}
+
+  @spec new_um_conditional_order_v1(Binance.Client.t(), term(), term(), term(), Keyword.t()) ::
+          {:ok, term()} | {:error, term()}
   @doc """
   New UM Conditional Order
   Method: POST
@@ -1423,16 +1814,37 @@ defmodule Binance.API.DerivativesTrading.PortfolioMargin.Trade do
           method: "POST",
           base_url: base_url,
           url: "/papi/v1/um/conditional/order",
-          query: [symbol: symbol, side: side, positionSide: Keyword.get(opts, :positionSide), strategyType: strategyType, timeInForce: Keyword.get(opts, :timeInForce), quantity: Keyword.get(opts, :quantity), reduceOnly: Keyword.get(opts, :reduceOnly), price: Keyword.get(opts, :price), workingType: Keyword.get(opts, :workingType), priceProtect: Keyword.get(opts, :priceProtect), newClientStrategyId: Keyword.get(opts, :newClientStrategyId), stopPrice: Keyword.get(opts, :stopPrice), activationPrice: Keyword.get(opts, :activationPrice), callbackRate: Keyword.get(opts, :callbackRate), priceMatch: Keyword.get(opts, :priceMatch), selfTradePreventionMode: Keyword.get(opts, :selfTradePreventionMode), goodTillDate: Keyword.get(opts, :goodTillDate), recvWindow: Keyword.get(opts, :recvWindow), timestamp: nil],
+          query: [
+            symbol: symbol,
+            side: side,
+            positionSide: Keyword.get(opts, :positionSide),
+            strategyType: strategyType,
+            timeInForce: Keyword.get(opts, :timeInForce),
+            quantity: Keyword.get(opts, :quantity),
+            reduceOnly: Keyword.get(opts, :reduceOnly),
+            price: Keyword.get(opts, :price),
+            workingType: Keyword.get(opts, :workingType),
+            priceProtect: Keyword.get(opts, :priceProtect),
+            newClientStrategyId: Keyword.get(opts, :newClientStrategyId),
+            stopPrice: Keyword.get(opts, :stopPrice),
+            activationPrice: Keyword.get(opts, :activationPrice),
+            callbackRate: Keyword.get(opts, :callbackRate),
+            priceMatch: Keyword.get(opts, :priceMatch),
+            selfTradePreventionMode: Keyword.get(opts, :selfTradePreventionMode),
+            goodTillDate: Keyword.get(opts, :goodTillDate),
+            recvWindow: Keyword.get(opts, :recvWindow),
+            timestamp: nil
+          ],
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
-    
+
       Binance.REST.HTTPClient.request(request)
     end
   end
-  
-  @spec query_um_conditional_order_history_v1(Binance.Client.t(), term(), Keyword.t()) :: {:ok, term()} | {:error, term()}
+
+  @spec query_um_conditional_order_history_v1(Binance.Client.t(), term(), Keyword.t()) ::
+          {:ok, term()} | {:error, term()}
   @doc """
   Query UM Conditional Order History
   Method: GET
@@ -1450,16 +1862,23 @@ defmodule Binance.API.DerivativesTrading.PortfolioMargin.Trade do
           method: "GET",
           base_url: base_url,
           url: "/papi/v1/um/conditional/orderHistory",
-          query: [symbol: symbol, strategyId: Keyword.get(opts, :strategyId), newClientStrategyId: Keyword.get(opts, :newClientStrategyId), recvWindow: Keyword.get(opts, :recvWindow), timestamp: nil],
+          query: [
+            symbol: symbol,
+            strategyId: Keyword.get(opts, :strategyId),
+            newClientStrategyId: Keyword.get(opts, :newClientStrategyId),
+            recvWindow: Keyword.get(opts, :recvWindow),
+            timestamp: nil
+          ],
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
-    
+
       Binance.REST.HTTPClient.request(request)
     end
   end
-  
-  @spec get_um_futures_bnb_burn_status_v1(Binance.Client.t(), Keyword.t()) :: {:ok, term()} | {:error, term()}
+
+  @spec get_um_futures_bnb_burn_status_v1(Binance.Client.t(), Keyword.t()) ::
+          {:ok, term()} | {:error, term()}
   @doc """
   Get UM Futures BNB Burn Status
   Variant: User Data
@@ -1482,12 +1901,13 @@ defmodule Binance.API.DerivativesTrading.PortfolioMargin.Trade do
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
-    
+
       Binance.REST.HTTPClient.request(request)
     end
   end
-  
-  @spec toggle_bnb_burn_on_um_futures_trade_v1(Binance.Client.t(), term(), Keyword.t()) :: {:ok, term()} | {:error, term()}
+
+  @spec toggle_bnb_burn_on_um_futures_trade_v1(Binance.Client.t(), term(), Keyword.t()) ::
+          {:ok, term()} | {:error, term()}
   @doc """
   Toggle BNB Burn On UM Futures Trade
   Variant: Trade
@@ -1511,12 +1931,13 @@ defmodule Binance.API.DerivativesTrading.PortfolioMargin.Trade do
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
-    
+
       Binance.REST.HTTPClient.request(request)
     end
   end
-  
-  @spec query_user_s_um_force_orders_v1(Binance.Client.t(), Keyword.t()) :: {:ok, term()} | {:error, term()}
+
+  @spec query_user_s_um_force_orders_v1(Binance.Client.t(), Keyword.t()) ::
+          {:ok, term()} | {:error, term()}
   @doc """
   Query User's UM Force Orders
   Variant: User Data
@@ -1535,16 +1956,25 @@ defmodule Binance.API.DerivativesTrading.PortfolioMargin.Trade do
           method: "GET",
           base_url: base_url,
           url: "/papi/v1/um/forceOrders",
-          query: [symbol: Keyword.get(opts, :symbol), autoCloseType: Keyword.get(opts, :autoCloseType), startTime: Keyword.get(opts, :startTime), endTime: Keyword.get(opts, :endTime), limit: Keyword.get(opts, :limit), recvWindow: Keyword.get(opts, :recvWindow), timestamp: nil],
+          query: [
+            symbol: Keyword.get(opts, :symbol),
+            autoCloseType: Keyword.get(opts, :autoCloseType),
+            startTime: Keyword.get(opts, :startTime),
+            endTime: Keyword.get(opts, :endTime),
+            limit: Keyword.get(opts, :limit),
+            recvWindow: Keyword.get(opts, :recvWindow),
+            timestamp: nil
+          ],
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
-    
+
       Binance.REST.HTTPClient.request(request)
     end
   end
-  
-  @spec query_current_um_open_order_v1(Binance.Client.t(), term(), Keyword.t()) :: {:ok, term()} | {:error, term()}
+
+  @spec query_current_um_open_order_v1(Binance.Client.t(), term(), Keyword.t()) ::
+          {:ok, term()} | {:error, term()}
   @doc """
   Query Current UM Open Order
   Variant: User Data
@@ -1564,16 +1994,23 @@ defmodule Binance.API.DerivativesTrading.PortfolioMargin.Trade do
           method: "GET",
           base_url: base_url,
           url: "/papi/v1/um/openOrder",
-          query: [symbol: symbol, orderId: Keyword.get(opts, :orderId), origClientOrderId: Keyword.get(opts, :origClientOrderId), recvWindow: Keyword.get(opts, :recvWindow), timestamp: nil],
+          query: [
+            symbol: symbol,
+            orderId: Keyword.get(opts, :orderId),
+            origClientOrderId: Keyword.get(opts, :origClientOrderId),
+            recvWindow: Keyword.get(opts, :recvWindow),
+            timestamp: nil
+          ],
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
-    
+
       Binance.REST.HTTPClient.request(request)
     end
   end
-  
-  @spec query_all_current_um_open_orders_v1(Binance.Client.t(), Keyword.t()) :: {:ok, term()} | {:error, term()}
+
+  @spec query_all_current_um_open_orders_v1(Binance.Client.t(), Keyword.t()) ::
+          {:ok, term()} | {:error, term()}
   @doc """
   Query All Current UM Open Orders
   Variant: User Data
@@ -1592,16 +2029,21 @@ defmodule Binance.API.DerivativesTrading.PortfolioMargin.Trade do
           method: "GET",
           base_url: base_url,
           url: "/papi/v1/um/openOrders",
-          query: [symbol: Keyword.get(opts, :symbol), recvWindow: Keyword.get(opts, :recvWindow), timestamp: nil],
+          query: [
+            symbol: Keyword.get(opts, :symbol),
+            recvWindow: Keyword.get(opts, :recvWindow),
+            timestamp: nil
+          ],
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
-    
+
       Binance.REST.HTTPClient.request(request)
     end
   end
-  
-  @spec cancel_um_order_v1(Binance.Client.t(), term(), Keyword.t()) :: {:ok, term()} | {:error, term()}
+
+  @spec cancel_um_order_v1(Binance.Client.t(), term(), Keyword.t()) ::
+          {:ok, term()} | {:error, term()}
   @doc """
   Cancel UM Order
   Variant: Trade
@@ -1621,16 +2063,23 @@ defmodule Binance.API.DerivativesTrading.PortfolioMargin.Trade do
           method: "DELETE",
           base_url: base_url,
           url: "/papi/v1/um/order",
-          query: [symbol: symbol, orderId: Keyword.get(opts, :orderId), origClientOrderId: Keyword.get(opts, :origClientOrderId), recvWindow: Keyword.get(opts, :recvWindow), timestamp: nil],
+          query: [
+            symbol: symbol,
+            orderId: Keyword.get(opts, :orderId),
+            origClientOrderId: Keyword.get(opts, :origClientOrderId),
+            recvWindow: Keyword.get(opts, :recvWindow),
+            timestamp: nil
+          ],
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
-    
+
       Binance.REST.HTTPClient.request(request)
     end
   end
-  
-  @spec modify_um_order_v1(Binance.Client.t(), term(), term(), term(), term(), Keyword.t()) :: {:ok, term()} | {:error, term()}
+
+  @spec modify_um_order_v1(Binance.Client.t(), term(), term(), term(), term(), Keyword.t()) ::
+          {:ok, term()} | {:error, term()}
   @doc """
   Modify UM Order
   Variant: Trade
@@ -1650,16 +2099,27 @@ defmodule Binance.API.DerivativesTrading.PortfolioMargin.Trade do
           method: "PUT",
           base_url: base_url,
           url: "/papi/v1/um/order",
-          query: [orderId: Keyword.get(opts, :orderId), origClientOrderId: Keyword.get(opts, :origClientOrderId), symbol: symbol, side: side, quantity: quantity, price: price, priceMatch: Keyword.get(opts, :priceMatch), recvWindow: Keyword.get(opts, :recvWindow), timestamp: nil],
+          query: [
+            orderId: Keyword.get(opts, :orderId),
+            origClientOrderId: Keyword.get(opts, :origClientOrderId),
+            symbol: symbol,
+            side: side,
+            quantity: quantity,
+            price: price,
+            priceMatch: Keyword.get(opts, :priceMatch),
+            recvWindow: Keyword.get(opts, :recvWindow),
+            timestamp: nil
+          ],
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
-    
+
       Binance.REST.HTTPClient.request(request)
     end
   end
-  
-  @spec new_um_order_v1(Binance.Client.t(), term(), term(), term(), Keyword.t()) :: {:ok, term()} | {:error, term()}
+
+  @spec new_um_order_v1(Binance.Client.t(), term(), term(), term(), Keyword.t()) ::
+          {:ok, term()} | {:error, term()}
   @doc """
   New UM Order
   Variant: Trade
@@ -1679,16 +2139,33 @@ defmodule Binance.API.DerivativesTrading.PortfolioMargin.Trade do
           method: "POST",
           base_url: base_url,
           url: "/papi/v1/um/order",
-          query: [symbol: symbol, side: side, positionSide: Keyword.get(opts, :positionSide), type: type, timeInForce: Keyword.get(opts, :timeInForce), quantity: Keyword.get(opts, :quantity), reduceOnly: Keyword.get(opts, :reduceOnly), price: Keyword.get(opts, :price), newClientOrderId: Keyword.get(opts, :newClientOrderId), newOrderRespType: Keyword.get(opts, :newOrderRespType), priceMatch: Keyword.get(opts, :priceMatch), selfTradePreventionMode: Keyword.get(opts, :selfTradePreventionMode), goodTillDate: Keyword.get(opts, :goodTillDate), recvWindow: Keyword.get(opts, :recvWindow), timestamp: nil],
+          query: [
+            symbol: symbol,
+            side: side,
+            positionSide: Keyword.get(opts, :positionSide),
+            type: type,
+            timeInForce: Keyword.get(opts, :timeInForce),
+            quantity: Keyword.get(opts, :quantity),
+            reduceOnly: Keyword.get(opts, :reduceOnly),
+            price: Keyword.get(opts, :price),
+            newClientOrderId: Keyword.get(opts, :newClientOrderId),
+            newOrderRespType: Keyword.get(opts, :newOrderRespType),
+            priceMatch: Keyword.get(opts, :priceMatch),
+            selfTradePreventionMode: Keyword.get(opts, :selfTradePreventionMode),
+            goodTillDate: Keyword.get(opts, :goodTillDate),
+            recvWindow: Keyword.get(opts, :recvWindow),
+            timestamp: nil
+          ],
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
-    
+
       Binance.REST.HTTPClient.request(request)
     end
   end
-  
-  @spec query_um_order_v1(Binance.Client.t(), term(), Keyword.t()) :: {:ok, term()} | {:error, term()}
+
+  @spec query_um_order_v1(Binance.Client.t(), term(), Keyword.t()) ::
+          {:ok, term()} | {:error, term()}
   @doc """
   Query UM Order
   Variant: User Data
@@ -1708,16 +2185,23 @@ defmodule Binance.API.DerivativesTrading.PortfolioMargin.Trade do
           method: "GET",
           base_url: base_url,
           url: "/papi/v1/um/order",
-          query: [symbol: symbol, orderId: Keyword.get(opts, :orderId), origClientOrderId: Keyword.get(opts, :origClientOrderId), recvWindow: Keyword.get(opts, :recvWindow), timestamp: nil],
+          query: [
+            symbol: symbol,
+            orderId: Keyword.get(opts, :orderId),
+            origClientOrderId: Keyword.get(opts, :origClientOrderId),
+            recvWindow: Keyword.get(opts, :recvWindow),
+            timestamp: nil
+          ],
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
-    
+
       Binance.REST.HTTPClient.request(request)
     end
   end
-  
-  @spec query_um_modify_order_history_v1(Binance.Client.t(), term(), Keyword.t()) :: {:ok, term()} | {:error, term()}
+
+  @spec query_um_modify_order_history_v1(Binance.Client.t(), term(), Keyword.t()) ::
+          {:ok, term()} | {:error, term()}
   @doc """
   Query UM Modify Order History
   Variant: Trade
@@ -1737,16 +2221,26 @@ defmodule Binance.API.DerivativesTrading.PortfolioMargin.Trade do
           method: "GET",
           base_url: base_url,
           url: "/papi/v1/um/orderAmendment",
-          query: [symbol: symbol, orderId: Keyword.get(opts, :orderId), origClientOrderId: Keyword.get(opts, :origClientOrderId), startTime: Keyword.get(opts, :startTime), endTime: Keyword.get(opts, :endTime), limit: Keyword.get(opts, :limit), recvWindow: Keyword.get(opts, :recvWindow), timestamp: nil],
+          query: [
+            symbol: symbol,
+            orderId: Keyword.get(opts, :orderId),
+            origClientOrderId: Keyword.get(opts, :origClientOrderId),
+            startTime: Keyword.get(opts, :startTime),
+            endTime: Keyword.get(opts, :endTime),
+            limit: Keyword.get(opts, :limit),
+            recvWindow: Keyword.get(opts, :recvWindow),
+            timestamp: nil
+          ],
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
-    
+
       Binance.REST.HTTPClient.request(request)
     end
   end
-  
-  @spec futures_tradfi_perps_contract_v1(Binance.Client.t(), Keyword.t()) :: {:ok, term()} | {:error, term()}
+
+  @spec futures_tradfi_perps_contract_v1(Binance.Client.t(), Keyword.t()) ::
+          {:ok, term()} | {:error, term()}
   @doc """
   Futures TradFi Perps Contract
   Variant: User Data
@@ -1769,12 +2263,13 @@ defmodule Binance.API.DerivativesTrading.PortfolioMargin.Trade do
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
-    
+
       Binance.REST.HTTPClient.request(request)
     end
   end
-  
-  @spec um_account_trade_list_v1(Binance.Client.t(), term(), Keyword.t()) :: {:ok, term()} | {:error, term()}
+
+  @spec um_account_trade_list_v1(Binance.Client.t(), term(), Keyword.t()) ::
+          {:ok, term()} | {:error, term()}
   @doc """
   UM Account Trade List
   Variant: User Data
@@ -1794,11 +2289,19 @@ defmodule Binance.API.DerivativesTrading.PortfolioMargin.Trade do
           method: "GET",
           base_url: base_url,
           url: "/papi/v1/um/userTrades",
-          query: [symbol: symbol, startTime: Keyword.get(opts, :startTime), endTime: Keyword.get(opts, :endTime), fromId: Keyword.get(opts, :fromId), limit: Keyword.get(opts, :limit), recvWindow: Keyword.get(opts, :recvWindow), timestamp: nil],
+          query: [
+            symbol: symbol,
+            startTime: Keyword.get(opts, :startTime),
+            endTime: Keyword.get(opts, :endTime),
+            fromId: Keyword.get(opts, :fromId),
+            limit: Keyword.get(opts, :limit),
+            recvWindow: Keyword.get(opts, :recvWindow),
+            timestamp: nil
+          ],
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
-    
+
       Binance.REST.HTTPClient.request(request)
     end
   end

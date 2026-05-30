@@ -10,7 +10,8 @@ defmodule Binance.API.DerivativesTrading.PortfolioMarginPro.Account do
     end
   end
 
-  @spec get_portfolio_margin_pro_account_info_v1(Binance.Client.t(), Keyword.t()) :: {:ok, term()} | {:error, term()}
+  @spec get_portfolio_margin_pro_account_info_v1(Binance.Client.t(), Keyword.t()) ::
+          {:ok, term()} | {:error, term()}
   @doc """
   Get Portfolio Margin Pro Account Info
   Variant: User Data
@@ -33,12 +34,13 @@ defmodule Binance.API.DerivativesTrading.PortfolioMarginPro.Account do
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
-    
+
       Binance.REST.HTTPClient.request(request)
     end
   end
-  
-  @spec fund_collection_by_asset_v1(Binance.Client.t(), term(), Keyword.t()) :: {:ok, term()} | {:error, term()}
+
+  @spec fund_collection_by_asset_v1(Binance.Client.t(), term(), Keyword.t()) ::
+          {:ok, term()} | {:error, term()}
   @doc """
   Fund Collection by Asset
   Variant: User Data
@@ -62,12 +64,13 @@ defmodule Binance.API.DerivativesTrading.PortfolioMarginPro.Account do
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
-    
+
       Binance.REST.HTTPClient.request(request)
     end
   end
-  
-  @spec fund_auto_collection_v1(Binance.Client.t(), Keyword.t()) :: {:ok, term()} | {:error, term()}
+
+  @spec fund_auto_collection_v1(Binance.Client.t(), Keyword.t()) ::
+          {:ok, term()} | {:error, term()}
   @doc """
   Fund Auto-collection
   Variant: User Data
@@ -90,12 +93,13 @@ defmodule Binance.API.DerivativesTrading.PortfolioMarginPro.Account do
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
-    
+
       Binance.REST.HTTPClient.request(request)
     end
   end
-  
-  @spec get_portfolio_margin_pro_account_balance_v1(Binance.Client.t(), Keyword.t()) :: {:ok, term()} | {:error, term()}
+
+  @spec get_portfolio_margin_pro_account_balance_v1(Binance.Client.t(), Keyword.t()) ::
+          {:ok, term()} | {:error, term()}
   @doc """
   Get Portfolio Margin Pro Account Balance
   Variant: User Data
@@ -114,16 +118,21 @@ defmodule Binance.API.DerivativesTrading.PortfolioMarginPro.Account do
           method: "GET",
           base_url: base_url,
           url: "/sapi/v1/portfolio/balance",
-          query: [asset: Keyword.get(opts, :asset), recvWindow: Keyword.get(opts, :recvWindow), timestamp: nil],
+          query: [
+            asset: Keyword.get(opts, :asset),
+            recvWindow: Keyword.get(opts, :recvWindow),
+            timestamp: nil
+          ],
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
-    
+
       Binance.REST.HTTPClient.request(request)
     end
   end
-  
-  @spec bnb_transfer_v1(Binance.Client.t(), term(), term(), Keyword.t()) :: {:ok, term()} | {:error, term()}
+
+  @spec bnb_transfer_v1(Binance.Client.t(), term(), term(), Keyword.t()) ::
+          {:ok, term()} | {:error, term()}
   @doc """
   BNB transfer
   Variant: User Data
@@ -143,16 +152,22 @@ defmodule Binance.API.DerivativesTrading.PortfolioMarginPro.Account do
           method: "POST",
           base_url: base_url,
           url: "/sapi/v1/portfolio/bnb-transfer",
-          query: [amount: amount, transferSide: transferSide, recvWindow: Keyword.get(opts, :recvWindow), timestamp: nil],
+          query: [
+            amount: amount,
+            transferSide: transferSide,
+            recvWindow: Keyword.get(opts, :recvWindow),
+            timestamp: nil
+          ],
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
-    
+
       Binance.REST.HTTPClient.request(request)
     end
   end
-  
-  @spec get_delta_mode_status_v1(Binance.Client.t(), Keyword.t()) :: {:ok, term()} | {:error, term()}
+
+  @spec get_delta_mode_status_v1(Binance.Client.t(), Keyword.t()) ::
+          {:ok, term()} | {:error, term()}
   @doc """
   Get Delta Mode Status
   Variant: User Data
@@ -175,12 +190,13 @@ defmodule Binance.API.DerivativesTrading.PortfolioMarginPro.Account do
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
-    
+
       Binance.REST.HTTPClient.request(request)
     end
   end
-  
-  @spec switch_delta_mode_v1(Binance.Client.t(), term(), Keyword.t()) :: {:ok, term()} | {:error, term()}
+
+  @spec switch_delta_mode_v1(Binance.Client.t(), term(), Keyword.t()) ::
+          {:ok, term()} | {:error, term()}
   @doc """
   Switch Delta Mode
   Variant: Trade
@@ -200,16 +216,25 @@ defmodule Binance.API.DerivativesTrading.PortfolioMarginPro.Account do
           method: "POST",
           base_url: base_url,
           url: "/sapi/v1/portfolio/delta-mode",
-          query: [deltaEnabled: deltaEnabled, recvWindow: Keyword.get(opts, :recvWindow), timestamp: nil],
+          query: [
+            deltaEnabled: deltaEnabled,
+            recvWindow: Keyword.get(opts, :recvWindow),
+            timestamp: nil
+          ],
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
-    
+
       Binance.REST.HTTPClient.request(request)
     end
   end
-  
-  @spec get_transferable_earn_asset_balance_for_portfolio_margin_v1(Binance.Client.t(), term(), term(), Keyword.t()) :: {:ok, term()} | {:error, term()}
+
+  @spec get_transferable_earn_asset_balance_for_portfolio_margin_v1(
+          Binance.Client.t(),
+          term(),
+          term(),
+          Keyword.t()
+        ) :: {:ok, term()} | {:error, term()}
   @doc """
   Get Transferable Earn Asset Balance for Portfolio Margin
   Variant: User Data
@@ -220,7 +245,12 @@ defmodule Binance.API.DerivativesTrading.PortfolioMarginPro.Account do
   Required: asset, transferType
   Optional: recvWindow
   """
-  def get_transferable_earn_asset_balance_for_portfolio_margin_v1(client, asset, transferType, opts \\ []) do
+  def get_transferable_earn_asset_balance_for_portfolio_margin_v1(
+        client,
+        asset,
+        transferType,
+        opts \\ []
+      ) do
     with {:ok, base_url} <- base_url(client.env) do
       {:ok, request} =
         Binance.RequestBuilder.build(%{
@@ -229,16 +259,27 @@ defmodule Binance.API.DerivativesTrading.PortfolioMarginPro.Account do
           method: "GET",
           base_url: base_url,
           url: "/sapi/v1/portfolio/earn-asset-balance",
-          query: [asset: asset, transferType: transferType, recvWindow: Keyword.get(opts, :recvWindow), timestamp: nil],
+          query: [
+            asset: asset,
+            transferType: transferType,
+            recvWindow: Keyword.get(opts, :recvWindow),
+            timestamp: nil
+          ],
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
-    
+
       Binance.REST.HTTPClient.request(request)
     end
   end
-  
-  @spec transfer_ldusdt_rwusd_for_portfolio_margin_v1(Binance.Client.t(), term(), term(), term(), Keyword.t()) :: {:ok, term()} | {:error, term()}
+
+  @spec transfer_ldusdt_rwusd_for_portfolio_margin_v1(
+          Binance.Client.t(),
+          term(),
+          term(),
+          term(),
+          Keyword.t()
+        ) :: {:ok, term()} | {:error, term()}
   @doc """
   Transfer LDUSDT/RWUSD for Portfolio Margin
   Variant: Trade
@@ -249,7 +290,13 @@ defmodule Binance.API.DerivativesTrading.PortfolioMarginPro.Account do
   Required: asset, transferType, amount
   Optional: recvWindow
   """
-  def transfer_ldusdt_rwusd_for_portfolio_margin_v1(client, asset, transferType, amount, opts \\ []) do
+  def transfer_ldusdt_rwusd_for_portfolio_margin_v1(
+        client,
+        asset,
+        transferType,
+        amount,
+        opts \\ []
+      ) do
     with {:ok, base_url} <- base_url(client.env) do
       {:ok, request} =
         Binance.RequestBuilder.build(%{
@@ -258,16 +305,25 @@ defmodule Binance.API.DerivativesTrading.PortfolioMarginPro.Account do
           method: "POST",
           base_url: base_url,
           url: "/sapi/v1/portfolio/earn-asset-transfer",
-          query: [asset: asset, transferType: transferType, amount: amount, recvWindow: Keyword.get(opts, :recvWindow), timestamp: nil],
+          query: [
+            asset: asset,
+            transferType: transferType,
+            amount: amount,
+            recvWindow: Keyword.get(opts, :recvWindow),
+            timestamp: nil
+          ],
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
-    
+
       Binance.REST.HTTPClient.request(request)
     end
   end
-  
-  @spec query_portfolio_margin_pro_negative_balance_interest_history_v1(Binance.Client.t(), Keyword.t()) :: {:ok, term()} | {:error, term()}
+
+  @spec query_portfolio_margin_pro_negative_balance_interest_history_v1(
+          Binance.Client.t(),
+          Keyword.t()
+        ) :: {:ok, term()} | {:error, term()}
   @doc """
   Query Portfolio Margin Pro Negative Balance Interest History
   Variant: User Data
@@ -286,16 +342,24 @@ defmodule Binance.API.DerivativesTrading.PortfolioMarginPro.Account do
           method: "GET",
           base_url: base_url,
           url: "/sapi/v1/portfolio/interest-history",
-          query: [asset: Keyword.get(opts, :asset), startTime: Keyword.get(opts, :startTime), endTime: Keyword.get(opts, :endTime), size: Keyword.get(opts, :size), recvWindow: Keyword.get(opts, :recvWindow), timestamp: nil],
+          query: [
+            asset: Keyword.get(opts, :asset),
+            startTime: Keyword.get(opts, :startTime),
+            endTime: Keyword.get(opts, :endTime),
+            size: Keyword.get(opts, :size),
+            recvWindow: Keyword.get(opts, :recvWindow),
+            timestamp: nil
+          ],
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
-    
+
       Binance.REST.HTTPClient.request(request)
     end
   end
-  
-  @spec delete_margin_call_level_v1(Binance.Client.t(), Keyword.t()) :: {:ok, term()} | {:error, term()}
+
+  @spec delete_margin_call_level_v1(Binance.Client.t(), Keyword.t()) ::
+          {:ok, term()} | {:error, term()}
   @doc """
   Delete Margin Call Level
   Variant: User Data
@@ -318,12 +382,13 @@ defmodule Binance.API.DerivativesTrading.PortfolioMarginPro.Account do
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
-    
+
       Binance.REST.HTTPClient.request(request)
     end
   end
-  
-  @spec get_margin_call_level_v1(Binance.Client.t(), Keyword.t()) :: {:ok, term()} | {:error, term()}
+
+  @spec get_margin_call_level_v1(Binance.Client.t(), Keyword.t()) ::
+          {:ok, term()} | {:error, term()}
   @doc """
   Get Margin Call Level
   Variant: User Data
@@ -346,12 +411,13 @@ defmodule Binance.API.DerivativesTrading.PortfolioMarginPro.Account do
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
-    
+
       Binance.REST.HTTPClient.request(request)
     end
   end
-  
-  @spec set_margin_call_level_v1(Binance.Client.t(), term(), Keyword.t()) :: {:ok, term()} | {:error, term()}
+
+  @spec set_margin_call_level_v1(Binance.Client.t(), term(), Keyword.t()) ::
+          {:ok, term()} | {:error, term()}
   @doc """
   Set Margin Call Level
   Variant: User Data
@@ -371,16 +437,21 @@ defmodule Binance.API.DerivativesTrading.PortfolioMarginPro.Account do
           method: "POST",
           base_url: base_url,
           url: "/sapi/v1/portfolio/margin-call-level",
-          query: [marginCallLevel: marginCallLevel, recvWindow: Keyword.get(opts, :recvWindow), timestamp: nil],
+          query: [
+            marginCallLevel: marginCallLevel,
+            recvWindow: Keyword.get(opts, :recvWindow),
+            timestamp: nil
+          ],
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
-    
+
       Binance.REST.HTTPClient.request(request)
     end
   end
-  
-  @spec query_portfolio_margin_pro_bankruptcy_loan_amount_v1(Binance.Client.t(), Keyword.t()) :: {:ok, term()} | {:error, term()}
+
+  @spec query_portfolio_margin_pro_bankruptcy_loan_amount_v1(Binance.Client.t(), Keyword.t()) ::
+          {:ok, term()} | {:error, term()}
   @doc """
   Query Portfolio Margin Pro Bankruptcy Loan Amount
   Variant: User Data
@@ -403,12 +474,15 @@ defmodule Binance.API.DerivativesTrading.PortfolioMarginPro.Account do
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
-    
+
       Binance.REST.HTTPClient.request(request)
     end
   end
-  
-  @spec query_portfolio_margin_pro_bankruptcy_loan_repay_history_v1(Binance.Client.t(), Keyword.t()) :: {:ok, term()} | {:error, term()}
+
+  @spec query_portfolio_margin_pro_bankruptcy_loan_repay_history_v1(
+          Binance.Client.t(),
+          Keyword.t()
+        ) :: {:ok, term()} | {:error, term()}
   @doc """
   Query Portfolio Margin Pro Bankruptcy Loan Repay History
   Variant: User Data
@@ -427,16 +501,24 @@ defmodule Binance.API.DerivativesTrading.PortfolioMarginPro.Account do
           method: "GET",
           base_url: base_url,
           url: "/sapi/v1/portfolio/pmloan-history",
-          query: [startTime: Keyword.get(opts, :startTime), endTime: Keyword.get(opts, :endTime), current: Keyword.get(opts, :current), size: Keyword.get(opts, :size), recvWindow: Keyword.get(opts, :recvWindow), timestamp: nil],
+          query: [
+            startTime: Keyword.get(opts, :startTime),
+            endTime: Keyword.get(opts, :endTime),
+            current: Keyword.get(opts, :current),
+            size: Keyword.get(opts, :size),
+            recvWindow: Keyword.get(opts, :recvWindow),
+            timestamp: nil
+          ],
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
-    
+
       Binance.REST.HTTPClient.request(request)
     end
   end
-  
-  @spec portfolio_margin_pro_bankruptcy_loan_repay_v1(Binance.Client.t(), Keyword.t()) :: {:ok, term()} | {:error, term()}
+
+  @spec portfolio_margin_pro_bankruptcy_loan_repay_v1(Binance.Client.t(), Keyword.t()) ::
+          {:ok, term()} | {:error, term()}
   @doc """
   Portfolio Margin Pro Bankruptcy Loan Repay
   Method: POST
@@ -453,16 +535,21 @@ defmodule Binance.API.DerivativesTrading.PortfolioMarginPro.Account do
           method: "POST",
           base_url: base_url,
           url: "/sapi/v1/portfolio/repay",
-          query: [from: Keyword.get(opts, :from), recvWindow: Keyword.get(opts, :recvWindow), timestamp: nil],
+          query: [
+            from: Keyword.get(opts, :from),
+            recvWindow: Keyword.get(opts, :recvWindow),
+            timestamp: nil
+          ],
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
-    
+
       Binance.REST.HTTPClient.request(request)
     end
   end
-  
-  @spec repay_futures_negative_balance_v1(Binance.Client.t(), Keyword.t()) :: {:ok, term()} | {:error, term()}
+
+  @spec repay_futures_negative_balance_v1(Binance.Client.t(), Keyword.t()) ::
+          {:ok, term()} | {:error, term()}
   @doc """
   Repay futures Negative Balance
   Variant: User Data
@@ -481,16 +568,21 @@ defmodule Binance.API.DerivativesTrading.PortfolioMarginPro.Account do
           method: "POST",
           base_url: base_url,
           url: "/sapi/v1/portfolio/repay-futures-negative-balance",
-          query: [from: Keyword.get(opts, :from), recvWindow: Keyword.get(opts, :recvWindow), timestamp: nil],
+          query: [
+            from: Keyword.get(opts, :from),
+            recvWindow: Keyword.get(opts, :recvWindow),
+            timestamp: nil
+          ],
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
-    
+
       Binance.REST.HTTPClient.request(request)
     end
   end
-  
-  @spec change_auto_repay_futures_status_v1(Binance.Client.t(), term(), Keyword.t()) :: {:ok, term()} | {:error, term()}
+
+  @spec change_auto_repay_futures_status_v1(Binance.Client.t(), term(), Keyword.t()) ::
+          {:ok, term()} | {:error, term()}
   @doc """
   Change Auto-repay-futures Status
   Variant: Trade
@@ -510,16 +602,21 @@ defmodule Binance.API.DerivativesTrading.PortfolioMarginPro.Account do
           method: "POST",
           base_url: base_url,
           url: "/sapi/v1/portfolio/repay-futures-switch",
-          query: [autoRepay: autoRepay, recvWindow: Keyword.get(opts, :recvWindow), timestamp: nil],
+          query: [
+            autoRepay: autoRepay,
+            recvWindow: Keyword.get(opts, :recvWindow),
+            timestamp: nil
+          ],
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
-    
+
       Binance.REST.HTTPClient.request(request)
     end
   end
-  
-  @spec get_auto_repay_futures_status_v1(Binance.Client.t(), Keyword.t()) :: {:ok, term()} | {:error, term()}
+
+  @spec get_auto_repay_futures_status_v1(Binance.Client.t(), Keyword.t()) ::
+          {:ok, term()} | {:error, term()}
   @doc """
   Get Auto-repay-futures Status
   Variant: User Data
@@ -542,12 +639,13 @@ defmodule Binance.API.DerivativesTrading.PortfolioMarginPro.Account do
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
-    
+
       Binance.REST.HTTPClient.request(request)
     end
   end
-  
-  @spec get_portfolio_margin_pro_span_account_info_v2(Binance.Client.t(), Keyword.t()) :: {:ok, term()} | {:error, term()}
+
+  @spec get_portfolio_margin_pro_span_account_info_v2(Binance.Client.t(), Keyword.t()) ::
+          {:ok, term()} | {:error, term()}
   @doc """
   Get Portfolio Margin Pro SPAN Account Info
   Variant: User Data
@@ -570,7 +668,7 @@ defmodule Binance.API.DerivativesTrading.PortfolioMarginPro.Account do
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
-    
+
       Binance.REST.HTTPClient.request(request)
     end
   end

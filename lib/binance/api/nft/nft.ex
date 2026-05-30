@@ -10,7 +10,8 @@ defmodule Binance.API.Nft do
     end
   end
 
-  @spec get_nft_deposit_history_v1(Binance.Client.t(), Keyword.t()) :: {:ok, term()} | {:error, term()}
+  @spec get_nft_deposit_history_v1(Binance.Client.t(), Keyword.t()) ::
+          {:ok, term()} | {:error, term()}
   @doc """
   Get NFT Deposit History
   Variant: User Data
@@ -29,16 +30,24 @@ defmodule Binance.API.Nft do
           method: "GET",
           base_url: base_url,
           url: "/sapi/v1/nft/history/deposit",
-          query: [startTime: Keyword.get(opts, :startTime), endTime: Keyword.get(opts, :endTime), limit: Keyword.get(opts, :limit), page: Keyword.get(opts, :page), recvWindow: Keyword.get(opts, :recvWindow), timestamp: nil],
+          query: [
+            startTime: Keyword.get(opts, :startTime),
+            endTime: Keyword.get(opts, :endTime),
+            limit: Keyword.get(opts, :limit),
+            page: Keyword.get(opts, :page),
+            recvWindow: Keyword.get(opts, :recvWindow),
+            timestamp: nil
+          ],
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
-    
+
       Binance.REST.HTTPClient.request(request)
     end
   end
-  
-  @spec get_nft_transaction_history_v1(Binance.Client.t(), term(), Keyword.t()) :: {:ok, term()} | {:error, term()}
+
+  @spec get_nft_transaction_history_v1(Binance.Client.t(), term(), Keyword.t()) ::
+          {:ok, term()} | {:error, term()}
   @doc """
   Get NFT Transaction History
   Variant: User Data
@@ -58,16 +67,25 @@ defmodule Binance.API.Nft do
           method: "GET",
           base_url: base_url,
           url: "/sapi/v1/nft/history/transactions",
-          query: [orderType: orderType, startTime: Keyword.get(opts, :startTime), endTime: Keyword.get(opts, :endTime), limit: Keyword.get(opts, :limit), page: Keyword.get(opts, :page), recvWindow: Keyword.get(opts, :recvWindow), timestamp: nil],
+          query: [
+            orderType: orderType,
+            startTime: Keyword.get(opts, :startTime),
+            endTime: Keyword.get(opts, :endTime),
+            limit: Keyword.get(opts, :limit),
+            page: Keyword.get(opts, :page),
+            recvWindow: Keyword.get(opts, :recvWindow),
+            timestamp: nil
+          ],
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
-    
+
       Binance.REST.HTTPClient.request(request)
     end
   end
-  
-  @spec get_nft_withdraw_history_v1(Binance.Client.t(), Keyword.t()) :: {:ok, term()} | {:error, term()}
+
+  @spec get_nft_withdraw_history_v1(Binance.Client.t(), Keyword.t()) ::
+          {:ok, term()} | {:error, term()}
   @doc """
   Get NFT Withdraw History
   Variant: User Data
@@ -86,15 +104,22 @@ defmodule Binance.API.Nft do
           method: "GET",
           base_url: base_url,
           url: "/sapi/v1/nft/history/withdraw",
-          query: [startTime: Keyword.get(opts, :startTime), endTime: Keyword.get(opts, :endTime), limit: Keyword.get(opts, :limit), page: Keyword.get(opts, :page), recvWindow: Keyword.get(opts, :recvWindow), timestamp: nil],
+          query: [
+            startTime: Keyword.get(opts, :startTime),
+            endTime: Keyword.get(opts, :endTime),
+            limit: Keyword.get(opts, :limit),
+            page: Keyword.get(opts, :page),
+            recvWindow: Keyword.get(opts, :recvWindow),
+            timestamp: nil
+          ],
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
-    
+
       Binance.REST.HTTPClient.request(request)
     end
   end
-  
+
   @spec get_nft_asset_v1(Binance.Client.t(), Keyword.t()) :: {:ok, term()} | {:error, term()}
   @doc """
   Get NFT Asset
@@ -114,11 +139,16 @@ defmodule Binance.API.Nft do
           method: "GET",
           base_url: base_url,
           url: "/sapi/v1/nft/user/getAsset",
-          query: [limit: Keyword.get(opts, :limit), page: Keyword.get(opts, :page), recvWindow: Keyword.get(opts, :recvWindow), timestamp: nil],
+          query: [
+            limit: Keyword.get(opts, :limit),
+            page: Keyword.get(opts, :page),
+            recvWindow: Keyword.get(opts, :recvWindow),
+            timestamp: nil
+          ],
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
-    
+
       Binance.REST.HTTPClient.request(request)
     end
   end

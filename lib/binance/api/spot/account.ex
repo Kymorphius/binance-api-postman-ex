@@ -1,7 +1,11 @@
 defmodule Binance.API.Spot.Account do
   @moduledoc false
 
-  @base_urls %{prod_url: "https://api.binance.com", testnet_url: "https://testnet.binance.vision", demo_url: "https://demo-api.binance.com"}
+  @base_urls %{
+    prod_url: "https://api.binance.com",
+    testnet_url: "https://testnet.binance.vision",
+    demo_url: "https://demo-api.binance.com"
+  }
 
   def base_url(key \\ :prod_url) do
     case Map.fetch(@base_urls, key) do
@@ -10,7 +14,8 @@ defmodule Binance.API.Spot.Account do
     end
   end
 
-  @spec account_information_v3(Binance.Client.t(), Keyword.t()) :: {:ok, term()} | {:error, term()}
+  @spec account_information_v3(Binance.Client.t(), Keyword.t()) ::
+          {:ok, term()} | {:error, term()}
   @doc """
   Account information
   Method: GET
@@ -27,15 +32,19 @@ defmodule Binance.API.Spot.Account do
           method: "GET",
           base_url: base_url,
           url: "/api/v3/account",
-          query: [omitZeroBalances: Keyword.get(opts, :omitZeroBalances), recvWindow: Keyword.get(opts, :recvWindow), timestamp: nil],
+          query: [
+            omitZeroBalances: Keyword.get(opts, :omitZeroBalances),
+            recvWindow: Keyword.get(opts, :recvWindow),
+            timestamp: nil
+          ],
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
-    
+
       Binance.REST.HTTPClient.request(request)
     end
   end
-  
+
   @spec query_commission_rates_v3(Binance.Client.t(), term()) :: {:ok, term()} | {:error, term()}
   @doc """
   Query Commission Rates
@@ -57,12 +66,13 @@ defmodule Binance.API.Spot.Account do
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
-    
+
       Binance.REST.HTTPClient.request(request)
     end
   end
-  
-  @spec query_all_order_lists_v3(Binance.Client.t(), Keyword.t()) :: {:ok, term()} | {:error, term()}
+
+  @spec query_all_order_lists_v3(Binance.Client.t(), Keyword.t()) ::
+          {:ok, term()} | {:error, term()}
   @doc """
   Query all Order lists
   Method: GET
@@ -79,15 +89,22 @@ defmodule Binance.API.Spot.Account do
           method: "GET",
           base_url: base_url,
           url: "/api/v3/allOrderList",
-          query: [fromId: Keyword.get(opts, :fromId), startTime: Keyword.get(opts, :startTime), endTime: Keyword.get(opts, :endTime), limit: Keyword.get(opts, :limit), recvWindow: Keyword.get(opts, :recvWindow), timestamp: nil],
+          query: [
+            fromId: Keyword.get(opts, :fromId),
+            startTime: Keyword.get(opts, :startTime),
+            endTime: Keyword.get(opts, :endTime),
+            limit: Keyword.get(opts, :limit),
+            recvWindow: Keyword.get(opts, :recvWindow),
+            timestamp: nil
+          ],
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
-    
+
       Binance.REST.HTTPClient.request(request)
     end
   end
-  
+
   @spec all_orders_v3(Binance.Client.t(), term(), Keyword.t()) :: {:ok, term()} | {:error, term()}
   @doc """
   All orders
@@ -106,16 +123,25 @@ defmodule Binance.API.Spot.Account do
           method: "GET",
           base_url: base_url,
           url: "/api/v3/allOrders",
-          query: [symbol: symbol, orderId: Keyword.get(opts, :orderId), startTime: Keyword.get(opts, :startTime), endTime: Keyword.get(opts, :endTime), limit: Keyword.get(opts, :limit), recvWindow: Keyword.get(opts, :recvWindow), timestamp: nil],
+          query: [
+            symbol: symbol,
+            orderId: Keyword.get(opts, :orderId),
+            startTime: Keyword.get(opts, :startTime),
+            endTime: Keyword.get(opts, :endTime),
+            limit: Keyword.get(opts, :limit),
+            recvWindow: Keyword.get(opts, :recvWindow),
+            timestamp: nil
+          ],
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
-    
+
       Binance.REST.HTTPClient.request(request)
     end
   end
-  
-  @spec query_allocations_v3(Binance.Client.t(), term(), Keyword.t()) :: {:ok, term()} | {:error, term()}
+
+  @spec query_allocations_v3(Binance.Client.t(), term(), Keyword.t()) ::
+          {:ok, term()} | {:error, term()}
   @doc """
   Query Allocations
   Method: GET
@@ -133,16 +159,26 @@ defmodule Binance.API.Spot.Account do
           method: "GET",
           base_url: base_url,
           url: "/api/v3/myAllocations",
-          query: [symbol: symbol, startTime: Keyword.get(opts, :startTime), endTime: Keyword.get(opts, :endTime), fromAllocationId: Keyword.get(opts, :fromAllocationId), limit: Keyword.get(opts, :limit), orderId: Keyword.get(opts, :orderId), recvWindow: Keyword.get(opts, :recvWindow), timestamp: nil],
+          query: [
+            symbol: symbol,
+            startTime: Keyword.get(opts, :startTime),
+            endTime: Keyword.get(opts, :endTime),
+            fromAllocationId: Keyword.get(opts, :fromAllocationId),
+            limit: Keyword.get(opts, :limit),
+            orderId: Keyword.get(opts, :orderId),
+            recvWindow: Keyword.get(opts, :recvWindow),
+            timestamp: nil
+          ],
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
-    
+
       Binance.REST.HTTPClient.request(request)
     end
   end
-  
-  @spec query_relevant_filters_v3(Binance.Client.t(), term(), Keyword.t()) :: {:ok, term()} | {:error, term()}
+
+  @spec query_relevant_filters_v3(Binance.Client.t(), term(), Keyword.t()) ::
+          {:ok, term()} | {:error, term()}
   @doc """
   Query relevant filters
   Method: GET
@@ -164,12 +200,13 @@ defmodule Binance.API.Spot.Account do
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
-    
+
       Binance.REST.HTTPClient.request(request)
     end
   end
-  
-  @spec query_prevented_matches_v3(Binance.Client.t(), term(), Keyword.t()) :: {:ok, term()} | {:error, term()}
+
+  @spec query_prevented_matches_v3(Binance.Client.t(), term(), Keyword.t()) ::
+          {:ok, term()} | {:error, term()}
   @doc """
   Query Prevented Matches
   Method: GET
@@ -187,16 +224,25 @@ defmodule Binance.API.Spot.Account do
           method: "GET",
           base_url: base_url,
           url: "/api/v3/myPreventedMatches",
-          query: [symbol: symbol, preventedMatchId: Keyword.get(opts, :preventedMatchId), orderId: Keyword.get(opts, :orderId), fromPreventedMatchId: Keyword.get(opts, :fromPreventedMatchId), limit: Keyword.get(opts, :limit), recvWindow: Keyword.get(opts, :recvWindow), timestamp: nil],
+          query: [
+            symbol: symbol,
+            preventedMatchId: Keyword.get(opts, :preventedMatchId),
+            orderId: Keyword.get(opts, :orderId),
+            fromPreventedMatchId: Keyword.get(opts, :fromPreventedMatchId),
+            limit: Keyword.get(opts, :limit),
+            recvWindow: Keyword.get(opts, :recvWindow),
+            timestamp: nil
+          ],
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
-    
+
       Binance.REST.HTTPClient.request(request)
     end
   end
-  
-  @spec account_trade_list_v3(Binance.Client.t(), term(), Keyword.t()) :: {:ok, term()} | {:error, term()}
+
+  @spec account_trade_list_v3(Binance.Client.t(), term(), Keyword.t()) ::
+          {:ok, term()} | {:error, term()}
   @doc """
   Account trade list
   Method: GET
@@ -214,16 +260,26 @@ defmodule Binance.API.Spot.Account do
           method: "GET",
           base_url: base_url,
           url: "/api/v3/myTrades",
-          query: [symbol: symbol, orderId: Keyword.get(opts, :orderId), startTime: Keyword.get(opts, :startTime), endTime: Keyword.get(opts, :endTime), fromId: Keyword.get(opts, :fromId), limit: Keyword.get(opts, :limit), recvWindow: Keyword.get(opts, :recvWindow), timestamp: nil],
+          query: [
+            symbol: symbol,
+            orderId: Keyword.get(opts, :orderId),
+            startTime: Keyword.get(opts, :startTime),
+            endTime: Keyword.get(opts, :endTime),
+            fromId: Keyword.get(opts, :fromId),
+            limit: Keyword.get(opts, :limit),
+            recvWindow: Keyword.get(opts, :recvWindow),
+            timestamp: nil
+          ],
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
-    
+
       Binance.REST.HTTPClient.request(request)
     end
   end
-  
-  @spec query_open_order_lists_v3(Binance.Client.t(), Keyword.t()) :: {:ok, term()} | {:error, term()}
+
+  @spec query_open_order_lists_v3(Binance.Client.t(), Keyword.t()) ::
+          {:ok, term()} | {:error, term()}
   @doc """
   Query Open Order lists
   Method: GET
@@ -244,12 +300,13 @@ defmodule Binance.API.Spot.Account do
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
-    
+
       Binance.REST.HTTPClient.request(request)
     end
   end
-  
-  @spec current_open_orders_v3(Binance.Client.t(), Keyword.t()) :: {:ok, term()} | {:error, term()}
+
+  @spec current_open_orders_v3(Binance.Client.t(), Keyword.t()) ::
+          {:ok, term()} | {:error, term()}
   @doc """
   Current open orders
   Method: GET
@@ -266,16 +323,21 @@ defmodule Binance.API.Spot.Account do
           method: "GET",
           base_url: base_url,
           url: "/api/v3/openOrders",
-          query: [symbol: Keyword.get(opts, :symbol), recvWindow: Keyword.get(opts, :recvWindow), timestamp: nil],
+          query: [
+            symbol: Keyword.get(opts, :symbol),
+            recvWindow: Keyword.get(opts, :recvWindow),
+            timestamp: nil
+          ],
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
-    
+
       Binance.REST.HTTPClient.request(request)
     end
   end
-  
-  @spec query_order_v3(Binance.Client.t(), term(), Keyword.t()) :: {:ok, term()} | {:error, term()}
+
+  @spec query_order_v3(Binance.Client.t(), term(), Keyword.t()) ::
+          {:ok, term()} | {:error, term()}
   @doc """
   Query order
   Method: GET
@@ -293,16 +355,23 @@ defmodule Binance.API.Spot.Account do
           method: "GET",
           base_url: base_url,
           url: "/api/v3/order",
-          query: [symbol: symbol, orderId: Keyword.get(opts, :orderId), origClientOrderId: Keyword.get(opts, :origClientOrderId), recvWindow: Keyword.get(opts, :recvWindow), timestamp: nil],
+          query: [
+            symbol: symbol,
+            orderId: Keyword.get(opts, :orderId),
+            origClientOrderId: Keyword.get(opts, :origClientOrderId),
+            recvWindow: Keyword.get(opts, :recvWindow),
+            timestamp: nil
+          ],
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
-    
+
       Binance.REST.HTTPClient.request(request)
     end
   end
-  
-  @spec query_order_amendments_v3(Binance.Client.t(), term(), term(), Keyword.t()) :: {:ok, term()} | {:error, term()}
+
+  @spec query_order_amendments_v3(Binance.Client.t(), term(), term(), Keyword.t()) ::
+          {:ok, term()} | {:error, term()}
   @doc """
   Query Order Amendments
   Method: GET
@@ -320,15 +389,22 @@ defmodule Binance.API.Spot.Account do
           method: "GET",
           base_url: base_url,
           url: "/api/v3/order/amendments",
-          query: [symbol: symbol, orderId: orderId, fromExecutionId: Keyword.get(opts, :fromExecutionId), limit: Keyword.get(opts, :limit), recvWindow: Keyword.get(opts, :recvWindow), timestamp: nil],
+          query: [
+            symbol: symbol,
+            orderId: orderId,
+            fromExecutionId: Keyword.get(opts, :fromExecutionId),
+            limit: Keyword.get(opts, :limit),
+            recvWindow: Keyword.get(opts, :recvWindow),
+            timestamp: nil
+          ],
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
-    
+
       Binance.REST.HTTPClient.request(request)
     end
   end
-  
+
   @spec query_order_list_v3(Binance.Client.t(), Keyword.t()) :: {:ok, term()} | {:error, term()}
   @doc """
   Query Order list
@@ -346,16 +422,22 @@ defmodule Binance.API.Spot.Account do
           method: "GET",
           base_url: base_url,
           url: "/api/v3/orderList",
-          query: [orderListId: Keyword.get(opts, :orderListId), origClientOrderId: Keyword.get(opts, :origClientOrderId), recvWindow: Keyword.get(opts, :recvWindow), timestamp: nil],
+          query: [
+            orderListId: Keyword.get(opts, :orderListId),
+            origClientOrderId: Keyword.get(opts, :origClientOrderId),
+            recvWindow: Keyword.get(opts, :recvWindow),
+            timestamp: nil
+          ],
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
-    
+
       Binance.REST.HTTPClient.request(request)
     end
   end
-  
-  @spec query_unfilled_order_count_v3(Binance.Client.t(), Keyword.t()) :: {:ok, term()} | {:error, term()}
+
+  @spec query_unfilled_order_count_v3(Binance.Client.t(), Keyword.t()) ::
+          {:ok, term()} | {:error, term()}
   @doc """
   Query Unfilled Order Count
   Method: GET
@@ -376,7 +458,7 @@ defmodule Binance.API.Spot.Account do
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
-    
+
       Binance.REST.HTTPClient.request(request)
     end
   end

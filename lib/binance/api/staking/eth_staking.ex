@@ -10,7 +10,8 @@ defmodule Binance.API.Staking.EthStaking do
     end
   end
 
-  @spec get_wbeth_rate_history_v1(Binance.Client.t(), Keyword.t()) :: {:ok, term()} | {:error, term()}
+  @spec get_wbeth_rate_history_v1(Binance.Client.t(), Keyword.t()) ::
+          {:ok, term()} | {:error, term()}
   @doc """
   Get WBETH Rate History
   Variant: User Data
@@ -29,16 +30,24 @@ defmodule Binance.API.Staking.EthStaking do
           method: "GET",
           base_url: base_url,
           url: "/sapi/v1/eth-staking/eth/history/rateHistory",
-          query: [startTime: Keyword.get(opts, :startTime), endTime: Keyword.get(opts, :endTime), current: Keyword.get(opts, :current), size: Keyword.get(opts, :size), recvWindow: Keyword.get(opts, :recvWindow), timestamp: nil],
+          query: [
+            startTime: Keyword.get(opts, :startTime),
+            endTime: Keyword.get(opts, :endTime),
+            current: Keyword.get(opts, :current),
+            size: Keyword.get(opts, :size),
+            recvWindow: Keyword.get(opts, :recvWindow),
+            timestamp: nil
+          ],
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
-    
+
       Binance.REST.HTTPClient.request(request)
     end
   end
-  
-  @spec get_eth_redemption_history_v1(Binance.Client.t(), Keyword.t()) :: {:ok, term()} | {:error, term()}
+
+  @spec get_eth_redemption_history_v1(Binance.Client.t(), Keyword.t()) ::
+          {:ok, term()} | {:error, term()}
   @doc """
   Get ETH redemption history
   Variant: User Data
@@ -57,16 +66,25 @@ defmodule Binance.API.Staking.EthStaking do
           method: "GET",
           base_url: base_url,
           url: "/sapi/v1/eth-staking/eth/history/redemptionHistory",
-          query: [redeemId: Keyword.get(opts, :redeemId), startTime: Keyword.get(opts, :startTime), endTime: Keyword.get(opts, :endTime), current: Keyword.get(opts, :current), size: Keyword.get(opts, :size), recvWindow: Keyword.get(opts, :recvWindow), timestamp: nil],
+          query: [
+            redeemId: Keyword.get(opts, :redeemId),
+            startTime: Keyword.get(opts, :startTime),
+            endTime: Keyword.get(opts, :endTime),
+            current: Keyword.get(opts, :current),
+            size: Keyword.get(opts, :size),
+            recvWindow: Keyword.get(opts, :recvWindow),
+            timestamp: nil
+          ],
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
-    
+
       Binance.REST.HTTPClient.request(request)
     end
   end
-  
-  @spec get_eth_staking_history_v1(Binance.Client.t(), Keyword.t()) :: {:ok, term()} | {:error, term()}
+
+  @spec get_eth_staking_history_v1(Binance.Client.t(), Keyword.t()) ::
+          {:ok, term()} | {:error, term()}
   @doc """
   Get ETH staking history
   Variant: User Data
@@ -85,16 +103,25 @@ defmodule Binance.API.Staking.EthStaking do
           method: "GET",
           base_url: base_url,
           url: "/sapi/v1/eth-staking/eth/history/stakingHistory",
-          query: [purchaseId: Keyword.get(opts, :purchaseId), startTime: Keyword.get(opts, :startTime), endTime: Keyword.get(opts, :endTime), current: Keyword.get(opts, :current), size: Keyword.get(opts, :size), recvWindow: Keyword.get(opts, :recvWindow), timestamp: nil],
+          query: [
+            purchaseId: Keyword.get(opts, :purchaseId),
+            startTime: Keyword.get(opts, :startTime),
+            endTime: Keyword.get(opts, :endTime),
+            current: Keyword.get(opts, :current),
+            size: Keyword.get(opts, :size),
+            recvWindow: Keyword.get(opts, :recvWindow),
+            timestamp: nil
+          ],
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
-    
+
       Binance.REST.HTTPClient.request(request)
     end
   end
-  
-  @spec get_wbeth_rewards_history_v1(Binance.Client.t(), Keyword.t()) :: {:ok, term()} | {:error, term()}
+
+  @spec get_wbeth_rewards_history_v1(Binance.Client.t(), Keyword.t()) ::
+          {:ok, term()} | {:error, term()}
   @doc """
   Get WBETH rewards history
   Variant: User Data
@@ -113,16 +140,24 @@ defmodule Binance.API.Staking.EthStaking do
           method: "GET",
           base_url: base_url,
           url: "/sapi/v1/eth-staking/eth/history/wbethRewardsHistory",
-          query: [startTime: Keyword.get(opts, :startTime), endTime: Keyword.get(opts, :endTime), current: Keyword.get(opts, :current), size: Keyword.get(opts, :size), recvWindow: Keyword.get(opts, :recvWindow), timestamp: nil],
+          query: [
+            startTime: Keyword.get(opts, :startTime),
+            endTime: Keyword.get(opts, :endTime),
+            current: Keyword.get(opts, :current),
+            size: Keyword.get(opts, :size),
+            recvWindow: Keyword.get(opts, :recvWindow),
+            timestamp: nil
+          ],
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
-    
+
       Binance.REST.HTTPClient.request(request)
     end
   end
-  
-  @spec get_current_eth_staking_quota_v1(Binance.Client.t(), Keyword.t()) :: {:ok, term()} | {:error, term()}
+
+  @spec get_current_eth_staking_quota_v1(Binance.Client.t(), Keyword.t()) ::
+          {:ok, term()} | {:error, term()}
   @doc """
   Get current ETH staking quota
   Variant: User Data
@@ -145,11 +180,11 @@ defmodule Binance.API.Staking.EthStaking do
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
-    
+
       Binance.REST.HTTPClient.request(request)
     end
   end
-  
+
   @spec redeem_eth_v1(Binance.Client.t(), term(), Keyword.t()) :: {:ok, term()} | {:error, term()}
   @doc """
   Redeem ETH
@@ -170,16 +205,22 @@ defmodule Binance.API.Staking.EthStaking do
           method: "POST",
           base_url: base_url,
           url: "/sapi/v1/eth-staking/eth/redeem",
-          query: [amount: amount, asset: Keyword.get(opts, :asset), recvWindow: Keyword.get(opts, :recvWindow), timestamp: nil],
+          query: [
+            amount: amount,
+            asset: Keyword.get(opts, :asset),
+            recvWindow: Keyword.get(opts, :recvWindow),
+            timestamp: nil
+          ],
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
-    
+
       Binance.REST.HTTPClient.request(request)
     end
   end
-  
-  @spec get_wbeth_unwrap_history_v1(Binance.Client.t(), Keyword.t()) :: {:ok, term()} | {:error, term()}
+
+  @spec get_wbeth_unwrap_history_v1(Binance.Client.t(), Keyword.t()) ::
+          {:ok, term()} | {:error, term()}
   @doc """
   Get WBETH unwrap history
   Variant: User Data
@@ -198,16 +239,24 @@ defmodule Binance.API.Staking.EthStaking do
           method: "GET",
           base_url: base_url,
           url: "/sapi/v1/eth-staking/wbeth/history/unwrapHistory",
-          query: [startTime: Keyword.get(opts, :startTime), endTime: Keyword.get(opts, :endTime), current: Keyword.get(opts, :current), size: Keyword.get(opts, :size), recvWindow: Keyword.get(opts, :recvWindow), timestamp: nil],
+          query: [
+            startTime: Keyword.get(opts, :startTime),
+            endTime: Keyword.get(opts, :endTime),
+            current: Keyword.get(opts, :current),
+            size: Keyword.get(opts, :size),
+            recvWindow: Keyword.get(opts, :recvWindow),
+            timestamp: nil
+          ],
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
-    
+
       Binance.REST.HTTPClient.request(request)
     end
   end
-  
-  @spec get_wbeth_wrap_history_v1(Binance.Client.t(), Keyword.t()) :: {:ok, term()} | {:error, term()}
+
+  @spec get_wbeth_wrap_history_v1(Binance.Client.t(), Keyword.t()) ::
+          {:ok, term()} | {:error, term()}
   @doc """
   Get WBETH wrap history
   Variant: User Data
@@ -226,15 +275,22 @@ defmodule Binance.API.Staking.EthStaking do
           method: "GET",
           base_url: base_url,
           url: "/sapi/v1/eth-staking/wbeth/history/wrapHistory",
-          query: [startTime: Keyword.get(opts, :startTime), endTime: Keyword.get(opts, :endTime), current: Keyword.get(opts, :current), size: Keyword.get(opts, :size), recvWindow: Keyword.get(opts, :recvWindow), timestamp: nil],
+          query: [
+            startTime: Keyword.get(opts, :startTime),
+            endTime: Keyword.get(opts, :endTime),
+            current: Keyword.get(opts, :current),
+            size: Keyword.get(opts, :size),
+            recvWindow: Keyword.get(opts, :recvWindow),
+            timestamp: nil
+          ],
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
-    
+
       Binance.REST.HTTPClient.request(request)
     end
   end
-  
+
   @spec wrap_beth_v1(Binance.Client.t(), term(), Keyword.t()) :: {:ok, term()} | {:error, term()}
   @doc """
   Wrap BETH
@@ -259,12 +315,13 @@ defmodule Binance.API.Staking.EthStaking do
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
-    
+
       Binance.REST.HTTPClient.request(request)
     end
   end
-  
-  @spec eth_staking_account_v2(Binance.Client.t(), Keyword.t()) :: {:ok, term()} | {:error, term()}
+
+  @spec eth_staking_account_v2(Binance.Client.t(), Keyword.t()) ::
+          {:ok, term()} | {:error, term()}
   @doc """
   ETH Staking account
   Variant: User Data
@@ -287,12 +344,13 @@ defmodule Binance.API.Staking.EthStaking do
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
-    
+
       Binance.REST.HTTPClient.request(request)
     end
   end
-  
-  @spec subscribe_eth_staking_v2(Binance.Client.t(), term(), Keyword.t()) :: {:ok, term()} | {:error, term()}
+
+  @spec subscribe_eth_staking_v2(Binance.Client.t(), term(), Keyword.t()) ::
+          {:ok, term()} | {:error, term()}
   @doc """
   Subscribe ETH Staking
   Variant: Trade
@@ -316,7 +374,7 @@ defmodule Binance.API.Staking.EthStaking do
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
-    
+
       Binance.REST.HTTPClient.request(request)
     end
   end

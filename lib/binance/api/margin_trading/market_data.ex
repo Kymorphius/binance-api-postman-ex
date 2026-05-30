@@ -10,7 +10,8 @@ defmodule Binance.API.MarginTrading.MarketData do
     end
   end
 
-  @spec get_all_margin_assets_v1(Binance.Client.t(), Keyword.t()) :: {:ok, term()} | {:error, term()}
+  @spec get_all_margin_assets_v1(Binance.Client.t(), Keyword.t()) ::
+          {:ok, term()} | {:error, term()}
   @doc """
   Get All Margin Assets
   Variant: Market Data
@@ -33,12 +34,13 @@ defmodule Binance.API.MarginTrading.MarketData do
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
-    
+
       Binance.REST.HTTPClient.request(request)
     end
   end
-  
-  @spec get_all_cross_margin_pairs_v1(Binance.Client.t(), Keyword.t()) :: {:ok, term()} | {:error, term()}
+
+  @spec get_all_cross_margin_pairs_v1(Binance.Client.t(), Keyword.t()) ::
+          {:ok, term()} | {:error, term()}
   @doc """
   Get All Cross Margin Pairs
   Variant: Market Data
@@ -61,12 +63,13 @@ defmodule Binance.API.MarginTrading.MarketData do
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
-    
+
       Binance.REST.HTTPClient.request(request)
     end
   end
-  
-  @spec query_margin_available_inventory_v1(Binance.Client.t(), term()) :: {:ok, term()} | {:error, term()}
+
+  @spec query_margin_available_inventory_v1(Binance.Client.t(), term()) ::
+          {:ok, term()} | {:error, term()}
   @doc """
   Query Margin Available Inventory
   Variant: User Data
@@ -89,11 +92,11 @@ defmodule Binance.API.MarginTrading.MarketData do
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
-    
+
       Binance.REST.HTTPClient.request(request)
     end
   end
-  
+
   @spec cross_margin_collateral_ratio_v1(Binance.Client.t()) :: {:ok, term()} | {:error, term()}
   @doc """
   Cross margin collateral ratio
@@ -116,12 +119,13 @@ defmodule Binance.API.MarginTrading.MarketData do
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
-    
+
       Binance.REST.HTTPClient.request(request)
     end
   end
-  
-  @spec get_delist_schedule_v1(Binance.Client.t(), Keyword.t()) :: {:ok, term()} | {:error, term()}
+
+  @spec get_delist_schedule_v1(Binance.Client.t(), Keyword.t()) ::
+          {:ok, term()} | {:error, term()}
   @doc """
   Get Delist Schedule
   Variant: Market Data
@@ -144,12 +148,13 @@ defmodule Binance.API.MarginTrading.MarketData do
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
-    
+
       Binance.REST.HTTPClient.request(request)
     end
   end
-  
-  @spec get_all_isolated_margin_symbol_v1(Binance.Client.t(), Keyword.t()) :: {:ok, term()} | {:error, term()}
+
+  @spec get_all_isolated_margin_symbol_v1(Binance.Client.t(), Keyword.t()) ::
+          {:ok, term()} | {:error, term()}
   @doc """
   Get All Isolated Margin Symbol
   Variant: Market Data
@@ -172,12 +177,13 @@ defmodule Binance.API.MarginTrading.MarketData do
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
-    
+
       Binance.REST.HTTPClient.request(request)
     end
   end
-  
-  @spec query_isolated_margin_tier_data_v1(Binance.Client.t(), term(), Keyword.t()) :: {:ok, term()} | {:error, term()}
+
+  @spec query_isolated_margin_tier_data_v1(Binance.Client.t(), term(), Keyword.t()) ::
+          {:ok, term()} | {:error, term()}
   @doc """
   Query Isolated Margin Tier Data
   Variant: User Data
@@ -197,16 +203,22 @@ defmodule Binance.API.MarginTrading.MarketData do
           method: "GET",
           base_url: base_url,
           url: "/sapi/v1/margin/isolatedMarginTier",
-          query: [symbol: symbol, tier: Keyword.get(opts, :tier), recvWindow: Keyword.get(opts, :recvWindow), timestamp: nil],
+          query: [
+            symbol: symbol,
+            tier: Keyword.get(opts, :tier),
+            recvWindow: Keyword.get(opts, :recvWindow),
+            timestamp: nil
+          ],
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
-    
+
       Binance.REST.HTTPClient.request(request)
     end
   end
-  
-  @spec query_liability_coin_leverage_bracket_in_cross_margin_pro_mode_v1(Binance.Client.t()) :: {:ok, term()} | {:error, term()}
+
+  @spec query_liability_coin_leverage_bracket_in_cross_margin_pro_mode_v1(Binance.Client.t()) ::
+          {:ok, term()} | {:error, term()}
   @doc """
   Query Liability Coin Leverage Bracket in Cross Margin Pro Mode
   Variant: Market Data
@@ -228,11 +240,11 @@ defmodule Binance.API.MarginTrading.MarketData do
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
-    
+
       Binance.REST.HTTPClient.request(request)
     end
   end
-  
+
   @spec get_limit_price_pairs_v1(Binance.Client.t()) :: {:ok, term()} | {:error, term()}
   @doc """
   Get Limit Price Pairs
@@ -255,11 +267,11 @@ defmodule Binance.API.MarginTrading.MarketData do
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
-    
+
       Binance.REST.HTTPClient.request(request)
     end
   end
-  
+
   @spec get_list_schedule_v1(Binance.Client.t(), Keyword.t()) :: {:ok, term()} | {:error, term()}
   @doc """
   Get list Schedule
@@ -283,11 +295,11 @@ defmodule Binance.API.MarginTrading.MarketData do
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
-    
+
       Binance.REST.HTTPClient.request(request)
     end
   end
-  
+
   @spec query_margin_priceindex_v1(Binance.Client.t(), term()) :: {:ok, term()} | {:error, term()}
   @doc """
   Query Margin PriceIndex
@@ -311,11 +323,11 @@ defmodule Binance.API.MarginTrading.MarketData do
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
-    
+
       Binance.REST.HTTPClient.request(request)
     end
   end
-  
+
   @spec get_margin_restricted_assets_v1(Binance.Client.t()) :: {:ok, term()} | {:error, term()}
   @doc """
   Get Margin Restricted Assets
@@ -338,12 +350,13 @@ defmodule Binance.API.MarginTrading.MarketData do
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
-    
+
       Binance.REST.HTTPClient.request(request)
     end
   end
-  
-  @spec get_margin_asset_risk_based_liquidation_ratio_v1(Binance.Client.t()) :: {:ok, term()} | {:error, term()}
+
+  @spec get_margin_asset_risk_based_liquidation_ratio_v1(Binance.Client.t()) ::
+          {:ok, term()} | {:error, term()}
   @doc """
   Get Margin Asset Risk-Based Liquidation Ratio
   Variant: Market Data
@@ -365,7 +378,7 @@ defmodule Binance.API.MarginTrading.MarketData do
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
-    
+
       Binance.REST.HTTPClient.request(request)
     end
   end

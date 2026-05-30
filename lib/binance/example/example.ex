@@ -10,8 +10,10 @@ defmodule Binance.Example do
   alias Binance.API.DerivativesTrading.UsdsFutures.Trade, as: FuturesTrade
 
   @commands [
-    {"mix pull_repo", "Clone or update the Binance Postman repository into lib/binance_api_postman_repo"},
-    {"mix generate_raw_api --all", "Generate raw API modules from all Binance Postman collections"},
+    {"mix pull_repo",
+     "Clone or update the Binance Postman repository into lib/binance_api_postman_repo"},
+    {"mix generate_raw_api --all",
+     "Generate raw API modules from all Binance Postman collections"},
     {"mix compile", "Compile the project after code changes"},
     {"mix test", "Run the test suite"},
     {"iex -S mix", "Open an interactive shell with the project loaded"}
@@ -36,13 +38,17 @@ defmodule Binance.Example do
 
     Client.new(api_key, api_secret, env)
   end
-  
+
   def spot_average_price(symbol) do
     Market.current_average_price_v3(sample_client(), symbol)
   end
 
   def spot_ticker_price(symbol) do
-    Market.symbol_price_ticker_v3(sample_client(), symbol: symbol, symbols: nil, symbolStatus: nil)
+    Market.symbol_price_ticker_v3(sample_client(),
+      symbol: symbol,
+      symbols: nil,
+      symbolStatus: nil
+    )
   end
 
   def spot_order_book(symbol, limit \\ 5) do
@@ -88,15 +94,13 @@ defmodule Binance.Example do
       symbol,
       "SELL",
       "MARKET",
-      [
-        positionSide: Keyword.get(opts, :positionSide),
-        quantity: quantity,
-        price: Keyword.get(opts, :price),
-        newClientOrderId: Keyword.get(opts, :newClientOrderId),
-        newOrderRespType: Keyword.get(opts, :newOrderRespType, "RESULT"),
-        selfTradePreventionMode: Keyword.get(opts, :selfTradePreventionMode),
-        recvWindow: Keyword.get(opts, :recvWindow, 5000)
-      ]
+      positionSide: Keyword.get(opts, :positionSide),
+      quantity: quantity,
+      price: Keyword.get(opts, :price),
+      newClientOrderId: Keyword.get(opts, :newClientOrderId),
+      newOrderRespType: Keyword.get(opts, :newOrderRespType, "RESULT"),
+      selfTradePreventionMode: Keyword.get(opts, :selfTradePreventionMode),
+      recvWindow: Keyword.get(opts, :recvWindow, 5000)
     )
   end
 
@@ -106,15 +110,13 @@ defmodule Binance.Example do
       symbol,
       "BUY",
       "MARKET",
-      [
-        positionSide: Keyword.get(opts, :positionSide),
-        quantity: quantity,
-        price: Keyword.get(opts, :price),
-        newClientOrderId: Keyword.get(opts, :newClientOrderId),
-        newOrderRespType: Keyword.get(opts, :newOrderRespType, "RESULT"),
-        selfTradePreventionMode: Keyword.get(opts, :selfTradePreventionMode),
-        recvWindow: Keyword.get(opts, :recvWindow, 5000)
-      ]
+      positionSide: Keyword.get(opts, :positionSide),
+      quantity: quantity,
+      price: Keyword.get(opts, :price),
+      newClientOrderId: Keyword.get(opts, :newClientOrderId),
+      newOrderRespType: Keyword.get(opts, :newOrderRespType, "RESULT"),
+      selfTradePreventionMode: Keyword.get(opts, :selfTradePreventionMode),
+      recvWindow: Keyword.get(opts, :recvWindow, 5000)
     )
   end
 

@@ -10,7 +10,16 @@ defmodule Binance.API.VipLoan.Trade do
     end
   end
 
-  @spec vip_loan_borrow_v1(Binance.Client.t(), term(), term(), term(), term(), term(), term(), Keyword.t()) :: {:ok, term()} | {:error, term()}
+  @spec vip_loan_borrow_v1(
+          Binance.Client.t(),
+          term(),
+          term(),
+          term(),
+          term(),
+          term(),
+          term(),
+          Keyword.t()
+        ) :: {:ok, term()} | {:error, term()}
   @doc """
   VIP Loan Borrow
   Variant: Trade
@@ -21,7 +30,16 @@ defmodule Binance.API.VipLoan.Trade do
   Required: loanAccountId, loanCoin, loanAmount, collateralAccountId, collateralCoin, isFlexibleRate
   Optional: loanTerm, recvWindow
   """
-  def vip_loan_borrow_v1(client, loanAccountId, loanCoin, loanAmount, collateralAccountId, collateralCoin, isFlexibleRate, opts \\ []) do
+  def vip_loan_borrow_v1(
+        client,
+        loanAccountId,
+        loanCoin,
+        loanAmount,
+        collateralAccountId,
+        collateralCoin,
+        isFlexibleRate,
+        opts \\ []
+      ) do
     with {:ok, base_url} <- base_url(client.env) do
       {:ok, request} =
         Binance.RequestBuilder.build(%{
@@ -30,16 +48,27 @@ defmodule Binance.API.VipLoan.Trade do
           method: "POST",
           base_url: base_url,
           url: "/sapi/v1/loan/vip/borrow",
-          query: [loanAccountId: loanAccountId, loanCoin: loanCoin, loanAmount: loanAmount, collateralAccountId: collateralAccountId, collateralCoin: collateralCoin, isFlexibleRate: isFlexibleRate, loanTerm: Keyword.get(opts, :loanTerm), recvWindow: Keyword.get(opts, :recvWindow), timestamp: nil],
+          query: [
+            loanAccountId: loanAccountId,
+            loanCoin: loanCoin,
+            loanAmount: loanAmount,
+            collateralAccountId: collateralAccountId,
+            collateralCoin: collateralCoin,
+            isFlexibleRate: isFlexibleRate,
+            loanTerm: Keyword.get(opts, :loanTerm),
+            recvWindow: Keyword.get(opts, :recvWindow),
+            timestamp: nil
+          ],
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
-    
+
       Binance.REST.HTTPClient.request(request)
     end
   end
-  
-  @spec vip_loan_renew_v1(Binance.Client.t(), term(), term(), Keyword.t()) :: {:ok, term()} | {:error, term()}
+
+  @spec vip_loan_renew_v1(Binance.Client.t(), term(), term(), Keyword.t()) ::
+          {:ok, term()} | {:error, term()}
   @doc """
   VIP Loan Renew
   Variant: Trade
@@ -59,16 +88,22 @@ defmodule Binance.API.VipLoan.Trade do
           method: "POST",
           base_url: base_url,
           url: "/sapi/v1/loan/vip/renew",
-          query: [orderId: orderId, loanTerm: loanTerm, recvWindow: Keyword.get(opts, :recvWindow), timestamp: nil],
+          query: [
+            orderId: orderId,
+            loanTerm: loanTerm,
+            recvWindow: Keyword.get(opts, :recvWindow),
+            timestamp: nil
+          ],
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
-    
+
       Binance.REST.HTTPClient.request(request)
     end
   end
-  
-  @spec vip_loan_repay_v1(Binance.Client.t(), term(), term(), Keyword.t()) :: {:ok, term()} | {:error, term()}
+
+  @spec vip_loan_repay_v1(Binance.Client.t(), term(), term(), Keyword.t()) ::
+          {:ok, term()} | {:error, term()}
   @doc """
   VIP Loan Repay
   Variant: Trade
@@ -88,11 +123,16 @@ defmodule Binance.API.VipLoan.Trade do
           method: "POST",
           base_url: base_url,
           url: "/sapi/v1/loan/vip/repay",
-          query: [orderId: orderId, amount: amount, recvWindow: Keyword.get(opts, :recvWindow), timestamp: nil],
+          query: [
+            orderId: orderId,
+            amount: amount,
+            recvWindow: Keyword.get(opts, :recvWindow),
+            timestamp: nil
+          ],
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
-    
+
       Binance.REST.HTTPClient.request(request)
     end
   end

@@ -1,7 +1,10 @@
 defmodule Binance.API.DerivativesTrading.Options.MarketMakerEndpoints do
   @moduledoc false
 
-  @base_urls %{prod_url: "https://eapi.binance.com", testnet_url: "https://testnet.binancefuture.com"}
+  @base_urls %{
+    prod_url: "https://eapi.binance.com",
+    testnet_url: "https://testnet.binancefuture.com"
+  }
 
   def base_url(key \\ :prod_url) do
     case Map.fetch(@base_urls, key) do
@@ -10,7 +13,8 @@ defmodule Binance.API.DerivativesTrading.Options.MarketMakerEndpoints do
     end
   end
 
-  @spec get_auto_cancel_all_open_orders_config_v1(Binance.Client.t(), Keyword.t()) :: {:ok, term()} | {:error, term()}
+  @spec get_auto_cancel_all_open_orders_config_v1(Binance.Client.t(), Keyword.t()) ::
+          {:ok, term()} | {:error, term()}
   @doc """
   Get Auto-Cancel All Open Orders Config
   Variant: Trade
@@ -29,16 +33,21 @@ defmodule Binance.API.DerivativesTrading.Options.MarketMakerEndpoints do
           method: "GET",
           base_url: base_url,
           url: "/eapi/v1/countdownCancelAll",
-          query: [underlying: Keyword.get(opts, :underlying), recvWindow: Keyword.get(opts, :recvWindow), timestamp: nil],
+          query: [
+            underlying: Keyword.get(opts, :underlying),
+            recvWindow: Keyword.get(opts, :recvWindow),
+            timestamp: nil
+          ],
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
-    
+
       Binance.REST.HTTPClient.request(request)
     end
   end
-  
-  @spec set_auto_cancel_all_open_orders_config_v1(Binance.Client.t(), term(), term(), Keyword.t()) :: {:ok, term()} | {:error, term()}
+
+  @spec set_auto_cancel_all_open_orders_config_v1(Binance.Client.t(), term(), term(), Keyword.t()) ::
+          {:ok, term()} | {:error, term()}
   @doc """
   Set Auto-Cancel All Open Orders Config
   Variant: Trade
@@ -58,16 +67,22 @@ defmodule Binance.API.DerivativesTrading.Options.MarketMakerEndpoints do
           method: "POST",
           base_url: base_url,
           url: "/eapi/v1/countdownCancelAll",
-          query: [underlying: underlying, countdownTime: countdownTime, recvWindow: Keyword.get(opts, :recvWindow), timestamp: nil],
+          query: [
+            underlying: underlying,
+            countdownTime: countdownTime,
+            recvWindow: Keyword.get(opts, :recvWindow),
+            timestamp: nil
+          ],
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
-    
+
       Binance.REST.HTTPClient.request(request)
     end
   end
-  
-  @spec auto_cancel_all_open_orders_heartbeat_v1(Binance.Client.t(), term(), Keyword.t()) :: {:ok, term()} | {:error, term()}
+
+  @spec auto_cancel_all_open_orders_heartbeat_v1(Binance.Client.t(), term(), Keyword.t()) ::
+          {:ok, term()} | {:error, term()}
   @doc """
   Auto-Cancel All Open Orders Heartbeat
   Variant: Trade
@@ -87,16 +102,21 @@ defmodule Binance.API.DerivativesTrading.Options.MarketMakerEndpoints do
           method: "POST",
           base_url: base_url,
           url: "/eapi/v1/countdownCancelAllHeartBeat",
-          query: [underlyings: underlyings, recvWindow: Keyword.get(opts, :recvWindow), timestamp: nil],
+          query: [
+            underlyings: underlyings,
+            recvWindow: Keyword.get(opts, :recvWindow),
+            timestamp: nil
+          ],
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
-    
+
       Binance.REST.HTTPClient.request(request)
     end
   end
-  
-  @spec get_market_maker_protection_config_v1(Binance.Client.t(), Keyword.t()) :: {:ok, term()} | {:error, term()}
+
+  @spec get_market_maker_protection_config_v1(Binance.Client.t(), Keyword.t()) ::
+          {:ok, term()} | {:error, term()}
   @doc """
   Get Market Maker Protection Config
   Variant: Trade
@@ -115,16 +135,21 @@ defmodule Binance.API.DerivativesTrading.Options.MarketMakerEndpoints do
           method: "GET",
           base_url: base_url,
           url: "/eapi/v1/mmp",
-          query: [underlying: Keyword.get(opts, :underlying), recvWindow: Keyword.get(opts, :recvWindow), timestamp: nil],
+          query: [
+            underlying: Keyword.get(opts, :underlying),
+            recvWindow: Keyword.get(opts, :recvWindow),
+            timestamp: nil
+          ],
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
-    
+
       Binance.REST.HTTPClient.request(request)
     end
   end
-  
-  @spec reset_market_maker_protection_config_v1(Binance.Client.t(), Keyword.t()) :: {:ok, term()} | {:error, term()}
+
+  @spec reset_market_maker_protection_config_v1(Binance.Client.t(), Keyword.t()) ::
+          {:ok, term()} | {:error, term()}
   @doc """
   Reset Market Maker Protection Config
   Variant: Trade
@@ -143,16 +168,21 @@ defmodule Binance.API.DerivativesTrading.Options.MarketMakerEndpoints do
           method: "POST",
           base_url: base_url,
           url: "/eapi/v1/mmpReset",
-          query: [underlying: Keyword.get(opts, :underlying), recvWindow: Keyword.get(opts, :recvWindow), timestamp: nil],
+          query: [
+            underlying: Keyword.get(opts, :underlying),
+            recvWindow: Keyword.get(opts, :recvWindow),
+            timestamp: nil
+          ],
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
-    
+
       Binance.REST.HTTPClient.request(request)
     end
   end
-  
-  @spec set_market_maker_protection_config_v1(Binance.Client.t(), Keyword.t()) :: {:ok, term()} | {:error, term()}
+
+  @spec set_market_maker_protection_config_v1(Binance.Client.t(), Keyword.t()) ::
+          {:ok, term()} | {:error, term()}
   @doc """
   Set Market Maker Protection Config
   Variant: Trade
@@ -171,11 +201,19 @@ defmodule Binance.API.DerivativesTrading.Options.MarketMakerEndpoints do
           method: "POST",
           base_url: base_url,
           url: "/eapi/v1/mmpSet",
-          query: [underlying: Keyword.get(opts, :underlying), windowTimeInMilliseconds: Keyword.get(opts, :windowTimeInMilliseconds), frozenTimeInMilliseconds: Keyword.get(opts, :frozenTimeInMilliseconds), qtyLimit: Keyword.get(opts, :qtyLimit), deltaLimit: Keyword.get(opts, :deltaLimit), recvWindow: Keyword.get(opts, :recvWindow), timestamp: nil],
+          query: [
+            underlying: Keyword.get(opts, :underlying),
+            windowTimeInMilliseconds: Keyword.get(opts, :windowTimeInMilliseconds),
+            frozenTimeInMilliseconds: Keyword.get(opts, :frozenTimeInMilliseconds),
+            qtyLimit: Keyword.get(opts, :qtyLimit),
+            deltaLimit: Keyword.get(opts, :deltaLimit),
+            recvWindow: Keyword.get(opts, :recvWindow),
+            timestamp: nil
+          ],
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
-    
+
       Binance.REST.HTTPClient.request(request)
     end
   end

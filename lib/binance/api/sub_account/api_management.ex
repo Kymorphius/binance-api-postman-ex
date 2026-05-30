@@ -10,7 +10,12 @@ defmodule Binance.API.SubAccount.ApiManagement do
     end
   end
 
-  @spec get_ip_restriction_for_a_sub_account_api_key_v1(Binance.Client.t(), term(), term(), Keyword.t()) :: {:ok, term()} | {:error, term()}
+  @spec get_ip_restriction_for_a_sub_account_api_key_v1(
+          Binance.Client.t(),
+          term(),
+          term(),
+          Keyword.t()
+        ) :: {:ok, term()} | {:error, term()}
   @doc """
   Get IP Restriction for a Sub-account API Key
   Variant: User Data
@@ -30,16 +35,27 @@ defmodule Binance.API.SubAccount.ApiManagement do
           method: "GET",
           base_url: base_url,
           url: "/sapi/v1/sub-account/subAccountApi/ipRestriction",
-          query: [email: email, subAccountApiKey: subAccountApiKey, recvWindow: Keyword.get(opts, :recvWindow), timestamp: nil],
+          query: [
+            email: email,
+            subAccountApiKey: subAccountApiKey,
+            recvWindow: Keyword.get(opts, :recvWindow),
+            timestamp: nil
+          ],
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
-    
+
       Binance.REST.HTTPClient.request(request)
     end
   end
-  
-  @spec delete_ip_list_for_a_sub_account_api_key_v1(Binance.Client.t(), term(), term(), term(), Keyword.t()) :: {:ok, term()} | {:error, term()}
+
+  @spec delete_ip_list_for_a_sub_account_api_key_v1(
+          Binance.Client.t(),
+          term(),
+          term(),
+          term(),
+          Keyword.t()
+        ) :: {:ok, term()} | {:error, term()}
   @doc """
   Delete IP List For a Sub-account API Key
   Variant: User Data
@@ -50,7 +66,13 @@ defmodule Binance.API.SubAccount.ApiManagement do
   Required: email, subAccountApiKey, ipAddress
   Optional: recvWindow
   """
-  def delete_ip_list_for_a_sub_account_api_key_v1(client, email, subAccountApiKey, ipAddress, opts \\ []) do
+  def delete_ip_list_for_a_sub_account_api_key_v1(
+        client,
+        email,
+        subAccountApiKey,
+        ipAddress,
+        opts \\ []
+      ) do
     with {:ok, base_url} <- base_url(client.env) do
       {:ok, request} =
         Binance.RequestBuilder.build(%{
@@ -59,16 +81,28 @@ defmodule Binance.API.SubAccount.ApiManagement do
           method: "DELETE",
           base_url: base_url,
           url: "/sapi/v1/sub-account/subAccountApi/ipRestriction/ipList",
-          query: [email: email, subAccountApiKey: subAccountApiKey, ipAddress: ipAddress, recvWindow: Keyword.get(opts, :recvWindow), timestamp: nil],
+          query: [
+            email: email,
+            subAccountApiKey: subAccountApiKey,
+            ipAddress: ipAddress,
+            recvWindow: Keyword.get(opts, :recvWindow),
+            timestamp: nil
+          ],
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
-    
+
       Binance.REST.HTTPClient.request(request)
     end
   end
-  
-  @spec add_ip_restriction_for_sub_account_api_key_v2(Binance.Client.t(), term(), term(), term(), Keyword.t()) :: {:ok, term()} | {:error, term()}
+
+  @spec add_ip_restriction_for_sub_account_api_key_v2(
+          Binance.Client.t(),
+          term(),
+          term(),
+          term(),
+          Keyword.t()
+        ) :: {:ok, term()} | {:error, term()}
   @doc """
   Add IP Restriction for Sub-Account API key
   Variant: User Data
@@ -79,7 +113,13 @@ defmodule Binance.API.SubAccount.ApiManagement do
   Required: email, subAccountApiKey, status
   Optional: ipAddress, recvWindow
   """
-  def add_ip_restriction_for_sub_account_api_key_v2(client, email, subAccountApiKey, status, opts \\ []) do
+  def add_ip_restriction_for_sub_account_api_key_v2(
+        client,
+        email,
+        subAccountApiKey,
+        status,
+        opts \\ []
+      ) do
     with {:ok, base_url} <- base_url(client.env) do
       {:ok, request} =
         Binance.RequestBuilder.build(%{
@@ -88,11 +128,18 @@ defmodule Binance.API.SubAccount.ApiManagement do
           method: "POST",
           base_url: base_url,
           url: "/sapi/v2/sub-account/subAccountApi/ipRestriction",
-          query: [email: email, subAccountApiKey: subAccountApiKey, status: status, ipAddress: Keyword.get(opts, :ipAddress), recvWindow: Keyword.get(opts, :recvWindow), timestamp: nil],
+          query: [
+            email: email,
+            subAccountApiKey: subAccountApiKey,
+            status: status,
+            ipAddress: Keyword.get(opts, :ipAddress),
+            recvWindow: Keyword.get(opts, :recvWindow),
+            timestamp: nil
+          ],
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
-    
+
       Binance.REST.HTTPClient.request(request)
     end
   end

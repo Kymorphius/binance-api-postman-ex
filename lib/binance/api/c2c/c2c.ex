@@ -10,7 +10,8 @@ defmodule Binance.API.C2c do
     end
   end
 
-  @spec get_c2c_trade_history_v1(Binance.Client.t(), Keyword.t()) :: {:ok, term()} | {:error, term()}
+  @spec get_c2c_trade_history_v1(Binance.Client.t(), Keyword.t()) ::
+          {:ok, term()} | {:error, term()}
   @doc """
   Get C2C Trade History
   Variant: User Data
@@ -29,11 +30,19 @@ defmodule Binance.API.C2c do
           method: "GET",
           base_url: base_url,
           url: "/sapi/v1/c2c/orderMatch/listUserOrderHistory",
-          query: [tradeType: Keyword.get(opts, :tradeType), startTimestamp: Keyword.get(opts, :startTimestamp), endTimestamp: Keyword.get(opts, :endTimestamp), page: Keyword.get(opts, :page), rows: Keyword.get(opts, :rows), recvWindow: Keyword.get(opts, :recvWindow), timestamp: nil],
+          query: [
+            tradeType: Keyword.get(opts, :tradeType),
+            startTimestamp: Keyword.get(opts, :startTimestamp),
+            endTimestamp: Keyword.get(opts, :endTimestamp),
+            page: Keyword.get(opts, :page),
+            rows: Keyword.get(opts, :rows),
+            recvWindow: Keyword.get(opts, :recvWindow),
+            timestamp: nil
+          ],
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
-    
+
       Binance.REST.HTTPClient.request(request)
     end
   end

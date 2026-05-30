@@ -1,7 +1,11 @@
 defmodule Binance.API.Spot.Market do
   @moduledoc false
 
-  @base_urls %{prod_url: "https://api.binance.com", testnet_url: "https://testnet.binance.vision", demo_url: "https://demo-api.binance.com"}
+  @base_urls %{
+    prod_url: "https://api.binance.com",
+    testnet_url: "https://testnet.binance.vision",
+    demo_url: "https://demo-api.binance.com"
+  }
 
   def base_url(key \\ :prod_url) do
     case Map.fetch(@base_urls, key) do
@@ -10,7 +14,8 @@ defmodule Binance.API.Spot.Market do
     end
   end
 
-  @spec compressed_aggregate_trades_list_v3(Binance.Client.t(), term(), Keyword.t()) :: {:ok, term()} | {:error, term()}
+  @spec compressed_aggregate_trades_list_v3(Binance.Client.t(), term(), Keyword.t()) ::
+          {:ok, term()} | {:error, term()}
   @doc """
   Compressed/Aggregate trades list
   Method: GET
@@ -28,15 +33,21 @@ defmodule Binance.API.Spot.Market do
           method: "GET",
           base_url: base_url,
           url: "/api/v3/aggTrades",
-          query: [symbol: symbol, fromId: Keyword.get(opts, :fromId), startTime: Keyword.get(opts, :startTime), endTime: Keyword.get(opts, :endTime), limit: Keyword.get(opts, :limit)],
+          query: [
+            symbol: symbol,
+            fromId: Keyword.get(opts, :fromId),
+            startTime: Keyword.get(opts, :startTime),
+            endTime: Keyword.get(opts, :endTime),
+            limit: Keyword.get(opts, :limit)
+          ],
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
-    
+
       Binance.REST.HTTPClient.request(request)
     end
   end
-  
+
   @spec current_average_price_v3(Binance.Client.t(), term()) :: {:ok, term()} | {:error, term()}
   @doc """
   Current average price
@@ -58,11 +69,11 @@ defmodule Binance.API.Spot.Market do
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
-    
+
       Binance.REST.HTTPClient.request(request)
     end
   end
-  
+
   @spec order_book_v3(Binance.Client.t(), term(), Keyword.t()) :: {:ok, term()} | {:error, term()}
   @doc """
   Order book
@@ -81,43 +92,21 @@ defmodule Binance.API.Spot.Market do
           method: "GET",
           base_url: base_url,
           url: "/api/v3/depth",
-          query: [symbol: symbol, limit: Keyword.get(opts, :limit), symbolStatus: Keyword.get(opts, :symbolStatus)],
+          query: [
+            symbol: symbol,
+            limit: Keyword.get(opts, :limit),
+            symbolStatus: Keyword.get(opts, :symbolStatus)
+          ],
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
-    
+
       Binance.REST.HTTPClient.request(request)
     end
   end
-  
-  @spec historical_block_trades_v3(Binance.Client.t(), term(), term(), Keyword.t()) :: {:ok, term()} | {:error, term()}
-  @doc """
-  Historical Block Trades
-  Method: GET
-  Path: /api/v3/historicalBlockTrades
-  Requires signature: false
-  Required: symbol, fromId
-  Optional: limit
-  """
-  def historical_block_trades_v3(client, symbol, fromId, opts \\ []) do
-    with {:ok, base_url} <- base_url(client.env) do
-      {:ok, request} =
-        Binance.RequestBuilder.build(%{
-          client: client,
-          requires_signature?: false,
-          method: "GET",
-          base_url: base_url,
-          url: "/api/v3/historicalBlockTrades",
-          query: [symbol: symbol, fromId: fromId, limit: Keyword.get(opts, :limit)],
-          headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
-          body: %{mode: "urlencoded", urlencoded: []}
-        })
-    
-      Binance.REST.HTTPClient.request(request)
-    end
-  end
-  
-  @spec old_trade_lookup_v3(Binance.Client.t(), term(), Keyword.t()) :: {:ok, term()} | {:error, term()}
+
+  @spec old_trade_lookup_v3(Binance.Client.t(), term(), Keyword.t()) ::
+          {:ok, term()} | {:error, term()}
   @doc """
   Old trade lookup
   Method: GET
@@ -135,16 +124,21 @@ defmodule Binance.API.Spot.Market do
           method: "GET",
           base_url: base_url,
           url: "/api/v3/historicalTrades",
-          query: [symbol: symbol, limit: Keyword.get(opts, :limit), fromId: Keyword.get(opts, :fromId)],
+          query: [
+            symbol: symbol,
+            limit: Keyword.get(opts, :limit),
+            fromId: Keyword.get(opts, :fromId)
+          ],
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
-    
+
       Binance.REST.HTTPClient.request(request)
     end
   end
-  
-  @spec kline_candlestick_data_v3(Binance.Client.t(), term(), term(), Keyword.t()) :: {:ok, term()} | {:error, term()}
+
+  @spec kline_candlestick_data_v3(Binance.Client.t(), term(), term(), Keyword.t()) ::
+          {:ok, term()} | {:error, term()}
   @doc """
   Kline/Candlestick data
   Method: GET
@@ -162,15 +156,22 @@ defmodule Binance.API.Spot.Market do
           method: "GET",
           base_url: base_url,
           url: "/api/v3/klines",
-          query: [symbol: symbol, interval: interval, startTime: Keyword.get(opts, :startTime), endTime: Keyword.get(opts, :endTime), timeZone: Keyword.get(opts, :timeZone), limit: Keyword.get(opts, :limit)],
+          query: [
+            symbol: symbol,
+            interval: interval,
+            startTime: Keyword.get(opts, :startTime),
+            endTime: Keyword.get(opts, :endTime),
+            timeZone: Keyword.get(opts, :timeZone),
+            limit: Keyword.get(opts, :limit)
+          ],
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
-    
+
       Binance.REST.HTTPClient.request(request)
     end
   end
-  
+
   @spec query_reference_price_v3(Binance.Client.t(), term()) :: {:ok, term()} | {:error, term()}
   @doc """
   Query Reference Price
@@ -192,12 +193,13 @@ defmodule Binance.API.Spot.Market do
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
-    
+
       Binance.REST.HTTPClient.request(request)
     end
   end
-  
-  @spec query_reference_price_calculation_v3(Binance.Client.t(), term(), Keyword.t()) :: {:ok, term()} | {:error, term()}
+
+  @spec query_reference_price_calculation_v3(Binance.Client.t(), term(), Keyword.t()) ::
+          {:ok, term()} | {:error, term()}
   @doc """
   Query Reference Price Calculation
   Method: GET
@@ -219,12 +221,13 @@ defmodule Binance.API.Spot.Market do
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
-    
+
       Binance.REST.HTTPClient.request(request)
     end
   end
-  
-  @spec rolling_window_price_change_statistics_v3(Binance.Client.t(), Keyword.t()) :: {:ok, term()} | {:error, term()}
+
+  @spec rolling_window_price_change_statistics_v3(Binance.Client.t(), Keyword.t()) ::
+          {:ok, term()} | {:error, term()}
   @doc """
   Rolling window price change statistics
   Method: GET
@@ -241,16 +244,23 @@ defmodule Binance.API.Spot.Market do
           method: "GET",
           base_url: base_url,
           url: "/api/v3/ticker",
-          query: [symbol: Keyword.get(opts, :symbol), symbols: Keyword.get(opts, :symbols), windowSize: Keyword.get(opts, :windowSize), type: Keyword.get(opts, :type), symbolStatus: Keyword.get(opts, :symbolStatus)],
+          query: [
+            symbol: Keyword.get(opts, :symbol),
+            symbols: Keyword.get(opts, :symbols),
+            windowSize: Keyword.get(opts, :windowSize),
+            type: Keyword.get(opts, :type),
+            symbolStatus: Keyword.get(opts, :symbolStatus)
+          ],
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
-    
+
       Binance.REST.HTTPClient.request(request)
     end
   end
-  
-  @spec x_24hr_ticker_price_change_statistics_v3(Binance.Client.t(), Keyword.t()) :: {:ok, term()} | {:error, term()}
+
+  @spec x_24hr_ticker_price_change_statistics_v3(Binance.Client.t(), Keyword.t()) ::
+          {:ok, term()} | {:error, term()}
   @doc """
   24hr ticker price change statistics
   Method: GET
@@ -267,16 +277,22 @@ defmodule Binance.API.Spot.Market do
           method: "GET",
           base_url: base_url,
           url: "/api/v3/ticker/24hr",
-          query: [symbol: Keyword.get(opts, :symbol), symbols: Keyword.get(opts, :symbols), type: Keyword.get(opts, :type), symbolStatus: Keyword.get(opts, :symbolStatus)],
+          query: [
+            symbol: Keyword.get(opts, :symbol),
+            symbols: Keyword.get(opts, :symbols),
+            type: Keyword.get(opts, :type),
+            symbolStatus: Keyword.get(opts, :symbolStatus)
+          ],
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
-    
+
       Binance.REST.HTTPClient.request(request)
     end
   end
-  
-  @spec symbol_order_book_ticker_v3(Binance.Client.t(), Keyword.t()) :: {:ok, term()} | {:error, term()}
+
+  @spec symbol_order_book_ticker_v3(Binance.Client.t(), Keyword.t()) ::
+          {:ok, term()} | {:error, term()}
   @doc """
   Symbol order book ticker
   Method: GET
@@ -293,16 +309,21 @@ defmodule Binance.API.Spot.Market do
           method: "GET",
           base_url: base_url,
           url: "/api/v3/ticker/bookTicker",
-          query: [symbol: Keyword.get(opts, :symbol), symbols: Keyword.get(opts, :symbols), symbolStatus: Keyword.get(opts, :symbolStatus)],
+          query: [
+            symbol: Keyword.get(opts, :symbol),
+            symbols: Keyword.get(opts, :symbols),
+            symbolStatus: Keyword.get(opts, :symbolStatus)
+          ],
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
-    
+
       Binance.REST.HTTPClient.request(request)
     end
   end
-  
-  @spec symbol_price_ticker_v3(Binance.Client.t(), Keyword.t()) :: {:ok, term()} | {:error, term()}
+
+  @spec symbol_price_ticker_v3(Binance.Client.t(), Keyword.t()) ::
+          {:ok, term()} | {:error, term()}
   @doc """
   Symbol price ticker
   Method: GET
@@ -319,15 +340,19 @@ defmodule Binance.API.Spot.Market do
           method: "GET",
           base_url: base_url,
           url: "/api/v3/ticker/price",
-          query: [symbol: Keyword.get(opts, :symbol), symbols: Keyword.get(opts, :symbols), symbolStatus: Keyword.get(opts, :symbolStatus)],
+          query: [
+            symbol: Keyword.get(opts, :symbol),
+            symbols: Keyword.get(opts, :symbols),
+            symbolStatus: Keyword.get(opts, :symbolStatus)
+          ],
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
-    
+
       Binance.REST.HTTPClient.request(request)
     end
   end
-  
+
   @spec trading_day_ticker_v3(Binance.Client.t(), Keyword.t()) :: {:ok, term()} | {:error, term()}
   @doc """
   Trading Day Ticker
@@ -345,16 +370,23 @@ defmodule Binance.API.Spot.Market do
           method: "GET",
           base_url: base_url,
           url: "/api/v3/ticker/tradingDay",
-          query: [symbol: Keyword.get(opts, :symbol), symbols: Keyword.get(opts, :symbols), timeZone: Keyword.get(opts, :timeZone), type: Keyword.get(opts, :type), symbolStatus: Keyword.get(opts, :symbolStatus)],
+          query: [
+            symbol: Keyword.get(opts, :symbol),
+            symbols: Keyword.get(opts, :symbols),
+            timeZone: Keyword.get(opts, :timeZone),
+            type: Keyword.get(opts, :type),
+            symbolStatus: Keyword.get(opts, :symbolStatus)
+          ],
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
-    
+
       Binance.REST.HTTPClient.request(request)
     end
   end
-  
-  @spec recent_trades_list_v3(Binance.Client.t(), term(), Keyword.t()) :: {:ok, term()} | {:error, term()}
+
+  @spec recent_trades_list_v3(Binance.Client.t(), term(), Keyword.t()) ::
+          {:ok, term()} | {:error, term()}
   @doc """
   Recent trades list
   Method: GET
@@ -376,12 +408,13 @@ defmodule Binance.API.Spot.Market do
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
-    
+
       Binance.REST.HTTPClient.request(request)
     end
   end
-  
-  @spec uiklines_v3(Binance.Client.t(), term(), term(), Keyword.t()) :: {:ok, term()} | {:error, term()}
+
+  @spec uiklines_v3(Binance.Client.t(), term(), term(), Keyword.t()) ::
+          {:ok, term()} | {:error, term()}
   @doc """
   UIKlines
   Method: GET
@@ -399,11 +432,18 @@ defmodule Binance.API.Spot.Market do
           method: "GET",
           base_url: base_url,
           url: "/api/v3/uiKlines",
-          query: [symbol: symbol, interval: interval, startTime: Keyword.get(opts, :startTime), endTime: Keyword.get(opts, :endTime), timeZone: Keyword.get(opts, :timeZone), limit: Keyword.get(opts, :limit)],
+          query: [
+            symbol: symbol,
+            interval: interval,
+            startTime: Keyword.get(opts, :startTime),
+            endTime: Keyword.get(opts, :endTime),
+            timeZone: Keyword.get(opts, :timeZone),
+            limit: Keyword.get(opts, :limit)
+          ],
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
-    
+
       Binance.REST.HTTPClient.request(request)
     end
   end

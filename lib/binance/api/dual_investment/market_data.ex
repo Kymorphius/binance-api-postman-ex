@@ -10,7 +10,13 @@ defmodule Binance.API.DualInvestment.MarketData do
     end
   end
 
-  @spec get_dual_investment_product_list_v1(Binance.Client.t(), term(), term(), term(), Keyword.t()) :: {:ok, term()} | {:error, term()}
+  @spec get_dual_investment_product_list_v1(
+          Binance.Client.t(),
+          term(),
+          term(),
+          term(),
+          Keyword.t()
+        ) :: {:ok, term()} | {:error, term()}
   @doc """
   Get Dual Investment product list
   Method: GET
@@ -19,7 +25,13 @@ defmodule Binance.API.DualInvestment.MarketData do
   Required: optionType, exercisedCoin, investCoin
   Optional: pageSize, pageIndex, recvWindow
   """
-  def get_dual_investment_product_list_v1(client, optionType, exercisedCoin, investCoin, opts \\ []) do
+  def get_dual_investment_product_list_v1(
+        client,
+        optionType,
+        exercisedCoin,
+        investCoin,
+        opts \\ []
+      ) do
     with {:ok, base_url} <- base_url(client.env) do
       {:ok, request} =
         Binance.RequestBuilder.build(%{
@@ -28,11 +40,19 @@ defmodule Binance.API.DualInvestment.MarketData do
           method: "GET",
           base_url: base_url,
           url: "/sapi/v1/dci/product/list",
-          query: [optionType: optionType, exercisedCoin: exercisedCoin, investCoin: investCoin, pageSize: Keyword.get(opts, :pageSize), pageIndex: Keyword.get(opts, :pageIndex), recvWindow: Keyword.get(opts, :recvWindow), timestamp: nil],
+          query: [
+            optionType: optionType,
+            exercisedCoin: exercisedCoin,
+            investCoin: investCoin,
+            pageSize: Keyword.get(opts, :pageSize),
+            pageIndex: Keyword.get(opts, :pageIndex),
+            recvWindow: Keyword.get(opts, :recvWindow),
+            timestamp: nil
+          ],
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
-    
+
       Binance.REST.HTTPClient.request(request)
     end
   end

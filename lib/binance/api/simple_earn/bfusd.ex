@@ -33,12 +33,13 @@ defmodule Binance.API.SimpleEarn.Bfusd do
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
-    
+
       Binance.REST.HTTPClient.request(request)
     end
   end
-  
-  @spec get_bfusd_rate_history_v1(Binance.Client.t(), Keyword.t()) :: {:ok, term()} | {:error, term()}
+
+  @spec get_bfusd_rate_history_v1(Binance.Client.t(), Keyword.t()) ::
+          {:ok, term()} | {:error, term()}
   @doc """
   Get BFUSD Rate History
   Variant: User Data
@@ -57,16 +58,24 @@ defmodule Binance.API.SimpleEarn.Bfusd do
           method: "GET",
           base_url: base_url,
           url: "/sapi/v1/bfusd/history/rateHistory",
-          query: [startTime: Keyword.get(opts, :startTime), endTime: Keyword.get(opts, :endTime), current: Keyword.get(opts, :current), size: Keyword.get(opts, :size), recvWindow: Keyword.get(opts, :recvWindow), timestamp: nil],
+          query: [
+            startTime: Keyword.get(opts, :startTime),
+            endTime: Keyword.get(opts, :endTime),
+            current: Keyword.get(opts, :current),
+            size: Keyword.get(opts, :size),
+            recvWindow: Keyword.get(opts, :recvWindow),
+            timestamp: nil
+          ],
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
-    
+
       Binance.REST.HTTPClient.request(request)
     end
   end
-  
-  @spec get_bfusd_redemption_history_v1(Binance.Client.t(), Keyword.t()) :: {:ok, term()} | {:error, term()}
+
+  @spec get_bfusd_redemption_history_v1(Binance.Client.t(), Keyword.t()) ::
+          {:ok, term()} | {:error, term()}
   @doc """
   Get BFUSD Redemption History
   Variant: User Data
@@ -85,16 +94,24 @@ defmodule Binance.API.SimpleEarn.Bfusd do
           method: "GET",
           base_url: base_url,
           url: "/sapi/v1/bfusd/history/redemptionHistory",
-          query: [startTime: Keyword.get(opts, :startTime), endTime: Keyword.get(opts, :endTime), current: Keyword.get(opts, :current), size: Keyword.get(opts, :size), recvWindow: Keyword.get(opts, :recvWindow), timestamp: nil],
+          query: [
+            startTime: Keyword.get(opts, :startTime),
+            endTime: Keyword.get(opts, :endTime),
+            current: Keyword.get(opts, :current),
+            size: Keyword.get(opts, :size),
+            recvWindow: Keyword.get(opts, :recvWindow),
+            timestamp: nil
+          ],
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
-    
+
       Binance.REST.HTTPClient.request(request)
     end
   end
-  
-  @spec get_bfusd_rewards_history_v1(Binance.Client.t(), Keyword.t()) :: {:ok, term()} | {:error, term()}
+
+  @spec get_bfusd_rewards_history_v1(Binance.Client.t(), Keyword.t()) ::
+          {:ok, term()} | {:error, term()}
   @doc """
   Get BFUSD Rewards History
   Variant: User Data
@@ -113,16 +130,24 @@ defmodule Binance.API.SimpleEarn.Bfusd do
           method: "GET",
           base_url: base_url,
           url: "/sapi/v1/bfusd/history/rewardsHistory",
-          query: [startTime: Keyword.get(opts, :startTime), endTime: Keyword.get(opts, :endTime), current: Keyword.get(opts, :current), size: Keyword.get(opts, :size), recvWindow: Keyword.get(opts, :recvWindow), timestamp: nil],
+          query: [
+            startTime: Keyword.get(opts, :startTime),
+            endTime: Keyword.get(opts, :endTime),
+            current: Keyword.get(opts, :current),
+            size: Keyword.get(opts, :size),
+            recvWindow: Keyword.get(opts, :recvWindow),
+            timestamp: nil
+          ],
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
-    
+
       Binance.REST.HTTPClient.request(request)
     end
   end
-  
-  @spec get_bfusd_subscription_history_v1(Binance.Client.t(), Keyword.t()) :: {:ok, term()} | {:error, term()}
+
+  @spec get_bfusd_subscription_history_v1(Binance.Client.t(), Keyword.t()) ::
+          {:ok, term()} | {:error, term()}
   @doc """
   Get BFUSD subscription history
   Variant: User Data
@@ -141,16 +166,25 @@ defmodule Binance.API.SimpleEarn.Bfusd do
           method: "GET",
           base_url: base_url,
           url: "/sapi/v1/bfusd/history/subscriptionHistory",
-          query: [asset: Keyword.get(opts, :asset), startTime: Keyword.get(opts, :startTime), endTime: Keyword.get(opts, :endTime), current: Keyword.get(opts, :current), size: Keyword.get(opts, :size), recvWindow: Keyword.get(opts, :recvWindow), timestamp: nil],
+          query: [
+            asset: Keyword.get(opts, :asset),
+            startTime: Keyword.get(opts, :startTime),
+            endTime: Keyword.get(opts, :endTime),
+            current: Keyword.get(opts, :current),
+            size: Keyword.get(opts, :size),
+            recvWindow: Keyword.get(opts, :recvWindow),
+            timestamp: nil
+          ],
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
-    
+
       Binance.REST.HTTPClient.request(request)
     end
   end
-  
-  @spec get_bfusd_quota_details_v1(Binance.Client.t(), Keyword.t()) :: {:ok, term()} | {:error, term()}
+
+  @spec get_bfusd_quota_details_v1(Binance.Client.t(), Keyword.t()) ::
+          {:ok, term()} | {:error, term()}
   @doc """
   Get BFUSD Quota Details
   Variant: User Data
@@ -173,12 +207,13 @@ defmodule Binance.API.SimpleEarn.Bfusd do
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
-    
+
       Binance.REST.HTTPClient.request(request)
     end
   end
-  
-  @spec redeem_bfusd_v1(Binance.Client.t(), term(), term(), Keyword.t()) :: {:ok, term()} | {:error, term()}
+
+  @spec redeem_bfusd_v1(Binance.Client.t(), term(), term(), Keyword.t()) ::
+          {:ok, term()} | {:error, term()}
   @doc """
   Redeem BFUSD
   Variant: Trade
@@ -198,16 +233,22 @@ defmodule Binance.API.SimpleEarn.Bfusd do
           method: "POST",
           base_url: base_url,
           url: "/sapi/v1/bfusd/redeem",
-          query: [amount: amount, type: type, recvWindow: Keyword.get(opts, :recvWindow), timestamp: nil],
+          query: [
+            amount: amount,
+            type: type,
+            recvWindow: Keyword.get(opts, :recvWindow),
+            timestamp: nil
+          ],
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
-    
+
       Binance.REST.HTTPClient.request(request)
     end
   end
-  
-  @spec subscribe_bfusd_v1(Binance.Client.t(), term(), term(), Keyword.t()) :: {:ok, term()} | {:error, term()}
+
+  @spec subscribe_bfusd_v1(Binance.Client.t(), term(), term(), Keyword.t()) ::
+          {:ok, term()} | {:error, term()}
   @doc """
   Subscribe BFUSD
   Variant: Trade
@@ -227,11 +268,16 @@ defmodule Binance.API.SimpleEarn.Bfusd do
           method: "POST",
           base_url: base_url,
           url: "/sapi/v1/bfusd/subscribe",
-          query: [asset: asset, amount: amount, recvWindow: Keyword.get(opts, :recvWindow), timestamp: nil],
+          query: [
+            asset: asset,
+            amount: amount,
+            recvWindow: Keyword.get(opts, :recvWindow),
+            timestamp: nil
+          ],
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
-    
+
       Binance.REST.HTTPClient.request(request)
     end
   end

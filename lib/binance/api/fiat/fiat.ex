@@ -10,7 +10,8 @@ defmodule Binance.API.Fiat do
     end
   end
 
-  @spec deposit_v1(Binance.Client.t(), term(), term(), term(), Keyword.t()) :: {:ok, term()} | {:error, term()}
+  @spec deposit_v1(Binance.Client.t(), term(), term(), term(), Keyword.t()) ::
+          {:ok, term()} | {:error, term()}
   @doc """
   Deposit
   Variant: Trade
@@ -31,15 +32,28 @@ defmodule Binance.API.Fiat do
           base_url: base_url,
           url: "/sapi/v1/fiat/deposit",
           query: [recvWindow: Keyword.get(opts, :recvWindow), timestamp: nil],
-          headers: [{"X-MBX-APIKEY", ""}, {"Content-Type", "application/x-www-form-urlencoded"}, {"Accept", "application/json"}],
-          body: %{mode: "urlencoded", urlencoded: [currency: currency, apiPaymentMethod: apiPaymentMethod, amount: amount, ext: Keyword.get(opts, :ext)]}
+          headers: [
+            {"X-MBX-APIKEY", ""},
+            {"Content-Type", "application/x-www-form-urlencoded"},
+            {"Accept", "application/json"}
+          ],
+          body: %{
+            mode: "urlencoded",
+            urlencoded: [
+              currency: currency,
+              apiPaymentMethod: apiPaymentMethod,
+              amount: amount,
+              ext: Keyword.get(opts, :ext)
+            ]
+          }
         })
-    
+
       Binance.REST.HTTPClient.request(request)
     end
   end
-  
-  @spec get_order_detail_v1(Binance.Client.t(), term(), Keyword.t()) :: {:ok, term()} | {:error, term()}
+
+  @spec get_order_detail_v1(Binance.Client.t(), term(), Keyword.t()) ::
+          {:ok, term()} | {:error, term()}
   @doc """
   Get Order Detail
   Variant: User Data
@@ -63,12 +77,13 @@ defmodule Binance.API.Fiat do
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
-    
+
       Binance.REST.HTTPClient.request(request)
     end
   end
-  
-  @spec get_fiat_deposit_withdraw_history_v1(Binance.Client.t(), term(), Keyword.t()) :: {:ok, term()} | {:error, term()}
+
+  @spec get_fiat_deposit_withdraw_history_v1(Binance.Client.t(), term(), Keyword.t()) ::
+          {:ok, term()} | {:error, term()}
   @doc """
   Get Fiat Deposit/Withdraw History
   Variant: User Data
@@ -88,16 +103,25 @@ defmodule Binance.API.Fiat do
           method: "GET",
           base_url: base_url,
           url: "/sapi/v1/fiat/orders",
-          query: [transactionType: transactionType, beginTime: Keyword.get(opts, :beginTime), endTime: Keyword.get(opts, :endTime), page: Keyword.get(opts, :page), rows: Keyword.get(opts, :rows), recvWindow: Keyword.get(opts, :recvWindow), timestamp: nil],
+          query: [
+            transactionType: transactionType,
+            beginTime: Keyword.get(opts, :beginTime),
+            endTime: Keyword.get(opts, :endTime),
+            page: Keyword.get(opts, :page),
+            rows: Keyword.get(opts, :rows),
+            recvWindow: Keyword.get(opts, :recvWindow),
+            timestamp: nil
+          ],
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
-    
+
       Binance.REST.HTTPClient.request(request)
     end
   end
-  
-  @spec get_fiat_payments_history_v1(Binance.Client.t(), term(), Keyword.t()) :: {:ok, term()} | {:error, term()}
+
+  @spec get_fiat_payments_history_v1(Binance.Client.t(), term(), Keyword.t()) ::
+          {:ok, term()} | {:error, term()}
   @doc """
   Get Fiat Payments History
   Variant: User Data
@@ -117,16 +141,25 @@ defmodule Binance.API.Fiat do
           method: "GET",
           base_url: base_url,
           url: "/sapi/v1/fiat/payments",
-          query: [transactionType: transactionType, beginTime: Keyword.get(opts, :beginTime), endTime: Keyword.get(opts, :endTime), page: Keyword.get(opts, :page), rows: Keyword.get(opts, :rows), recvWindow: Keyword.get(opts, :recvWindow), timestamp: nil],
+          query: [
+            transactionType: transactionType,
+            beginTime: Keyword.get(opts, :beginTime),
+            endTime: Keyword.get(opts, :endTime),
+            page: Keyword.get(opts, :page),
+            rows: Keyword.get(opts, :rows),
+            recvWindow: Keyword.get(opts, :recvWindow),
+            timestamp: nil
+          ],
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
-    
+
       Binance.REST.HTTPClient.request(request)
     end
   end
-  
-  @spec fiat_withdraw_v2(Binance.Client.t(), term(), term(), term(), term(), Keyword.t()) :: {:ok, term()} | {:error, term()}
+
+  @spec fiat_withdraw_v2(Binance.Client.t(), term(), term(), term(), term(), Keyword.t()) ::
+          {:ok, term()} | {:error, term()}
   @doc """
   Fiat Withdraw
   Variant: Withdraw
@@ -147,10 +180,23 @@ defmodule Binance.API.Fiat do
           base_url: base_url,
           url: "/sapi/v2/fiat/withdraw",
           query: [recvWindow: Keyword.get(opts, :recvWindow), timestamp: nil],
-          headers: [{"X-MBX-APIKEY", ""}, {"Content-Type", "application/x-www-form-urlencoded"}, {"Accept", "application/json"}],
-          body: %{mode: "urlencoded", urlencoded: [currency: currency, apiPaymentMethod: apiPaymentMethod, amount: amount, accountInfo: accountInfo, ext: Keyword.get(opts, :ext)]}
+          headers: [
+            {"X-MBX-APIKEY", ""},
+            {"Content-Type", "application/x-www-form-urlencoded"},
+            {"Accept", "application/json"}
+          ],
+          body: %{
+            mode: "urlencoded",
+            urlencoded: [
+              currency: currency,
+              apiPaymentMethod: apiPaymentMethod,
+              amount: amount,
+              accountInfo: accountInfo,
+              ext: Keyword.get(opts, :ext)
+            ]
+          }
         })
-    
+
       Binance.REST.HTTPClient.request(request)
     end
   end

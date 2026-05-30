@@ -10,7 +10,8 @@ defmodule Binance.API.MarginTrading.Account do
     end
   end
 
-  @spec get_bnb_burn_status_v1(Binance.Client.t(), Keyword.t()) :: {:ok, term()} | {:error, term()}
+  @spec get_bnb_burn_status_v1(Binance.Client.t(), Keyword.t()) ::
+          {:ok, term()} | {:error, term()}
   @doc """
   Get BNB Burn Status
   Variant: User Data
@@ -33,12 +34,13 @@ defmodule Binance.API.MarginTrading.Account do
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
-    
+
       Binance.REST.HTTPClient.request(request)
     end
   end
-  
-  @spec query_cross_margin_account_details_v1(Binance.Client.t(), Keyword.t()) :: {:ok, term()} | {:error, term()}
+
+  @spec query_cross_margin_account_details_v1(Binance.Client.t(), Keyword.t()) ::
+          {:ok, term()} | {:error, term()}
   @doc """
   Query Cross Margin Account Details
   Variant: User Data
@@ -61,12 +63,13 @@ defmodule Binance.API.MarginTrading.Account do
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
-    
+
       Binance.REST.HTTPClient.request(request)
     end
   end
-  
-  @spec query_cross_isolated_margin_capital_flow_v1(Binance.Client.t(), Keyword.t()) :: {:ok, term()} | {:error, term()}
+
+  @spec query_cross_isolated_margin_capital_flow_v1(Binance.Client.t(), Keyword.t()) ::
+          {:ok, term()} | {:error, term()}
   @doc """
   Query Cross Isolated Margin Capital Flow
   Variant: User Data
@@ -85,16 +88,27 @@ defmodule Binance.API.MarginTrading.Account do
           method: "GET",
           base_url: base_url,
           url: "/sapi/v1/margin/capital-flow",
-          query: [asset: Keyword.get(opts, :asset), symbol: Keyword.get(opts, :symbol), type: Keyword.get(opts, :type), startTime: Keyword.get(opts, :startTime), endTime: Keyword.get(opts, :endTime), fromId: Keyword.get(opts, :fromId), limit: Keyword.get(opts, :limit), recvWindow: Keyword.get(opts, :recvWindow), timestamp: nil],
+          query: [
+            asset: Keyword.get(opts, :asset),
+            symbol: Keyword.get(opts, :symbol),
+            type: Keyword.get(opts, :type),
+            startTime: Keyword.get(opts, :startTime),
+            endTime: Keyword.get(opts, :endTime),
+            fromId: Keyword.get(opts, :fromId),
+            limit: Keyword.get(opts, :limit),
+            recvWindow: Keyword.get(opts, :recvWindow),
+            timestamp: nil
+          ],
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
-    
+
       Binance.REST.HTTPClient.request(request)
     end
   end
-  
-  @spec query_cross_margin_fee_data_v1(Binance.Client.t(), Keyword.t()) :: {:ok, term()} | {:error, term()}
+
+  @spec query_cross_margin_fee_data_v1(Binance.Client.t(), Keyword.t()) ::
+          {:ok, term()} | {:error, term()}
   @doc """
   Query Cross Margin Fee Data
   Variant: User Data
@@ -113,16 +127,22 @@ defmodule Binance.API.MarginTrading.Account do
           method: "GET",
           base_url: base_url,
           url: "/sapi/v1/margin/crossMarginData",
-          query: [vipLevel: Keyword.get(opts, :vipLevel), coin: Keyword.get(opts, :coin), recvWindow: Keyword.get(opts, :recvWindow), timestamp: nil],
+          query: [
+            vipLevel: Keyword.get(opts, :vipLevel),
+            coin: Keyword.get(opts, :coin),
+            recvWindow: Keyword.get(opts, :recvWindow),
+            timestamp: nil
+          ],
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
-    
+
       Binance.REST.HTTPClient.request(request)
     end
   end
-  
-  @spec disable_isolated_margin_account_v1(Binance.Client.t(), term(), Keyword.t()) :: {:ok, term()} | {:error, term()}
+
+  @spec disable_isolated_margin_account_v1(Binance.Client.t(), term(), Keyword.t()) ::
+          {:ok, term()} | {:error, term()}
   @doc """
   Disable Isolated Margin Account
   Variant: Trade
@@ -146,12 +166,13 @@ defmodule Binance.API.MarginTrading.Account do
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
-    
+
       Binance.REST.HTTPClient.request(request)
     end
   end
-  
-  @spec enable_isolated_margin_account_v1(Binance.Client.t(), term(), Keyword.t()) :: {:ok, term()} | {:error, term()}
+
+  @spec enable_isolated_margin_account_v1(Binance.Client.t(), term(), Keyword.t()) ::
+          {:ok, term()} | {:error, term()}
   @doc """
   Enable Isolated Margin Account
   Variant: Trade
@@ -175,12 +196,13 @@ defmodule Binance.API.MarginTrading.Account do
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
-    
+
       Binance.REST.HTTPClient.request(request)
     end
   end
-  
-  @spec query_isolated_margin_account_info_v1(Binance.Client.t(), Keyword.t()) :: {:ok, term()} | {:error, term()}
+
+  @spec query_isolated_margin_account_info_v1(Binance.Client.t(), Keyword.t()) ::
+          {:ok, term()} | {:error, term()}
   @doc """
   Query Isolated Margin Account Info
   Variant: User Data
@@ -199,16 +221,21 @@ defmodule Binance.API.MarginTrading.Account do
           method: "GET",
           base_url: base_url,
           url: "/sapi/v1/margin/isolated/account",
-          query: [symbols: Keyword.get(opts, :symbols), recvWindow: Keyword.get(opts, :recvWindow), timestamp: nil],
+          query: [
+            symbols: Keyword.get(opts, :symbols),
+            recvWindow: Keyword.get(opts, :recvWindow),
+            timestamp: nil
+          ],
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
-    
+
       Binance.REST.HTTPClient.request(request)
     end
   end
-  
-  @spec query_enabled_isolated_margin_account_limit_v1(Binance.Client.t(), Keyword.t()) :: {:ok, term()} | {:error, term()}
+
+  @spec query_enabled_isolated_margin_account_limit_v1(Binance.Client.t(), Keyword.t()) ::
+          {:ok, term()} | {:error, term()}
   @doc """
   Query Enabled Isolated Margin Account Limit
   Variant: User Data
@@ -231,12 +258,13 @@ defmodule Binance.API.MarginTrading.Account do
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
-    
+
       Binance.REST.HTTPClient.request(request)
     end
   end
-  
-  @spec query_isolated_margin_fee_data_v1(Binance.Client.t(), Keyword.t()) :: {:ok, term()} | {:error, term()}
+
+  @spec query_isolated_margin_fee_data_v1(Binance.Client.t(), Keyword.t()) ::
+          {:ok, term()} | {:error, term()}
   @doc """
   Query Isolated Margin Fee Data
   Variant: User Data
@@ -255,16 +283,22 @@ defmodule Binance.API.MarginTrading.Account do
           method: "GET",
           base_url: base_url,
           url: "/sapi/v1/margin/isolatedMarginData",
-          query: [vipLevel: Keyword.get(opts, :vipLevel), symbol: Keyword.get(opts, :symbol), recvWindow: Keyword.get(opts, :recvWindow), timestamp: nil],
+          query: [
+            vipLevel: Keyword.get(opts, :vipLevel),
+            symbol: Keyword.get(opts, :symbol),
+            recvWindow: Keyword.get(opts, :recvWindow),
+            timestamp: nil
+          ],
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
-    
+
       Binance.REST.HTTPClient.request(request)
     end
   end
-  
-  @spec adjust_cross_margin_max_leverage_v1(Binance.Client.t(), term()) :: {:ok, term()} | {:error, term()}
+
+  @spec adjust_cross_margin_max_leverage_v1(Binance.Client.t(), term()) ::
+          {:ok, term()} | {:error, term()}
   @doc """
   Adjust cross margin max leverage
   Variant: User Data
@@ -287,12 +321,13 @@ defmodule Binance.API.MarginTrading.Account do
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
-    
+
       Binance.REST.HTTPClient.request(request)
     end
   end
-  
-  @spec get_summary_of_margin_account_v1(Binance.Client.t(), Keyword.t()) :: {:ok, term()} | {:error, term()}
+
+  @spec get_summary_of_margin_account_v1(Binance.Client.t(), Keyword.t()) ::
+          {:ok, term()} | {:error, term()}
   @doc """
   Get Summary of Margin account
   Variant: User Data
@@ -315,7 +350,7 @@ defmodule Binance.API.MarginTrading.Account do
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
-    
+
       Binance.REST.HTTPClient.request(request)
     end
   end

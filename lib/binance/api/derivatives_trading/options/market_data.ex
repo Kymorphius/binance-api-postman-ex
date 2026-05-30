@@ -1,7 +1,10 @@
 defmodule Binance.API.DerivativesTrading.Options.MarketData do
   @moduledoc false
 
-  @base_urls %{prod_url: "https://eapi.binance.com", testnet_url: "https://testnet.binancefuture.com"}
+  @base_urls %{
+    prod_url: "https://eapi.binance.com",
+    testnet_url: "https://testnet.binancefuture.com"
+  }
 
   def base_url(key \\ :prod_url) do
     case Map.fetch(@base_urls, key) do
@@ -10,7 +13,8 @@ defmodule Binance.API.DerivativesTrading.Options.MarketData do
     end
   end
 
-  @spec recent_block_trades_list_v1(Binance.Client.t(), Keyword.t()) :: {:ok, term()} | {:error, term()}
+  @spec recent_block_trades_list_v1(Binance.Client.t(), Keyword.t()) ::
+          {:ok, term()} | {:error, term()}
   @doc """
   Recent Block Trades List
   Method: GET
@@ -31,11 +35,11 @@ defmodule Binance.API.DerivativesTrading.Options.MarketData do
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
-    
+
       Binance.REST.HTTPClient.request(request)
     end
   end
-  
+
   @spec order_book_v1(Binance.Client.t(), term(), Keyword.t()) :: {:ok, term()} | {:error, term()}
   @doc """
   Order Book
@@ -58,11 +62,11 @@ defmodule Binance.API.DerivativesTrading.Options.MarketData do
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
-    
+
       Binance.REST.HTTPClient.request(request)
     end
   end
-  
+
   @spec exchange_information_v1(Binance.Client.t()) :: {:ok, term()} | {:error, term()}
   @doc """
   Exchange Information
@@ -83,12 +87,13 @@ defmodule Binance.API.DerivativesTrading.Options.MarketData do
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
-    
+
       Binance.REST.HTTPClient.request(request)
     end
   end
-  
-  @spec historical_exercise_records_v1(Binance.Client.t(), Keyword.t()) :: {:ok, term()} | {:error, term()}
+
+  @spec historical_exercise_records_v1(Binance.Client.t(), Keyword.t()) ::
+          {:ok, term()} | {:error, term()}
   @doc """
   Historical Exercise Records
   Method: GET
@@ -105,15 +110,20 @@ defmodule Binance.API.DerivativesTrading.Options.MarketData do
           method: "GET",
           base_url: base_url,
           url: "/eapi/v1/exerciseHistory",
-          query: [underlying: Keyword.get(opts, :underlying), startTime: Keyword.get(opts, :startTime), endTime: Keyword.get(opts, :endTime), limit: Keyword.get(opts, :limit)],
+          query: [
+            underlying: Keyword.get(opts, :underlying),
+            startTime: Keyword.get(opts, :startTime),
+            endTime: Keyword.get(opts, :endTime),
+            limit: Keyword.get(opts, :limit)
+          ],
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
-    
+
       Binance.REST.HTTPClient.request(request)
     end
   end
-  
+
   @spec index_price_v1(Binance.Client.t(), term()) :: {:ok, term()} | {:error, term()}
   @doc """
   Index Price
@@ -135,12 +145,13 @@ defmodule Binance.API.DerivativesTrading.Options.MarketData do
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
-    
+
       Binance.REST.HTTPClient.request(request)
     end
   end
-  
-  @spec kline_candlestick_data_v1(Binance.Client.t(), term(), term(), Keyword.t()) :: {:ok, term()} | {:error, term()}
+
+  @spec kline_candlestick_data_v1(Binance.Client.t(), term(), term(), Keyword.t()) ::
+          {:ok, term()} | {:error, term()}
   @doc """
   Kline/Candlestick Data
   Method: GET
@@ -158,15 +169,21 @@ defmodule Binance.API.DerivativesTrading.Options.MarketData do
           method: "GET",
           base_url: base_url,
           url: "/eapi/v1/klines",
-          query: [symbol: symbol, interval: interval, startTime: Keyword.get(opts, :startTime), endTime: Keyword.get(opts, :endTime), limit: Keyword.get(opts, :limit)],
+          query: [
+            symbol: symbol,
+            interval: interval,
+            startTime: Keyword.get(opts, :startTime),
+            endTime: Keyword.get(opts, :endTime),
+            limit: Keyword.get(opts, :limit)
+          ],
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
-    
+
       Binance.REST.HTTPClient.request(request)
     end
   end
-  
+
   @spec option_mark_price_v1(Binance.Client.t(), Keyword.t()) :: {:ok, term()} | {:error, term()}
   @doc """
   Option Mark Price
@@ -188,11 +205,11 @@ defmodule Binance.API.DerivativesTrading.Options.MarketData do
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
-    
+
       Binance.REST.HTTPClient.request(request)
     end
   end
-  
+
   @spec open_interest_v1(Binance.Client.t(), term(), term()) :: {:ok, term()} | {:error, term()}
   @doc """
   Open Interest
@@ -214,11 +231,11 @@ defmodule Binance.API.DerivativesTrading.Options.MarketData do
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
-    
+
       Binance.REST.HTTPClient.request(request)
     end
   end
-  
+
   @spec test_connectivity_v1(Binance.Client.t()) :: {:ok, term()} | {:error, term()}
   @doc """
   Test Connectivity
@@ -239,12 +256,13 @@ defmodule Binance.API.DerivativesTrading.Options.MarketData do
           headers: [{"X-MBX-APIKEY", ""}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
-    
+
       Binance.REST.HTTPClient.request(request)
     end
   end
-  
-  @spec x_24hr_ticker_price_change_statistics_v1(Binance.Client.t(), Keyword.t()) :: {:ok, term()} | {:error, term()}
+
+  @spec x_24hr_ticker_price_change_statistics_v1(Binance.Client.t(), Keyword.t()) ::
+          {:ok, term()} | {:error, term()}
   @doc """
   24hr Ticker Price Change Statistics
   Method: GET
@@ -265,11 +283,11 @@ defmodule Binance.API.DerivativesTrading.Options.MarketData do
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
-    
+
       Binance.REST.HTTPClient.request(request)
     end
   end
-  
+
   @spec check_server_time_v1(Binance.Client.t()) :: {:ok, term()} | {:error, term()}
   @doc """
   Check Server Time
@@ -290,12 +308,13 @@ defmodule Binance.API.DerivativesTrading.Options.MarketData do
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
-    
+
       Binance.REST.HTTPClient.request(request)
     end
   end
-  
-  @spec recent_trades_list_v1(Binance.Client.t(), term(), Keyword.t()) :: {:ok, term()} | {:error, term()}
+
+  @spec recent_trades_list_v1(Binance.Client.t(), term(), Keyword.t()) ::
+          {:ok, term()} | {:error, term()}
   @doc """
   Recent Trades List
   Method: GET
@@ -317,7 +336,7 @@ defmodule Binance.API.DerivativesTrading.Options.MarketData do
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
-    
+
       Binance.REST.HTTPClient.request(request)
     end
   end

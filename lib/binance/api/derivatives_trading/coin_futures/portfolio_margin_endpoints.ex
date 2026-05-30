@@ -1,7 +1,10 @@
 defmodule Binance.API.DerivativesTrading.CoinFutures.PortfolioMarginEndpoints do
   @moduledoc false
 
-  @base_urls %{prod_url: "https://dapi.binance.com", testnet_url: "https://testnet.binancefuture.com"}
+  @base_urls %{
+    prod_url: "https://dapi.binance.com",
+    testnet_url: "https://testnet.binancefuture.com"
+  }
 
   def base_url(key \\ :prod_url) do
     case Map.fetch(@base_urls, key) do
@@ -10,7 +13,8 @@ defmodule Binance.API.DerivativesTrading.CoinFutures.PortfolioMarginEndpoints do
     end
   end
 
-  @spec classic_portfolio_margin_account_information_v1(Binance.Client.t(), term(), Keyword.t()) :: {:ok, term()} | {:error, term()}
+  @spec classic_portfolio_margin_account_information_v1(Binance.Client.t(), term(), Keyword.t()) ::
+          {:ok, term()} | {:error, term()}
   @doc """
   Classic Portfolio Margin Account Information
   Variant: User Data
@@ -34,7 +38,7 @@ defmodule Binance.API.DerivativesTrading.CoinFutures.PortfolioMarginEndpoints do
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
-    
+
       Binance.REST.HTTPClient.request(request)
     end
   end

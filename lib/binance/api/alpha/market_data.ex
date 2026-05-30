@@ -10,7 +10,8 @@ defmodule Binance.API.Alpha.MarketData do
     end
   end
 
-  @spec aggregated_trades_v1(Binance.Client.t(), term(), Keyword.t()) :: {:ok, term()} | {:error, term()}
+  @spec aggregated_trades_v1(Binance.Client.t(), term(), Keyword.t()) ::
+          {:ok, term()} | {:error, term()}
   @doc """
   Aggregated Trades
   Method: GET
@@ -28,15 +29,21 @@ defmodule Binance.API.Alpha.MarketData do
           method: "GET",
           base_url: base_url,
           url: "/bapi/defi/v1/public/alpha-trade/agg-trades",
-          query: [symbol: symbol, fromId: Keyword.get(opts, :fromId), startTime: Keyword.get(opts, :startTime), endTime: Keyword.get(opts, :endTime), limit: Keyword.get(opts, :limit)],
+          query: [
+            symbol: symbol,
+            fromId: Keyword.get(opts, :fromId),
+            startTime: Keyword.get(opts, :startTime),
+            endTime: Keyword.get(opts, :endTime),
+            limit: Keyword.get(opts, :limit)
+          ],
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
-    
+
       Binance.REST.HTTPClient.request(request)
     end
   end
-  
+
   @spec get_exchange_info_v1(Binance.Client.t()) :: {:ok, term()} | {:error, term()}
   @doc """
   Get Exchange Info
@@ -57,12 +64,13 @@ defmodule Binance.API.Alpha.MarketData do
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
-    
+
       Binance.REST.HTTPClient.request(request)
     end
   end
-  
-  @spec klines_v1(Binance.Client.t(), term(), term(), Keyword.t()) :: {:ok, term()} | {:error, term()}
+
+  @spec klines_v1(Binance.Client.t(), term(), term(), Keyword.t()) ::
+          {:ok, term()} | {:error, term()}
   @doc """
   Klines
   Variant: Candlestick Data
@@ -82,15 +90,21 @@ defmodule Binance.API.Alpha.MarketData do
           method: "GET",
           base_url: base_url,
           url: "/bapi/defi/v1/public/alpha-trade/klines",
-          query: [symbol: symbol, interval: interval, limit: Keyword.get(opts, :limit), startTime: Keyword.get(opts, :startTime), endTime: Keyword.get(opts, :endTime)],
+          query: [
+            symbol: symbol,
+            interval: interval,
+            limit: Keyword.get(opts, :limit),
+            startTime: Keyword.get(opts, :startTime),
+            endTime: Keyword.get(opts, :endTime)
+          ],
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
-    
+
       Binance.REST.HTTPClient.request(request)
     end
   end
-  
+
   @spec ticker_v1(Binance.Client.t(), term()) :: {:ok, term()} | {:error, term()}
   @doc """
   Ticker
@@ -114,11 +128,11 @@ defmodule Binance.API.Alpha.MarketData do
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
-    
+
       Binance.REST.HTTPClient.request(request)
     end
   end
-  
+
   @spec token_list_v1(Binance.Client.t()) :: {:ok, term()} | {:error, term()}
   @doc """
   Token List
@@ -139,7 +153,7 @@ defmodule Binance.API.Alpha.MarketData do
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
-    
+
       Binance.REST.HTTPClient.request(request)
     end
   end

@@ -10,7 +10,8 @@ defmodule Binance.API.CryptoLoan.StableRate do
     end
   end
 
-  @spec get_loan_borrow_history_v1(Binance.Client.t(), Keyword.t()) :: {:ok, term()} | {:error, term()}
+  @spec get_loan_borrow_history_v1(Binance.Client.t(), Keyword.t()) ::
+          {:ok, term()} | {:error, term()}
   @doc """
   Get Loan Borrow History
   Variant: User Data
@@ -29,16 +30,27 @@ defmodule Binance.API.CryptoLoan.StableRate do
           method: "GET",
           base_url: base_url,
           url: "/sapi/v1/loan/borrow/history",
-          query: [orderId: Keyword.get(opts, :orderId), loanCoin: Keyword.get(opts, :loanCoin), collateralCoin: Keyword.get(opts, :collateralCoin), startTime: Keyword.get(opts, :startTime), endTime: Keyword.get(opts, :endTime), current: Keyword.get(opts, :current), limit: Keyword.get(opts, :limit), recvWindow: Keyword.get(opts, :recvWindow), timestamp: nil],
+          query: [
+            orderId: Keyword.get(opts, :orderId),
+            loanCoin: Keyword.get(opts, :loanCoin),
+            collateralCoin: Keyword.get(opts, :collateralCoin),
+            startTime: Keyword.get(opts, :startTime),
+            endTime: Keyword.get(opts, :endTime),
+            current: Keyword.get(opts, :current),
+            limit: Keyword.get(opts, :limit),
+            recvWindow: Keyword.get(opts, :recvWindow),
+            timestamp: nil
+          ],
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
-    
+
       Binance.REST.HTTPClient.request(request)
     end
   end
-  
-  @spec get_crypto_loans_income_history_v1(Binance.Client.t(), Keyword.t()) :: {:ok, term()} | {:error, term()}
+
+  @spec get_crypto_loans_income_history_v1(Binance.Client.t(), Keyword.t()) ::
+          {:ok, term()} | {:error, term()}
   @doc """
   Get Crypto Loans Income History
   Variant: User Data
@@ -57,16 +69,25 @@ defmodule Binance.API.CryptoLoan.StableRate do
           method: "GET",
           base_url: base_url,
           url: "/sapi/v1/loan/income",
-          query: [asset: Keyword.get(opts, :asset), type: Keyword.get(opts, :type), startTime: Keyword.get(opts, :startTime), endTime: Keyword.get(opts, :endTime), limit: Keyword.get(opts, :limit), recvWindow: Keyword.get(opts, :recvWindow), timestamp: nil],
+          query: [
+            asset: Keyword.get(opts, :asset),
+            type: Keyword.get(opts, :type),
+            startTime: Keyword.get(opts, :startTime),
+            endTime: Keyword.get(opts, :endTime),
+            limit: Keyword.get(opts, :limit),
+            recvWindow: Keyword.get(opts, :recvWindow),
+            timestamp: nil
+          ],
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
-    
+
       Binance.REST.HTTPClient.request(request)
     end
   end
-  
-  @spec get_loan_ltv_adjustment_history_v1(Binance.Client.t(), Keyword.t()) :: {:ok, term()} | {:error, term()}
+
+  @spec get_loan_ltv_adjustment_history_v1(Binance.Client.t(), Keyword.t()) ::
+          {:ok, term()} | {:error, term()}
   @doc """
   Get Loan LTV Adjustment History
   Variant: User Data
@@ -85,16 +106,27 @@ defmodule Binance.API.CryptoLoan.StableRate do
           method: "GET",
           base_url: base_url,
           url: "/sapi/v1/loan/ltv/adjustment/history",
-          query: [orderId: Keyword.get(opts, :orderId), loanCoin: Keyword.get(opts, :loanCoin), collateralCoin: Keyword.get(opts, :collateralCoin), startTime: Keyword.get(opts, :startTime), endTime: Keyword.get(opts, :endTime), current: Keyword.get(opts, :current), limit: Keyword.get(opts, :limit), recvWindow: Keyword.get(opts, :recvWindow), timestamp: nil],
+          query: [
+            orderId: Keyword.get(opts, :orderId),
+            loanCoin: Keyword.get(opts, :loanCoin),
+            collateralCoin: Keyword.get(opts, :collateralCoin),
+            startTime: Keyword.get(opts, :startTime),
+            endTime: Keyword.get(opts, :endTime),
+            current: Keyword.get(opts, :current),
+            limit: Keyword.get(opts, :limit),
+            recvWindow: Keyword.get(opts, :recvWindow),
+            timestamp: nil
+          ],
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
-    
+
       Binance.REST.HTTPClient.request(request)
     end
   end
-  
-  @spec check_collateral_repay_rate_v1(Binance.Client.t(), term(), term(), term(), Keyword.t()) :: {:ok, term()} | {:error, term()}
+
+  @spec check_collateral_repay_rate_v1(Binance.Client.t(), term(), term(), term(), Keyword.t()) ::
+          {:ok, term()} | {:error, term()}
   @doc """
   Check Collateral Repay Rate
   Variant: User Data
@@ -114,16 +146,23 @@ defmodule Binance.API.CryptoLoan.StableRate do
           method: "GET",
           base_url: base_url,
           url: "/sapi/v1/loan/repay/collateral/rate",
-          query: [loanCoin: loanCoin, collateralCoin: collateralCoin, repayAmount: repayAmount, recvWindow: Keyword.get(opts, :recvWindow), timestamp: nil],
+          query: [
+            loanCoin: loanCoin,
+            collateralCoin: collateralCoin,
+            repayAmount: repayAmount,
+            recvWindow: Keyword.get(opts, :recvWindow),
+            timestamp: nil
+          ],
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
-    
+
       Binance.REST.HTTPClient.request(request)
     end
   end
-  
-  @spec get_loan_repayment_history_v1(Binance.Client.t(), Keyword.t()) :: {:ok, term()} | {:error, term()}
+
+  @spec get_loan_repayment_history_v1(Binance.Client.t(), Keyword.t()) ::
+          {:ok, term()} | {:error, term()}
   @doc """
   Get Loan Repayment History
   Variant: User Data
@@ -142,11 +181,21 @@ defmodule Binance.API.CryptoLoan.StableRate do
           method: "GET",
           base_url: base_url,
           url: "/sapi/v1/loan/repay/history",
-          query: [orderId: Keyword.get(opts, :orderId), loanCoin: Keyword.get(opts, :loanCoin), collateralCoin: Keyword.get(opts, :collateralCoin), startTime: Keyword.get(opts, :startTime), endTime: Keyword.get(opts, :endTime), current: Keyword.get(opts, :current), limit: Keyword.get(opts, :limit), recvWindow: Keyword.get(opts, :recvWindow), timestamp: nil],
+          query: [
+            orderId: Keyword.get(opts, :orderId),
+            loanCoin: Keyword.get(opts, :loanCoin),
+            collateralCoin: Keyword.get(opts, :collateralCoin),
+            startTime: Keyword.get(opts, :startTime),
+            endTime: Keyword.get(opts, :endTime),
+            current: Keyword.get(opts, :current),
+            limit: Keyword.get(opts, :limit),
+            recvWindow: Keyword.get(opts, :recvWindow),
+            timestamp: nil
+          ],
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
-    
+
       Binance.REST.HTTPClient.request(request)
     end
   end

@@ -1,7 +1,10 @@
 defmodule Binance.API.DerivativesTrading.PortfolioMargin.MarketData do
   @moduledoc false
 
-  @base_urls %{prod_url: "https://papi.binance.com", testnet_url: "https://testnet.binancefuture.com"}
+  @base_urls %{
+    prod_url: "https://papi.binance.com",
+    testnet_url: "https://testnet.binancefuture.com"
+  }
 
   def base_url(key \\ :prod_url) do
     case Map.fetch(@base_urls, key) do
@@ -30,7 +33,7 @@ defmodule Binance.API.DerivativesTrading.PortfolioMargin.MarketData do
           headers: [{"X-MBX-APIKEY", ""}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
-    
+
       Binance.REST.HTTPClient.request(request)
     end
   end

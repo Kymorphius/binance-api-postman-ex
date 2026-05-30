@@ -14,7 +14,9 @@ defmodule BinanceApiPostmanEx do
 
     cond do
       File.dir?(@repo_dir) and File.dir?(Path.join(@repo_dir, ".git")) ->
-        {output, status} = System.cmd("git", ["-C", @repo_dir, "pull", "--ff-only"], stderr_to_stdout: true)
+        {output, status} =
+          System.cmd("git", ["-C", @repo_dir, "pull", "--ff-only"], stderr_to_stdout: true)
+
         {:ok, %{action: :updated, status: status, output: output}}
 
       File.exists?(@repo_dir) ->

@@ -10,7 +10,8 @@ defmodule Binance.API.VipLoan.UserInformation do
     end
   end
 
-  @spec get_vip_loan_accrued_interest_v1(Binance.Client.t(), Keyword.t()) :: {:ok, term()} | {:error, term()}
+  @spec get_vip_loan_accrued_interest_v1(Binance.Client.t(), Keyword.t()) ::
+          {:ok, term()} | {:error, term()}
   @doc """
   Get VIP Loan Accrued Interest
   Variant: User Data
@@ -29,16 +30,26 @@ defmodule Binance.API.VipLoan.UserInformation do
           method: "GET",
           base_url: base_url,
           url: "/sapi/v1/loan/vip/accruedInterest",
-          query: [orderId: Keyword.get(opts, :orderId), loanCoin: Keyword.get(opts, :loanCoin), startTime: Keyword.get(opts, :startTime), endTime: Keyword.get(opts, :endTime), current: Keyword.get(opts, :current), limit: Keyword.get(opts, :limit), recvWindow: Keyword.get(opts, :recvWindow), timestamp: nil],
+          query: [
+            orderId: Keyword.get(opts, :orderId),
+            loanCoin: Keyword.get(opts, :loanCoin),
+            startTime: Keyword.get(opts, :startTime),
+            endTime: Keyword.get(opts, :endTime),
+            current: Keyword.get(opts, :current),
+            limit: Keyword.get(opts, :limit),
+            recvWindow: Keyword.get(opts, :recvWindow),
+            timestamp: nil
+          ],
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
-    
+
       Binance.REST.HTTPClient.request(request)
     end
   end
-  
-  @spec check_vip_loan_collateral_account_v1(Binance.Client.t(), Keyword.t()) :: {:ok, term()} | {:error, term()}
+
+  @spec check_vip_loan_collateral_account_v1(Binance.Client.t(), Keyword.t()) ::
+          {:ok, term()} | {:error, term()}
   @doc """
   Check VIP Loan Collateral Account
   Variant: User Data
@@ -57,16 +68,22 @@ defmodule Binance.API.VipLoan.UserInformation do
           method: "GET",
           base_url: base_url,
           url: "/sapi/v1/loan/vip/collateral/account",
-          query: [orderId: Keyword.get(opts, :orderId), collateralAccountId: Keyword.get(opts, :collateralAccountId), recvWindow: Keyword.get(opts, :recvWindow), timestamp: nil],
+          query: [
+            orderId: Keyword.get(opts, :orderId),
+            collateralAccountId: Keyword.get(opts, :collateralAccountId),
+            recvWindow: Keyword.get(opts, :recvWindow),
+            timestamp: nil
+          ],
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
-    
+
       Binance.REST.HTTPClient.request(request)
     end
   end
-  
-  @spec get_vip_loan_ongoing_orders_v1(Binance.Client.t(), Keyword.t()) :: {:ok, term()} | {:error, term()}
+
+  @spec get_vip_loan_ongoing_orders_v1(Binance.Client.t(), Keyword.t()) ::
+          {:ok, term()} | {:error, term()}
   @doc """
   Get VIP Loan Ongoing Orders
   Variant: User Data
@@ -85,16 +102,26 @@ defmodule Binance.API.VipLoan.UserInformation do
           method: "GET",
           base_url: base_url,
           url: "/sapi/v1/loan/vip/ongoing/orders",
-          query: [orderId: Keyword.get(opts, :orderId), collateralAccountId: Keyword.get(opts, :collateralAccountId), loanCoin: Keyword.get(opts, :loanCoin), collateralCoin: Keyword.get(opts, :collateralCoin), current: Keyword.get(opts, :current), limit: Keyword.get(opts, :limit), recvWindow: Keyword.get(opts, :recvWindow), timestamp: nil],
+          query: [
+            orderId: Keyword.get(opts, :orderId),
+            collateralAccountId: Keyword.get(opts, :collateralAccountId),
+            loanCoin: Keyword.get(opts, :loanCoin),
+            collateralCoin: Keyword.get(opts, :collateralCoin),
+            current: Keyword.get(opts, :current),
+            limit: Keyword.get(opts, :limit),
+            recvWindow: Keyword.get(opts, :recvWindow),
+            timestamp: nil
+          ],
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
-    
+
       Binance.REST.HTTPClient.request(request)
     end
   end
-  
-  @spec query_application_status_v1(Binance.Client.t(), Keyword.t()) :: {:ok, term()} | {:error, term()}
+
+  @spec query_application_status_v1(Binance.Client.t(), Keyword.t()) ::
+          {:ok, term()} | {:error, term()}
   @doc """
   Query Application Status
   Variant: User Data
@@ -113,11 +140,16 @@ defmodule Binance.API.VipLoan.UserInformation do
           method: "GET",
           base_url: base_url,
           url: "/sapi/v1/loan/vip/request/data",
-          query: [current: Keyword.get(opts, :current), limit: Keyword.get(opts, :limit), recvWindow: Keyword.get(opts, :recvWindow), timestamp: nil],
+          query: [
+            current: Keyword.get(opts, :current),
+            limit: Keyword.get(opts, :limit),
+            recvWindow: Keyword.get(opts, :recvWindow),
+            timestamp: nil
+          ],
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
-    
+
       Binance.REST.HTTPClient.request(request)
     end
   end

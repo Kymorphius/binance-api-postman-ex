@@ -10,7 +10,8 @@ defmodule Binance.API.Staking.OnChainYields do
     end
   end
 
-  @spec on_chain_yields_account_v1(Binance.Client.t(), Keyword.t()) :: {:ok, term()} | {:error, term()}
+  @spec on_chain_yields_account_v1(Binance.Client.t(), Keyword.t()) ::
+          {:ok, term()} | {:error, term()}
   @doc """
   On-chain Yields Account
   Variant: User Data
@@ -33,12 +34,13 @@ defmodule Binance.API.Staking.OnChainYields do
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
-    
+
       Binance.REST.HTTPClient.request(request)
     end
   end
-  
-  @spec get_on_chain_yields_locked_redemption_record_v1(Binance.Client.t(), Keyword.t()) :: {:ok, term()} | {:error, term()}
+
+  @spec get_on_chain_yields_locked_redemption_record_v1(Binance.Client.t(), Keyword.t()) ::
+          {:ok, term()} | {:error, term()}
   @doc """
   Get On-chain Yields Locked Redemption Record
   Variant: User Data
@@ -57,16 +59,27 @@ defmodule Binance.API.Staking.OnChainYields do
           method: "GET",
           base_url: base_url,
           url: "/sapi/v1/onchain-yields/locked/history/redemptionRecord",
-          query: [positionId: Keyword.get(opts, :positionId), redeemId: Keyword.get(opts, :redeemId), asset: Keyword.get(opts, :asset), startTime: Keyword.get(opts, :startTime), endTime: Keyword.get(opts, :endTime), current: Keyword.get(opts, :current), size: Keyword.get(opts, :size), recvWindow: Keyword.get(opts, :recvWindow), timestamp: nil],
+          query: [
+            positionId: Keyword.get(opts, :positionId),
+            redeemId: Keyword.get(opts, :redeemId),
+            asset: Keyword.get(opts, :asset),
+            startTime: Keyword.get(opts, :startTime),
+            endTime: Keyword.get(opts, :endTime),
+            current: Keyword.get(opts, :current),
+            size: Keyword.get(opts, :size),
+            recvWindow: Keyword.get(opts, :recvWindow),
+            timestamp: nil
+          ],
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
-    
+
       Binance.REST.HTTPClient.request(request)
     end
   end
-  
-  @spec get_on_chain_yields_locked_rewards_history_v1(Binance.Client.t(), Keyword.t()) :: {:ok, term()} | {:error, term()}
+
+  @spec get_on_chain_yields_locked_rewards_history_v1(Binance.Client.t(), Keyword.t()) ::
+          {:ok, term()} | {:error, term()}
   @doc """
   Get On-chain Yields Locked Rewards History
   Variant: User Data
@@ -85,16 +98,26 @@ defmodule Binance.API.Staking.OnChainYields do
           method: "GET",
           base_url: base_url,
           url: "/sapi/v1/onchain-yields/locked/history/rewardsRecord",
-          query: [positionId: Keyword.get(opts, :positionId), asset: Keyword.get(opts, :asset), startTime: Keyword.get(opts, :startTime), endTime: Keyword.get(opts, :endTime), current: Keyword.get(opts, :current), size: Keyword.get(opts, :size), recvWindow: Keyword.get(opts, :recvWindow), timestamp: nil],
+          query: [
+            positionId: Keyword.get(opts, :positionId),
+            asset: Keyword.get(opts, :asset),
+            startTime: Keyword.get(opts, :startTime),
+            endTime: Keyword.get(opts, :endTime),
+            current: Keyword.get(opts, :current),
+            size: Keyword.get(opts, :size),
+            recvWindow: Keyword.get(opts, :recvWindow),
+            timestamp: nil
+          ],
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
-    
+
       Binance.REST.HTTPClient.request(request)
     end
   end
-  
-  @spec get_on_chain_yields_locked_subscription_record_v1(Binance.Client.t(), Keyword.t()) :: {:ok, term()} | {:error, term()}
+
+  @spec get_on_chain_yields_locked_subscription_record_v1(Binance.Client.t(), Keyword.t()) ::
+          {:ok, term()} | {:error, term()}
   @doc """
   Get On-chain Yields Locked Subscription Record
   Variant: User Data
@@ -113,16 +136,27 @@ defmodule Binance.API.Staking.OnChainYields do
           method: "GET",
           base_url: base_url,
           url: "/sapi/v1/onchain-yields/locked/history/subscriptionRecord",
-          query: [purchaseId: Keyword.get(opts, :purchaseId), clientId: Keyword.get(opts, :clientId), asset: Keyword.get(opts, :asset), startTime: Keyword.get(opts, :startTime), endTime: Keyword.get(opts, :endTime), current: Keyword.get(opts, :current), size: Keyword.get(opts, :size), recvWindow: Keyword.get(opts, :recvWindow), timestamp: nil],
+          query: [
+            purchaseId: Keyword.get(opts, :purchaseId),
+            clientId: Keyword.get(opts, :clientId),
+            asset: Keyword.get(opts, :asset),
+            startTime: Keyword.get(opts, :startTime),
+            endTime: Keyword.get(opts, :endTime),
+            current: Keyword.get(opts, :current),
+            size: Keyword.get(opts, :size),
+            recvWindow: Keyword.get(opts, :recvWindow),
+            timestamp: nil
+          ],
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
-    
+
       Binance.REST.HTTPClient.request(request)
     end
   end
-  
-  @spec get_on_chain_yields_locked_product_list_v1(Binance.Client.t(), Keyword.t()) :: {:ok, term()} | {:error, term()}
+
+  @spec get_on_chain_yields_locked_product_list_v1(Binance.Client.t(), Keyword.t()) ::
+          {:ok, term()} | {:error, term()}
   @doc """
   Get On-chain Yields Locked Product List
   Variant: User Data
@@ -141,16 +175,23 @@ defmodule Binance.API.Staking.OnChainYields do
           method: "GET",
           base_url: base_url,
           url: "/sapi/v1/onchain-yields/locked/list",
-          query: [asset: Keyword.get(opts, :asset), current: Keyword.get(opts, :current), size: Keyword.get(opts, :size), recvWindow: Keyword.get(opts, :recvWindow), timestamp: nil],
+          query: [
+            asset: Keyword.get(opts, :asset),
+            current: Keyword.get(opts, :current),
+            size: Keyword.get(opts, :size),
+            recvWindow: Keyword.get(opts, :recvWindow),
+            timestamp: nil
+          ],
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
-    
+
       Binance.REST.HTTPClient.request(request)
     end
   end
-  
-  @spec get_on_chain_yields_locked_personal_left_quota_v1(Binance.Client.t(), term(), Keyword.t()) :: {:ok, term()} | {:error, term()}
+
+  @spec get_on_chain_yields_locked_personal_left_quota_v1(Binance.Client.t(), term(), Keyword.t()) ::
+          {:ok, term()} | {:error, term()}
   @doc """
   Get On-chain Yields Locked Personal Left Quota
   Variant: User Data
@@ -170,16 +211,21 @@ defmodule Binance.API.Staking.OnChainYields do
           method: "GET",
           base_url: base_url,
           url: "/sapi/v1/onchain-yields/locked/personalLeftQuota",
-          query: [projectId: projectId, recvWindow: Keyword.get(opts, :recvWindow), timestamp: nil],
+          query: [
+            projectId: projectId,
+            recvWindow: Keyword.get(opts, :recvWindow),
+            timestamp: nil
+          ],
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
-    
+
       Binance.REST.HTTPClient.request(request)
     end
   end
-  
-  @spec get_on_chain_yields_locked_product_position_v1(Binance.Client.t(), Keyword.t()) :: {:ok, term()} | {:error, term()}
+
+  @spec get_on_chain_yields_locked_product_position_v1(Binance.Client.t(), Keyword.t()) ::
+          {:ok, term()} | {:error, term()}
   @doc """
   Get On-chain Yields Locked Product Position
   Variant: User Data
@@ -198,16 +244,25 @@ defmodule Binance.API.Staking.OnChainYields do
           method: "GET",
           base_url: base_url,
           url: "/sapi/v1/onchain-yields/locked/position",
-          query: [asset: Keyword.get(opts, :asset), positionId: Keyword.get(opts, :positionId), projectId: Keyword.get(opts, :projectId), current: Keyword.get(opts, :current), size: Keyword.get(opts, :size), recvWindow: Keyword.get(opts, :recvWindow), timestamp: nil],
+          query: [
+            asset: Keyword.get(opts, :asset),
+            positionId: Keyword.get(opts, :positionId),
+            projectId: Keyword.get(opts, :projectId),
+            current: Keyword.get(opts, :current),
+            size: Keyword.get(opts, :size),
+            recvWindow: Keyword.get(opts, :recvWindow),
+            timestamp: nil
+          ],
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
-    
+
       Binance.REST.HTTPClient.request(request)
     end
   end
-  
-  @spec redeem_on_chain_yields_locked_product_v1(Binance.Client.t(), term(), Keyword.t()) :: {:ok, term()} | {:error, term()}
+
+  @spec redeem_on_chain_yields_locked_product_v1(Binance.Client.t(), term(), Keyword.t()) ::
+          {:ok, term()} | {:error, term()}
   @doc """
   Redeem On-chain Yields Locked Product
   Variant: Trade
@@ -227,16 +282,26 @@ defmodule Binance.API.Staking.OnChainYields do
           method: "POST",
           base_url: base_url,
           url: "/sapi/v1/onchain-yields/locked/redeem",
-          query: [positionId: positionId, channelId: Keyword.get(opts, :channelId), recvWindow: Keyword.get(opts, :recvWindow), timestamp: nil],
+          query: [
+            positionId: positionId,
+            channelId: Keyword.get(opts, :channelId),
+            recvWindow: Keyword.get(opts, :recvWindow),
+            timestamp: nil
+          ],
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
-    
+
       Binance.REST.HTTPClient.request(request)
     end
   end
-  
-  @spec set_on_chain_yields_locked_auto_subscribe_v1(Binance.Client.t(), term(), term(), Keyword.t()) :: {:ok, term()} | {:error, term()}
+
+  @spec set_on_chain_yields_locked_auto_subscribe_v1(
+          Binance.Client.t(),
+          term(),
+          term(),
+          Keyword.t()
+        ) :: {:ok, term()} | {:error, term()}
   @doc """
   Set On-chain Yields Locked Auto Subscribe
   Variant: User Data
@@ -256,16 +321,26 @@ defmodule Binance.API.Staking.OnChainYields do
           method: "POST",
           base_url: base_url,
           url: "/sapi/v1/onchain-yields/locked/setAutoSubscribe",
-          query: [positionId: positionId, autoSubscribe: autoSubscribe, recvWindow: Keyword.get(opts, :recvWindow), timestamp: nil],
+          query: [
+            positionId: positionId,
+            autoSubscribe: autoSubscribe,
+            recvWindow: Keyword.get(opts, :recvWindow),
+            timestamp: nil
+          ],
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
-    
+
       Binance.REST.HTTPClient.request(request)
     end
   end
-  
-  @spec set_on_chain_yields_locked_product_redeem_option_v1(Binance.Client.t(), term(), term(), Keyword.t()) :: {:ok, term()} | {:error, term()}
+
+  @spec set_on_chain_yields_locked_product_redeem_option_v1(
+          Binance.Client.t(),
+          term(),
+          term(),
+          Keyword.t()
+        ) :: {:ok, term()} | {:error, term()}
   @doc """
   Set On-chain Yields Locked Product Redeem Option
   Variant: User Data
@@ -276,7 +351,12 @@ defmodule Binance.API.Staking.OnChainYields do
   Required: positionId, redeemTo
   Optional: recvWindow
   """
-  def set_on_chain_yields_locked_product_redeem_option_v1(client, positionId, redeemTo, opts \\ []) do
+  def set_on_chain_yields_locked_product_redeem_option_v1(
+        client,
+        positionId,
+        redeemTo,
+        opts \\ []
+      ) do
     with {:ok, base_url} <- base_url(client.env) do
       {:ok, request} =
         Binance.RequestBuilder.build(%{
@@ -285,16 +365,26 @@ defmodule Binance.API.Staking.OnChainYields do
           method: "POST",
           base_url: base_url,
           url: "/sapi/v1/onchain-yields/locked/setRedeemOption",
-          query: [positionId: positionId, redeemTo: redeemTo, recvWindow: Keyword.get(opts, :recvWindow), timestamp: nil],
+          query: [
+            positionId: positionId,
+            redeemTo: redeemTo,
+            recvWindow: Keyword.get(opts, :recvWindow),
+            timestamp: nil
+          ],
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
-    
+
       Binance.REST.HTTPClient.request(request)
     end
   end
-  
-  @spec subscribe_on_chain_yields_locked_product_v1(Binance.Client.t(), term(), term(), Keyword.t()) :: {:ok, term()} | {:error, term()}
+
+  @spec subscribe_on_chain_yields_locked_product_v1(
+          Binance.Client.t(),
+          term(),
+          term(),
+          Keyword.t()
+        ) :: {:ok, term()} | {:error, term()}
   @doc """
   Subscribe On-chain Yields Locked Product
   Variant: Trade
@@ -314,16 +404,31 @@ defmodule Binance.API.Staking.OnChainYields do
           method: "POST",
           base_url: base_url,
           url: "/sapi/v1/onchain-yields/locked/subscribe",
-          query: [projectId: projectId, amount: amount, autoSubscribe: Keyword.get(opts, :autoSubscribe), sourceAccount: Keyword.get(opts, :sourceAccount), redeemTo: Keyword.get(opts, :redeemTo), channelId: Keyword.get(opts, :channelId), clientId: Keyword.get(opts, :clientId), recvWindow: Keyword.get(opts, :recvWindow), timestamp: nil],
+          query: [
+            projectId: projectId,
+            amount: amount,
+            autoSubscribe: Keyword.get(opts, :autoSubscribe),
+            sourceAccount: Keyword.get(opts, :sourceAccount),
+            redeemTo: Keyword.get(opts, :redeemTo),
+            channelId: Keyword.get(opts, :channelId),
+            clientId: Keyword.get(opts, :clientId),
+            recvWindow: Keyword.get(opts, :recvWindow),
+            timestamp: nil
+          ],
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
-    
+
       Binance.REST.HTTPClient.request(request)
     end
   end
-  
-  @spec get_on_chain_yields_locked_subscription_preview_v1(Binance.Client.t(), term(), term(), Keyword.t()) :: {:ok, term()} | {:error, term()}
+
+  @spec get_on_chain_yields_locked_subscription_preview_v1(
+          Binance.Client.t(),
+          term(),
+          term(),
+          Keyword.t()
+        ) :: {:ok, term()} | {:error, term()}
   @doc """
   Get On-chain Yields Locked Subscription Preview
   Variant: User Data
@@ -343,11 +448,17 @@ defmodule Binance.API.Staking.OnChainYields do
           method: "GET",
           base_url: base_url,
           url: "/sapi/v1/onchain-yields/locked/subscriptionPreview",
-          query: [projectId: projectId, amount: amount, autoSubscribe: Keyword.get(opts, :autoSubscribe), recvWindow: Keyword.get(opts, :recvWindow), timestamp: nil],
+          query: [
+            projectId: projectId,
+            amount: amount,
+            autoSubscribe: Keyword.get(opts, :autoSubscribe),
+            recvWindow: Keyword.get(opts, :recvWindow),
+            timestamp: nil
+          ],
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
-    
+
       Binance.REST.HTTPClient.request(request)
     end
   end

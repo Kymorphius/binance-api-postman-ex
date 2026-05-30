@@ -4,7 +4,7 @@ defmodule BinanceApiPostmanRepoMapper do
   """
 
   def collection_dir(collection_name) do
-    ["lib", "binance", "api"] ++ collection_dir_parts(collection_name)
+    (["lib", "binance", "api"] ++ collection_dir_parts(collection_name))
     |> Path.join()
   end
 
@@ -23,7 +23,8 @@ defmodule BinanceApiPostmanRepoMapper do
     collection_module = collection_module_name_parts(collection_name)
     folder_module = folder_name |> normalize_name() |> Macro.camelize()
 
-    ["Binance", "API"] ++ collection_module ++ maybe_append_folder_module(collection_module, folder_module)
+    (["Binance", "API"] ++
+       collection_module ++ maybe_append_folder_module(collection_module, folder_module))
     |> Enum.join(".")
   end
 

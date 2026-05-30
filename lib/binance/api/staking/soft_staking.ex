@@ -10,7 +10,8 @@ defmodule Binance.API.Staking.SoftStaking do
     end
   end
 
-  @spec get_soft_staking_rewards_history_v1(Binance.Client.t(), Keyword.t()) :: {:ok, term()} | {:error, term()}
+  @spec get_soft_staking_rewards_history_v1(Binance.Client.t(), Keyword.t()) ::
+          {:ok, term()} | {:error, term()}
   @doc """
   Get Soft Staking Rewards History
   Variant: User Data
@@ -29,16 +30,25 @@ defmodule Binance.API.Staking.SoftStaking do
           method: "GET",
           base_url: base_url,
           url: "/sapi/v1/soft-staking/history/rewardsRecord",
-          query: [asset: Keyword.get(opts, :asset), startTime: Keyword.get(opts, :startTime), endTime: Keyword.get(opts, :endTime), current: Keyword.get(opts, :current), size: Keyword.get(opts, :size), recvWindow: Keyword.get(opts, :recvWindow), timestamp: nil],
+          query: [
+            asset: Keyword.get(opts, :asset),
+            startTime: Keyword.get(opts, :startTime),
+            endTime: Keyword.get(opts, :endTime),
+            current: Keyword.get(opts, :current),
+            size: Keyword.get(opts, :size),
+            recvWindow: Keyword.get(opts, :recvWindow),
+            timestamp: nil
+          ],
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
-    
+
       Binance.REST.HTTPClient.request(request)
     end
   end
-  
-  @spec get_soft_staking_product_list_v1(Binance.Client.t(), Keyword.t()) :: {:ok, term()} | {:error, term()}
+
+  @spec get_soft_staking_product_list_v1(Binance.Client.t(), Keyword.t()) ::
+          {:ok, term()} | {:error, term()}
   @doc """
   Get Soft Staking Product List
   Variant: User Data
@@ -57,16 +67,23 @@ defmodule Binance.API.Staking.SoftStaking do
           method: "GET",
           base_url: base_url,
           url: "/sapi/v1/soft-staking/list",
-          query: [asset: Keyword.get(opts, :asset), current: Keyword.get(opts, :current), size: Keyword.get(opts, :size), recvWindow: Keyword.get(opts, :recvWindow), timestamp: nil],
+          query: [
+            asset: Keyword.get(opts, :asset),
+            current: Keyword.get(opts, :current),
+            size: Keyword.get(opts, :size),
+            recvWindow: Keyword.get(opts, :recvWindow),
+            timestamp: nil
+          ],
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
-    
+
       Binance.REST.HTTPClient.request(request)
     end
   end
-  
-  @spec set_soft_staking_v1(Binance.Client.t(), term(), Keyword.t()) :: {:ok, term()} | {:error, term()}
+
+  @spec set_soft_staking_v1(Binance.Client.t(), term(), Keyword.t()) ::
+          {:ok, term()} | {:error, term()}
   @doc """
   Set Soft Staking
   Variant: User Data
@@ -86,11 +103,15 @@ defmodule Binance.API.Staking.SoftStaking do
           method: "GET",
           base_url: base_url,
           url: "/sapi/v1/soft-staking/set",
-          query: [softStaking: softStaking, recvWindow: Keyword.get(opts, :recvWindow), timestamp: nil],
+          query: [
+            softStaking: softStaking,
+            recvWindow: Keyword.get(opts, :recvWindow),
+            timestamp: nil
+          ],
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
-    
+
       Binance.REST.HTTPClient.request(request)
     end
   end

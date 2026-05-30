@@ -10,7 +10,8 @@ defmodule Binance.API.Convert.Trade do
     end
   end
 
-  @spec accept_quote_v1(Binance.Client.t(), term(), Keyword.t()) :: {:ok, term()} | {:error, term()}
+  @spec accept_quote_v1(Binance.Client.t(), term(), Keyword.t()) ::
+          {:ok, term()} | {:error, term()}
   @doc """
   Accept Quote
   Variant: Trade
@@ -34,12 +35,13 @@ defmodule Binance.API.Convert.Trade do
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
-    
+
       Binance.REST.HTTPClient.request(request)
     end
   end
-  
-  @spec send_quote_request_v1(Binance.Client.t(), term(), term(), Keyword.t()) :: {:ok, term()} | {:error, term()}
+
+  @spec send_quote_request_v1(Binance.Client.t(), term(), term(), Keyword.t()) ::
+          {:ok, term()} | {:error, term()}
   @doc """
   Send Quote Request
   Variant: User Data
@@ -59,16 +61,26 @@ defmodule Binance.API.Convert.Trade do
           method: "POST",
           base_url: base_url,
           url: "/sapi/v1/convert/getQuote",
-          query: [fromAsset: fromAsset, toAsset: toAsset, fromAmount: Keyword.get(opts, :fromAmount), toAmount: Keyword.get(opts, :toAmount), walletType: Keyword.get(opts, :walletType), validTime: Keyword.get(opts, :validTime), recvWindow: Keyword.get(opts, :recvWindow), timestamp: nil],
+          query: [
+            fromAsset: fromAsset,
+            toAsset: toAsset,
+            fromAmount: Keyword.get(opts, :fromAmount),
+            toAmount: Keyword.get(opts, :toAmount),
+            walletType: Keyword.get(opts, :walletType),
+            validTime: Keyword.get(opts, :validTime),
+            recvWindow: Keyword.get(opts, :recvWindow),
+            timestamp: nil
+          ],
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
-    
+
       Binance.REST.HTTPClient.request(request)
     end
   end
-  
-  @spec cancel_limit_order_v1(Binance.Client.t(), term(), Keyword.t()) :: {:ok, term()} | {:error, term()}
+
+  @spec cancel_limit_order_v1(Binance.Client.t(), term(), Keyword.t()) ::
+          {:ok, term()} | {:error, term()}
   @doc """
   Cancel limit order
   Variant: User Data
@@ -92,12 +104,20 @@ defmodule Binance.API.Convert.Trade do
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
-    
+
       Binance.REST.HTTPClient.request(request)
     end
   end
-  
-  @spec place_limit_order_v1(Binance.Client.t(), term(), term(), term(), term(), term(), Keyword.t()) :: {:ok, term()} | {:error, term()}
+
+  @spec place_limit_order_v1(
+          Binance.Client.t(),
+          term(),
+          term(),
+          term(),
+          term(),
+          term(),
+          Keyword.t()
+        ) :: {:ok, term()} | {:error, term()}
   @doc """
   Place limit order
   Variant: User Data
@@ -108,7 +128,15 @@ defmodule Binance.API.Convert.Trade do
   Required: baseAsset, quoteAsset, limitPrice, side, expiredType
   Optional: baseAmount, quoteAmount, walletType, recvWindow
   """
-  def place_limit_order_v1(client, baseAsset, quoteAsset, limitPrice, side, expiredType, opts \\ []) do
+  def place_limit_order_v1(
+        client,
+        baseAsset,
+        quoteAsset,
+        limitPrice,
+        side,
+        expiredType,
+        opts \\ []
+      ) do
     with {:ok, base_url} <- base_url(client.env) do
       {:ok, request} =
         Binance.RequestBuilder.build(%{
@@ -117,16 +145,28 @@ defmodule Binance.API.Convert.Trade do
           method: "POST",
           base_url: base_url,
           url: "/sapi/v1/convert/limit/placeOrder",
-          query: [baseAsset: baseAsset, quoteAsset: quoteAsset, limitPrice: limitPrice, baseAmount: Keyword.get(opts, :baseAmount), quoteAmount: Keyword.get(opts, :quoteAmount), side: side, walletType: Keyword.get(opts, :walletType), expiredType: expiredType, recvWindow: Keyword.get(opts, :recvWindow), timestamp: nil],
+          query: [
+            baseAsset: baseAsset,
+            quoteAsset: quoteAsset,
+            limitPrice: limitPrice,
+            baseAmount: Keyword.get(opts, :baseAmount),
+            quoteAmount: Keyword.get(opts, :quoteAmount),
+            side: side,
+            walletType: Keyword.get(opts, :walletType),
+            expiredType: expiredType,
+            recvWindow: Keyword.get(opts, :recvWindow),
+            timestamp: nil
+          ],
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
-    
+
       Binance.REST.HTTPClient.request(request)
     end
   end
-  
-  @spec query_limit_open_orders_v1(Binance.Client.t(), Keyword.t()) :: {:ok, term()} | {:error, term()}
+
+  @spec query_limit_open_orders_v1(Binance.Client.t(), Keyword.t()) ::
+          {:ok, term()} | {:error, term()}
   @doc """
   Query limit open orders
   Variant: User Data
@@ -149,11 +189,11 @@ defmodule Binance.API.Convert.Trade do
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
-    
+
       Binance.REST.HTTPClient.request(request)
     end
   end
-  
+
   @spec order_status_v1(Binance.Client.t(), Keyword.t()) :: {:ok, term()} | {:error, term()}
   @doc """
   Order status
@@ -173,16 +213,21 @@ defmodule Binance.API.Convert.Trade do
           method: "GET",
           base_url: base_url,
           url: "/sapi/v1/convert/orderStatus",
-          query: [orderId: Keyword.get(opts, :orderId), quoteId: Keyword.get(opts, :quoteId), timestamp: nil],
+          query: [
+            orderId: Keyword.get(opts, :orderId),
+            quoteId: Keyword.get(opts, :quoteId),
+            timestamp: nil
+          ],
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
-    
+
       Binance.REST.HTTPClient.request(request)
     end
   end
-  
-  @spec get_convert_trade_history_v1(Binance.Client.t(), term(), term(), Keyword.t()) :: {:ok, term()} | {:error, term()}
+
+  @spec get_convert_trade_history_v1(Binance.Client.t(), term(), term(), Keyword.t()) ::
+          {:ok, term()} | {:error, term()}
   @doc """
   Get Convert Trade History
   Variant: User Data
@@ -202,11 +247,17 @@ defmodule Binance.API.Convert.Trade do
           method: "GET",
           base_url: base_url,
           url: "/sapi/v1/convert/tradeFlow",
-          query: [startTime: startTime, endTime: endTime, limit: Keyword.get(opts, :limit), recvWindow: Keyword.get(opts, :recvWindow), timestamp: nil],
+          query: [
+            startTime: startTime,
+            endTime: endTime,
+            limit: Keyword.get(opts, :limit),
+            recvWindow: Keyword.get(opts, :recvWindow),
+            timestamp: nil
+          ],
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
-    
+
       Binance.REST.HTTPClient.request(request)
     end
   end

@@ -26,14 +26,16 @@ defmodule BinanceApiPostmanRepoParser do
   defp parse_item(%{"name" => name, "request" => request}, collection_path, folder_path) do
     normalized_request = normalize_request(request)
 
-    [%{
-      collection_name: hd(collection_path),
-      collection_path: collection_path,
-      folder_path: folder_path,
-      name: name,
-      request: normalized_request,
-      requires_signature?: requires_signature?(normalized_request)
-    }]
+    [
+      %{
+        collection_name: hd(collection_path),
+        collection_path: collection_path,
+        folder_path: folder_path,
+        name: name,
+        request: normalized_request,
+        requires_signature?: requires_signature?(normalized_request)
+      }
+    ]
   end
 
   defp parse_collection_variables(variables) do
@@ -54,6 +56,7 @@ defmodule BinanceApiPostmanRepoParser do
   end
 
   defp path_only_url(nil), do: nil
+
   defp path_only_url(raw_url) do
     raw_url
     |> String.replace(~r/^\{\{[^}]+\}\}/, "")
@@ -90,10 +93,14 @@ defmodule BinanceApiPostmanRepoParser do
   defp requires_signature?(%{query: query, body: %{urlencoded: body_params}}) do
     all_params = query ++ body_params
 
-    Enum.any?(all_params, fn param -> param.key in ["timestamp", "signature", "api_key", "secret_key"] end)
+    Enum.any?(all_params, fn param ->
+      param.key in ["timestamp", "signature", "api_key", "secret_key"]
+    end)
   end
 
   defp requires_signature?(%{query: query, body: nil}) do
-    Enum.any?(query, fn param -> param.key in ["timestamp", "signature", "api_key", "secret_key"] end)
+    Enum.any?(query, fn param ->
+      param.key in ["timestamp", "signature", "api_key", "secret_key"]
+    end)
   end
 end

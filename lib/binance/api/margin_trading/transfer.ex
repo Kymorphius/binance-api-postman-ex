@@ -10,7 +10,8 @@ defmodule Binance.API.MarginTrading.Transfer do
     end
   end
 
-  @spec query_max_transfer_out_amount_v1(Binance.Client.t(), term(), Keyword.t()) :: {:ok, term()} | {:error, term()}
+  @spec query_max_transfer_out_amount_v1(Binance.Client.t(), term(), Keyword.t()) ::
+          {:ok, term()} | {:error, term()}
   @doc """
   Query Max Transfer-Out Amount
   Variant: User Data
@@ -30,16 +31,22 @@ defmodule Binance.API.MarginTrading.Transfer do
           method: "GET",
           base_url: base_url,
           url: "/sapi/v1/margin/maxTransferable",
-          query: [asset: asset, isolatedSymbol: Keyword.get(opts, :isolatedSymbol), recvWindow: Keyword.get(opts, :recvWindow), timestamp: nil],
+          query: [
+            asset: asset,
+            isolatedSymbol: Keyword.get(opts, :isolatedSymbol),
+            recvWindow: Keyword.get(opts, :recvWindow),
+            timestamp: nil
+          ],
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
-    
+
       Binance.REST.HTTPClient.request(request)
     end
   end
-  
-  @spec get_cross_margin_transfer_history_v1(Binance.Client.t(), Keyword.t()) :: {:ok, term()} | {:error, term()}
+
+  @spec get_cross_margin_transfer_history_v1(Binance.Client.t(), Keyword.t()) ::
+          {:ok, term()} | {:error, term()}
   @doc """
   Get Cross Margin Transfer History
   Variant: User Data
@@ -58,11 +65,21 @@ defmodule Binance.API.MarginTrading.Transfer do
           method: "GET",
           base_url: base_url,
           url: "/sapi/v1/margin/transfer",
-          query: [asset: Keyword.get(opts, :asset), type: Keyword.get(opts, :type), startTime: Keyword.get(opts, :startTime), endTime: Keyword.get(opts, :endTime), current: Keyword.get(opts, :current), size: Keyword.get(opts, :size), isolatedSymbol: Keyword.get(opts, :isolatedSymbol), recvWindow: Keyword.get(opts, :recvWindow), timestamp: nil],
+          query: [
+            asset: Keyword.get(opts, :asset),
+            type: Keyword.get(opts, :type),
+            startTime: Keyword.get(opts, :startTime),
+            endTime: Keyword.get(opts, :endTime),
+            current: Keyword.get(opts, :current),
+            size: Keyword.get(opts, :size),
+            isolatedSymbol: Keyword.get(opts, :isolatedSymbol),
+            recvWindow: Keyword.get(opts, :recvWindow),
+            timestamp: nil
+          ],
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
-    
+
       Binance.REST.HTTPClient.request(request)
     end
   end

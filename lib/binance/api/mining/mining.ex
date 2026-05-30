@@ -10,7 +10,16 @@ defmodule Binance.API.Mining do
     end
   end
 
-  @spec hashrate_resale_request_v1(Binance.Client.t(), term(), term(), term(), term(), term(), term(), Keyword.t()) :: {:ok, term()} | {:error, term()}
+  @spec hashrate_resale_request_v1(
+          Binance.Client.t(),
+          term(),
+          term(),
+          term(),
+          term(),
+          term(),
+          term(),
+          Keyword.t()
+        ) :: {:ok, term()} | {:error, term()}
   @doc """
   Hashrate Resale Request
   Variant: User Data
@@ -21,7 +30,16 @@ defmodule Binance.API.Mining do
   Required: userName, algo, endDate, startDate, toPoolUser, hashRate
   Optional: recvWindow
   """
-  def hashrate_resale_request_v1(client, userName, algo, endDate, startDate, toPoolUser, hashRate, opts \\ []) do
+  def hashrate_resale_request_v1(
+        client,
+        userName,
+        algo,
+        endDate,
+        startDate,
+        toPoolUser,
+        hashRate,
+        opts \\ []
+      ) do
     with {:ok, base_url} <- base_url(client.env) do
       {:ok, request} =
         Binance.RequestBuilder.build(%{
@@ -30,16 +48,26 @@ defmodule Binance.API.Mining do
           method: "POST",
           base_url: base_url,
           url: "/sapi/v1/mining/hash-transfer/config",
-          query: [userName: userName, algo: algo, endDate: endDate, startDate: startDate, toPoolUser: toPoolUser, hashRate: hashRate, recvWindow: Keyword.get(opts, :recvWindow), timestamp: nil],
+          query: [
+            userName: userName,
+            algo: algo,
+            endDate: endDate,
+            startDate: startDate,
+            toPoolUser: toPoolUser,
+            hashRate: hashRate,
+            recvWindow: Keyword.get(opts, :recvWindow),
+            timestamp: nil
+          ],
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
-    
+
       Binance.REST.HTTPClient.request(request)
     end
   end
-  
-  @spec cancel_hashrate_resale_configuration_v1(Binance.Client.t(), term(), term(), Keyword.t()) :: {:ok, term()} | {:error, term()}
+
+  @spec cancel_hashrate_resale_configuration_v1(Binance.Client.t(), term(), term(), Keyword.t()) ::
+          {:ok, term()} | {:error, term()}
   @doc """
   Cancel hashrate resale configuration
   Variant: User Data
@@ -59,16 +87,22 @@ defmodule Binance.API.Mining do
           method: "POST",
           base_url: base_url,
           url: "/sapi/v1/mining/hash-transfer/config/cancel",
-          query: [configId: configId, userName: userName, recvWindow: Keyword.get(opts, :recvWindow), timestamp: nil],
+          query: [
+            configId: configId,
+            userName: userName,
+            recvWindow: Keyword.get(opts, :recvWindow),
+            timestamp: nil
+          ],
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
-    
+
       Binance.REST.HTTPClient.request(request)
     end
   end
-  
-  @spec hashrate_resale_list_v1(Binance.Client.t(), Keyword.t()) :: {:ok, term()} | {:error, term()}
+
+  @spec hashrate_resale_list_v1(Binance.Client.t(), Keyword.t()) ::
+          {:ok, term()} | {:error, term()}
   @doc """
   Hashrate Resale List
   Method: GET
@@ -85,16 +119,22 @@ defmodule Binance.API.Mining do
           method: "GET",
           base_url: base_url,
           url: "/sapi/v1/mining/hash-transfer/config/details/list",
-          query: [pageIndex: Keyword.get(opts, :pageIndex), pageSize: Keyword.get(opts, :pageSize), recvWindow: Keyword.get(opts, :recvWindow), timestamp: nil],
+          query: [
+            pageIndex: Keyword.get(opts, :pageIndex),
+            pageSize: Keyword.get(opts, :pageSize),
+            recvWindow: Keyword.get(opts, :recvWindow),
+            timestamp: nil
+          ],
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
-    
+
       Binance.REST.HTTPClient.request(request)
     end
   end
-  
-  @spec hashrate_resale_detail_v1(Binance.Client.t(), term(), Keyword.t()) :: {:ok, term()} | {:error, term()}
+
+  @spec hashrate_resale_detail_v1(Binance.Client.t(), term(), Keyword.t()) ::
+          {:ok, term()} | {:error, term()}
   @doc """
   Hashrate Resale Detail
   Variant: User Data
@@ -114,16 +154,23 @@ defmodule Binance.API.Mining do
           method: "GET",
           base_url: base_url,
           url: "/sapi/v1/mining/hash-transfer/profit/details",
-          query: [configId: configId, pageIndex: Keyword.get(opts, :pageIndex), pageSize: Keyword.get(opts, :pageSize), recvWindow: Keyword.get(opts, :recvWindow), timestamp: nil],
+          query: [
+            configId: configId,
+            pageIndex: Keyword.get(opts, :pageIndex),
+            pageSize: Keyword.get(opts, :pageSize),
+            recvWindow: Keyword.get(opts, :recvWindow),
+            timestamp: nil
+          ],
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
-    
+
       Binance.REST.HTTPClient.request(request)
     end
   end
-  
-  @spec earnings_list_v1(Binance.Client.t(), term(), term(), Keyword.t()) :: {:ok, term()} | {:error, term()}
+
+  @spec earnings_list_v1(Binance.Client.t(), term(), term(), Keyword.t()) ::
+          {:ok, term()} | {:error, term()}
   @doc """
   Earnings List
   Variant: User Data
@@ -143,16 +190,27 @@ defmodule Binance.API.Mining do
           method: "GET",
           base_url: base_url,
           url: "/sapi/v1/mining/payment/list",
-          query: [algo: algo, userName: userName, coin: Keyword.get(opts, :coin), startDate: Keyword.get(opts, :startDate), endDate: Keyword.get(opts, :endDate), pageIndex: Keyword.get(opts, :pageIndex), pageSize: Keyword.get(opts, :pageSize), recvWindow: Keyword.get(opts, :recvWindow), timestamp: nil],
+          query: [
+            algo: algo,
+            userName: userName,
+            coin: Keyword.get(opts, :coin),
+            startDate: Keyword.get(opts, :startDate),
+            endDate: Keyword.get(opts, :endDate),
+            pageIndex: Keyword.get(opts, :pageIndex),
+            pageSize: Keyword.get(opts, :pageSize),
+            recvWindow: Keyword.get(opts, :recvWindow),
+            timestamp: nil
+          ],
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
-    
+
       Binance.REST.HTTPClient.request(request)
     end
   end
-  
-  @spec extra_bonus_list_v1(Binance.Client.t(), term(), term(), Keyword.t()) :: {:ok, term()} | {:error, term()}
+
+  @spec extra_bonus_list_v1(Binance.Client.t(), term(), term(), Keyword.t()) ::
+          {:ok, term()} | {:error, term()}
   @doc """
   Extra Bonus List
   Variant: User Data
@@ -172,16 +230,27 @@ defmodule Binance.API.Mining do
           method: "GET",
           base_url: base_url,
           url: "/sapi/v1/mining/payment/other",
-          query: [algo: algo, userName: userName, coin: Keyword.get(opts, :coin), startDate: Keyword.get(opts, :startDate), endDate: Keyword.get(opts, :endDate), pageIndex: Keyword.get(opts, :pageIndex), pageSize: Keyword.get(opts, :pageSize), recvWindow: Keyword.get(opts, :recvWindow), timestamp: nil],
+          query: [
+            algo: algo,
+            userName: userName,
+            coin: Keyword.get(opts, :coin),
+            startDate: Keyword.get(opts, :startDate),
+            endDate: Keyword.get(opts, :endDate),
+            pageIndex: Keyword.get(opts, :pageIndex),
+            pageSize: Keyword.get(opts, :pageSize),
+            recvWindow: Keyword.get(opts, :recvWindow),
+            timestamp: nil
+          ],
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
-    
+
       Binance.REST.HTTPClient.request(request)
     end
   end
-  
-  @spec mining_account_earning_v1(Binance.Client.t(), term(), Keyword.t()) :: {:ok, term()} | {:error, term()}
+
+  @spec mining_account_earning_v1(Binance.Client.t(), term(), Keyword.t()) ::
+          {:ok, term()} | {:error, term()}
   @doc """
   Mining Account Earning
   Variant: User Data
@@ -201,15 +270,23 @@ defmodule Binance.API.Mining do
           method: "GET",
           base_url: base_url,
           url: "/sapi/v1/mining/payment/uid",
-          query: [algo: algo, startDate: Keyword.get(opts, :startDate), endDate: Keyword.get(opts, :endDate), pageIndex: Keyword.get(opts, :pageIndex), pageSize: Keyword.get(opts, :pageSize), recvWindow: Keyword.get(opts, :recvWindow), timestamp: nil],
+          query: [
+            algo: algo,
+            startDate: Keyword.get(opts, :startDate),
+            endDate: Keyword.get(opts, :endDate),
+            pageIndex: Keyword.get(opts, :pageIndex),
+            pageSize: Keyword.get(opts, :pageSize),
+            recvWindow: Keyword.get(opts, :recvWindow),
+            timestamp: nil
+          ],
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
-    
+
       Binance.REST.HTTPClient.request(request)
     end
   end
-  
+
   @spec acquiring_algorithm_v1(Binance.Client.t()) :: {:ok, term()} | {:error, term()}
   @doc """
   Acquiring Algorithm
@@ -232,11 +309,11 @@ defmodule Binance.API.Mining do
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
-    
+
       Binance.REST.HTTPClient.request(request)
     end
   end
-  
+
   @spec acquiring_coinname_v1(Binance.Client.t()) :: {:ok, term()} | {:error, term()}
   @doc """
   Acquiring CoinName
@@ -259,12 +336,13 @@ defmodule Binance.API.Mining do
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
-    
+
       Binance.REST.HTTPClient.request(request)
     end
   end
-  
-  @spec account_list_v1(Binance.Client.t(), term(), term(), Keyword.t()) :: {:ok, term()} | {:error, term()}
+
+  @spec account_list_v1(Binance.Client.t(), term(), term(), Keyword.t()) ::
+          {:ok, term()} | {:error, term()}
   @doc """
   Account List
   Variant: User Data
@@ -284,16 +362,22 @@ defmodule Binance.API.Mining do
           method: "GET",
           base_url: base_url,
           url: "/sapi/v1/mining/statistics/user/list",
-          query: [algo: algo, userName: userName, recvWindow: Keyword.get(opts, :recvWindow), timestamp: nil],
+          query: [
+            algo: algo,
+            userName: userName,
+            recvWindow: Keyword.get(opts, :recvWindow),
+            timestamp: nil
+          ],
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
-    
+
       Binance.REST.HTTPClient.request(request)
     end
   end
-  
-  @spec statistic_list_v1(Binance.Client.t(), term(), term(), Keyword.t()) :: {:ok, term()} | {:error, term()}
+
+  @spec statistic_list_v1(Binance.Client.t(), term(), term(), Keyword.t()) ::
+          {:ok, term()} | {:error, term()}
   @doc """
   Statistic List
   Variant: User Data
@@ -313,16 +397,22 @@ defmodule Binance.API.Mining do
           method: "GET",
           base_url: base_url,
           url: "/sapi/v1/mining/statistics/user/status",
-          query: [algo: algo, userName: userName, recvWindow: Keyword.get(opts, :recvWindow), timestamp: nil],
+          query: [
+            algo: algo,
+            userName: userName,
+            recvWindow: Keyword.get(opts, :recvWindow),
+            timestamp: nil
+          ],
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
-    
+
       Binance.REST.HTTPClient.request(request)
     end
   end
-  
-  @spec request_for_detail_miner_list_v1(Binance.Client.t(), term(), term(), term(), Keyword.t()) :: {:ok, term()} | {:error, term()}
+
+  @spec request_for_detail_miner_list_v1(Binance.Client.t(), term(), term(), term(), Keyword.t()) ::
+          {:ok, term()} | {:error, term()}
   @doc """
   Request for Detail Miner List
   Variant: User Data
@@ -342,16 +432,23 @@ defmodule Binance.API.Mining do
           method: "GET",
           base_url: base_url,
           url: "/sapi/v1/mining/worker/detail",
-          query: [algo: algo, userName: userName, workerName: workerName, recvWindow: Keyword.get(opts, :recvWindow), timestamp: nil],
+          query: [
+            algo: algo,
+            userName: userName,
+            workerName: workerName,
+            recvWindow: Keyword.get(opts, :recvWindow),
+            timestamp: nil
+          ],
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
-    
+
       Binance.REST.HTTPClient.request(request)
     end
   end
-  
-  @spec request_for_miner_list_v1(Binance.Client.t(), term(), term(), Keyword.t()) :: {:ok, term()} | {:error, term()}
+
+  @spec request_for_miner_list_v1(Binance.Client.t(), term(), term(), Keyword.t()) ::
+          {:ok, term()} | {:error, term()}
   @doc """
   Request for Miner List
   Variant: User Data
@@ -371,11 +468,20 @@ defmodule Binance.API.Mining do
           method: "GET",
           base_url: base_url,
           url: "/sapi/v1/mining/worker/list",
-          query: [algo: algo, userName: userName, pageIndex: Keyword.get(opts, :pageIndex), sort: Keyword.get(opts, :sort), sortColumn: Keyword.get(opts, :sortColumn), workerStatus: Keyword.get(opts, :workerStatus), recvWindow: Keyword.get(opts, :recvWindow), timestamp: nil],
+          query: [
+            algo: algo,
+            userName: userName,
+            pageIndex: Keyword.get(opts, :pageIndex),
+            sort: Keyword.get(opts, :sort),
+            sortColumn: Keyword.get(opts, :sortColumn),
+            workerStatus: Keyword.get(opts, :workerStatus),
+            recvWindow: Keyword.get(opts, :recvWindow),
+            timestamp: nil
+          ],
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
-    
+
       Binance.REST.HTTPClient.request(request)
     end
   end

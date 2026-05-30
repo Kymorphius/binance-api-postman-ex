@@ -10,7 +10,8 @@ defmodule Binance.API.CopyTrading.FutureCopyTrading do
     end
   end
 
-  @spec get_futures_lead_trading_symbol_whitelist_v1(Binance.Client.t(), Keyword.t()) :: {:ok, term()} | {:error, term()}
+  @spec get_futures_lead_trading_symbol_whitelist_v1(Binance.Client.t(), Keyword.t()) ::
+          {:ok, term()} | {:error, term()}
   @doc """
   Get Futures Lead Trading Symbol Whitelist
   Variant: User Data
@@ -33,12 +34,13 @@ defmodule Binance.API.CopyTrading.FutureCopyTrading do
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
-    
+
       Binance.REST.HTTPClient.request(request)
     end
   end
-  
-  @spec get_futures_lead_trader_status_v1(Binance.Client.t(), Keyword.t()) :: {:ok, term()} | {:error, term()}
+
+  @spec get_futures_lead_trader_status_v1(Binance.Client.t(), Keyword.t()) ::
+          {:ok, term()} | {:error, term()}
   @doc """
   Get Futures Lead Trader Status
   Variant: Trade
@@ -61,7 +63,7 @@ defmodule Binance.API.CopyTrading.FutureCopyTrading do
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
-    
+
       Binance.REST.HTTPClient.request(request)
     end
   end

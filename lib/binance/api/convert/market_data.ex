@@ -10,7 +10,8 @@ defmodule Binance.API.Convert.MarketData do
     end
   end
 
-  @spec query_order_quantity_precision_per_asset_v1(Binance.Client.t(), Keyword.t()) :: {:ok, term()} | {:error, term()}
+  @spec query_order_quantity_precision_per_asset_v1(Binance.Client.t(), Keyword.t()) ::
+          {:ok, term()} | {:error, term()}
   @doc """
   Query order quantity precision per asset
   Variant: User Data
@@ -33,12 +34,13 @@ defmodule Binance.API.Convert.MarketData do
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
-    
+
       Binance.REST.HTTPClient.request(request)
     end
   end
-  
-  @spec list_all_convert_pairs_v1(Binance.Client.t(), Keyword.t()) :: {:ok, term()} | {:error, term()}
+
+  @spec list_all_convert_pairs_v1(Binance.Client.t(), Keyword.t()) ::
+          {:ok, term()} | {:error, term()}
   @doc """
   List All Convert Pairs
   Method: GET
@@ -59,7 +61,7 @@ defmodule Binance.API.Convert.MarketData do
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
-    
+
       Binance.REST.HTTPClient.request(request)
     end
   end

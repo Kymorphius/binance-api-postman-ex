@@ -10,7 +10,8 @@ defmodule Binance.API.SubAccount.AccountManagement do
     end
   end
 
-  @spec enable_options_for_sub_account_v1(Binance.Client.t(), term(), Keyword.t()) :: {:ok, term()} | {:error, term()}
+  @spec enable_options_for_sub_account_v1(Binance.Client.t(), term(), Keyword.t()) ::
+          {:ok, term()} | {:error, term()}
   @doc """
   Enable Options for Sub-account
   Variant: User Data
@@ -34,12 +35,13 @@ defmodule Binance.API.SubAccount.AccountManagement do
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
-    
+
       Binance.REST.HTTPClient.request(request)
     end
   end
-  
-  @spec enable_futures_for_sub_account_v1(Binance.Client.t(), term(), Keyword.t()) :: {:ok, term()} | {:error, term()}
+
+  @spec enable_futures_for_sub_account_v1(Binance.Client.t(), term(), Keyword.t()) ::
+          {:ok, term()} | {:error, term()}
   @doc """
   Enable Futures for Sub-account
   Variant: User Data
@@ -63,12 +65,13 @@ defmodule Binance.API.SubAccount.AccountManagement do
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
-    
+
       Binance.REST.HTTPClient.request(request)
     end
   end
-  
-  @spec get_futures_position_risk_of_sub_account_v1(Binance.Client.t(), term(), Keyword.t()) :: {:ok, term()} | {:error, term()}
+
+  @spec get_futures_position_risk_of_sub_account_v1(Binance.Client.t(), term(), Keyword.t()) ::
+          {:ok, term()} | {:error, term()}
   @doc """
   Get Futures Position-Risk of Sub-account
   Variant: User Data
@@ -92,12 +95,13 @@ defmodule Binance.API.SubAccount.AccountManagement do
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
-    
+
       Binance.REST.HTTPClient.request(request)
     end
   end
-  
-  @spec query_sub_account_list_v1(Binance.Client.t(), Keyword.t()) :: {:ok, term()} | {:error, term()}
+
+  @spec query_sub_account_list_v1(Binance.Client.t(), Keyword.t()) ::
+          {:ok, term()} | {:error, term()}
   @doc """
   Query Sub-account List
   Variant: User Data
@@ -116,16 +120,24 @@ defmodule Binance.API.SubAccount.AccountManagement do
           method: "GET",
           base_url: base_url,
           url: "/sapi/v1/sub-account/list",
-          query: [email: Keyword.get(opts, :email), isFreeze: Keyword.get(opts, :isFreeze), page: Keyword.get(opts, :page), limit: Keyword.get(opts, :limit), recvWindow: Keyword.get(opts, :recvWindow), timestamp: nil],
+          query: [
+            email: Keyword.get(opts, :email),
+            isFreeze: Keyword.get(opts, :isFreeze),
+            page: Keyword.get(opts, :page),
+            limit: Keyword.get(opts, :limit),
+            recvWindow: Keyword.get(opts, :recvWindow),
+            timestamp: nil
+          ],
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
-    
+
       Binance.REST.HTTPClient.request(request)
     end
   end
-  
-  @spec get_sub_account_s_status_on_margin_or_futures_v1(Binance.Client.t(), Keyword.t()) :: {:ok, term()} | {:error, term()}
+
+  @spec get_sub_account_s_status_on_margin_or_futures_v1(Binance.Client.t(), Keyword.t()) ::
+          {:ok, term()} | {:error, term()}
   @doc """
   Get Sub-account's Status on Margin Or Futures
   Variant: User Data
@@ -144,16 +156,21 @@ defmodule Binance.API.SubAccount.AccountManagement do
           method: "GET",
           base_url: base_url,
           url: "/sapi/v1/sub-account/status",
-          query: [email: Keyword.get(opts, :email), recvWindow: Keyword.get(opts, :recvWindow), timestamp: nil],
+          query: [
+            email: Keyword.get(opts, :email),
+            recvWindow: Keyword.get(opts, :recvWindow),
+            timestamp: nil
+          ],
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
-    
+
       Binance.REST.HTTPClient.request(request)
     end
   end
-  
-  @spec query_sub_account_transaction_statistics_v1(Binance.Client.t(), Keyword.t()) :: {:ok, term()} | {:error, term()}
+
+  @spec query_sub_account_transaction_statistics_v1(Binance.Client.t(), Keyword.t()) ::
+          {:ok, term()} | {:error, term()}
   @doc """
   Query Sub-account Transaction Statistics
   Variant: User Data
@@ -172,16 +189,21 @@ defmodule Binance.API.SubAccount.AccountManagement do
           method: "GET",
           base_url: base_url,
           url: "/sapi/v1/sub-account/transaction-statistics",
-          query: [email: Keyword.get(opts, :email), recvWindow: Keyword.get(opts, :recvWindow), timestamp: nil],
+          query: [
+            email: Keyword.get(opts, :email),
+            recvWindow: Keyword.get(opts, :recvWindow),
+            timestamp: nil
+          ],
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
-    
+
       Binance.REST.HTTPClient.request(request)
     end
   end
-  
-  @spec create_a_virtual_sub_account_v1(Binance.Client.t(), term(), Keyword.t()) :: {:ok, term()} | {:error, term()}
+
+  @spec create_a_virtual_sub_account_v1(Binance.Client.t(), term(), Keyword.t()) ::
+          {:ok, term()} | {:error, term()}
   @doc """
   Create a Virtual Sub-account
   Variant: User Data
@@ -201,16 +223,25 @@ defmodule Binance.API.SubAccount.AccountManagement do
           method: "POST",
           base_url: base_url,
           url: "/sapi/v1/sub-account/virtualSubAccount",
-          query: [subAccountString: subAccountString, recvWindow: Keyword.get(opts, :recvWindow), timestamp: nil],
+          query: [
+            subAccountString: subAccountString,
+            recvWindow: Keyword.get(opts, :recvWindow),
+            timestamp: nil
+          ],
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
-    
+
       Binance.REST.HTTPClient.request(request)
     end
   end
-  
-  @spec get_futures_position_risk_of_sub_account_v2(Binance.Client.t(), term(), term(), Keyword.t()) :: {:ok, term()} | {:error, term()}
+
+  @spec get_futures_position_risk_of_sub_account_v2(
+          Binance.Client.t(),
+          term(),
+          term(),
+          Keyword.t()
+        ) :: {:ok, term()} | {:error, term()}
   @doc """
   Get Futures Position-Risk of Sub-account V2
   Variant: User Data
@@ -230,11 +261,16 @@ defmodule Binance.API.SubAccount.AccountManagement do
           method: "GET",
           base_url: base_url,
           url: "/sapi/v2/sub-account/futures/positionRisk",
-          query: [email: email, futuresType: futuresType, recvWindow: Keyword.get(opts, :recvWindow), timestamp: nil],
+          query: [
+            email: email,
+            futuresType: futuresType,
+            recvWindow: Keyword.get(opts, :recvWindow),
+            timestamp: nil
+          ],
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
-    
+
       Binance.REST.HTTPClient.request(request)
     end
   end

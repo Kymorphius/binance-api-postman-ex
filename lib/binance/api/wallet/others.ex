@@ -10,7 +10,8 @@ defmodule Binance.API.Wallet.Others do
     end
   end
 
-  @spec get_symbols_delist_schedule_for_spot_v1(Binance.Client.t(), Keyword.t()) :: {:ok, term()} | {:error, term()}
+  @spec get_symbols_delist_schedule_for_spot_v1(Binance.Client.t(), Keyword.t()) ::
+          {:ok, term()} | {:error, term()}
   @doc """
   Get symbols delist schedule for spot
   Variant: Market Data
@@ -33,11 +34,11 @@ defmodule Binance.API.Wallet.Others do
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
-    
+
       Binance.REST.HTTPClient.request(request)
     end
   end
-  
+
   @spec system_status_v1(Binance.Client.t()) :: {:ok, term()} | {:error, term()}
   @doc """
   System Status
@@ -60,7 +61,7 @@ defmodule Binance.API.Wallet.Others do
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
-    
+
       Binance.REST.HTTPClient.request(request)
     end
   end

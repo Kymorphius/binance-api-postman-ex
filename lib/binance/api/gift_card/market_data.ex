@@ -10,7 +10,8 @@ defmodule Binance.API.GiftCard.MarketData do
     end
   end
 
-  @spec create_a_dual_token_gift_card_v1(Binance.Client.t(), term(), term(), term(), Keyword.t()) :: {:ok, term()} | {:error, term()}
+  @spec create_a_dual_token_gift_card_v1(Binance.Client.t(), term(), term(), term(), Keyword.t()) ::
+          {:ok, term()} | {:error, term()}
   @doc """
   Create a dual-token gift card
   Variant: Trade
@@ -30,16 +31,23 @@ defmodule Binance.API.GiftCard.MarketData do
           method: "POST",
           base_url: base_url,
           url: "/sapi/v1/giftcard/buyCode",
-          query: [baseToken: baseToken, faceToken: faceToken, baseTokenAmount: baseTokenAmount, recvWindow: Keyword.get(opts, :recvWindow), timestamp: nil],
+          query: [
+            baseToken: baseToken,
+            faceToken: faceToken,
+            baseTokenAmount: baseTokenAmount,
+            recvWindow: Keyword.get(opts, :recvWindow),
+            timestamp: nil
+          ],
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
-    
+
       Binance.REST.HTTPClient.request(request)
     end
   end
-  
-  @spec fetch_token_limit_v1(Binance.Client.t(), term(), Keyword.t()) :: {:ok, term()} | {:error, term()}
+
+  @spec fetch_token_limit_v1(Binance.Client.t(), term(), Keyword.t()) ::
+          {:ok, term()} | {:error, term()}
   @doc """
   Fetch Token Limit
   Variant: User Data
@@ -59,16 +67,21 @@ defmodule Binance.API.GiftCard.MarketData do
           method: "GET",
           base_url: base_url,
           url: "/sapi/v1/giftcard/buyCode/token-limit",
-          query: [baseToken: baseToken, recvWindow: Keyword.get(opts, :recvWindow), timestamp: nil],
+          query: [
+            baseToken: baseToken,
+            recvWindow: Keyword.get(opts, :recvWindow),
+            timestamp: nil
+          ],
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
-    
+
       Binance.REST.HTTPClient.request(request)
     end
   end
-  
-  @spec create_a_single_token_gift_card_v1(Binance.Client.t(), term(), term(), Keyword.t()) :: {:ok, term()} | {:error, term()}
+
+  @spec create_a_single_token_gift_card_v1(Binance.Client.t(), term(), term(), Keyword.t()) ::
+          {:ok, term()} | {:error, term()}
   @doc """
   Create a single-token gift card
   Variant: User Data
@@ -88,16 +101,22 @@ defmodule Binance.API.GiftCard.MarketData do
           method: "POST",
           base_url: base_url,
           url: "/sapi/v1/giftcard/createCode",
-          query: [token: token, amount: amount, recvWindow: Keyword.get(opts, :recvWindow), timestamp: nil],
+          query: [
+            token: token,
+            amount: amount,
+            recvWindow: Keyword.get(opts, :recvWindow),
+            timestamp: nil
+          ],
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
-    
+
       Binance.REST.HTTPClient.request(request)
     end
   end
-  
-  @spec fetch_rsa_public_key_v1(Binance.Client.t(), Keyword.t()) :: {:ok, term()} | {:error, term()}
+
+  @spec fetch_rsa_public_key_v1(Binance.Client.t(), Keyword.t()) ::
+          {:ok, term()} | {:error, term()}
   @doc """
   Fetch RSA Public Key
   Variant: User Data
@@ -120,12 +139,13 @@ defmodule Binance.API.GiftCard.MarketData do
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
-    
+
       Binance.REST.HTTPClient.request(request)
     end
   end
-  
-  @spec redeem_a_binance_gift_card_v1(Binance.Client.t(), term(), Keyword.t()) :: {:ok, term()} | {:error, term()}
+
+  @spec redeem_a_binance_gift_card_v1(Binance.Client.t(), term(), Keyword.t()) ::
+          {:ok, term()} | {:error, term()}
   @doc """
   Redeem a Binance Gift Card
   Variant: User Data
@@ -145,16 +165,22 @@ defmodule Binance.API.GiftCard.MarketData do
           method: "POST",
           base_url: base_url,
           url: "/sapi/v1/giftcard/redeemCode",
-          query: [code: code, externalUid: Keyword.get(opts, :externalUid), recvWindow: Keyword.get(opts, :recvWindow), timestamp: nil],
+          query: [
+            code: code,
+            externalUid: Keyword.get(opts, :externalUid),
+            recvWindow: Keyword.get(opts, :recvWindow),
+            timestamp: nil
+          ],
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
-    
+
       Binance.REST.HTTPClient.request(request)
     end
   end
-  
-  @spec verify_binance_gift_card_by_gift_card_number_v1(Binance.Client.t(), term(), Keyword.t()) :: {:ok, term()} | {:error, term()}
+
+  @spec verify_binance_gift_card_by_gift_card_number_v1(Binance.Client.t(), term(), Keyword.t()) ::
+          {:ok, term()} | {:error, term()}
   @doc """
   Verify Binance Gift Card by Gift Card Number
   Variant: User Data
@@ -174,11 +200,15 @@ defmodule Binance.API.GiftCard.MarketData do
           method: "GET",
           base_url: base_url,
           url: "/sapi/v1/giftcard/verify",
-          query: [referenceNo: referenceNo, recvWindow: Keyword.get(opts, :recvWindow), timestamp: nil],
+          query: [
+            referenceNo: referenceNo,
+            recvWindow: Keyword.get(opts, :recvWindow),
+            timestamp: nil
+          ],
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
-    
+
       Binance.REST.HTTPClient.request(request)
     end
   end

@@ -53,14 +53,19 @@ defmodule Binance.RequestBuilder do
     struct(Request, Map.take(attrs, [:method, :url, :headers, :body]))
   end
 
-  defp validate_required_attrs(%{method: method, url: url} = attrs) when not is_nil(method) and not is_nil(url), do: {:ok, attrs}
+  defp validate_required_attrs(%{method: method, url: url} = attrs)
+       when not is_nil(method) and not is_nil(url), do: {:ok, attrs}
+
   defp validate_required_attrs(%{method: nil}), do: {:error, :missing_method}
   defp validate_required_attrs(%{url: nil}), do: {:error, :missing_url}
   defp validate_required_attrs(_), do: {:error, :missing_required_request_fields}
 
   defp normalize_headers(nil), do: []
   defp normalize_headers(headers) when is_list(headers), do: Enum.map(headers, &normalize_pair/1)
-  defp normalize_headers(headers) when is_map(headers), do: Enum.map(Map.to_list(headers), &normalize_pair/1)
+
+  defp normalize_headers(headers) when is_map(headers),
+    do: Enum.map(Map.to_list(headers), &normalize_pair/1)
+
   defp normalize_headers(headers), do: Enum.map(List.wrap(headers), &normalize_pair/1)
 
   defp maybe_add_api_key_header(%{headers: headers} = request) do
@@ -99,7 +104,11 @@ defmodule Binance.RequestBuilder do
     params = query
 
     if Keyword.has_key?(params, :timestamp) do
-      Map.put(request, :query, put_param_if_missing(params, :timestamp, System.system_time(:millisecond)))
+      Map.put(
+        request,
+        :query,
+        put_param_if_missing(params, :timestamp, System.system_time(:millisecond))
+      )
     else
       request
     end
@@ -190,7 +199,10 @@ defmodule Binance.RequestBuilder do
 
   defp normalize_query_value(value) when is_binary(value), do: value
   defp normalize_query_value(value) when is_integer(value), do: Integer.to_string(value)
-  defp normalize_query_value(value) when is_float(value), do: :erlang.float_to_binary(value, [:compact, decimals: 16])
+
+  defp normalize_query_value(value) when is_float(value),
+    do: :erlang.float_to_binary(value, [:compact, decimals: 16])
+
   defp normalize_query_value(value) when is_atom(value), do: Atom.to_string(value)
   defp normalize_query_value(value), do: to_string(value)
 

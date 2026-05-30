@@ -1,7 +1,10 @@
 defmodule Binance.API.DerivativesTrading.PortfolioMargin.UserDataStreams do
   @moduledoc false
 
-  @base_urls %{prod_url: "https://papi.binance.com", testnet_url: "https://testnet.binancefuture.com"}
+  @base_urls %{
+    prod_url: "https://papi.binance.com",
+    testnet_url: "https://testnet.binancefuture.com"
+  }
 
   def base_url(key \\ :prod_url) do
     case Map.fetch(@base_urls, key) do
@@ -32,11 +35,11 @@ defmodule Binance.API.DerivativesTrading.PortfolioMargin.UserDataStreams do
           headers: [{"X-MBX-APIKEY", ""}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
-    
+
       Binance.REST.HTTPClient.request(request)
     end
   end
-  
+
   @spec keepalive_user_data_stream_v1(Binance.Client.t()) :: {:ok, term()} | {:error, term()}
   @doc """
   Keepalive User Data Stream
@@ -59,11 +62,11 @@ defmodule Binance.API.DerivativesTrading.PortfolioMargin.UserDataStreams do
           headers: [{"X-MBX-APIKEY", ""}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
-    
+
       Binance.REST.HTTPClient.request(request)
     end
   end
-  
+
   @spec start_user_data_stream_v1(Binance.Client.t()) :: {:ok, term()} | {:error, term()}
   @doc """
   Start User Data Stream
@@ -86,7 +89,7 @@ defmodule Binance.API.DerivativesTrading.PortfolioMargin.UserDataStreams do
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
-    
+
       Binance.REST.HTTPClient.request(request)
     end
   end

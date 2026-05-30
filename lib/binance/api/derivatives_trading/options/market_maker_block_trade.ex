@@ -1,7 +1,10 @@
 defmodule Binance.API.DerivativesTrading.Options.MarketMakerBlockTrade do
   @moduledoc false
 
-  @base_urls %{prod_url: "https://eapi.binance.com", testnet_url: "https://testnet.binancefuture.com"}
+  @base_urls %{
+    prod_url: "https://eapi.binance.com",
+    testnet_url: "https://testnet.binancefuture.com"
+  }
 
   def base_url(key \\ :prod_url) do
     case Map.fetch(@base_urls, key) do
@@ -10,7 +13,8 @@ defmodule Binance.API.DerivativesTrading.Options.MarketMakerBlockTrade do
     end
   end
 
-  @spec cancel_block_trade_order_v1(Binance.Client.t(), term(), Keyword.t()) :: {:ok, term()} | {:error, term()}
+  @spec cancel_block_trade_order_v1(Binance.Client.t(), term(), Keyword.t()) ::
+          {:ok, term()} | {:error, term()}
   @doc """
   Cancel Block Trade Order
   Variant: Trade
@@ -30,16 +34,21 @@ defmodule Binance.API.DerivativesTrading.Options.MarketMakerBlockTrade do
           method: "DELETE",
           base_url: base_url,
           url: "/eapi/v1/block/order/create",
-          query: [blockOrderMatchingKey: blockOrderMatchingKey, recvWindow: Keyword.get(opts, :recvWindow), timestamp: nil],
+          query: [
+            blockOrderMatchingKey: blockOrderMatchingKey,
+            recvWindow: Keyword.get(opts, :recvWindow),
+            timestamp: nil
+          ],
           headers: [{"X-MBX-APIKEY", ""}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
-    
+
       Binance.REST.HTTPClient.request(request)
     end
   end
-  
-  @spec extend_block_trade_order_v1(Binance.Client.t(), term(), Keyword.t()) :: {:ok, term()} | {:error, term()}
+
+  @spec extend_block_trade_order_v1(Binance.Client.t(), term(), Keyword.t()) ::
+          {:ok, term()} | {:error, term()}
   @doc """
   Extend Block Trade Order
   Variant: Trade
@@ -59,16 +68,21 @@ defmodule Binance.API.DerivativesTrading.Options.MarketMakerBlockTrade do
           method: "PUT",
           base_url: base_url,
           url: "/eapi/v1/block/order/create",
-          query: [blockOrderMatchingKey: blockOrderMatchingKey, recvWindow: Keyword.get(opts, :recvWindow), timestamp: nil],
+          query: [
+            blockOrderMatchingKey: blockOrderMatchingKey,
+            recvWindow: Keyword.get(opts, :recvWindow),
+            timestamp: nil
+          ],
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
-    
+
       Binance.REST.HTTPClient.request(request)
     end
   end
-  
-  @spec new_block_trade_order_v1(Binance.Client.t(), term(), term(), Keyword.t()) :: {:ok, term()} | {:error, term()}
+
+  @spec new_block_trade_order_v1(Binance.Client.t(), term(), term(), Keyword.t()) ::
+          {:ok, term()} | {:error, term()}
   @doc """
   New Block Trade Order
   Variant: Trade
@@ -88,16 +102,22 @@ defmodule Binance.API.DerivativesTrading.Options.MarketMakerBlockTrade do
           method: "POST",
           base_url: base_url,
           url: "/eapi/v1/block/order/create",
-          query: [liquidity: liquidity, legs: legs, recvWindow: Keyword.get(opts, :recvWindow), timestamp: nil],
+          query: [
+            liquidity: liquidity,
+            legs: legs,
+            recvWindow: Keyword.get(opts, :recvWindow),
+            timestamp: nil
+          ],
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
-    
+
       Binance.REST.HTTPClient.request(request)
     end
   end
-  
-  @spec accept_block_trade_order_v1(Binance.Client.t(), term(), Keyword.t()) :: {:ok, term()} | {:error, term()}
+
+  @spec accept_block_trade_order_v1(Binance.Client.t(), term(), Keyword.t()) ::
+          {:ok, term()} | {:error, term()}
   @doc """
   Accept Block Trade Order
   Variant: Trade
@@ -117,16 +137,21 @@ defmodule Binance.API.DerivativesTrading.Options.MarketMakerBlockTrade do
           method: "POST",
           base_url: base_url,
           url: "/eapi/v1/block/order/execute",
-          query: [blockOrderMatchingKey: blockOrderMatchingKey, recvWindow: Keyword.get(opts, :recvWindow), timestamp: nil],
+          query: [
+            blockOrderMatchingKey: blockOrderMatchingKey,
+            recvWindow: Keyword.get(opts, :recvWindow),
+            timestamp: nil
+          ],
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
-    
+
       Binance.REST.HTTPClient.request(request)
     end
   end
-  
-  @spec query_block_trade_details_v1(Binance.Client.t(), term(), Keyword.t()) :: {:ok, term()} | {:error, term()}
+
+  @spec query_block_trade_details_v1(Binance.Client.t(), term(), Keyword.t()) ::
+          {:ok, term()} | {:error, term()}
   @doc """
   Query Block Trade Details
   Variant: User Data
@@ -146,16 +171,21 @@ defmodule Binance.API.DerivativesTrading.Options.MarketMakerBlockTrade do
           method: "GET",
           base_url: base_url,
           url: "/eapi/v1/block/order/execute",
-          query: [blockOrderMatchingKey: blockOrderMatchingKey, recvWindow: Keyword.get(opts, :recvWindow), timestamp: nil],
+          query: [
+            blockOrderMatchingKey: blockOrderMatchingKey,
+            recvWindow: Keyword.get(opts, :recvWindow),
+            timestamp: nil
+          ],
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
-    
+
       Binance.REST.HTTPClient.request(request)
     end
   end
-  
-  @spec query_block_trade_order_v1(Binance.Client.t(), Keyword.t()) :: {:ok, term()} | {:error, term()}
+
+  @spec query_block_trade_order_v1(Binance.Client.t(), Keyword.t()) ::
+          {:ok, term()} | {:error, term()}
   @doc """
   Query Block Trade Order
   Variant: Trade
@@ -174,16 +204,24 @@ defmodule Binance.API.DerivativesTrading.Options.MarketMakerBlockTrade do
           method: "GET",
           base_url: base_url,
           url: "/eapi/v1/block/order/orders",
-          query: [blockOrderMatchingKey: Keyword.get(opts, :blockOrderMatchingKey), endTime: Keyword.get(opts, :endTime), startTime: Keyword.get(opts, :startTime), underlying: Keyword.get(opts, :underlying), recvWindow: Keyword.get(opts, :recvWindow), timestamp: nil],
+          query: [
+            blockOrderMatchingKey: Keyword.get(opts, :blockOrderMatchingKey),
+            endTime: Keyword.get(opts, :endTime),
+            startTime: Keyword.get(opts, :startTime),
+            underlying: Keyword.get(opts, :underlying),
+            recvWindow: Keyword.get(opts, :recvWindow),
+            timestamp: nil
+          ],
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
-    
+
       Binance.REST.HTTPClient.request(request)
     end
   end
-  
-  @spec account_block_trade_list_v1(Binance.Client.t(), Keyword.t()) :: {:ok, term()} | {:error, term()}
+
+  @spec account_block_trade_list_v1(Binance.Client.t(), Keyword.t()) ::
+          {:ok, term()} | {:error, term()}
   @doc """
   Account Block Trade List
   Variant: User Data
@@ -202,11 +240,17 @@ defmodule Binance.API.DerivativesTrading.Options.MarketMakerBlockTrade do
           method: "GET",
           base_url: base_url,
           url: "/eapi/v1/block/user-trades",
-          query: [endTime: Keyword.get(opts, :endTime), startTime: Keyword.get(opts, :startTime), underlying: Keyword.get(opts, :underlying), recvWindow: Keyword.get(opts, :recvWindow), timestamp: nil],
+          query: [
+            endTime: Keyword.get(opts, :endTime),
+            startTime: Keyword.get(opts, :startTime),
+            underlying: Keyword.get(opts, :underlying),
+            recvWindow: Keyword.get(opts, :recvWindow),
+            timestamp: nil
+          ],
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
-    
+
       Binance.REST.HTTPClient.request(request)
     end
   end

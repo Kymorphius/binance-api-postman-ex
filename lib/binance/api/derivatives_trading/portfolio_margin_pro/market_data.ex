@@ -10,7 +10,8 @@ defmodule Binance.API.DerivativesTrading.PortfolioMarginPro.MarketData do
     end
   end
 
-  @spec query_portfolio_margin_asset_index_price_v1(Binance.Client.t(), Keyword.t()) :: {:ok, term()} | {:error, term()}
+  @spec query_portfolio_margin_asset_index_price_v1(Binance.Client.t(), Keyword.t()) ::
+          {:ok, term()} | {:error, term()}
   @doc """
   Query Portfolio Margin Asset Index Price
   Variant: Market Data
@@ -33,12 +34,13 @@ defmodule Binance.API.DerivativesTrading.PortfolioMarginPro.MarketData do
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
-    
+
       Binance.REST.HTTPClient.request(request)
     end
   end
-  
-  @spec portfolio_margin_collateral_rate_v1(Binance.Client.t()) :: {:ok, term()} | {:error, term()}
+
+  @spec portfolio_margin_collateral_rate_v1(Binance.Client.t()) ::
+          {:ok, term()} | {:error, term()}
   @doc """
   Portfolio Margin Collateral Rate
   Variant: Market Data
@@ -60,12 +62,13 @@ defmodule Binance.API.DerivativesTrading.PortfolioMarginPro.MarketData do
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
-    
+
       Binance.REST.HTTPClient.request(request)
     end
   end
-  
-  @spec get_portfolio_margin_asset_leverage_v1(Binance.Client.t()) :: {:ok, term()} | {:error, term()}
+
+  @spec get_portfolio_margin_asset_leverage_v1(Binance.Client.t()) ::
+          {:ok, term()} | {:error, term()}
   @doc """
   Get Portfolio Margin Asset Leverage
   Variant: User Data
@@ -87,12 +90,13 @@ defmodule Binance.API.DerivativesTrading.PortfolioMarginPro.MarketData do
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
-    
+
       Binance.REST.HTTPClient.request(request)
     end
   end
-  
-  @spec portfolio_margin_pro_tiered_collateral_rate_v2(Binance.Client.t(), Keyword.t()) :: {:ok, term()} | {:error, term()}
+
+  @spec portfolio_margin_pro_tiered_collateral_rate_v2(Binance.Client.t(), Keyword.t()) ::
+          {:ok, term()} | {:error, term()}
   @doc """
   Portfolio Margin Pro Tiered Collateral Rate
   Variant: User Data
@@ -115,7 +119,7 @@ defmodule Binance.API.DerivativesTrading.PortfolioMarginPro.MarketData do
           headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
           body: %{mode: "urlencoded", urlencoded: []}
         })
-    
+
       Binance.REST.HTTPClient.request(request)
     end
   end
