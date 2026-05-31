@@ -4,7 +4,7 @@ defmodule Binance.Client do
   @enforce_keys [:api_key, :api_secret, :env]
   defstruct [:api_key, :api_secret, :env]
 
-  @type env :: :prod_url | :testnet_url | :demo_url | atom()
+  @type env :: :prod_url | :testnet_url | :demo_url | atom() | binary()
   @type t :: %__MODULE__{
           api_key: binary(),
           api_secret: binary(),
