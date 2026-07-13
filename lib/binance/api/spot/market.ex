@@ -105,6 +105,34 @@ defmodule Binance.API.Spot.Market do
     end
   end
 
+  @spec historical_block_trades_v3(Binance.Client.t(), term(), term(), Keyword.t()) ::
+          {:ok, term()} | {:error, term()}
+  @doc """
+  Historical Block Trades
+  Method: GET
+  Path: /api/v3/historicalBlockTrades
+  Requires signature: false
+  Required: symbol, fromId
+  Optional: limit
+  """
+  def historical_block_trades_v3(client, symbol, fromId, opts \\ []) do
+    with {:ok, base_url} <- base_url(client.env) do
+      {:ok, request} =
+        Binance.RequestBuilder.build(%{
+          client: client,
+          requires_signature?: false,
+          method: "GET",
+          base_url: base_url,
+          url: "/api/v3/historicalBlockTrades",
+          query: [symbol: symbol, fromId: fromId, limit: Keyword.get(opts, :limit)],
+          headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
+          body: %{mode: "urlencoded", urlencoded: []}
+        })
+
+      Binance.REST.HTTPClient.request(request)
+    end
+  end
+
   @spec old_trade_lookup_v3(Binance.Client.t(), term(), Keyword.t()) ::
           {:ok, term()} | {:error, term()}
   @doc """

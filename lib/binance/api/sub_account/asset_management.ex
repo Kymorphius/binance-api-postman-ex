@@ -57,7 +57,7 @@ defmodule Binance.API.SubAccount.AssetManagement do
   Path: /sapi/v1/capital/deposit/subHisrec
   Requires signature: true
   Required: email
-  Optional: coin, status, startTime, endTime, limit, offset, recvWindow, txId
+  Optional: includeSource, coin, status, startTime, endTime, limit, offset, recvWindow, txId
   """
   def get_sub_account_deposit_history_v1(client, email, opts \\ []) do
     with {:ok, base_url} <- base_url(client.env) do
@@ -70,6 +70,7 @@ defmodule Binance.API.SubAccount.AssetManagement do
           url: "/sapi/v1/capital/deposit/subHisrec",
           query: [
             email: email,
+            includeSource: Keyword.get(opts, :includeSource),
             coin: Keyword.get(opts, :coin),
             status: Keyword.get(opts, :status),
             startTime: Keyword.get(opts, :startTime),
@@ -267,10 +268,10 @@ defmodule Binance.API.SubAccount.AssetManagement do
   Method: GET
   Path: /sapi/v1/sub-account/futures/move-position
   Requires signature: true
-  Required: symbol, page, row
+  Required: symbol, page, rows
   Optional: startTime, endTime, recvWindow
   """
-  def get_move_position_history_for_sub_account_v1(client, symbol, page, row, opts \\ []) do
+  def get_move_position_history_for_sub_account_v1(client, symbol, page, rows, opts \\ []) do
     with {:ok, base_url} <- base_url(client.env) do
       {:ok, request} =
         Binance.RequestBuilder.build(%{
@@ -284,7 +285,7 @@ defmodule Binance.API.SubAccount.AssetManagement do
             startTime: Keyword.get(opts, :startTime),
             endTime: Keyword.get(opts, :endTime),
             page: page,
-            row: row,
+            rows: rows,
             recvWindow: Keyword.get(opts, :recvWindow),
             timestamp: nil
           ],
