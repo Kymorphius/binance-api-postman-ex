@@ -230,7 +230,7 @@ defmodule Binance.API.Wallet.Asset do
   Path: /sapi/v1/asset/dust-convert/convert
   Requires signature: true
   Required: asset
-  Optional: clientId, targetAsset, thirdPartyClientId, dustQuotaAssetToTargetAssetPrice
+  Optional: accountType, clientId, targetAsset, thirdPartyClientId, dustQuotaAssetToTargetAssetPrice
   """
   def dust_convert_v1(client, asset, opts \\ []) do
     with {:ok, base_url} <- base_url(client.env) do
@@ -243,6 +243,7 @@ defmodule Binance.API.Wallet.Asset do
           url: "/sapi/v1/asset/dust-convert/convert",
           query: [
             asset: asset,
+            accountType: Keyword.get(opts, :accountType),
             clientId: Keyword.get(opts, :clientId),
             targetAsset: Keyword.get(opts, :targetAsset),
             thirdPartyClientId: Keyword.get(opts, :thirdPartyClientId),
@@ -268,7 +269,7 @@ defmodule Binance.API.Wallet.Asset do
   Path: /sapi/v1/asset/dust-convert/query-convertible-assets
   Requires signature: true
   Required: targetAsset
-  Optional: dustQuotaAssetToTargetAssetPrice
+  Optional: accountType, dustQuotaAssetToTargetAssetPrice
   """
   def dust_convertible_assets_v1(client, targetAsset, opts \\ []) do
     with {:ok, base_url} <- base_url(client.env) do
@@ -280,6 +281,7 @@ defmodule Binance.API.Wallet.Asset do
           base_url: base_url,
           url: "/sapi/v1/asset/dust-convert/query-convertible-assets",
           query: [
+            accountType: Keyword.get(opts, :accountType),
             targetAsset: targetAsset,
             dustQuotaAssetToTargetAssetPrice:
               Keyword.get(opts, :dustQuotaAssetToTargetAssetPrice),

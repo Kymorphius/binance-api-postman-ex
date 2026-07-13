@@ -67,6 +67,63 @@ defmodule Binance.API.VipLoan.Trade do
     end
   end
 
+  @spec vip_loan_fixed_rate_borrow_v1(
+          Binance.Client.t(),
+          term(),
+          term(),
+          term(),
+          term(),
+          term(),
+          term(),
+          Keyword.t()
+        ) :: {:ok, term()} | {:error, term()}
+  @doc """
+  VIP Loan Fixed Rate Borrow
+  Variant: Trade
+  Tags: trade
+  Method: POST
+  Path: /sapi/v1/loan/vip/fixed/borrow
+  Requires signature: true
+  Required: supplyRequest, borrowCoin, loanTerm, borrowUid, collateralCoin, collateralAccountId
+  Optional: autoRepay, recvWindow
+  """
+  def vip_loan_fixed_rate_borrow_v1(
+        client,
+        supplyRequest,
+        borrowCoin,
+        loanTerm,
+        borrowUid,
+        collateralCoin,
+        collateralAccountId,
+        opts \\ []
+      ) do
+    with {:ok, base_url} <- base_url(client.env) do
+      {:ok, request} =
+        Binance.RequestBuilder.build(%{
+          client: client,
+          requires_signature?: true,
+          method: "POST",
+          base_url: base_url,
+          url: "/sapi/v1/loan/vip/fixed/borrow",
+          query: [
+            supplyRequest: supplyRequest,
+            borrowCoin: borrowCoin,
+            loanTerm: loanTerm,
+            borrowUid: borrowUid,
+            collateralCoin: collateralCoin,
+            collateralAccountId: collateralAccountId,
+            autoRepay: Keyword.get(opts, :autoRepay),
+            recvWindow: Keyword.get(opts, :recvWindow),
+            timestamp: nil
+          ],
+          headers: [{"X-MBX-APIKEY", ""}, {"Accept", "application/json"}],
+          body: %{mode: "urlencoded", urlencoded: []}
+        })
+
+      Binance.REST.HTTPClient.request(request)
+    end
+  end
+
   @spec vip_loan_renew_v1(Binance.Client.t(), term(), term(), Keyword.t()) ::
           {:ok, term()} | {:error, term()}
   @doc """
